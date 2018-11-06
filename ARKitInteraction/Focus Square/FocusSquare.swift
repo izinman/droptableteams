@@ -15,10 +15,9 @@ import ARKit
 class FocusSquare: SCNNode {
     // MARK: - Types
     
-    enum State {
+    enum State: Equatable {
         case initializing
-        case featuresDetected(anchorPosition: float3, camera: ARCamera?)
-        case planeDetected(anchorPosition: float3, planeAnchor: ARPlaneAnchor, camera: ARCamera?)
+        case detecting(hitTestResult: ARHitTestResult, camera: ARCamera?)
     }
     
     // MARK: - Configuration Properties
@@ -49,8 +48,7 @@ class FocusSquare: SCNNode {
     var lastPosition: float3? {
         switch state {
         case .initializing: return nil
-        case .featuresDetected(let anchorPosition, _): return anchorPosition
-        case .planeDetected(let anchorPosition, _, _): return anchorPosition
+        case .detecting(let hitTestResult, _): return hitTestResult.worldTransform.translation
         }
     }
     
@@ -62,11 +60,14 @@ class FocusSquare: SCNNode {
             case .initializing:
                 displayAsBillboard()
                 
-            case .featuresDetected(let anchorPosition, let camera):
-                displayAsOpen(at: anchorPosition, camera: camera)
-                
-            case .planeDetected(let anchorPosition, let planeAnchor, let camera):
-                displayAsClosed(at: anchorPosition, planeAnchor: planeAnchor, camera: camera)
+            case let .detecting(hitTestResult, camera):
+                if let planeAnchor = hitTestResult.anchor as? ARPlaneAnchor {
+                    displayAsClosed(for: hitTestResult, planeAnchor: planeAnchor, camera: camera)
+                    currentPlaneAnchor = planeAnchor
+                } else {
+                    displayAsOpen(for: hitTestResult, camera: camera)
+                    currentPlaneAnchor = nil
+                }
             }
         }
     }
@@ -77,8 +78,20 @@ class FocusSquare: SCNNode {
     /// Indicates if the square is currently being animated.
     private var isAnimating = false
     
+    /// Indicates if the square is currently changing its alignment.
+    private var isChangingAlignment = false
+    
+    /// The focus square's current alignment.
+    private var currentAlignment: ARPlaneAnchor.Alignment?
+    
+    /// The current plane anchor if the focus square is on a plane.
+    private(set) var currentPlaneAnchor: ARPlaneAnchor?
+    
     /// The focus square's most recent positions.
     private var recentFocusSquarePositions: [float3] = []
+    
+    /// The focus square's most recent alignments.
+    private(set) var recentFocusSquareAlignments: [ARPlaneAnchor.Alignment] = []
     
     /// Previously visited plane anchors.
     private var anchorsOfVisitedPlanes: Set<ARAnchor> = []
@@ -91,9 +104,9 @@ class FocusSquare: SCNNode {
     
     // MARK: - Initialization
     
-	override init() {
-		super.init()
-		opacity = 0.0
+    override init() {
+        super.init()
+        opacity = 0.0
         
         /*
          The focus square consists of eight segments as follows, which can be individually animated.
@@ -137,15 +150,15 @@ class FocusSquare: SCNNode {
         // Always render focus square on top of other content.
         displayNodeHierarchyOnTop(true)
         
-		addChildNode(positioningNode)
+        addChildNode(positioningNode)
         
         // Start the focus square as a billboard.
         displayAsBillboard()
-	}
-	
-	required init?(coder aDecoder: NSCoder) {
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
         fatalError("\(#function) has not been implemented")
-	}
+    }
     
     // MARK: - Appearance
     
@@ -167,42 +180,43 @@ class FocusSquare: SCNNode {
     
     /// Displays the focus square parallel to the camera plane.
     private func displayAsBillboard() {
-        eulerAngles.x = -.pi / 2
+        simdTransform = matrix_identity_float4x4
+        eulerAngles.x = .pi / 2
         simdPosition = float3(0, 0, -0.8)
         unhide()
         performOpenAnimation()
     }
 
     /// Called when a surface has been detected.
-    private func displayAsOpen(at position: float3, camera: ARCamera?) {
+    private func displayAsOpen(for hitTestResult: ARHitTestResult, camera: ARCamera?) {
         performOpenAnimation()
+        let position = hitTestResult.worldTransform.translation
         recentFocusSquarePositions.append(position)
-        updateTransform(for: position, camera: camera)
+        updateTransform(for: position, hitTestResult: hitTestResult, camera: camera)
     }
     
     /// Called when a plane has been detected.
-    private func displayAsClosed(at position: float3, planeAnchor: ARPlaneAnchor, camera: ARCamera?) {
+    private func displayAsClosed(for hitTestResult: ARHitTestResult, planeAnchor: ARPlaneAnchor, camera: ARCamera?) {
         performCloseAnimation(flash: !anchorsOfVisitedPlanes.contains(planeAnchor))
         anchorsOfVisitedPlanes.insert(planeAnchor)
+        let position = hitTestResult.worldTransform.translation
         recentFocusSquarePositions.append(position)
-        updateTransform(for: position, camera: camera)
+        updateTransform(for: position, hitTestResult: hitTestResult, camera: camera)
     }
     
     // MARK: Helper Methods
 
     /// Update the transform of the focus square to be aligned with the camera.
-	private func updateTransform(for position: float3, camera: ARCamera?) {
-        simdTransform = matrix_identity_float4x4
-		
-		// Average using several most recent positions.
+    private func updateTransform(for position: float3, hitTestResult: ARHitTestResult, camera: ARCamera?) {
+        // Average using several most recent positions.
         recentFocusSquarePositions = Array(recentFocusSquarePositions.suffix(10))
-		
+        
         // Move to average of recent positions to avoid jitter.
         let average = recentFocusSquarePositions.reduce(float3(0), { $0 + $1 }) / Float(recentFocusSquarePositions.count)
         self.simdPosition = average
         self.simdScale = float3(scaleBasedOnDistance(camera: camera))
-		
-		// Correct y rotation of camera square.
+        
+        // Correct y rotation of camera square.
         guard let camera = camera else { return }
         let tilt = abs(camera.eulerAngles.x)
         let threshold1: Float = .pi / 2 * 0.65
@@ -222,21 +236,84 @@ class FocusSquare: SCNNode {
         default:
             angle = yaw
         }
-        eulerAngles.y = angle
+        
+        if state != .initializing {
+            updateAlignment(for: hitTestResult, yRotationAngle: angle)
+        }
     }
-	
-	private func normalize(_ angle: Float, forMinimalRotationTo ref: Float) -> Float {
-		// Normalize angle in steps of 90 degrees such that the rotation to the other angle is minimal
-		var normalized = angle
-		while abs(normalized - ref) > .pi / 4 {
-			if angle > ref {
-				normalized -= .pi / 2
-			} else {
-				normalized += .pi / 2
-			}
-		}
-		return normalized
-	}
+    
+    private func updateAlignment(for hitTestResult: ARHitTestResult, yRotationAngle angle: Float) {
+        // Abort if an animation is currently in progress.
+        if isChangingAlignment {
+            return
+        }
+        
+        var shouldAnimateAlignmentChange = false
+        
+        let tempNode = SCNNode()
+        tempNode.simdRotation = float4(0, 1, 0, angle)
+        
+        // Determine current alignment
+        var alignment: ARPlaneAnchor.Alignment?
+        if let planeAnchor = hitTestResult.anchor as? ARPlaneAnchor {
+            alignment = planeAnchor.alignment
+        } else if hitTestResult.type == .estimatedHorizontalPlane {
+            alignment = .horizontal
+        } else if hitTestResult.type == .estimatedVerticalPlane {
+            alignment = .vertical
+        }
+        
+        // add to list of recent alignments
+        if alignment != nil {
+            recentFocusSquareAlignments.append(alignment!)
+        }
+        
+        // Average using several most recent alignments.
+        recentFocusSquareAlignments = Array(recentFocusSquareAlignments.suffix(20))
+        
+        let horizontalHistory = recentFocusSquareAlignments.filter({ $0 == .horizontal }).count
+        let verticalHistory = recentFocusSquareAlignments.filter({ $0 == .vertical }).count
+        
+        // Alignment is same as most of the history - change it
+        if alignment == .horizontal && horizontalHistory > 15 ||
+            alignment == .vertical && verticalHistory > 10 ||
+            hitTestResult.anchor is ARPlaneAnchor {
+            if alignment != currentAlignment {
+                shouldAnimateAlignmentChange = true
+                currentAlignment = alignment
+                recentFocusSquareAlignments.removeAll()
+            }
+        } else {
+            // Alignment is different than most of the history - ignore it
+            alignment = currentAlignment
+            return
+        }
+        
+        if alignment == .vertical {
+            tempNode.simdOrientation = hitTestResult.worldTransform.orientation
+            shouldAnimateAlignmentChange = true
+        }
+        
+        // Change the focus square's alignment
+        if shouldAnimateAlignmentChange {
+            performAlignmentAnimation(to: tempNode.simdOrientation)
+        } else {
+            simdOrientation = tempNode.simdOrientation
+        }
+    }
+    
+    private func normalize(_ angle: Float, forMinimalRotationTo ref: Float) -> Float {
+        // Normalize angle in steps of 90 degrees such that the rotation to the other angle is minimal
+        var normalized = angle
+        while abs(normalized - ref) > .pi / 4 {
+            if angle > ref {
+                normalized -= .pi / 2
+            } else {
+                normalized += .pi / 2
+            }
+        }
+        return normalized
+    }
 
     /**
      Reduce visual size change with distance by scaling up when close and down when far away.
@@ -245,7 +322,7 @@ class FocusSquare: SCNNode {
      (estimated distance when looking at a table), and a scale of 1.2x
      for a distance 1.5 m distance (estimated distance when looking at the floor).
      */
-	private func scaleBasedOnDistance(camera: ARCamera?) -> Float {
+    private func scaleBasedOnDistance(camera: ARCamera?) -> Float {
         guard let camera = camera else { return 1.0 }
 
         let distanceFromCamera = simd_length(simdWorldPosition - camera.transform.translation)
@@ -253,81 +330,93 @@ class FocusSquare: SCNNode {
             return distanceFromCamera / 0.7
         } else {
             return 0.25 * distanceFromCamera + 0.825
-		}
-	}
+        }
+    }
     
     // MARK: Animations
     
-	private func performOpenAnimation() {
-		guard !isOpen, !isAnimating else { return }
+    private func performOpenAnimation() {
+        guard !isOpen, !isAnimating else { return }
         isOpen = true
         isAnimating = true
 
-		// Open animation
-		SCNTransaction.begin()
-		SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-		SCNTransaction.animationDuration = FocusSquare.animationDuration / 4
-		positioningNode.opacity = 1.0
+        // Open animation
+        SCNTransaction.begin()
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        SCNTransaction.animationDuration = FocusSquare.animationDuration / 4
+        positioningNode.opacity = 1.0
         for segment in segments {
             segment.open()
         }
-		SCNTransaction.completionBlock = {
+        SCNTransaction.completionBlock = {
             self.positioningNode.runAction(pulseAction(), forKey: "pulse")
             // This is a safe operation because `SCNTransaction`'s completion block is called back on the main thread.
             self.isAnimating = false
         }
-		SCNTransaction.commit()
-		
-		// Add a scale/bounce animation.
-		SCNTransaction.begin()
-		SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-		SCNTransaction.animationDuration = FocusSquare.animationDuration / 4
+        SCNTransaction.commit()
+        
+        // Add a scale/bounce animation.
+        SCNTransaction.begin()
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        SCNTransaction.animationDuration = FocusSquare.animationDuration / 4
         positioningNode.simdScale = float3(FocusSquare.size)
-		SCNTransaction.commit()
-	}
+        SCNTransaction.commit()
+    }
 
-	private func performCloseAnimation(flash: Bool = false) {
+    private func performCloseAnimation(flash: Bool = false) {
         guard isOpen, !isAnimating else { return }
-		isOpen = false
+        isOpen = false
         isAnimating = true
         
         positioningNode.removeAction(forKey: "pulse")
         positioningNode.opacity = 1.0
-		
-		// Close animation
-		SCNTransaction.begin()
-		SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-		SCNTransaction.animationDuration = FocusSquare.animationDuration / 2
-		positioningNode.opacity = 0.99
-		SCNTransaction.completionBlock = {
-			SCNTransaction.begin()
-			SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-			SCNTransaction.animationDuration = FocusSquare.animationDuration / 4
+        
+        // Close animation
+        SCNTransaction.begin()
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        SCNTransaction.animationDuration = FocusSquare.animationDuration / 2
+        positioningNode.opacity = 0.99
+        SCNTransaction.completionBlock = {
+            SCNTransaction.begin()
+            SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            SCNTransaction.animationDuration = FocusSquare.animationDuration / 4
             for segment in self.segments {
                 segment.close()
             }
-			SCNTransaction.completionBlock = { self.isAnimating = false }
-			SCNTransaction.commit()
-		}
-		SCNTransaction.commit()
-		
-		// Scale/bounce animation
-		positioningNode.addAnimation(scaleAnimation(for: "transform.scale.x"), forKey: "transform.scale.x")
-		positioningNode.addAnimation(scaleAnimation(for: "transform.scale.y"), forKey: "transform.scale.y")
-		positioningNode.addAnimation(scaleAnimation(for: "transform.scale.z"), forKey: "transform.scale.z")
-		
-		if flash {
-			let waitAction = SCNAction.wait(duration: FocusSquare.animationDuration * 0.75)
-			let fadeInAction = SCNAction.fadeOpacity(to: 0.25, duration: FocusSquare.animationDuration * 0.125)
-			let fadeOutAction = SCNAction.fadeOpacity(to: 0.0, duration: FocusSquare.animationDuration * 0.125)
+            SCNTransaction.completionBlock = { self.isAnimating = false }
+            SCNTransaction.commit()
+        }
+        SCNTransaction.commit()
+        
+        // Scale/bounce animation
+        positioningNode.addAnimation(scaleAnimation(for: "transform.scale.x"), forKey: "transform.scale.x")
+        positioningNode.addAnimation(scaleAnimation(for: "transform.scale.y"), forKey: "transform.scale.y")
+        positioningNode.addAnimation(scaleAnimation(for: "transform.scale.z"), forKey: "transform.scale.z")
+        
+        if flash {
+            let waitAction = SCNAction.wait(duration: FocusSquare.animationDuration * 0.75)
+            let fadeInAction = SCNAction.fadeOpacity(to: 0.25, duration: FocusSquare.animationDuration * 0.125)
+            let fadeOutAction = SCNAction.fadeOpacity(to: 0.0, duration: FocusSquare.animationDuration * 0.125)
             fillPlane.runAction(SCNAction.sequence([waitAction, fadeInAction, fadeOutAction]))
-			
-			let flashSquareAction = flashAnimation(duration: FocusSquare.animationDuration * 0.25)
+            
+            let flashSquareAction = flashAnimation(duration: FocusSquare.animationDuration * 0.25)
             for segment in segments {
                 segment.runAction(.sequence([waitAction, flashSquareAction]))
             }
- 		}
-	}
+         }
+    }
+    
+    private func performAlignmentAnimation(to newOrientation: simd_quatf) {
+        isChangingAlignment = true
+        SCNTransaction.begin()
+        SCNTransaction.completionBlock = {
+            self.isChangingAlignment = false
+        }
+        SCNTransaction.animationDuration = 0.5
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        simdOrientation = newOrientation
+        SCNTransaction.commit()
+    }
     
     // MARK: Convenience Methods
     
@@ -411,27 +500,5 @@ private func flashAnimation(duration: TimeInterval) -> SCNAction {
         }
     }
     return action
-}
-
-extension FocusSquare.State: Equatable {
-    static func ==(lhs: FocusSquare.State, rhs: FocusSquare.State) -> Bool {
-        switch (lhs, rhs) {
-        case (.initializing, .initializing):
-            return true
-            
-        case (.featuresDetected(let lhsPosition, let lhsCamera),
-              .featuresDetected(let rhsPosition, let rhsCamera)):
-            return lhsPosition == rhsPosition && lhsCamera == rhsCamera
-            
-        case (.planeDetected(let lhsPosition, let lhsPlaneAnchor, let lhsCamera),
-              .planeDetected(let rhsPosition, let rhsPlaneAnchor, let rhsCamera)):
-            return lhsPosition == rhsPosition
-                && lhsPlaneAnchor == rhsPlaneAnchor
-                && lhsCamera == rhsCamera
-            
-        default:
-            return false
-        }
-    }
 }
 
