@@ -77,6 +77,7 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
         let objectsViewController = segue.destination as! VirtualObjectSelectionViewController
         objectsViewController.virtualObjects = VirtualObject.availableObjects
         objectsViewController.delegate = self
+        self.objectsViewController = objectsViewController
         
         // Set all rows of currently placed objects to selected.
         for object in virtualObjectLoader.loadedObjects {
@@ -85,4 +86,7 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
         }
     }
     
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        objectsViewController = nil
+    }
 }
