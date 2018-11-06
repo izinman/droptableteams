@@ -29,17 +29,20 @@ The square changes size and orientation to reflect estimated scene depth, and sw
 When the user chooses a virtual object to place, the sample app's [`setPosition(_:relativeTo:smoothMovement)`](x-source-tag://VirtualObjectSetPosition) method uses the [`FocusSquare`](x-source-tag://FocusSquare) object's simple heuristics to place the object at a roughly realistic position in the middle of the screen, even if ARKit hasn't yet detected a plane at that location.
 
 ``` swift
-guard let cameraTransform = session.currentFrame?.camera.transform,
-    let focusSquarePosition = focusSquare.lastPosition else {
+guard focusSquare.state != .initializing else {
     statusViewController.showMessage("CANNOT PLACE OBJECT\nTry moving left or right.")
+    if let controller = objectsViewController {
+        virtualObjectSelectionViewController(controller, didDeselectObject: virtualObject)
+    }
     return
 }
-        
+
+virtualObjectInteraction.translate(virtualObject, basedOn: screenCenter, infinitePlane: false, allowAnimation: false)
 virtualObjectInteraction.selectedObject = virtualObject
-virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
-        
+
 updateQueue.async {
     self.sceneView.scene.rootNode.addChildNode(virtualObject)
+    self.sceneView.addOrUpdateAnchor(for: virtualObject)
 }
 ```
 [View in Source](x-source-tag://PlaceVirtualObject)
@@ -58,6 +61,7 @@ if distanceToPlane > epsilon && distanceToPlane < verticalAllowance {
     SCNTransaction.animationDuration = CFTimeInterval(distanceToPlane * 500) // Move 2 mm per second.
     SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
     position.y = anchor.transform.columns.3.y
+    updateAlignment(to: anchor.alignment, transform: simdWorldTransform, allowAnimation: false)
     SCNTransaction.commit()
 }
 ```
@@ -65,6 +69,12 @@ if distanceToPlane > epsilon && distanceToPlane < verticalAllowance {
 
 [4]:https://developer.apple.com/documentation/arkit/arscnviewdelegate/2865794-renderer
 [5]:https://developer.apple.com/documentation/arkit/arscnviewdelegate/2865799-renderer
+
+**Use anchors to improve tracking quality around virtual objects.**
+Whenever you place a virtual object, always add an [`ARAnchor`][6] representing its position and orientation to the [`ARSession`][7]. After moving a virtual object, remove the anchor at the old position and create a new anchor at the new position. Adding an anchor tells ARKit that a position is important, improving world tracking quality in that area and helping virtual objects appear to stay in place relative to real-world surfaces. (See the sample code's [`addOrUpdateAnchor()`](x-source-tag://AddOrUpdateAnchor) method.)  
+
+[6]:https://developer.apple.com/documentation/arkit/aranchor
+[7]:https://developer.apple.com/documentation/arkit/arsession
 
 ## User Interaction with Virtual Objects
 
@@ -86,7 +96,7 @@ for index in 0..<gesture.numberOfTouches {
         return object
     }
 }
-        
+
 // As a last resort look for an object under the center of the touches.
 return sceneView.virtualObject(at: gesture.center(in: view))
 ```
