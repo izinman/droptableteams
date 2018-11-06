@@ -53,8 +53,8 @@ class StatusViewController: UIViewController {
     private var timers: [MessageType: Timer] = [:]
     
     // MARK: - Message Handling
-	
-	func showMessage(_ text: String, autoHide: Bool = true) {
+    
+    func showMessage(_ text: String, autoHide: Bool = true) {
         // Cancel any previous hide timer.
         messageHideTimer?.invalidate()
 
@@ -68,20 +68,20 @@ class StatusViewController: UIViewController {
                 self?.setMessageHidden(true, animated: true)
             })
         }
-	}
+    }
     
-	func scheduleMessage(_ text: String, inSeconds seconds: TimeInterval, messageType: MessageType) {
+    func scheduleMessage(_ text: String, inSeconds seconds: TimeInterval, messageType: MessageType) {
         cancelScheduledMessage(for: messageType)
 
         let timer = Timer.scheduledTimer(withTimeInterval: seconds, repeats: false, block: { [weak self] timer in
             self?.showMessage(text)
             timer.invalidate()
-		})
+        })
 
         timers[messageType] = timer
-	}
+    }
     
-    func cancelScheduledMessage(`for` messageType: MessageType) {
+    func cancelScheduledMessage(for messageType: MessageType) {
         timers[messageType]?.invalidate()
         timers[messageType] = nil
     }
@@ -94,14 +94,14 @@ class StatusViewController: UIViewController {
     
     // MARK: - ARKit
     
-	func showTrackingQualityInfo(for trackingState: ARCamera.TrackingState, autoHide: Bool) {
-		showMessage(trackingState.presentationString, autoHide: autoHide)
-	}
-	
-	func escalateFeedback(for trackingState: ARCamera.TrackingState, inSeconds seconds: TimeInterval) {
+    func showTrackingQualityInfo(for trackingState: ARCamera.TrackingState, autoHide: Bool) {
+        showMessage(trackingState.presentationString, autoHide: autoHide)
+    }
+    
+    func escalateFeedback(for trackingState: ARCamera.TrackingState, inSeconds seconds: TimeInterval) {
         cancelScheduledMessage(for: .trackingStateEscalation)
 
-		let timer = Timer.scheduledTimer(withTimeInterval: seconds, repeats: false, block: { [unowned self] _ in
+        let timer = Timer.scheduledTimer(withTimeInterval: seconds, repeats: false, block: { [unowned self] _ in
             self.cancelScheduledMessage(for: .trackingStateEscalation)
 
             var message = trackingState.presentationString
@@ -110,7 +110,7 @@ class StatusViewController: UIViewController {
             }
 
             self.showMessage(message, autoHide: false)
-		})
+        })
 
         timers[.trackingStateEscalation] = timer
     }
@@ -120,10 +120,10 @@ class StatusViewController: UIViewController {
     @IBAction private func restartExperience(_ sender: UIButton) {
         restartExperienceHandler()
     }
-	
-	// MARK: - Panel Visibility
     
-	private func setMessageHidden(_ hide: Bool, animated: Bool) {
+    // MARK: - Panel Visibility
+    
+    private func setMessageHidden(_ hide: Bool, animated: Bool) {
         // The panel starts out hidden, so show it before animating opacity.
         messagePanel.isHidden = false
         
@@ -135,7 +135,7 @@ class StatusViewController: UIViewController {
         UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState], animations: {
             self.messagePanel.alpha = hide ? 0 : 1
         }, completion: nil)
-	}
+    }
 }
 
 extension ARCamera.TrackingState {
@@ -151,6 +151,8 @@ extension ARCamera.TrackingState {
             return "TRACKING LIMITED\nLow detail"
         case .limited(.initializing):
             return "Initializing"
+        case .limited(.relocalizing):
+            return "Recovering from interruption"
         }
     }
 
@@ -160,6 +162,8 @@ extension ARCamera.TrackingState {
             return "Try slowing down your movement, or reset the session."
         case .limited(.insufficientFeatures):
             return "Try pointing at a flat surface, or reset the session."
+        case .limited(.relocalizing):
+            return "Return to the location where you left off or try resetting the session."
         default:
             return nil
         }
