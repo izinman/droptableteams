@@ -13,11 +13,11 @@ import ARKit
  objects quickly once they are needed.
 */
 class VirtualObjectLoader {
-	private(set) var loadedObjects = [VirtualObject]()
+    private(set) var loadedObjects = [VirtualObject]()
     
     private(set) var isLoading = false
-	
-	// MARK: - Loading object
+    
+    // MARK: - Loading object
 
     /**
      Loads a `VirtualObject` on a background queue. `loadedHandler` is invoked
@@ -25,22 +25,22 @@ class VirtualObjectLoader {
     */
     func loadVirtualObject(_ object: VirtualObject, loadedHandler: @escaping (VirtualObject) -> Void) {
         isLoading = true
-		loadedObjects.append(object)
-		
-		// Load the content asynchronously.
-        DispatchQueue.global(qos: .userInitiated).async {
+        loadedObjects.append(object)
+        
+        // Load the content asynchronously.
+        DispatchQueue.global(qos: .background).async {
             object.reset()
             object.load()
 
             self.isLoading = false
             loadedHandler(object)
         }
-	}
+    }
     
     // MARK: - Removing Objects
     
     func removeAllVirtualObjects() {
-        // Reverse the indicies so we don't trample over indicies as objects are removed.
+        // Reverse the indices so we don't trample over indices as objects are removed.
         for index in loadedObjects.indices.reversed() {
             removeVirtualObject(at: index)
         }
