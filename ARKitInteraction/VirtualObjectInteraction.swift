@@ -78,6 +78,12 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
             // Ignore changes to the pan gesture until the threshold for displacment has been exceeded.
             break
             
+        case .ended:
+            // Update the object's anchor when the gesture ended.
+            guard let existingTrackedObject = trackedObject else { break }
+            sceneView.addOrUpdateAnchor(for: existingTrackedObject)
+            fallthrough
+            
         default:
             // Clear the current position tracking.
             currentTrackingPosition = nil
@@ -97,7 +103,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     @objc
     func updateObjectToCurrentTrackingPosition() {
         guard let object = trackedObject, let position = currentTrackingPosition else { return }
-        translate(object, basedOn: position, infinitePlane: translateAssumingInfinitePlane)
+        translate(object, basedOn: position, infinitePlane: translateAssumingInfinitePlane, allowAnimation: true)
     }
 
     /// - Tag: didRotate
@@ -111,7 +117,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
           To make rotation also work correctly when looking from below the object one would have to
           flip the sign of the angle depending on whether the object is above or below the camera...
          */
-        trackedObject?.eulerAngles.y -= Float(gesture.rotation)
+        trackedObject?.objectRotation -= Float(gesture.rotation)
         
         gesture.rotation = 0
     }
@@ -125,7 +131,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
             selectedObject = tappedObject
         } else if let object = selectedObject {
             // Teleport the object to whereever the user touched the screen.
-            translate(object, basedOn: touchLocation, infinitePlane: false)
+            translate(object, basedOn: touchLocation, infinitePlane: false, allowAnimation: false)
+            sceneView.addOrUpdateAnchor(for: object)
         }
     }
     
@@ -153,17 +160,35 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     // MARK: - Update object position
 
     /// - Tag: DragVirtualObject
-    private func translate(_ object: VirtualObject, basedOn screenPos: CGPoint, infinitePlane: Bool) {
+    func translate(_ object: VirtualObject, basedOn screenPos: CGPoint, infinitePlane: Bool, allowAnimation: Bool) {
         guard let cameraTransform = sceneView.session.currentFrame?.camera.transform,
-            let (position, _, isOnPlane) = sceneView.worldPosition(fromScreenPosition: screenPos,
-                                                                   objectPosition: object.simdPosition,
-                                                                   infinitePlane: infinitePlane) else { return }
+            let result = sceneView.smartHitTest(screenPos,
+                                                infinitePlane: infinitePlane,
+                                                objectPosition: object.simdWorldPosition,
+                                                allowedAlignments: object.allowedAlignments) else { return }
         
+        let planeAlignment: ARPlaneAnchor.Alignment
+        if let planeAnchor = result.anchor as? ARPlaneAnchor {
+            planeAlignment = planeAnchor.alignment
+        } else if result.type == .estimatedHorizontalPlane {
+            planeAlignment = .horizontal
+        } else if result.type == .estimatedVerticalPlane {
+            planeAlignment = .vertical
+        } else {
+            return
+        }
+
         /*
          Plane hit test results are generally smooth. If we did *not* hit a plane,
          smooth the movement to prevent large jumps.
          */
-        object.setPosition(position, relativeTo: cameraTransform, smoothMovement: !isOnPlane)
+        let transform = result.worldTransform
+        let isOnPlane = result.anchor is ARPlaneAnchor
+        object.setTransform(transform,
+                            relativeTo: cameraTransform,
+                            smoothMovement: !isOnPlane,
+                            alignment: planeAlignment,
+                            allowAnimation: allowAnimation)
     }
 }
 
