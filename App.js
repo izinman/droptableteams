@@ -7,7 +7,9 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, NativeModules} from 'react-native';
+
+console.log(NativeModules.ARViewController)
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -28,9 +30,13 @@ export default class App extends Component<Props> {
   }
   render() {
     if (this.state.ARview == 1) return (
+      NativeModules.ARViewController.presentView(NativeModules.ARViewController.getSceneView())
+      /*
       <View style={styles.container}>
         <Text style={styles.meme}>I'm an ar view lol</Text>
       </View>
+      */
+
     )
     return (
       <View style={styles.container}>

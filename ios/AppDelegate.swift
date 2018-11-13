@@ -10,7 +10,7 @@ import UIKit
 
 @UIApplicationMain
 
-class AppDelegate : UIResponder,UIApplicationDelegate {
+class AppDelegate : UIResponder, UIApplicationDelegate {
   
   // Create the base window
   var window : UIWindow? = UIWindow(frame: UIScreen.main.bounds)
@@ -39,5 +39,11 @@ class AppDelegate : UIResponder,UIApplicationDelegate {
     window?.makeKeyAndVisible()
     
     return true
+  }
+  
+  func presentARView() {
+    let vc = ARViewController()
+    window?.rootViewController = vc
+    window?.makeKeyAndVisible()
   }
 }

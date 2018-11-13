@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ARViewController.swift
 //  FreeRealEstate
 //
 //  Created by Artem Jivotovski on 11/5/18.
@@ -10,11 +10,42 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
-
-    var sceneView: ARSCNView!
-    
-    override func viewDidLoad() {
+@objc(ARViewController)
+class ARViewController: UIViewController, ARSCNViewDelegate {
+  
+    @objc
+    static func requiresMainQueueSetup() -> Bool {
+      return true
+    }
+  
+    /*var sceneView = ARSCNView()*/
+    @objc
+    func getSceneView() -> ARSCNView {
+      return ARSCNView()
+    }
+  
+    @objc
+    func presentView(sceneView: ARSCNView) {
+      // Set the view's delegate
+      sceneView.delegate = self
+      
+      // Show statistics such as fps and timing information
+      sceneView.showsStatistics = true
+      
+      // Create a new scene
+      let scene = SCNScene(named: "art.scnassets/ship.scn")!
+      
+      // Set the scene to the view
+      sceneView.scene = scene
+      
+      // Create a session configuration
+      let configuration = ARWorldTrackingConfiguration()
+      
+      // Run the view's session
+      sceneView.session.run(configuration)
+    }
+  
+    /*override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set the view's delegate
@@ -28,9 +59,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = scene
-    }
+    }*/
+
     
-    override func viewWillAppear(_ animated: Bool) {
+    /*override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Create a session configuration
@@ -38,14 +70,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         // Run the view's session
         sceneView.session.run(configuration)
-    }
+    }*/
     
-    override func viewWillDisappear(_ animated: Bool) {
+   /* override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Pause the view's session
         sceneView.session.pause()
-    }
+    }*/
 
     // MARK: - ARSCNViewDelegate
     
@@ -57,7 +89,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return node
     }
 */
-    
+    /*
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         
@@ -71,5 +103,5 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
-    }
+    }*/
 }
