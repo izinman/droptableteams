@@ -12,38 +12,32 @@ import UIKit
 
 class AppDelegate : UIResponder, UIApplicationDelegate {
   
-  // Create the base window
-  var window : UIWindow? = UIWindow(frame: UIScreen.main.bounds)
+    // Create the base window
+    var window : UIWindow? = UIWindow(frame: UIScreen.main.bounds)
   
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    
-    // Setup any initial properties we want included
-    let initialProperties: [String: Any] = [:]
-    
-    // Define the name of the initial module
-    let moduleName = "FreeRealEstate"
-    
-    // Define the url that will be used to find the entry file
-    let bundleURL = RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index", fallbackResource: nil)
-    
-    // Create the React Native view that will render the module with the properties
-    let view = RCTRootView(bundleURL: bundleURL, moduleName: moduleName, initialProperties: initialProperties, launchOptions: launchOptions)
-    view?.backgroundColor = UIColor.white
-    
-    // Create the controller to display the view
-    let controller = UIViewController()
-    controller.view = view
-    
-    // Add the controller to the window
-    window?.rootViewController = controller
-    window?.makeKeyAndVisible()
-    
-    return true
-  }
-  
-  func presentARView() {
-    let vc = ARViewController()
-    window?.rootViewController = vc
-    window?.makeKeyAndVisible()
-  }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+      
+        // Setup any initial properties we want included
+        let initialProperties: [String: Any] = [:]
+      
+        // Define the name of the initial module
+        let moduleName = "FreeRealEstate"
+      
+        // Define the url that will be used to find the entry file
+        let bundleURL = RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index", fallbackResource: nil)
+        
+        // Create the React Native view that will render the module with the properties
+        let view = RCTRootView(bundleURL: bundleURL, moduleName: moduleName, initialProperties: initialProperties, launchOptions: launchOptions)
+        view?.backgroundColor = UIColor.white
+      
+        // Create the controller to display the view
+        let controller = UIViewController()
+        controller.view = view
+      
+        // Add the controller to the window
+        window?.rootViewController = controller
+        window?.makeKeyAndVisible()
+      
+        return true
+    }
 }

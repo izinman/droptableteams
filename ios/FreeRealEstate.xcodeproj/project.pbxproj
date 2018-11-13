@@ -18,10 +18,8 @@
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
-		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4C21E0B4AEC006451C7 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		2D02E4C31E0B4AEC006451C7 /* libRCTImage-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */; };
 		2D02E4C41E0B4AEC006451C7 /* libRCTLinking-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E881DF850E9000B6D8A /* libRCTLinking-tvOS.a */; };
@@ -35,9 +33,10 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
 		AC3DB41C219668C700AF31E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
-		ACBAC5812195152D00795235 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBAC5802195152D00795235 /* ViewController.swift */; };
-		ACBAC5852195156800795235 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = ACBAC5822195156800795235 /* Base.lproj */; };
+		AC3FDF4C219A6CE600C0BEEA /* ARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3FDF4B219A6CE600C0BEEA /* ARViewManager.m */; };
 		ACBAC5862195156800795235 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ACBAC5832195156800795235 /* art.scnassets */; };
+		ACFE8B7C219A64BA00A5DCAF /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFE8B7B219A64BA00A5DCAF /* ARViewController.swift */; };
+		ACFE8B81219A6B1600A5DCAF /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFE8B80219A6B1600A5DCAF /* ARView.swift */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 /* End PBXBuildFile section */
 
@@ -331,7 +330,6 @@
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* FreeRealEstate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeRealEstate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FreeRealEstate/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FreeRealEstate/Info.plist; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* FreeRealEstate-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FreeRealEstate-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,10 +340,11 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		AC3DB419219668C700AF31E7 /* FreeRealEstate-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		AC3DB41A219668C700AF31E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AC3FDF4B219A6CE600C0BEEA /* ARViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARViewManager.m; sourceTree = "<group>"; };
 		ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-Bridging-Header.h"; sourceTree = "<group>"; };
-		ACBAC5802195152D00795235 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ACBAC5822195156800795235 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		ACBAC5832195156800795235 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		ACFE8B7B219A64BA00A5DCAF /* ARViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		ACFE8B80219A6B1600A5DCAF /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -485,15 +484,15 @@
 		13B07FAE1A68108700A75B9A /* FreeRealEstate */ = {
 			isa = PBXGroup;
 			children = (
+				ACFE8B7B219A64BA00A5DCAF /* ARViewController.swift */,
 				AC3DB41A219668C700AF31E7 /* AppDelegate.swift */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
-				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				ACBAC5832195156800795235 /* art.scnassets */,
-				ACBAC5822195156800795235 /* Base.lproj */,
-				ACBAC5802195152D00795235 /* ViewController.swift */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
-				13B07FB61A68108700A75B9A /* Info.plist */,
 				ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
+				ACFE8B80219A6B1600A5DCAF /* ARView.swift */,
+				AC3FDF4B219A6CE600C0BEEA /* ARViewManager.m */,
 			);
 			name = FreeRealEstate;
 			sourceTree = "<group>";
@@ -1060,9 +1059,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				ACBAC5862195156800795235 /* art.scnassets in Resources */,
-				ACBAC5852195156800795235 /* Base.lproj in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1071,7 +1068,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1129,7 +1125,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
-				ACBAC5812195152D00795235 /* ViewController.swift in Sources */,
+				ACFE8B81219A6B1600A5DCAF /* ARView.swift in Sources */,
+				ACFE8B7C219A64BA00A5DCAF /* ARViewController.swift in Sources */,
+				AC3FDF4C219A6CE600C0BEEA /* ARViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1221,10 +1219,12 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HR92RX9LZ9;
 				INFOPLIST_FILE = FreeRealEstate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1246,9 +1246,11 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HR92RX9LZ9;
 				INFOPLIST_FILE = FreeRealEstate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;

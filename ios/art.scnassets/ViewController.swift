@@ -1,5 +1,5 @@
 //
-//  ARViewController.swift
+//  ViewController.swift
 //  FreeRealEstate
 //
 //  Created by Artem Jivotovski on 11/5/18.
@@ -10,9 +10,9 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ARViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate {
 
-    var sceneView = ARSCNView()
+    @IBOutlet var sceneView: ARSCNView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
