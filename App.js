@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, NativeModules} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, requireNativeComponent} from 'react-native';
 
 
 type Props = {};
@@ -15,22 +15,19 @@ type Props = {};
 export default class App extends Component<Props> {
   
   switchAR() {
-    this.setState({ARview: 1});
+    this.setState({inARview: 1});
   }
 
   constructor(props) {
     super(props);
-    this.state = {ARview: 0};
+    this.state = {inARview: 0};
     this.switchAR = this.switchAR.bind(this);
   }
 
   render() {
-    if (this.state.ARview == 1) {
-      NativeModules.ARVCPresenter.presentARVC();
-      return (
-      <View style={styles.container}>
-      </View>
-    ) 
+    if (this.state.inARview == 1) {
+      console.log(ARView)
+      return (<ARView style={{height: 667, width: 375}} />) 
     }
 
     return (
@@ -43,6 +40,8 @@ export default class App extends Component<Props> {
     );
   }
 }
+
+const ARView = requireNativeComponent("ARView")
 
 const styles = StyleSheet.create({
   meme: {
