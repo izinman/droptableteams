@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, requireNativeComponent} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, NativeModules} from 'react-native';
 
 
 type Props = {};
@@ -25,11 +25,13 @@ export default class App extends Component<Props> {
   }
 
   render() {
-    if (this.state.ARview == 1) return (
-
-      <ARView style ={this.props.style} {...this.props} />
-
-    )
+    if (this.state.ARview == 1) {
+      NativeModules.ARVCPresenter.presentARVC();
+      return (
+      <View style={styles.container}>
+      </View>
+    ) 
+    }
 
     return (
 
@@ -41,8 +43,6 @@ export default class App extends Component<Props> {
     );
   }
 }
-
-const ARView = requireNativeComponent('ARView', null)
 
 const styles = StyleSheet.create({
   meme: {
