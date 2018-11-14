@@ -12,24 +12,29 @@ import SceneKit
 
 @objc(ARViewManager)
 class ARViewManager : RCTViewManager {
+    
+    var ARView: ARSCNView!
+    var ARSCNManager: SceneManager!
+    
+    // Returns an ARSCNView for React to present
     override func view() -> UIView! {
         
-        // Instantiate a new ARView
-        let view = ARSCNView()
-        view.bounds = UIScreen.main.bounds
+        // Instantiate a new ARSCNView
+        ARView = ARSCNView()
+        ARView.bounds = UIScreen.main.bounds
         
-        // Load a scene from local assests
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        // Instantiate a SceneManager and get the scene/config
+        ARSCNManager = SceneManager()
+        ARView.scene = ARSCNManager.scene!
+        let config = ARSCNManager.ARWTConfig!
         
-        // Generate a new world tracking config
-        let configuration = ARWorldTrackingConfiguration()
+        // Run the ARView
+        ARView.session.run(config)
         
-        // Set the scene
-        view.scene = scene
-        
-        // Run the view's session
-        view.session.run(configuration)
-        
-        return view
+        return ARView
+    }
+    
+    override static func requiresMainQueueSetup() -> Bool {
+        return true
     }
 }
