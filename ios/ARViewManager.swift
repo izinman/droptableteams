@@ -16,12 +16,6 @@ class ARViewManager : RCTViewManager {
     var ARView: ARSCNView!
     var ARSCNManager: SceneManager!
     
-    @objc func addObject(_ node: ARSCNView!) {
-        DispatchQueue.main.async {
-            self.ARSCNManager.addObject(objectName: "ship")
-        }
-    }
-    
     // Returns an ARSCNView for React to present
     override func view() -> UIView! {
         
@@ -42,6 +36,12 @@ class ARViewManager : RCTViewManager {
     
     override static func requiresMainQueueSetup() -> Bool {
         return true
+    }
+    
+    @objc func addObject(_ node: ARSCNView!) {
+        DispatchQueue.main.async {
+            self.ARSCNManager.addObject(objectName: "ship")
+        }
     }
 }
 

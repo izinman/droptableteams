@@ -20,16 +20,16 @@ export default class App extends Component<Props> {
   render() { 
     return(
       <View>
-          <ARView style=
-            {{height: 607, width: 375}}
-            ref={ref => (this.ref = ref)}
+          <ARView 
+            styles = {ARViewStyle}
+            ref = {ref => (this.ref = ref)}
           />
-          <Button style={styles.addObject} title='Add Object' onPress={this.update}></Button>
+          <Button style={styles.addObjectButton} title='Add Object' onPress={this.placeObject}></Button>
       </View>
     );
   }
 
-  update = () => {
+  placeObject = () => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
       UIManager[ARView].Commands.addObject,
@@ -40,9 +40,14 @@ export default class App extends Component<Props> {
 
 const ARView = requireNativeComponent("ARView")
 const styles = StyleSheet.create({
-  addObject: {
-    height: 60,
-    width: 375,
+  ARViewStyle: {
+    height: Dimensions.get("window").height * 0.9,
+    width: Dimensions.get("window").width,
+  }
+
+  addObjectButton: {
+    height: Dimensions.get("window").height * 0.1,
+    width: Dimensions.get("window").width,
 
     fontSize: 20,
     textAlign: 'center',
