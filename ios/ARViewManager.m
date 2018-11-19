@@ -11,6 +11,6 @@
 
 @interface RCT_EXTERN_MODULE(ARViewManager, RCTViewManager)
 
-RCT_EXTERN_METHOD(addObject)
+RCT_EXTERN_METHOD(addObject: (nonnull NSNumber *)node)
 
 @end

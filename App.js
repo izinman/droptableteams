@@ -20,19 +20,22 @@ export default class App extends Component<Props> {
   render() { 
     return(
       <View>
-          <ARView style={{height: 607, width: 375}}/>
-          <Button style={styles.addObject} title='Add Object' onPress={HOW TO BIND BUTTONE??/>??}></Button>
+          <ARView style=
+            {{height: 607, width: 375}}
+            ref={ref => (this.ref = ref)}
+          />
+          <Button style={styles.addObject} title='Add Object' onPress={this.update}></Button>
       </View>
-    )
-  }
-
-  buttonPress = () => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(this.viewRef),                    
-      UIManager["ARView"].Commands.addObject, 
-      []
     );
   }
+
+  update = () => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      UIManager[ARView].Commands.addObject,
+      []
+    );
+  };
 }
 
 const ARView = requireNativeComponent("ARView")

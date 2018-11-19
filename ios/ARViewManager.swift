@@ -16,9 +16,10 @@ class ARViewManager : RCTViewManager {
     var ARView: ARSCNView!
     var ARSCNManager: SceneManager!
     
-    @objc
-    func addObject() {
-        ARSCNManager.addObject(objectName: "ship")
+    @objc func addObject(_ node: ARSCNView!) {
+        DispatchQueue.main.async {
+            self.ARSCNManager.addObject(objectName: "ship")
+        }
     }
     
     // Returns an ARSCNView for React to present
