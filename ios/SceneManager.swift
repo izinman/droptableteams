@@ -12,25 +12,31 @@ import SceneKit
 class SceneManager : NSObject {
     
     var scene: SCNScene!
-    var ARWTConfig: ARWorldTrackingConfiguration?
+    var ARWTConfig: ARWorldTrackingConfiguration!
     
     override init() {
         super.init()
-        setARWTConfig(config: nil)
-        setScene()
+        initARWTConfig(config: nil)
+        initScene()
     }
     
-    func setARWTConfig(config: ARWorldTrackingConfiguration?) {
+    func initARWTConfig(config: ARWorldTrackingConfiguration?) {
         // Check if we are loading an existing config -- if not, create a new one
-        if (config == nil) {
-            ARWTConfig = ARWorldTrackingConfiguration()
-        } else {
-            ARWTConfig = config
-        }
+        ARWTConfig = (config != nil) ? config : ARWorldTrackingConfiguration()
     }
     
-    func setScene() {
+    func initScene() {
         // TODO: Figure out how to load a scene from ARWTConfig
-        scene = SCNScene(named: "art.scnassets/ship.scn")!
+        scene = SCNScene()
+    }
+    
+    func addObject(objectName: String) {
+        let scnFileName = "art.scnassets/" + objectName + ".scn"
+        let objectScene = SCNScene(named: scnFileName)!
+        
+        let objectNode = objectScene.rootNode.childNode(withName: objectName, recursively: true)!
+        objectNode.position = SCNVector3(0, 0, 0)
+    
+        scene.rootNode.addChildNode(objectNode)
     }
 }

@@ -10,4 +10,7 @@
 #import <React/RCTViewManager.h>
 
 @interface RCT_EXTERN_MODULE(ARViewManager, RCTViewManager)
+
+RCT_EXTERN_METHOD(addObject)
+
 @end

@@ -16,6 +16,11 @@ class ARViewManager : RCTViewManager {
     var ARView: ARSCNView!
     var ARSCNManager: SceneManager!
     
+    @objc
+    func addObject() {
+        ARSCNManager.addObject(objectName: "ship")
+    }
+    
     // Returns an ARSCNView for React to present
     override func view() -> UIView! {
         
@@ -38,3 +43,4 @@ class ARViewManager : RCTViewManager {
         return true
     }
 }
+
