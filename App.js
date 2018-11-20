@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, UIManager, findNodeHandle, requireNativeComponent} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, UIManager, findNodeHandle, Dimensions, requireNativeComponent} from 'react-native';
 
 type Props = {};
 
@@ -21,15 +21,19 @@ export default class App extends Component<Props> {
     return(
       <View>
           <ARView 
-            styles = {ARViewStyle}
-            ref = {ref => (this.ref = ref)}
+            style={styles.ARViewStyle}
+            ref={ref => (this.ref = ref)}
           />
-          <Button style={styles.addObjectButton} title='Add Object' onPress={this.placeObject}></Button>
+          <Button 
+            style={styles.addObjButton} 
+            title='Add Object' 
+            onPress={this.update}>
+          </Button>
       </View>
     );
   }
 
-  placeObject = () => {
+  update = () => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
       UIManager[ARView].Commands.addObject,
@@ -43,9 +47,9 @@ const styles = StyleSheet.create({
   ARViewStyle: {
     height: Dimensions.get("window").height * 0.9,
     width: Dimensions.get("window").width,
-  }
+  },
 
-  addObjectButton: {
+  addObjButton: {
     height: Dimensions.get("window").height * 0.1,
     width: Dimensions.get("window").width,
 

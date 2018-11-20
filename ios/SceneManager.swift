@@ -22,7 +22,10 @@ class SceneManager : NSObject {
     
     func initARWTConfig(config: ARWorldTrackingConfiguration?) {
         // Check if we are loading an existing config -- if not, create a new one
-        ARWTConfig = (config != nil) ? config : ARWorldTrackingConfiguration()
+        let configuration = (config != nil) ? config : ARWorldTrackingConfiguration()
+        configuration?.planeDetection = [.horizontal, .vertical]
+        configuration?.isLightEstimationEnabled = true
+        ARWTConfig = configuration
     }
     
     func initScene() {
