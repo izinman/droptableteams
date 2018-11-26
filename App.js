@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     fontSize: 30, 
     width: '100%',
     textAlign: 'right',
-    paddingBottom: 60,
+    paddingBottom: 20,
     paddingRight: 100,
     fontStyle: 'italic'
   },

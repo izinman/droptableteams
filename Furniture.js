@@ -145,7 +145,7 @@ handleClick = () => {
                   end: [0.2, 0],
                 }}
                 buttonStyle={{borderWidth: 0, borderColor: 'transparent', borderRadius: 20, height: 45}}
-                containerStyle={{marginVertical: 10, height: 40, width: 400, alignSelf: 'center'}}
+                containerStyle={{marginVertical: 10, height: 40, width: 300, alignSelf: 'center'}}
                 onPress = {this.handleClick}
                 /> 
               </View>

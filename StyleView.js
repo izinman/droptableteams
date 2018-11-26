@@ -3,6 +3,7 @@ import { StyleSheet, Text, ScrollView, View } from 'react-native'
 import  Design  from "./Design.js"
 import Furniture from './Furniture.js'
 import {Button} from 'react-native-elements'
+import ARScene from './ARView.js';
 
 type Props = {};
 export default class StyleView extends Component<Props> {
@@ -43,7 +44,7 @@ export default class StyleView extends Component<Props> {
               end: [0.2, 0],
             }}
             buttonStyle={{borderWidth: 0, borderColor: 'transparent', borderRadius: 20, height: 45}}
-            containerStyle={{marginVertical: 10, height: 40, width: 400, alignSelf: 'center'}}
+            containerStyle={{marginVertical: 10, height: 40, width: 300, alignSelf: 'center'}}
             onPress = {this.handleClick}
             /> 
           </View>
@@ -55,7 +56,7 @@ export default class StyleView extends Component<Props> {
     }
     else{
       return(
-        <Furniture src = 'https://www.ikea.com/us/en/images/products/karlstad-sofa-gray__0404895_PE577343_S4.JPG' name='couch'/>
+        <ARScene/>
       );
     }
   }
