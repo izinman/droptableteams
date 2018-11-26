@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
+<<<<<<< HEAD
 import { StyleSheet, Text, ScrollView, View, Image} from 'react-native'
 import StyleView from './StyleView.js'
 import { Button}  from 'react-native-elements';
+=======
+import {Platform, StyleSheet, Text, View, Button, UIManager, findNodeHandle, Dimensions, requireNativeComponent} from 'react-native';
+>>>>>>> 5fa96c365de927686c9bb48f821736d5da909bcc
 
 
 type Props = {};
 export default class App extends Component<Props> {
   constructor(props) {
+<<<<<<< HEAD
     super(props);
     this.state = {home: 0}
 }
@@ -50,6 +55,46 @@ handleClick = () => {
     }
 }
 
+=======
+      super(props);
+  }
+
+  render() { 
+    return(
+      <View>
+          <ARView 
+            style={styles.ARViewStyle}
+            ref={ref => (this.ref = ref)}
+          />
+          <Button 
+            style={styles.addObjButton} 
+            title='Add Object' 
+            onPress={this.update}>
+          </Button>
+      </View>
+    );
+  }
+
+  update = () => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this.ref),
+      UIManager[ARView].Commands.addObject,
+      []
+    );
+  };
+}
+
+const ARView = requireNativeComponent("ARView")
+const styles = StyleSheet.create({
+  ARViewStyle: {
+    height: Dimensions.get("window").height * 0.9,
+    width: Dimensions.get("window").width,
+  },
+
+  addObjButton: {
+    height: Dimensions.get("window").height * 0.1,
+    width: Dimensions.get("window").width,
+>>>>>>> 5fa96c365de927686c9bb48f821736d5da909bcc
 
 const styles = StyleSheet.create({
   root:{

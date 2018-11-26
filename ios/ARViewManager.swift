@@ -11,20 +11,22 @@ import ARKit
 import SceneKit
 
 @objc(ARViewManager)
-class ARViewManager : RCTViewManager {
+class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     
-    var ARView = ARSCNView()
-    var ARSCNManager = SceneManager()
+    var ARView: ARSCNView!
+    var ARSCNManager: SceneManager!
     
     // Returns an ARSCNView for React to present
-    override func view() -> UIView! {
-        
-        // Set the view's bounds to be the screen
+    override func view() -> UIView {
+        // Instantiate a new ARSCNView
+        ARView = ARSCNView()
         ARView.bounds = UIScreen.main.bounds
         
-        // Get initial scene and world tracking config from the SceneManager
-        ARView.scene = ARSCNManager.scene
-        guard let config = ARSCNManager.ARWTConfig else { fatalError("ARWTConfig not found") }
+        // Instantiate a SceneManager and get the scene/config
+        ARSCNManager = SceneManager()
+        ARView.scene = ARSCNManager.scene!
+        ARView.delegate = self
+        let config = ARSCNManager.ARWTConfig!
         
         // Run the ARView
         ARView.session.run(config)
@@ -51,6 +53,12 @@ class ARViewManager : RCTViewManager {
     
     override static func requiresMainQueueSetup() -> Bool {
         return true
+    }
+    
+    @objc func addObject(_ node: ARSCNView!) {
+        DispatchQueue.main.async {
+            self.ARSCNManager.addObject(objectName: "ship")
+        }
     }
 }
 
