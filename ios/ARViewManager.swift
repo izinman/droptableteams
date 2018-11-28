@@ -13,20 +13,19 @@ import SceneKit
 @objc(ARViewManager)
 class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     
-    var ARView: ARSCNView!
-    var SceneManager: ARSCNManager!
+    var ARView = ARSCNView()
+    var SceneManager = ARSCNManager()
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
-        // Instantiate a new ARSCNView
-        ARView = ARSCNView()
+        
+        // Set the bounds of the view to be the screen
         ARView.bounds = UIScreen.main.bounds
         
-        // Instantiate a SceneManager and get the scene/config
-        SceneManager = ARSCNManager()
+        // Get the scene and config from the SceneManager
         ARView.scene = SceneManager.scene!
         ARView.delegate = self
-        let config = SceneManager.ARWTConfig!
+        guard let config = SceneManager.ARWTConfig else { fatalError("No config found") }
         
         // Run the ARView
         ARView.session.run(config)
