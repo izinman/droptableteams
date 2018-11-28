@@ -34,7 +34,7 @@
 		AC3DB41C219668C700AF31E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
 		AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC94C39E219C2DEB00D54C64 /* ARViewManager.m */; };
 		AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */; };
-		AC94C3A5219CDFE100D54C64 /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A4219CDFE100D54C64 /* SceneManager.swift */; };
+		AC94C3A5219CDFE100D54C64 /* ARSCNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A4219CDFE100D54C64 /* ARSCNManager.swift */; };
 		ACBAC5862195156800795235 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ACBAC5832195156800795235 /* art.scnassets */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		EAED28D021A5EBB70011E882 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAED28A821A5EB600011E882 /* libBVLinearGradient.a */; };
@@ -355,7 +355,7 @@
 		AC3DB41A219668C700AF31E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC94C39E219C2DEB00D54C64 /* ARViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARViewManager.m; sourceTree = "<group>"; };
 		AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARViewManager.swift; sourceTree = "<group>"; tabWidth = 4; };
-		AC94C3A4219CDFE100D54C64 /* SceneManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; tabWidth = 4; };
+		AC94C3A4219CDFE100D54C64 /* ARSCNManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARSCNManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-Bridging-Header.h"; sourceTree = "<group>"; };
 		ACBAC5832195156800795235 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -500,7 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				AC3DB41A219668C700AF31E7 /* AppDelegate.swift */,
-				AC94C3A4219CDFE100D54C64 /* SceneManager.swift */,
+				AC94C3A4219CDFE100D54C64 /* ARSCNManager.swift */,
 				AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */,
 				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -719,11 +719,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 8KU7L54DPF;
+						DevelopmentTeam = HR92RX9LZ9;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = ZMBNT2ZRC7;
+						DevelopmentTeam = HR92RX9LZ9;
 						LastSwiftMigration = 1010;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1169,7 +1169,7 @@
 			files = (
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
 				AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */,
-				AC94C3A5219CDFE100D54C64 /* SceneManager.swift in Sources */,
+				AC94C3A5219CDFE100D54C64 /* ARSCNManager.swift in Sources */,
 				AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1211,7 +1211,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 8KU7L54DPF;
+				DEVELOPMENT_TEAM = HR92RX9LZ9;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1235,7 +1235,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 8KU7L54DPF;
+				DEVELOPMENT_TEAM = HR92RX9LZ9;
 				INFOPLIST_FILE = FreeRealEstateTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1258,7 +1258,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = ZMBNT2ZRC7;
+				DEVELOPMENT_TEAM = HR92RX9LZ9;
 				INFOPLIST_FILE = FreeRealEstate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1267,7 +1267,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jlguida.compouter;
+				PRODUCT_BUNDLE_IDENTIFIER = spookybundle123;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1284,7 +1284,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = ZMBNT2ZRC7;
+				DEVELOPMENT_TEAM = HR92RX9LZ9;
 				INFOPLIST_FILE = FreeRealEstate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1293,7 +1293,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jlguida.compouter;
+				PRODUCT_BUNDLE_IDENTIFIER = spookybundle123;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;

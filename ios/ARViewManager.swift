@@ -14,7 +14,7 @@ import SceneKit
 class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     
     var ARView: ARSCNView!
-    var ARSCNManager: SceneManager!
+    var SceneManager: ARSCNManager!
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
@@ -23,10 +23,10 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
         ARView.bounds = UIScreen.main.bounds
         
         // Instantiate a SceneManager and get the scene/config
-        ARSCNManager = SceneManager()
-        ARView.scene = ARSCNManager.scene!
+        SceneManager = ARSCNManager()
+        ARView.scene = SceneManager.scene!
         ARView.delegate = self
-        let config = ARSCNManager.ARWTConfig!
+        let config = SceneManager.ARWTConfig!
         
         // Run the ARView
         ARView.session.run(config)
@@ -37,7 +37,7 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     @objc func addObject(_ node: ARSCNView!,  count: NSNumber) {
         print(count);
         DispatchQueue.main.async {
-            self.ARSCNManager.addObject(objectName: "ship")
+            self.SceneManager.addObject(objectName: "ship")
         }
     }
     
@@ -57,7 +57,7 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     
     @objc func addObject(_ node: ARSCNView!) {
         DispatchQueue.main.async {
-            self.ARSCNManager.addObject(objectName: "ship")
+            self.SceneManager.addObject(objectName: "ship")
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SceneManager.swift
+//  ARSCNManager.swift
 //  FreeRealEstate
 //
 //  Created by Artem Jivotovski on 11/14/18.
@@ -9,7 +9,7 @@
 import ARKit
 import SceneKit
 
-class SceneManager : NSObject {
+class ARSCNManager : NSObject {
     
     var scene: SCNScene!
     var ARWTConfig: ARWorldTrackingConfiguration!
