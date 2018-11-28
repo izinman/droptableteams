@@ -53,11 +53,5 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     override static func requiresMainQueueSetup() -> Bool {
         return true
     }
-    
-    @objc func addObject(_ node: ARSCNView!) {
-        DispatchQueue.main.async {
-            self.SceneManager.addObject(objectName: "ship")
-        }
-    }
 }
 
