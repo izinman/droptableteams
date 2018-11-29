@@ -10,6 +10,7 @@ import XCTest
 @testable import FreeRealEstate
 
 class ARSCNManagerTests: XCTestCase {
+  
     var manager: ARSCNManager!
     
     // Initialize a new ARSCNManager at the beginning of each test
@@ -22,7 +23,7 @@ class ARSCNManagerTests: XCTestCase {
     }
     //
     
-    func testARSCNManagerInit() {
+    func test_init() {
         XCTAssertNotNil(manager.scene)
         XCTAssertNotNil(manager.ARWTConfig)
         XCTAssert(manager.ARWTConfig.isLightEstimationEnabled == true)
@@ -30,10 +31,32 @@ class ARSCNManagerTests: XCTestCase {
         
     }
     
-    func testAddObject() {
+    func test_getScene() {
+        // Should be nonnull scene after init
+        XCTAssertNotNil(manager.getScene())
+        // Set it to nil and test that it now returns nil
+        manager.scene = nil
+      
+        XCTAssertNil(manager.getScene())
+    }
+    
+    func test_getConfig() {
+      // Should be nonnull config after init
+      XCTAssertNotNil(manager.getConfig())
+      // Test that it returns nil after being manually set
+      manager.ARWTConfig = nil
+      
+      XCTAssertNil(manager.getConfig())
+      
+    }
+    
+    func test_addObject() {
+      
         let count = manager.scene.rootNode.childNodes.count
         let expectedcount = count + 1
+      
         manager.addObject(objectName: "ship")
+      
         XCTAssert(manager.scene.rootNode.childNodes.count == expectedcount)
     }
     
