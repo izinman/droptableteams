@@ -16,38 +16,41 @@ export default class ARScene extends Component<Props> {
     if(this.state.AR == 1)
     {
     return(
-      <View style ={{flex: 1, flexDirection: 'column'}}>
+      <View >
+      <View style = {{width: '100%'}}>
       <ARView style=
-            {{height: 1, width: 375}}
+            {{height: '100%', width: '100%', backgroundColor: '#000000'}}
             ref={ref => (this.ref = ref)}
           />
-          <View style = {styles.place_holder}></View>          
+          </View>
+          <View style = {{width: '100%', flex: 1, flexDirection: 'row', justifyContent: 'space-evenly',  zIndex: 2, position: 'absolute', bottom: 50}}>
           <Button     
-                title={"place object"}
+                title={"place"}
                 ViewComponent={require('react-native-linear-gradient').default}
                 titleStyle={{fontWeight: 'bold', fontSize: 12}}
                 linearGradientProps={{
-                  colors: ['#0064e8', '#00ffed'],
-                  start: [1, 0],
-                  end: [0.2, 0],
+                  colors: ['#1460b7', '#1f79e0'],
+                  start: {x:1, y:0},
+                  end: {x:0.2, y:0},
                 }}
                 buttonStyle={{borderWidth: 0, borderColor: 'transparent', borderRadius: 20, height: 45}}
-                containerStyle={{marginVertical: 10, height: 40, width: 300, alignSelf: 'center'}}
+                containerStyle={{marginVertical: 10, height: 40, width: 65, alignSelf: 'center'}}
                 onPress = {this.update}
                 /> 
           <Button     
-                title={"choose object"}
+                title={"new"}
                 ViewComponent={require('react-native-linear-gradient').default}
                 titleStyle={{fontWeight: 'bold', fontSize: 12}}
                 linearGradientProps={{
-                  colors: ['#0064e8', '#00ffed'],
+                  colors: ["#0f9b1e", "#3bba49"],
                   start: [1, 0],
                   end: [0.2, 0],
                 }}
                 buttonStyle={{borderWidth: 0, borderColor: 'transparent', borderRadius: 20, height: 45}}
-                containerStyle={{marginVertical: 10, height: 40, width: 300, alignSelf: 'center'}}
+                containerStyle={{marginVertical: 10, height: 40, width: 45, alignSelf: 'center'}}
                 onPress = {this.choose}
                 /> 
+           </View>
       </View>
     );
               }

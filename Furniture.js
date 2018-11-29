@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, ScrollView, View, Image} from 'react-native'
+import { StyleSheet, Dimensions, ScrollView, View, Image} from 'react-native'
 import ARScene from "./ARView.js"
 import { Button, Tile}  from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -15,140 +15,153 @@ export default class Furniture extends Component<Props> {
 }
 handleClick = () => {
     console.log("working");
-    this.setState({start: 1});
+    this.setState({
+        start: 1,
+        width: Dimensions.get('window').width
+    });
   }
     render() {
+        const  width  = this.state.width;
         if(this.state.start == 0){
         return(
             
-            <View>
-            <ScrollView styles={styles.container} >
-            <View style={styles.container1}>
+            <View style = {{
+                backgroundColor: '#FFFFFF', 
+                flex: 1, 
+                flexDirection: 'column', 
+                alignSelf: 'center', 
+                alignItems: 'center', 
+                alignContent: 'center', 
+                justifyContent: 'center', 
+                width: '100%'}}>
+            <ScrollView>
+            <View style={{
+                backgroundColor: '#FFFFFF',
+                width: '100%',
+                flex: 1,
+                flexWrap: 'wrap',
+                flexDirection: 'row',
+                alignItems: 'center',
+                alignSelf: 'center',
+                alignContent: 'space-between',
+                justifyContent: 'center',
+                paddingTop: '25%'}} >
+                <View style={{padding: 10}}>
                 <Tile
                     imageSrc={{ uri: this.props.src }}
                     title = {this.props.name}
-                    titleStyle={{ fontSize: 30, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 10, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={410}
+                    width={150}
                     onPress={this.handleClick}
               />
               </View>
-              <View style={styles.container1}>
+              <View style={{padding: 10}}>
                 <Tile
                     imageSrc={{ uri: this.props.src }}
                     title = {this.props.name}
-                    titleStyle={{ fontSize: 30, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 10, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={410}
+                    width={150}
                     onPress={this.handleClick}
               />
               </View>
-              <View style={styles.container1}>
+              <View style={{padding: 10}}>
                 <Tile
                     imageSrc={{ uri: this.props.src }}
                     title = {this.props.name}
-                    titleStyle={{ fontSize: 30, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 10, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={410}
+                    width={150}
                     onPress={this.handleClick}
               />
               </View>
-              <View style={styles.container1}>
+              <View style={{padding: 10}}>
                 <Tile
                     imageSrc={{ uri: this.props.src }}
                     title = {this.props.name}
-                    titleStyle={{ fontSize: 30, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 10, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={410}
+                    width={150}
                     onPress={this.handleClick}
               />
               </View>
-              <View style={styles.container1}>
+              <View style={{padding: 10}}>
                 <Tile
                     imageSrc={{ uri: this.props.src }}
                     title = {this.props.name}
-                    titleStyle={{ fontSize: 30, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 10, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={410}
+                    width={150}
                     onPress={this.handleClick}
               />
               </View>
-              <View style={styles.container1}>
+              <View style={{padding: 10}}>
                 <Tile
                     imageSrc={{ uri: this.props.src }}
                     title = {this.props.name}
-                    titleStyle={{ fontSize: 30, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 10, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={410}
+                    width={150}
                     onPress={this.handleClick}
               />
               </View>
-              <View style={styles.container1}>
+              <View style={{padding: 10}}>
                 <Tile
                     imageSrc={{ uri: this.props.src }}
                     title = {this.props.name}
-                    titleStyle={{ fontSize: 30, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 10, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={410}
+                    width={150}
                     onPress={this.handleClick}
               />
               </View>
-              <View style={styles.container1}>
+              <View style={{padding: 10}}>
                 <Tile
                     imageSrc={{ uri: this.props.src }}
                     title = {this.props.name}
-                    titleStyle={{ fontSize: 30, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 10, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={410}
+                    width={150}
                     onPress={this.handleClick}
               />
               </View>
-              <View style={styles.container1}>
+              <View style={{padding: 10}}>
                 <Tile
                     imageSrc={{ uri: this.props.src }}
                     title = {this.props.name}
-                    titleStyle={{ fontSize: 30, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 10, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={410}
+                    width={150}
                     onPress={this.handleClick}
               />
               </View>
-              <View style={styles.container1}>
+              <View style={{padding: 10}}>
                 <Tile
                     imageSrc={{ uri: this.props.src }}
                     title = {this.props.name}
-                    titleStyle={{ fontSize: 30, fontWeight: 'bold' }}
+                    titleStyle={{ fontSize: 10, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={410}
+                    width={150}
                     onPress={this.handleClick}
               />
               </View>
+              
+                
+              
+              
+            </View>
             </ScrollView>
-            <View style={{position: 'absolute', bottom: 20 ,alignSelf: 'center' }}>
-              <Button     
-                title={"design"}
-                ViewComponent={require('react-native-linear-gradient').default}
-                titleStyle={{fontWeight: 'bold', fontSize: 12}}
-                linearGradientProps={{
-                  colors: ['#0064e8', '#00ffed'],
-                  start: [1, 0],
-                  end: [0.2, 0],
-                }}
-                buttonStyle={{borderWidth: 0, borderColor: 'transparent', borderRadius: 20, height: 45}}
-                containerStyle={{marginVertical: 10, height: 40, width: 300, alignSelf: 'center'}}
-                onPress = {this.handleClick}
-                /> 
-              </View>
            </View>
                
             );
@@ -165,23 +178,17 @@ handleClick = () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#f2f245",
-        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
-        alignSelf: 'center',
-        flexWrap: 'wrap',
         paddingTop: 150
       },
     container1: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center'
+        width: 100,
+        flexWrap: 'wrap',
     },
     image:{
         height: 75,
-        width: 150,
+        width: 100,
         marginTop: 5,
         marginLeft: 5,
         marginRight: 5,
