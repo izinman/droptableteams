@@ -341,10 +341,10 @@
 		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* FreeRealEstateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeRealEstateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* FreeRealEstateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreeRealEstateTests.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* FreeRealEstateTests.m */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = FreeRealEstateTests.m; sourceTree = "<group>"; tabWidth = 4; };
 		0AD3378D21AF8BDF00F1C634 /* FreeRealEstateTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstateTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		0AD3378E21AF8BDF00F1C634 /* ARViewManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewManagerTests.swift; sourceTree = "<group>"; };
-		0AD337B521AF9F3200F1C634 /* ARSCNManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNManagerTests.swift; sourceTree = "<group>"; };
+		0AD3378E21AF8BDF00F1C634 /* ARViewManagerTests.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARViewManagerTests.swift; sourceTree = "<group>"; tabWidth = 4; };
+		0AD337B521AF9F3200F1C634 /* ARSCNManagerTests.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARSCNManagerTests.swift; sourceTree = "<group>"; tabWidth = 4; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* FreeRealEstate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeRealEstate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -727,12 +727,12 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 5Q5LNZ4Y3R;
+						DevelopmentTeam = HR92RX9LZ9;
 						LastSwiftMigration = 1010;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 5Q5LNZ4Y3R;
+						DevelopmentTeam = HR92RX9LZ9;
 						LastSwiftMigration = 1010;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1223,7 +1223,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 5Q5LNZ4Y3R;
+				DEVELOPMENT_TEAM = HR92RX9LZ9;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1251,7 +1251,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 5Q5LNZ4Y3R;
+				DEVELOPMENT_TEAM = HR92RX9LZ9;
 				INFOPLIST_FILE = FreeRealEstateTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1275,7 +1275,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 5Q5LNZ4Y3R;
+				DEVELOPMENT_TEAM = HR92RX9LZ9;
 				INFOPLIST_FILE = FreeRealEstate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1284,7 +1284,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = spookybundle12345;
+				PRODUCT_BUNDLE_IDENTIFIER = mrspookbundle;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1300,7 +1300,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 5Q5LNZ4Y3R;
+				DEVELOPMENT_TEAM = HR92RX9LZ9;
 				INFOPLIST_FILE = FreeRealEstate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1309,7 +1309,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = spookybundle12345;
+				PRODUCT_BUNDLE_IDENTIFIER = mrspookbundle;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;

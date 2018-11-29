@@ -11,34 +11,34 @@ import XCTest
 @testable import FreeRealEstate
 
 class ARViewManagerTests: XCTestCase {
-  
-   var manager: ARViewManager!
-  
-  // Test setup and teardown
+    
+    var manager: ARViewManager!
+    
+    // Test setup and teardown
     override func setUp() {
-      manager = ARViewManager()
+        manager = ARViewManager()
     }
-
+    
     override func tearDown() {
         manager = nil
     }
-  //
-  
-  // Unit tests for functions of ARViewManager
+    //
+    
+    // Unit tests for functions of ARViewManager
     func testARViewManagerInitialize() {
-      XCTAssertNotNil(manager.ARView)
-      XCTAssertNotNil(manager.SceneManager)
+        XCTAssertNotNil(manager.ARView)
+        XCTAssertNotNil(manager.SceneManager)
     }
-
-  
-  func testARViewManagerview() {
-      XCTAssertNotNil(manager.view())
-  }
-  
-  func testReqsMainQueue() {
-    XCTAssert(ARViewManager.requiresMainQueueSetup())
-    XCTAssert(!(ARViewManager.requiresMainQueueSetup() == false))
-  }
-
-
+    
+    
+    func testARViewManagerview() {
+        XCTAssertNotNil(manager.view())
+    }
+    
+    func testReqsMainQueue() {
+        XCTAssert(ARViewManager.requiresMainQueueSetup())
+        XCTAssert(!(ARViewManager.requiresMainQueueSetup() == false))
+    }
+    
+    
 }
