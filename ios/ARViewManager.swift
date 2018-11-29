@@ -23,9 +23,9 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
         ARView.bounds = UIScreen.main.bounds
         
         // Get the scene and config from the SceneManager
-        ARView.scene = SceneManager.scene!
         ARView.delegate = self
-        guard let config = SceneManager.ARWTConfig else { fatalError("No config found") }
+        ARView.scene = SceneManager.getScene()
+        let config = SceneManager.getConfig()
         
         // Run the ARView
         ARView.session.run(config)

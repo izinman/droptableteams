@@ -33,6 +33,9 @@ class ARSCNManager : NSObject {
         scene = SCNScene()
     }
     
+    func getConfig() -> ARWorldTrackingConfiguration { return ARWTConfig }
+    func getScene() -> SCNScene { return scene }
+    
     func addObject(objectName: String) {
         let scnFileName = "art.scnassets/" + objectName + ".scn"
         let objectScene = SCNScene(named: scnFileName)!
