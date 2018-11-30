@@ -169,7 +169,7 @@ handleClick = () => {
         }
         else{
             return (
-                <ARScene/>
+                <ARScene styled = {1}/>
             );
         }
     }

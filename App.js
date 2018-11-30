@@ -3,6 +3,7 @@ import {Image} from 'react-native'
 import StyleView from './StyleView.js'
 import { Button}  from 'react-native-elements';
 import {Platform, StyleSheet, Text, View, UIManager, findNodeHandle, Dimensions, requireNativeComponent} from 'react-native';
+import ARScene from './ARView.js';
 
 
 
@@ -15,6 +16,8 @@ export default class App extends Component<Props> {
 handleClick = () => {
   this.setState({home: 1})
 }
+
+
   render() {
       if(this.state.home == 0){
         return (
@@ -24,23 +27,19 @@ handleClick = () => {
           <View styles={styles.root} >
             <Text style ={styles.welcome1}>Stage your property...</Text>
             <Text style ={styles.welcome2}>virtually</Text>
-            <Text style ={styles.welcome3}>With our help</Text>
+            <Text style ={styles.welcome3}></Text>
             <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', alignContent: 'center',height: 20}}>
-            <Image source={require('./cole.png')} style={{width: 100, height: 70, margin: 5}}/>
-            <Image source={require('./artem.png')} style={{width: 100, height: 70, margin: 5}}/>
-            <Image source={require('./micheal.png')} style={{width: 100, height: 70, margin: 5}}/>
-            <Image source={require('./isaac.png')} style={{width: 100, height: 70, margin: 5}}/>
-            <Image source={require('./jake.png')} style={{width: 100, height: 70, margin: 5}}/>
+            
             </View>
             <View style={styles.button_bg}>
             <Button 
-              title="Begin"
+              title="start"
               ViewComponent={require('react-native-linear-gradient').default}
-              titleStyle={{fontWeight: '400', fontSize: 16}}
+              titleStyle={{fontWeight: '600', fontSize: 16}}
               linearGradientProps={{
-                colors: ['#003187', '#002059'],
-                start: {x:1, y:0},
-                end: {x:0.2, y:0},
+                colors: ['#3a43ba', '#01458e'],
+                  start: {x:0, y:0},
+                  end: {x:0.5, y:0},
               }}
               buttonStyle={{borderWidth: 0, borderColor: 'white', borderWidth: 0 ,borderRadius: 35, height: 40}}
               containerStyle={{marginVertical: 10, height: 50, width: 250}}
@@ -53,7 +52,7 @@ handleClick = () => {
         );
       }
       else{
-        return(<StyleView/>);
+        return(<ARScene styled={0}/>);
       }
     }
 }
@@ -76,7 +75,6 @@ const styles = StyleSheet.create({
     
     textAlign: 'left',
     paddingBottom: '10%',
-    paddingLeft: '15%',
     paddingTop: '20%',
     alignSelf: 'flex-start'
   },
@@ -108,8 +106,15 @@ const styles = StyleSheet.create({
   },
   button_bg: {
     alignSelf: 'center',
-    paddingBottom: '30%'
+    paddingBottom: '20%'
   },
 });
 
 
+/*
+<Image source={require('./cole.png')} style={{width: 100, height: 70, margin: 5}}/>
+            <Image source={require('./artem.png')} style={{width: 100, height: 70, margin: 5}}/>
+            <Image source={require('./micheal.png')} style={{width: 100, height: 70, margin: 5}}/>
+            <Image source={require('./isaac.png')} style={{width: 100, height: 70, margin: 5}}/>
+            <Image source={require('./jake.png')} style={{width: 100, height: 70, margin: 5}}/>
+            */

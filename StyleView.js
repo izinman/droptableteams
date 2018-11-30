@@ -6,6 +6,18 @@ import {Button} from 'react-native-elements'
 import ARScene from './ARView.js';
 
 type Props = {};
+var modern = require('./modern.jpg');
+var contemporary = require('./contemporary.jpg');
+var minimalist = require('./minimalist.jpg' );
+var industrial = require('./industrial.jpg');
+var  mid_century_modern = require('./mid-century-modern.jpg');
+var  scandanavian = require('./scandanavian.jpg');
+var traditional = require('./traditional.jpg');
+var transitional = require('./transitional.jpg');
+var bohemian = require('./bohemian.jpg');
+var descr = "Cilurut recan igoyem pida ramula rola udoralut lihet, refe tase emerol nirad unowatap diehef codun ahadidir, detos polaca doney liel tomur merec resasu da ulita ofu; sopo osotos galed ofumice gabiha nep esies nitu, hes ho eme nobe oreyer relerer gariya diesa te nesiti. Net wef ru erukatib dikepo etie rin sasif irete liehitog"
+
+  
 export default class StyleView extends Component<Props> {
   constructor(props) {
     super(props);
@@ -13,44 +25,43 @@ export default class StyleView extends Component<Props> {
                   selected: 'contemporary'};
     this.handleClick = this.handleClick.bind(this);
 }
-  handleClick = () => {
+handleClick = () => {
     console.log("working");
     this.setState({start: 1});
   }
   render() {
     var instruction = "Select " + this.state.selected + " furniture"
-    var desc = "Cilurut recan igoyem pida ramula rola udoralut lihet, refe tase emerol nirad unowatap diehef codun ahadidir, detos polaca doney liel tomur merec resasu da ulita ofu; sopo osotos galed ofumice gabiha nep esies nitu, hes ho eme nobe oreyer relerer gariya diesa te nesiti. Net wef ru erukatib dikepo etie rin sasif irete liehitog"
     if(this.state.start == 0){
     return (
       <View style= {{height: '100%', width: '100%'}}>
         <ScrollView styles={styles.container} >
           <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row', height: '100%', justifyContent: 'center', alignItems: 'stretch', alignContent: 'stretch'}}>
               <View>
-                <Design src='./bg.jpg' name="modern" desc={desc}/>
+                <Design src={modern} name="modern" desc={descr}/>
                 </View>
               <View>
-                <Design src='./bg.jpg' name="contemporary" desc={desc}/>
+                <Design src={contemporary} name="contemporary" desc={descr}/>
                 </View>
               <View> 
-                <Design src='./bg.jpg' name="minimalist" desc={desc}/>
+                <Design src={minimalist} name="minimalist" desc={descr}/>
                 </View>
               <View> 
-                <Design src='./bg.jpg'name ="industrial" desc={desc}/>
+                <Design src={industrial} name ="industrial" desc={descr}/>
                 </View>
               <View> 
-                <Design src='./bg.jpg'name="mid-century modern" desc={desc}/>
+                <Design src={mid_century_modern} name="mid-century modern" desc={descr}/>
                 </View>
               <View>
-                <Design src='./bg.jpg'name="scandanavian" desc={desc}/>
+                <Design src={scandanavian} name="scandanavian" desc={descr}/>
                 </View>
               <View>
-                <Design src='./bg.jpg'name="traditional" desc={desc}/>
+                <Design src={traditional} name="traditional" desc={descr}/>
                 </View>
               <View>
-                <Design src='./bg.jpg'name="transitional" desc={desc}/>
+                <Design src={transitional} name="transitional" desc={descr}/>
                 </View>
               <View>
-                <Design src='./bg.jpg'name="bohemian" desc={desc}/>
+                <Design src={bohemian} name="bohemian" desc={descr}/>
                 </View>
               </View>
         </ScrollView>
@@ -77,7 +88,7 @@ export default class StyleView extends Component<Props> {
     }
     else{
       return(
-        <ARScene/>
+        <Furniture src = 'https://www.ikea.com/us/en/images/products/karlstad-sofa-gray__0404895_PE577343_S4.JPG' name='couch'/>
       );
     }
   }

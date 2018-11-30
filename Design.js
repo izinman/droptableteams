@@ -14,6 +14,7 @@ export default class Design extends Component<Props> {
             selected: 0,
             src: './bg.jpg'        }
     }
+    
     componentDidMount(){
         if (this.props.src  == null){
             this.setState({src: './bg.jpg'})
@@ -29,16 +30,15 @@ export default class Design extends Component<Props> {
         }  
     }
     handleSelect = () => {
-        
+
     }
   render() {
-      var desc = this.props.src;
       if(this.state.selected == 0){
     return (
 
         <View style={styles.container}>
         <Tile
-            imageSrc={require('./bg.jpg')}
+            imageSrc={this.props.src}
             title = {this.props.name}
             titleStyle={{ fontSize: 25, fontWeight: 'bold' }}
             featured
@@ -69,7 +69,7 @@ export default class Design extends Component<Props> {
                 </View>
             </View>
                 <Tile
-                    imageSrc={require('./bg.jpg')}
+                    imageSrc={this.props.src}
                     imageContainerStyle={{opacity: .15 }}
                     titleStyle={{ fontSize: 25, fontWeight: 'bold' }}
                     featured
@@ -84,7 +84,9 @@ export default class Design extends Component<Props> {
   }
 }
 
-
+Design.defaultProps = {
+    src: './bg.jpg'
+  };
 
 const styles = StyleSheet.create({
 container: {
