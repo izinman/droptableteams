@@ -29,11 +29,11 @@ handleClick = () => {
             <Text style ={styles.welcome2}>virtually</Text>
             <Text style ={styles.welcome3}>With us</Text>
             <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', alignContent: 'center',height: 20}}>
-            <Image source={require('./cole.png')} style={{width: 100, height: 70, margin: 5}}/>
-            <Image source={require('./artem.png')} style={{width: 100, height: 70, margin: 5}}/>
-            <Image source={require('./micheal.png')} style={{width: 100, height: 70, margin: 5}}/>
-            <Image source={require('./isaac.png')} style={{width: 100, height: 70, margin: 5}}/>
-            <Image source={require('./jake.png')} style={{width: 100, height: 70, margin: 5}}/>
+            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 50}}/>
+            <Image source={require('./artem.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 50}}/>
+            <Image source={require('./micheal.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 50}}/>
+            <Image source={require('./isaac.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 50}}/>
+            <Image source={require('./jake.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 50}}/>
             </View>
             <View style={styles.button_bg}>
             <Button 
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     fontSize: 34, 
     alignSelf: 'center',
     textAlign: 'center',
-    paddingBottom: 25,
+    paddingBottom: 55,
     paddingTop: '20%',
   },
   welcome2: {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     fontStyle: 'italic',
-    paddingBottom: '25%'
+    paddingBottom: '35%'
   },
   welcome3: {
     color: "#FFFFFF", 
