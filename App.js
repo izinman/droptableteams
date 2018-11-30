@@ -27,9 +27,13 @@ handleClick = () => {
           <View styles={styles.root} >
             <Text style ={styles.welcome1}>Stage your property...</Text>
             <Text style ={styles.welcome2}>virtually</Text>
-            <Text style ={styles.welcome3}></Text>
+            <Text style ={styles.welcome3}>With us</Text>
             <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', alignContent: 'center',height: 20}}>
-            
+            <Image source={require('./cole.png')} style={{width: 100, height: 70, margin: 5}}/>
+            <Image source={require('./artem.png')} style={{width: 100, height: 70, margin: 5}}/>
+            <Image source={require('./micheal.png')} style={{width: 100, height: 70, margin: 5}}/>
+            <Image source={require('./isaac.png')} style={{width: 100, height: 70, margin: 5}}/>
+            <Image source={require('./jake.png')} style={{width: 100, height: 70, margin: 5}}/>
             </View>
             <View style={styles.button_bg}>
             <Button 
@@ -71,20 +75,18 @@ const styles = StyleSheet.create({
 
     color: "#FFFFFF", 
     fontWeight: '300',
-    fontSize: 38, 
-    
-    textAlign: 'left',
-    paddingBottom: '10%',
+    fontSize: 34, 
+    alignSelf: 'center',
+    textAlign: 'center',
+    paddingBottom: 25,
     paddingTop: '20%',
-    alignSelf: 'flex-start'
   },
   welcome2: {
     color: "#FFFFFF", 
     fontWeight: "bold", 
     fontSize: 30, 
     width: '100%',
-    textAlign: 'right',
-    paddingRight: "5%",
+    textAlign: 'center',
     fontStyle: 'italic',
     paddingBottom: '25%'
   },
