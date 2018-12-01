@@ -42,7 +42,7 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
         }
     }
     
-    private func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("HEREEEEEE\nHEREEEEEE\nHEREEEEEE\nHEREEEEEE\nHEREEEEEE\nHEREEEEEE\nHEREEEEEE\n")
         if let arPlaneAnchor = anchor as? ARPlaneAnchor {
             //print("HEREEEEEE\nHEREEEEEE\nHEREEEEEE\nHEREEEEEE\nHEREEEEEE\nHEREEEEEE\nHEREEEEEE\n")
