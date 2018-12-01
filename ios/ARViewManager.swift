@@ -13,30 +13,30 @@ import SceneKit
 @objc(ARViewManager)
 class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     
-    var ARView = ARSCNView()
-    var SceneManager = ARSCNManager()
+    var arView = ARSCNView()
+    var sceneManager = ARSCNManager()
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
         
         // Set the bounds of the view to be the screen
-        ARView.bounds = UIScreen.main.bounds
+        arView.bounds = UIScreen.main.bounds
         
         // Get the scene and config from the SceneManager
-        ARView.delegate = self
-        ARView.scene = SceneManager.getScene()
-        let config = SceneManager.getConfig()
+        arView.delegate = self
+        arView.scene = sceneManager.getScene()
+        let config = sceneManager.getConfig()
         
         // Run the ARView
-        ARView.session.run(config)
+        arView.session.run(config)
         
-        return ARView
+        return arView
     }
     
     @objc func addObject(_ node: ARSCNView!,  count: NSNumber) {
         print(count);
         DispatchQueue.main.async {
-            self.SceneManager.addObject(objectName: "ship")
+            self.sceneManager.addObject(objectName: "ship")
         }
     }
     
@@ -46,8 +46,8 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     }
     
     func displayDebugInfo() {
-        ARView.showsStatistics = true
-        ARView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        arView.showsStatistics = true
+        arView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
     }
     
     override static func requiresMainQueueSetup() -> Bool {

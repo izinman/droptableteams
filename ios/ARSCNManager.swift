@@ -12,7 +12,7 @@ import SceneKit
 class ARSCNManager : NSObject {
     
     var scene: SCNScene!
-    var ARWTConfig: ARWorldTrackingConfiguration!
+    var arwtConfig: ARWorldTrackingConfiguration!
     
     override init() {
         super.init()
@@ -25,7 +25,7 @@ class ARSCNManager : NSObject {
         let configuration = (config != nil) ? config : ARWorldTrackingConfiguration()
         configuration?.planeDetection = [.horizontal, .vertical]
         configuration?.isLightEstimationEnabled = true
-        ARWTConfig = configuration
+        arwtConfig = configuration
     }
     
     func initScene() {
@@ -33,7 +33,7 @@ class ARSCNManager : NSObject {
         scene = SCNScene()
     }
     
-    func getConfig() -> ARWorldTrackingConfiguration { return ARWTConfig }
+    func getConfig() -> ARWorldTrackingConfiguration { return arwtConfig }
     func getScene() -> SCNScene { return scene }
     
     func addObject(objectName: String) {
