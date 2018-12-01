@@ -25,9 +25,9 @@ class ARSCNManagerTests: XCTestCase {
     
     func test_init() {
         XCTAssertNotNil(manager.scene)
-        XCTAssertNotNil(manager.ARWTConfig)
-        XCTAssert(manager.ARWTConfig.isLightEstimationEnabled == true)
-        XCTAssert(manager.ARWTConfig.planeDetection == [.horizontal, .vertical])
+        XCTAssertNotNil(manager.arwtConfig)
+        XCTAssert(manager.arwtConfig.isLightEstimationEnabled == true)
+        XCTAssert(manager.arwtConfig.planeDetection == [.horizontal, .vertical])
         
     }
     
@@ -44,7 +44,7 @@ class ARSCNManagerTests: XCTestCase {
       // Should be nonnull config after init
       XCTAssertNotNil(manager.getConfig())
       // Test that it returns nil after being manually set
-      manager.ARWTConfig = nil
+      manager.arwtConfig = nil
       
       XCTAssertNil(manager.getConfig())
       
