@@ -23,7 +23,7 @@ class ARSCNManager : NSObject {
     func initARWTConfig(config: ARWorldTrackingConfiguration?) {
         // Check if we are loading an existing config -- if not, create a new one
         let configuration = (config != nil) ? config : ARWorldTrackingConfiguration()
-        configuration?.planeDetection = [.horizontal, .vertical]
+        configuration?.planeDetection = .horizontal
         configuration?.isLightEstimationEnabled = true
         arwtConfig = configuration
     }
