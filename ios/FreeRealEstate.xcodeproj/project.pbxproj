@@ -40,6 +40,7 @@
 		ACBAC5862195156800795235 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ACBAC5832195156800795235 /* art.scnassets */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		EAED28D021A5EBB70011E882 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAED28A821A5EB600011E882 /* libBVLinearGradient.a */; };
+		EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDABA60321B35F3900833E0F /* VirtualPlane.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -365,6 +366,7 @@
 		ACBAC5832195156800795235 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		EAED28A221A5EB600011E882 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		EDABA60321B35F3900833E0F /* VirtualPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualPlane.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -511,6 +513,7 @@
 				AC94C3A4219CDFE100D54C64 /* ARSCNManager.swift */,
 				AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */,
 				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
+				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				ACBAC5832195156800795235 /* art.scnassets */,
 				ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */,
@@ -1180,6 +1183,7 @@
 			files = (
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
 				AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */,
+				EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */,
 				AC94C3A5219CDFE100D54C64 /* ARSCNManager.swift in Sources */,
 				AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */,
 			);
