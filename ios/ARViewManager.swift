@@ -16,6 +16,13 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     var arView = ARSCNView()
     var sceneManager = ARSCNManager()
     var planes = [UUID : VirtualPlane]()
+    var selectedPlane: VirtualPlane?
+    var shipNode: SCNNode {
+        let scnFileName = "art.scnassets/ship.scn"
+        let objectScene = SCNScene(named: scnFileName)!
+        let objectNode = objectScene.rootNode.childNode(withName: "ship", recursively: true)!
+        return objectNode
+    }
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
@@ -32,7 +39,23 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
         // Run the ARView
         arView.session.run(config)
         
+        let tapGesture = UITapGestureRecognizer(target: self, action:  #selector(scnTapped(_:)))
+        arView.addGestureRecognizer(tapGesture)
+        
         return arView
+    }
+    
+    @objc func scnTapped(_ sender: UITapGestureRecognizer) {
+        let touchLocation = sender.location(in: arView)
+        let hits = arView.hitTest(touchLocation, types: .featurePoint)
+        if hits.count > 0, let firstHit = hits.first, let identifier = firstHit.anchor?.identifier, let plane = planes[identifier] {
+            selectedPlane = plane
+            let ship = shipNode.clone()
+            ship.position = SCNVector3Make(firstHit.worldTransform.columns.3.x, firstHit.worldTransform.columns.3.y, firstHit.worldTransform.columns.3.z)
+            sceneManager.scene.rootNode.addChildNode(ship)
+        } else {
+            print("Plane not touch or planes not yet detected")
+        }
     }
     
     @objc func addObject(_ node: ARSCNView!,  count: NSNumber) {
