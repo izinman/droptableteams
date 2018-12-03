@@ -47,14 +47,25 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     
     @objc func scnTapped(_ sender: UITapGestureRecognizer) {
         let touchLocation = sender.location(in: arView)
-        let hits = arView.hitTest(touchLocation, types: .featurePoint)
-        if hits.count > 0, let firstHit = hits.first, let identifier = firstHit.anchor?.identifier, let plane = planes[identifier] {
-            selectedPlane = plane
+        let hits = arView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
+        
+        //
+        
+        if hits.count > 0, let hitResult = hits.last, let identifier = hitResult.anchor?.identifier {
+            selectedPlane = planes[identifier]
             let ship = shipNode.clone()
-            ship.position = SCNVector3Make(firstHit.worldTransform.columns.3.x, firstHit.worldTransform.columns.3.y, firstHit.worldTransform.columns.3.z)
+            let rotation = simd_float4x4(SCNMatrix4MakeRotation(arView.session.currentFrame!.camera.eulerAngles.y, 0, 1, 0))
+            let hitTransform = simd_mul(hitResult.worldTransform, rotation)
+            ship.transform = SCNMatrix4(hitTransform)
+            
+            // let hitVector = SCNVector3(hitTransform.columns.3.x, hitTransform.columns.3.y, hitTransform.columns.3.z)
+            // ship.position = hitVector
+            
+            ship.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
+            // arView.session.add(anchor: ARAnchor(transform: hitTransform))
             sceneManager.scene.rootNode.addChildNode(ship)
         } else {
-            print("Plane not touch or planes not yet detected")
+            print("Plane not touched or planes not yet detected")
         }
     }
     
