@@ -79,7 +79,7 @@ export default class StyleView extends Component<Props> {
              <View style={{padding: 2}}>
                 <Tile
                     imageSrc={{ uri: "https://secure.img2-fg.wfcdn.com/im/88812946/compr-r85/3349/33499118/chisolm-loveseat.jpg" }}
-                    title = "love seat"
+                    title = "Couch"
                     titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
