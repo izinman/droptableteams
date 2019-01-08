@@ -29,7 +29,7 @@ export default class Design extends Component<Props> {
                     linearGradientProps={{
                         colors: ['#3bba49', '#007c0d'],
                         start: {x:1, y:0},
-                        end: {x: 0.2, y: 0},
+                        end: {x: 0.5, y: 0},
                     }}
                     buttonStyle={{borderWidth: 0, borderColor: 'white', borderWidth: this.props.border, borderRadius: 8, height: 35}}
                     containerStyle={{marginVertical: 10, height: 35, width: 60, alignSelf: 'center'}}
