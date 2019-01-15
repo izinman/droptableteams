@@ -63,7 +63,7 @@ export default class ARScene extends Component<Props> {
                 }
                 else{
                   return(
-                    <Furniture src = 'https://www.ikea.com/us/en/images/products/karlstad-sofa-gray__0404895_PE577343_S4.JPG' name='couch'/>
+                    <StyleView/>
                   );
                 }
                 

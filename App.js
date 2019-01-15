@@ -27,7 +27,8 @@ handleClick = () => {
           <View styles={styles.root} >
             <Text style ={styles.welcome1}>Stage your property...</Text>
             <Text style ={styles.welcome2}>virtually</Text>
-            <Text style ={styles.welcome3}>With us</Text>
+            <Text style ={styles.welcome3}>With our </Text>
+            <Text style ={styles.welcome4}>FreeRealEstate </Text>
             <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', alignContent: 'center',height: 20}}>
             <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 50}}/>
             <Image source={require('./artem.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 50}}/>
@@ -84,17 +85,26 @@ const styles = StyleSheet.create({
   welcome2: {
     color: "#FFFFFF", 
     fontWeight: "bold", 
-    fontSize: 30, 
+    fontSize: 32, 
     width: '100%',
     textAlign: 'center',
     fontStyle: 'italic',
-    paddingBottom: '35%'
+    paddingBottom: '15%'
   },
   welcome3: {
     color: "#FFFFFF", 
     fontWeight: "300", 
     fontSize: 25, 
     width: '100%',
+    textAlign: 'center',
+    paddingBottom: "5%"
+  },
+  welcome4: {
+    color: "#FFFFFF", 
+    fontWeight: "600", 
+    fontSize: 35, 
+    width: '100%',
+    fontStyle: 'italic',
     textAlign: 'center',
     paddingBottom: "5%"
   },
