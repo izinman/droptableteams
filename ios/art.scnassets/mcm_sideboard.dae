@@ -4,8 +4,8 @@
   <contributor>
    <authoring_tool>SceneKit Collada Exporter v1.0</authoring_tool>
   </contributor>
-  <created>2019-01-15T04:15:45Z</created>
-  <modified>2019-01-15T04:15:45Z</modified>
+  <created>2019-01-15T06:37:27Z</created>
+  <modified>2019-01-15T06:37:27Z</modified>
   <unit meter="1.000000"/>
   <up_axis>Y_UP</up_axis>
  </asset>
@@ -1242,7 +1242,7 @@
   <visual_scene id="scene203">
    <node id="SketchUp" name="SketchUp">
     <node id="skp_camera_Last_Saved_SketchUp_View" name="skp_camera_Last_Saved_SketchUp_View">
-     <matrix>0.7562055 -0.12986 0.6413183 134.5017 -8.195637e-08 0.9801084 0.1984615 40.47014 -0.6543338 -0.1500778 0.7411635 103.59 0 0 0 1 </matrix>
+     <matrix>0.7562054 -0.12986 0.6413182 134.5017 -1.117587e-07 0.9801083 0.1984615 40.47014 -0.6543337 -0.1500778 0.7411635 103.59 0 0 0 1 </matrix>
      <instance_camera url="#ID1"/>
     </node>
     <node id="instance_0" name="instance_0">
@@ -1414,7 +1414,7 @@
        </node>
       </node>
       <node id="group_6" name="group_6">
-       <matrix>-1 -0 -0 20.07874 -0 0.9999998 -8.742277e-08 9.84252 -0 8.742277e-08 0.9999998 -1.968504 -0 -0 -0 1 </matrix>
+       <matrix>-1 0 -0 20.07874 -0 0.9999998 -8.742277e-08 9.84252 0 8.742277e-08 0.9999998 -1.968504 -0 -0 -0 1 </matrix>
        <node id="ID128" name="ID128">
         <instance_geometry url="#geometry125">
          <bind_material>
@@ -1451,7 +1451,7 @@
        </node>
       </node>
       <node id="ID152" name="group_7">
-       <matrix>-1 -0 -0 39.44882 -0 0.9999998 -8.742277e-08 9.84252 -0 8.742277e-08 0.9999998 -1.968504 -0 -0 -0 1 </matrix>
+       <matrix>-1 0 -0 39.44882 -0 0.9999998 -8.742277e-08 9.84252 0 8.742277e-08 0.9999998 -1.968504 -0 -0 -0 1 </matrix>
        <node id="node211" name="ID153">
         <instance_geometry url="#geometry151">
          <bind_material>
@@ -1488,7 +1488,7 @@
        </node>
       </node>
       <node id="ID177" name="group_8">
-       <matrix>-1 -0 -0 49.17323 -0 0.9999998 -8.742277e-08 9.84252 -0 8.742277e-08 0.9999998 -1.968504 -0 -0 -0 1 </matrix>
+       <matrix>-1 0 -0 49.17323 -0 0.9999998 -8.742277e-08 9.84252 0 8.742277e-08 0.9999998 -1.968504 -0 -0 -0 1 </matrix>
        <node id="ID178" name="ID178">
         <instance_geometry url="#geometry177">
          <bind_material>
