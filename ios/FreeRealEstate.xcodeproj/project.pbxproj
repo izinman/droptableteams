@@ -898,7 +898,7 @@
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = ZMBNT2ZRC7;
+						DevelopmentTeam = 8KU7L54DPF;
 						ProvisioningStyle = Manual;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
@@ -1539,8 +1539,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-
-				PRODUCT_BUNDLE_IDENTIFIER = capstone.ucsb.edu;
+				PRODUCT_BUNDLE_IDENTIFIER = appfolio.capstone.ucsb;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1572,7 +1571,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = capstone.ucsb.edu;
+				PRODUCT_BUNDLE_IDENTIFIER = appfolio.capstone.ucsb;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
