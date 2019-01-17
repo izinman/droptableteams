@@ -73,7 +73,7 @@ export default class ARScene extends Component<Props> {
   update = () => {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
-      UIManager[ARView].Commands.addObject,
+      UIManager[ARView].Commands.enterPlacementMode,
       [42]
     );
   };

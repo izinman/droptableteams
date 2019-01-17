@@ -11,7 +11,7 @@
 
 @interface RCT_EXTERN_MODULE(ARViewManager, RCTViewManager)
 
-RCT_EXTERN_METHOD(addObject: (nonnull NSNumber *)node
+RCT_EXTERN_METHOD(enterPlacementMode: (nonnull NSNumber *)node
                   count:(nonnull NSNumber *)count)
 
 @end
