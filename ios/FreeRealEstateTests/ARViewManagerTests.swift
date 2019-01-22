@@ -27,7 +27,6 @@ class ARViewManagerTests: XCTestCase {
     // Unit tests for functions of ARViewManager
     func testARViewManagerInitialize() {
         XCTAssertNotNil(manager.arView)
-        XCTAssertNotNil(manager.sceneManager)
     }
     
     
