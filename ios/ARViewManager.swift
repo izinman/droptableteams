@@ -69,11 +69,16 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
         }
     }
     
-    @objc func addObject(_ node: ARSCNView!,  count: NSNumber) {
-        print(count);
+    @objc func addObject(_ node: ARSCNView!,   count: NSNumber) {
         DispatchQueue.main.async {
             self.sceneManager.addObject(objectName: "ship")
         }
+    }
+    @objc func controlObject(_ node: ARSCNView!, control: NSString) {
+        print(control)
+        //DispatchQueue.main.async {
+          //  self.sceneManager.controlObject(controlName: "ship")
+        //}
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {

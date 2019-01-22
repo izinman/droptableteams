@@ -55,7 +55,7 @@ class ARSCNManagerTests: XCTestCase {
         let count = manager.scene.rootNode.childNodes.count
         let expectedcount = count + 1
       
-        manager.addObject(objectName: "ship")
+      manager.addObject(objectName: "ship")
       
         XCTAssert(manager.scene.rootNode.childNodes.count == expectedcount)
     }

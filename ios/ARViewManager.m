@@ -13,5 +13,7 @@
 
 RCT_EXTERN_METHOD(addObject: (nonnull NSNumber *)node
                   count:(nonnull NSNumber *)count)
+RCT_EXTERN_METHOD(controlObject: (nonnull NSNumber *)node
+                  control:(nonnull NSString *)control)
 
 @end
