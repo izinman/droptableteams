@@ -50,19 +50,24 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
         let touchLocation = sender.location(in: arView)
         let hits = arView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
         let nodeHits = arView.hitTest(touchLocation, options: nil)
-        
+        print("object touched")
         if hits.count > 0, let hitResult = hits.first, let identifier = hitResult.anchor?.identifier, planes[identifier] != nil, !firstObjectPlaced {
             let ship = shipNode.clone()
             let rotation = simd_float4x4(SCNMatrix4MakeRotation(arView.session.currentFrame!.camera.eulerAngles.y, 0, 1, 0))
             let hitTransform = simd_mul(hitResult.worldTransform, rotation)
             ship.transform = SCNMatrix4(hitTransform)
             
-            
+            print("object touched 1")
+
             ship.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
             sceneManager.scene.rootNode.addChildNode(ship)
             firstObjectPlaced = true
             selectedNode = ship
+            selectedNode?.runAction(SCNAction.rotateBy(x: 0, y: 0.1, z: 0, duration: 0))
+
         } else if let node = nodeHits.last?.node, node == selectedNode {
+            print("object touched 2")
+
             // Rotate Right
             selectedNode?.runAction(SCNAction.rotateBy(x: 0, y: 0.1, z: 0, duration: 0))
             /*

@@ -882,12 +882,12 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = X6L44JDG2E;
+						DevelopmentTeam = ZMBNT2ZRC7;
 						LastSwiftMigration = 1010;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = X6L44JDG2E;
+						DevelopmentTeam = ZMBNT2ZRC7;
 						LastSwiftMigration = 1010;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -900,7 +900,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = ZMBNT2ZRC7;
 						ProvisioningStyle = Manual;
-						TestTargetID = 2D02E47A1E0B4A5D006451C7;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 				};
 			};
@@ -1446,7 +1446,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = X6L44JDG2E;
+				DEVELOPMENT_TEAM = ZMBNT2ZRC7;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1487,7 +1487,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = X6L44JDG2E;
+				DEVELOPMENT_TEAM = ZMBNT2ZRC7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
@@ -1524,7 +1524,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = X6L44JDG2E;
+				DEVELOPMENT_TEAM = ZMBNT2ZRC7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
@@ -1539,8 +1539,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-
-				PRODUCT_BUNDLE_IDENTIFIER = capstone.ucsb.edu;
+				PRODUCT_BUNDLE_IDENTIFIER = jake.bundle.boyo;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1557,7 +1556,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = X6L44JDG2E;
+				DEVELOPMENT_TEAM = ZMBNT2ZRC7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
@@ -1572,7 +1571,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = capstone.ucsb.edu;
+				PRODUCT_BUNDLE_IDENTIFIER = jake.bundle.boyo;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
@@ -1612,7 +1611,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jlguida.bundlerboy;
+				PRODUCT_BUNDLE_IDENTIFIER = jlguida.bundle.boyo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-tvOS-Bridging-Header.h";
@@ -1654,7 +1653,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jlguida.bundlerboy;
+				PRODUCT_BUNDLE_IDENTIFIER = jlguida.bundle.boyo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-tvOS-Bridging-Header.h";
@@ -1676,7 +1675,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: jlguida@ucsb.edu (FVG5ZKGGS4)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 8KU7L54DPF;
+				DEVELOPMENT_TEAM = ZMBNT2ZRC7;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1702,7 +1701,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeRealEstate-tvOS.app/FreeRealEstate-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeRealEstate.app/FreeRealEstate";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
@@ -1720,7 +1719,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 8KU7L54DPF;
+				DEVELOPMENT_TEAM = ZMBNT2ZRC7;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1745,7 +1744,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeRealEstate-tvOS.app/FreeRealEstate-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeRealEstate.app/FreeRealEstate";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
