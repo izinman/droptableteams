@@ -43,6 +43,7 @@
 		8AA86A91C0EB496B89302B4F /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8018113EC34049A1CA8C5C /* FontAwesome5_Regular.ttf */; };
 		A5867B855DC0493CA0599D7F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94ABB681823D444494F53174 /* SimpleLineIcons.ttf */; };
 		A85F93EA30BC4A41A7DF16BA /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F72C067DF414DDC9171BC1F /* Foundation.ttf */; };
+		AB82595AA52D47F393BE85E2 /* ProductSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09B61C202DFB4928BD94FA42 /* ProductSans.ttf */; };
 		AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
 		AC3DB41C219668C700AF31E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
 		AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC94C39E219C2DEB00D54C64 /* ARViewManager.m */; };
@@ -58,7 +59,14 @@
 		C8146B4F2BF241218D74BA2F /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81972894B917414FAF48F33E /* FontAwesome5_Brands.ttf */; };
 		C9CC7CCD172149068F17D0FB /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA0BCBC1D444E568B854C36 /* Ionicons.ttf */; };
 		DE6292B2844B4E7F8F701FC7 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96724590D6A946F49241917B /* MaterialCommunityIcons.ttf */; };
+		EAB2D21E21F81769000B1DC6 /* product.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 234C8C25FE6E4F3A9BD54377 /* product.ttf */; };
+		EAB2D24B21F8176A000B1DC6 /* product.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 234C8C25FE6E4F3A9BD54377 /* product.ttf */; };
 		EAED28D021A5EBB70011E882 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAED28A821A5EB600011E882 /* libBVLinearGradient.a */; };
+		EAFDC57021F819460087690C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB61A68108700A75B9A /* Info.plist */; };
+		EAFDC57121F819470087690C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB61A68108700A75B9A /* Info.plist */; };
+		EAFDC5BA21F824DE0087690C /* ProductSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09B61C202DFB4928BD94FA42 /* ProductSans.ttf */; };
+		EAFDC5BB21F824E40087690C /* ProductSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09B61C202DFB4928BD94FA42 /* ProductSans.ttf */; };
+		EAFDC5BC21F824E50087690C /* ProductSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09B61C202DFB4928BD94FA42 /* ProductSans.ttf */; };
 		EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDABA60321B35F3900833E0F /* VirtualPlane.swift */; };
 /* End PBXBuildFile section */
 
@@ -405,6 +413,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* FreeRealEstateTests.m */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = FreeRealEstateTests.m; sourceTree = "<group>"; tabWidth = 4; };
 		013F4643E7464CC893004B35 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		09B61C202DFB4928BD94FA42 /* ProductSans.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = ProductSans.ttf; path = ../assets/fonts/ProductSans.ttf; sourceTree = "<group>"; };
 		0AD3378D21AF8BDF00F1C634 /* FreeRealEstateTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstateTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		0AD3378E21AF8BDF00F1C634 /* ARViewManagerTests.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARViewManagerTests.swift; sourceTree = "<group>"; tabWidth = 4; };
 		0AD337B521AF9F3200F1C634 /* ARSCNManagerTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ARSCNManagerTests.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -414,6 +423,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FreeRealEstate/Info.plist; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1B3E91D4CFF84AE1871910C1 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
+		234C8C25FE6E4F3A9BD54377 /* product.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = product.ttf; path = ../assets/fonts/product.ttf; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* FreeRealEstate-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FreeRealEstate-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FreeRealEstate-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FreeRealEstate-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -676,6 +686,8 @@
 				013F4643E7464CC893004B35 /* Octicons.ttf */,
 				94ABB681823D444494F53174 /* SimpleLineIcons.ttf */,
 				7C8A30868D794DCD9EC02BDF /* Zocial.ttf */,
+				234C8C25FE6E4F3A9BD54377 /* product.ttf */,
+				09B61C202DFB4928BD94FA42 /* ProductSans.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1307,6 +1319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAFDC5BA21F824DE0087690C /* ProductSans.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1330,6 +1343,7 @@
 				28FD6836A94C4ABBAC368F68 /* Octicons.ttf in Resources */,
 				A5867B855DC0493CA0599D7F /* SimpleLineIcons.ttf in Resources */,
 				B8CE742E9B6A458187A8889A /* Zocial.ttf in Resources */,
+				AB82595AA52D47F393BE85E2 /* ProductSans.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1337,6 +1351,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAFDC57021F819460087690C /* Info.plist in Resources */,
+				EAB2D24B21F8176A000B1DC6 /* product.ttf in Resources */,
+				EAFDC5BB21F824E40087690C /* ProductSans.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1344,6 +1361,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAFDC57121F819470087690C /* Info.plist in Resources */,
+				EAB2D21E21F81769000B1DC6 /* product.ttf in Resources */,
+				EAFDC5BC21F824E50087690C /* ProductSans.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
