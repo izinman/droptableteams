@@ -61,6 +61,8 @@ export default class StyleView extends Component<Props> {
     var chairsData = Array.from({length: 5});
     var tablesData = Array.from({length: 4});
     var miscData = Array.from({length: 7});
+    var bedData = Array.from({length: 6});
+
 
 
 
@@ -115,6 +117,23 @@ export default class StyleView extends Component<Props> {
                     featured
                     activeOpacity={.75}
                     width={225}
+                    onPress={this.handleClick}
+              />
+              </View>
+          </View>
+          
+        )}
+        <Text style = {{width: '100%', padding: 45, fontSize: 35,  fontFamily: 'Product Sans'}}>Beds</Text>
+        {bedData.map((_, i) =>
+          <View key={i} style={styles.row}>
+             <View style={{padding: 20, alignSelf:'center'}}>
+                <Tile
+                    imageSrc={ beds[i]}
+                    title = ""
+                    titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
+                    featured
+                    activeOpacity={.75}
+                    width={205}
                     onPress={this.handleClick}
               />
               </View>
