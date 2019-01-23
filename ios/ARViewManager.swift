@@ -17,13 +17,15 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     var sceneManager = ARSCNManager()
     var planes = [UUID : VirtualPlane]()
     var selectedPlane: VirtualPlane?
-    var shipNode: SCNNode {
-        let scnFileName = "art.scnassets/ship.scn"
-        let objectScene = SCNScene(named: scnFileName)!
-        let objectNode = objectScene.rootNode.childNode(withName: "ship", recursively: true)!
+    let objectScene = SCNScene()
+    var currObj = 1
+    /*var shipNode: SCNNode {
+        let scnFileName = "art.scnassets/chair.scn"
+        
+        let objectNode = objectScene.rootNode.childNode(withName: "_material_1", recursively: true)!
         return objectNode
     }
-    
+    */
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
         
@@ -45,6 +47,10 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
         return arView
     }
     
+    @objc func getNode(name: String) -> SCNNode {
+        return SCNScene(named: "art.scnassets/" + name + ".scn")!.rootNode.childNode(withName: "_material_1", recursively: true)!
+    }
+    
     @objc func scnTapped(_ sender: UITapGestureRecognizer) {
         let touchLocation = sender.location(in: arView)
         let hits = arView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
@@ -53,17 +59,34 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
         
         if hits.count > 0, let hitResult = hits.last, let identifier = hitResult.anchor?.identifier {
             selectedPlane = planes[identifier]
-            let ship = shipNode.clone()
+            var node = SCNNode()
+            var name = ""
+            switch(currObj) {
+            case 1:
+                name = "chair"
+            case 2:
+                name = "vase"
+            case 3:
+                name = "table_2"
+            case 4:
+                name = "coffee_table"
+            default:
+                return
+            }
+            node = getNode(name: name)
+            currObj = (currObj > 3) ? 1 : currObj + 1
+            //let ship = shipNode.clone()
             let rotation = simd_float4x4(SCNMatrix4MakeRotation(arView.session.currentFrame!.camera.eulerAngles.y, 0, 1, 0))
             let hitTransform = simd_mul(hitResult.worldTransform, rotation)
-            ship.transform = SCNMatrix4(hitTransform)
+            node.transform = SCNMatrix4(hitTransform)
+            node.scale = ObjScaleMap[name]!
             
             // let hitVector = SCNVector3(hitTransform.columns.3.x, hitTransform.columns.3.y, hitTransform.columns.3.z)
             // ship.position = hitVector
             
-            ship.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
+            node.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
             // arView.session.add(anchor: ARAnchor(transform: hitTransform))
-            sceneManager.scene.rootNode.addChildNode(ship)
+            sceneManager.scene.rootNode.addChildNode(node)
         } else {
             print("Plane not touched or planes not yet detected")
         }
@@ -72,7 +95,7 @@ class ARViewManager : RCTViewManager, ARSCNViewDelegate {
     @objc func addObject(_ node: ARSCNView!,  count: NSNumber) {
         print(count);
         DispatchQueue.main.async {
-            self.sceneManager.addObject(objectName: "ship")
+            self.sceneManager.addObject(objectName: "chair")
         }
     }
     
