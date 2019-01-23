@@ -13,7 +13,7 @@
 
 RCT_EXTERN_METHOD(enterPlacementMode: (nonnull NSNumber *)node
                   count:(nonnull NSNumber *)count)
-RCT_EXTERN_METHOD(controlObject: (nonnull NSNumber *)node
-                  control:(nonnull NSString *)control)
+RCT_EXTERN_METHOD(adjustObject: (nonnull NSNumber *)node
+                  buttonPressed:(nonnull NSString *)buttonPressed)
 
 @end

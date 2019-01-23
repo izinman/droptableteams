@@ -44,7 +44,7 @@ extension ARViewManager {
         }
     }
     
-    @objc func adjustNode(buttonPressed: String) {
+  @objc func adjustObject(_ node: ARSCNView!, buttonPressed: String) {
         switch (buttonPressed) {
         case "rotateRight":
             selectedNode?.runAction(SCNAction.rotateBy(x: 0, y: -0.1, z: 0, duration: 0))

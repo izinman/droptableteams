@@ -60,24 +60,8 @@ class ARViewManager : RCTViewManager {
         if inPlacementMode == true {
             addObject(location: touchLocation)
         } else {
-<<<<<<< HEAD
             selectObject(location: touchLocation)
-=======
-            print("Plane not touched or planes not yet detected")
         }
-    }
-    
-    @objc func addObject(_ node: ARSCNView!,   count: NSNumber) {
-        DispatchQueue.main.async {
-            self.sceneManager.addObject(objectName: "ship")
->>>>>>> origin/Rotate-Move-React
-        }
-    }
-    @objc func controlObject(_ node: ARSCNView!, control: NSString) {
-        print(control)
-        //DispatchQueue.main.async {
-          //  self.sceneManager.controlObject(controlName: "ship")
-        //}
     }
     
     override static func requiresMainQueueSetup() -> Bool {
