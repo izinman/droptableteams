@@ -70,25 +70,81 @@ export default class StyleView extends Component<Props> {
     console.log(text);
   }
 
-  _renderScrollViewContent() {
-    const data = Array.from({length: 30});
+  _renderScrollViewContent(title) {
+    const data = Array.from({length: 10});
     return (
+      <View>
+      
       <View style={styles.scrollViewContent}>
+      <Text style = {{width: '100%', padding: 45, fontSize: 45}}>Couches</Text>
         {data.map((_, i) =>
           <View key={i} style={styles.row}>
-             <View style={{padding: 2}}>
+             <View style={{padding: 20, alignSelf:'center'}}>
                 <Tile
                     imageSrc={{ uri: "https://secure.img2-fg.wfcdn.com/im/88812946/compr-r85/3349/33499118/chisolm-loveseat.jpg" }}
                     title = "Couch"
                     titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={182}
+                    width={225}
                     onPress={this.handleClick}
               />
               </View>
           </View>
+          
         )}
+        <Text style = {{width: '100%', padding: 45, fontSize: 45}}>Chairs</Text>
+        {data.map((_, i) =>
+          <View key={i} style={styles.row}>
+             <View style={{padding: 20, alignSelf:'center'}}>
+                <Tile
+                    imageSrc={{ uri: "https://secure.img2-fg.wfcdn.com/im/88812946/compr-r85/3349/33499118/chisolm-loveseat.jpg" }}
+                    title = "Couch"
+                    titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
+                    featured
+                    activeOpacity={.75}
+                    width={225}
+                    onPress={this.handleClick}
+              />
+              </View>
+          </View>
+          
+        )}
+        <Text style = {{width: '100%', padding: 45, fontSize: 45}}>Tables</Text>
+        {data.map((_, i) =>
+          <View key={i} style={styles.row}>
+             <View style={{padding: 20, alignSelf:'flex-start'}}>
+                <Tile
+                    imageSrc={{ uri: "https://secure.img2-fg.wfcdn.com/im/88812946/compr-r85/3349/33499118/chisolm-loveseat.jpg" }}
+                    title = "Couch"
+                    titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
+                    featured
+                    activeOpacity={.75}
+                    width={225}
+                    onPress={this.handleClick}
+              />
+              </View>
+          </View>
+          
+        )}
+        <Text style = {{width: '100%', padding: 45, fontSize: 45}}>Misc.</Text>
+        {data.map((_, i) =>
+          <View key={i} style={styles.row}>
+             <View style={{padding: 20, alignSelf:'center'}}>
+                <Tile
+                    imageSrc={{ uri: "https://secure.img2-fg.wfcdn.com/im/88812946/compr-r85/3349/33499118/chisolm-loveseat.jpg" }}
+                    title = "Couch"
+                    titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
+                    featured
+                    activeOpacity={.75}
+                    width={225}
+                    onPress={this.handleClick}
+              />
+              </View>
+          </View>
+          
+        )}
+      </View>
       </View>
     );
   }
@@ -111,7 +167,7 @@ export default class StyleView extends Component<Props> {
     });
 
     let data = [{
-      value: 'Contemporary',
+      value: 'All',
     }, {
       value: 'Minimalist',
     }, 
@@ -142,7 +198,8 @@ export default class StyleView extends Component<Props> {
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {y: this.state.scrollY}}}]
           )}>
-            {this._renderScrollViewContent()}
+            {this._renderScrollViewContent('Couches')
+          }
         </ScrollView>
         <Animated.View style={[styles.header, {height: headerHeight}]}>
           <Animated.Image
@@ -152,6 +209,10 @@ export default class StyleView extends Component<Props> {
             ]}
             source={this.state.img}
           />
+          <View style = {{backgroundColor: '#000000',margin: 25, padding: 15,position: 'absolute', bottom: 0, left: 0,borderRadius: 65, }}>
+          <Text style={{ fontSize: 30, color: '#ffffff', alignSelf: 'center', textAlign: 'center'}}>Style</Text>
+
+          </View>
           <Animated.View style ={[styles.ddContainerAnimated, {opacity: imageOpacity}]}></Animated.View>
           <View style={styles.bar}>
             <View style ={styles.ddContainer}>
@@ -160,9 +221,8 @@ export default class StyleView extends Component<Props> {
                   baseColor='#ffffff'
                   label='Furniture Style'
                   textColor='#ffffff'
-                  textStyle={{fontWeight: '800'}}
                   itemColor="#ffffff"
-                  fontSize={18}
+                  fontSize={25}
                   pickerStyle={{backgroundColor:"#232323" }}
                   labelFontSize={16}
                   selectedItemColor="#ededed"
@@ -205,8 +265,9 @@ const styles = StyleSheet.create({
     },
     fill: {
       zIndex: -10,
-      backgroundColor: '#232323',
-      width: '100%'
+      backgroundColor: '#ffffff',
+      width: '100%',
+      alignSelf:'center'
     },
     backgroundImage: {
       position: 'absolute',
@@ -228,9 +289,9 @@ const styles = StyleSheet.create({
 
     },
     row: {
-      backgroundColor: '#232323',
-      flexGrow: 100,
-      flexBasis: "50%"
+      backgroundColor: '#ffffff',
+      
+      flexBasis: "25%"
     },
     header: {
       position: 'absolute',
@@ -247,8 +308,8 @@ const styles = StyleSheet.create({
       width: '100%',
       marginTop: 0,
       height: 32,
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
     },
     title: {
       backgroundColor: 'transparent',
@@ -259,6 +320,9 @@ const styles = StyleSheet.create({
       marginTop: HEADER_MAX_HEIGHT,
       width: '100%',
       flex: 1,
+      justifyContent:'flex-start',
+      alignItems: 'flex-start',
+      alignSelf: 'flex-start',
       flexDirection: 'row',
       flexWrap: 'wrap',
       
