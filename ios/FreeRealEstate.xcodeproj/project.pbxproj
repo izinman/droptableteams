@@ -46,6 +46,8 @@
 		AC3330B021FBEF0800505BF8 /* ARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC94C39E219C2DEB00D54C64 /* ARViewManager.m */; };
 		AC3330B121FBEF0C00505BF8 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */; };
 		AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
+		AC3330C021FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3330BF21FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift */; };
+		AC3330C121FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3330BF21FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift */; };
 		AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
 		AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
 		AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
@@ -437,6 +439,7 @@
 		9F8CC78A9BC645B19D086337 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		A078D5E8625849CB992DA1CD /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		A63D366FDE5F4A88988949EE /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		AC3330BF21FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARView+ARSCNViewDelegate.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC3DB419219668C700AF31E7 /* FreeRealEstate-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		AC3DB41A219668C700AF31E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC6C883B21FBEAC300B07A9F /* ARView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -600,6 +603,7 @@
 				AC3DB41A219668C700AF31E7 /* AppDelegate.swift */,
 				AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */,
 				AC6C883B21FBEAC300B07A9F /* ARView.swift */,
+				AC3330BF21FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift */,
 				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
 				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -1393,6 +1397,7 @@
 				AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */,
 				0AD3378F21AF8BDF00F1C634 /* ARViewManagerTests.swift in Sources */,
 				AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */,
+				AC3330C121FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1401,6 +1406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
+				AC3330C021FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift in Sources */,
 				AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */,
 				AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */,
 				EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */,
@@ -1543,7 +1549,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = spookybundlemf;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.ucsb.capstone;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1575,7 +1581,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = spookybundlemf;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.ucsb.capstone;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;

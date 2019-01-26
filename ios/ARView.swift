@@ -53,9 +53,13 @@ class ARView : ARSCNView, ARSCNViewDelegate {
         
         // Check that the node is not null and select it
         if let node = nodeHits.first?.node.parent as? SCNNode, objects.contains(node) {
+            
+            if (selectedNode != nil) {
+                selectedNode?.opacity = 1.0
+            }
+            
             selectedNode = node
             selectedNode?.opacity = 0.7
-            
             onObjectSelect!([:])
         }
     }
@@ -90,29 +94,5 @@ class ARView : ARSCNView, ARSCNViewDelegate {
         self.showsStatistics = true
         self.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         // , ARSCNDebugOptions.showWorldOrigin]
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-        let plane = VirtualPlane(anchor: planeAnchor)
-        
-        planes[planeAnchor.identifier] = plane
-        node.addChildNode(plane)
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor,
-            let plane = planes[planeAnchor.identifier]
-            else { return }
-        
-        plane.updateWithNewAnchor(planeAnchor)
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor,
-            let index = planes.index(forKey: planeAnchor.identifier)
-            else { return }
-        
-        planes.remove(at: index)
     }
 }
