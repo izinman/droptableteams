@@ -8,6 +8,7 @@
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTViewManager.h>
+#import "React/RCTEventEmitter.h"
 
 @interface RCT_EXTERN_MODULE(ARViewManager, RCTViewManager)
 
@@ -15,5 +16,6 @@ RCT_EXTERN_METHOD(enterPlacementMode: (nonnull NSNumber *)node
                   count:(nonnull NSNumber *)count)
 RCT_EXTERN_METHOD(adjustObject: (nonnull NSNumber *)node
                   buttonPressed:(nonnull NSString *)buttonPressed)
+RCT_EXPORT_VIEW_PROPERTY(onObjectSelect, RCTDirectEventBlock)
 
 @end

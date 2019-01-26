@@ -23,9 +23,9 @@ export default class ARScene extends Component<Props> {
             return (
                 <View>
                     <View style={{width: '100%'}}>
-                        <ARView style=
-                                    {{height: '100%', width: '100%', backgroundColor: '#000000'}}
+                        <ARView style={{height: '100%', width: '100%', backgroundColor: '#000000'}}
                                 ref={ref => (this.ref = ref)}
+                                onObjectSelect={this.selectObject}
                         />
                     </View>
                     <View style={{
@@ -346,6 +346,10 @@ export default class ARScene extends Component<Props> {
             [buttonPressed]
         );
     };
+
+    selectObject = e => {
+        console.log("Rekt");
+    }
 }
 
 

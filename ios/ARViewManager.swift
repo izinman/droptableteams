@@ -13,29 +13,15 @@ import SceneKit
 @objc(ARViewManager)
 class ARViewManager : RCTViewManager {
     
-    
-    var arView = ARSCNView()
-    var planes = [UUID : VirtualPlane]()
-    var objects = [SCNNode]()
-    
-    var selectedNode: SCNNode?
+    var arView = ARView()
     var inPlacementMode = false
-    
-    var shipNode: SCNNode {
-        let scnFileName = "art.scnassets/ship.scn"
-        let objectScene = SCNScene(named: scnFileName)!
-        let objectNode = objectScene.rootNode.childNode(withName: "ship", recursively: true)!
-        let material = SCNMaterial()
-        objectNode.geometry?.materials = [material]
-        return objectNode
-    }
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
         // Set the bounds of the view to be the screen
         arView.bounds = UIScreen.main.bounds
         
-        arView.delegate = self
+        arView.delegate = arView
         
         // Initialize the AWRTConfig and the scene
         let config = ARWorldTrackingConfiguration()
@@ -53,24 +39,27 @@ class ARViewManager : RCTViewManager {
         return arView
     }
     
+    @objc func enterPlacementMode(_ node: ARSCNView!,  count: NSNumber) {
+        inPlacementMode = true
+    }
+    
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         // Get the location tapped by the user
         let touchLocation = sender.location(in: arView)
         
         if inPlacementMode == true {
-            addObject(location: touchLocation)
+            arView.addObject(location: touchLocation)
+            inPlacementMode = false
         } else {
-            selectObject(location: touchLocation)
+            arView.selectObject(location: touchLocation)
         }
+    }
+    
+    @objc func adjustObject(_ node: ARSCNView!, buttonPressed: String) {
+        arView.adjustObject(buttonPressed: buttonPressed)
     }
     
     override static func requiresMainQueueSetup() -> Bool {
         return true
-    }
-    
-    func displayDebugInfo() {
-        arView.showsStatistics = true
-        arView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
-        // , ARSCNDebugOptions.showWorldOrigin]
     }
 }

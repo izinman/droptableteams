@@ -42,10 +42,13 @@
 		8AA86A91C0EB496B89302B4F /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8018113EC34049A1CA8C5C /* FontAwesome5_Regular.ttf */; };
 		A5867B855DC0493CA0599D7F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94ABB681823D444494F53174 /* SimpleLineIcons.ttf */; };
 		A85F93EA30BC4A41A7DF16BA /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F72C067DF414DDC9171BC1F /* Foundation.ttf */; };
-		AC2503CB21F6DFC000663083 /* ARViewManager+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2503C921F6DFC000663083 /* ARViewManager+ARSCNViewDelegate.swift */; };
-		AC2503CC21F6DFC000663083 /* ARViewManager+ObjectManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2503CA21F6DFC000663083 /* ARViewManager+ObjectManipulation.swift */; };
+		AC3330AF21FBEF0200505BF8 /* VirtualPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDABA60321B35F3900833E0F /* VirtualPlane.swift */; };
+		AC3330B021FBEF0800505BF8 /* ARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC94C39E219C2DEB00D54C64 /* ARViewManager.m */; };
+		AC3330B121FBEF0C00505BF8 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */; };
+		AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
 		AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
-		AC3DB41C219668C700AF31E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
+		AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
+		AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
 		AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC94C39E219C2DEB00D54C64 /* ARViewManager.m */; };
 		AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */; };
 		ACBAC5862195156800795235 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ACBAC5832195156800795235 /* art.scnassets */; };
@@ -434,10 +437,9 @@
 		9F8CC78A9BC645B19D086337 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		A078D5E8625849CB992DA1CD /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		A63D366FDE5F4A88988949EE /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
-		AC2503C921F6DFC000663083 /* ARViewManager+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
-		AC2503CA21F6DFC000663083 /* ARViewManager+ObjectManipulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ObjectManipulation.swift"; sourceTree = "<group>"; };
 		AC3DB419219668C700AF31E7 /* FreeRealEstate-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		AC3DB41A219668C700AF31E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AC6C883B21FBEAC300B07A9F /* ARView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		AC94C39E219C2DEB00D54C64 /* ARViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARViewManager.m; sourceTree = "<group>"; };
 		AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARViewManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -449,7 +451,7 @@
 		CD8018113EC34049A1CA8C5C /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		D794D4431CD2431AA5CEC782 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		EAED28A221A5EB600011E882 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
-		EDABA60321B35F3900833E0F /* VirtualPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualPlane.swift; sourceTree = "<group>"; };
+		EDABA60321B35F3900833E0F /* VirtualPlane.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = VirtualPlane.swift; sourceTree = "<group>"; tabWidth = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -597,8 +599,7 @@
 			children = (
 				AC3DB41A219668C700AF31E7 /* AppDelegate.swift */,
 				AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */,
-				AC2503C921F6DFC000663083 /* ARViewManager+ARSCNViewDelegate.swift */,
-				AC2503CA21F6DFC000663083 /* ARViewManager+ObjectManipulation.swift */,
+				AC6C883B21FBEAC300B07A9F /* ARView.swift */,
 				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
 				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -1385,8 +1386,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC3330AF21FBEF0200505BF8 /* VirtualPlane.swift in Sources */,
+				AC3330B121FBEF0C00505BF8 /* ARViewManager.swift in Sources */,
+				AC3330B021FBEF0800505BF8 /* ARViewManager.m in Sources */,
 				00E356F31AD99517003FC87E /* FreeRealEstateTests.m in Sources */,
+				AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */,
 				0AD3378F21AF8BDF00F1C634 /* ARViewManagerTests.swift in Sources */,
+				AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1395,9 +1401,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
-				AC2503CB21F6DFC000663083 /* ARViewManager+ARSCNViewDelegate.swift in Sources */,
+				AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */,
 				AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */,
-				AC2503CC21F6DFC000663083 /* ARViewManager+ObjectManipulation.swift in Sources */,
 				EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */,
 				AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */,
 			);
@@ -1407,7 +1412,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC3DB41C219668C700AF31E7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1666,7 +1670,6 @@
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1709,7 +1712,6 @@
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
