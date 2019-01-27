@@ -15,7 +15,8 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
     // Create the base window
     var window : UIWindow? = UIWindow(frame: UIScreen.main.bounds)
   
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
+      [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
       
         // Setup any initial properties we want included
         let initialProperties: [String: Any] = [:]

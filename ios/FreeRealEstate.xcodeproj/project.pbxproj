@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -65,6 +64,7 @@
 		DE6292B2844B4E7F8F701FC7 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96724590D6A946F49241917B /* MaterialCommunityIcons.ttf */; };
 		EAED28D021A5EBB70011E882 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAED28A821A5EB600011E882 /* libBVLinearGradient.a */; };
 		EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDABA60321B35F3900833E0F /* VirtualPlane.swift */; };
+		1653132E96FE41769313C866 /* ProductSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC624A723C2B4D089DD98C2C /* ProductSans.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -455,6 +455,7 @@
 		D794D4431CD2431AA5CEC782 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		EAED28A221A5EB600011E882 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		EDABA60321B35F3900833E0F /* VirtualPlane.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = VirtualPlane.swift; sourceTree = "<group>"; tabWidth = 4; };
+		EC624A723C2B4D089DD98C2C /* ProductSans.ttf */ = {isa = PBXFileReference; name = "ProductSans.ttf"; path = "../assets/fonts/ProductSans.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -681,6 +682,7 @@
 				013F4643E7464CC893004B35 /* Octicons.ttf */,
 				94ABB681823D444494F53174 /* SimpleLineIcons.ttf */,
 				7C8A30868D794DCD9EC02BDF /* Zocial.ttf */,
+				EC624A723C2B4D089DD98C2C /* ProductSans.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1335,6 +1337,7 @@
 				28FD6836A94C4ABBAC368F68 /* Octicons.ttf in Resources */,
 				A5867B855DC0493CA0599D7F /* SimpleLineIcons.ttf in Resources */,
 				B8CE742E9B6A458187A8889A /* Zocial.ttf in Resources */,
+				1653132E96FE41769313C866 /* ProductSans.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
