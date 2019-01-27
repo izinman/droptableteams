@@ -6,6 +6,7 @@ import StyleView from './StyleView';
 
 type Props = {};
 var buttonPressed = "";
+var objectSelected = false;
 
 export default class ARScene extends Component<Props> {
 
@@ -37,7 +38,7 @@ export default class ARScene extends Component<Props> {
                         position: 'absolute',
                         bottom: '5%'
                     }}>
-
+                        {(objectSelected == true) &&
                         <View style={{width: '100%', flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
                             <View style={{
                                 flex: 1,
@@ -276,6 +277,7 @@ export default class ARScene extends Component<Props> {
                                 </View>
                             </View>
                         </View>
+                        }
                         <View style={{width: '100%', flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
                             <Button
                                 title={"Place"}
@@ -325,6 +327,10 @@ export default class ARScene extends Component<Props> {
         console.log('Clicked', e);
         buttonPressed = e;
         this.adjustObject();
+        if (e == "confirmPlacement") {
+            objectSelected = false;
+            this.forceUpdate();
+        }
     }
 
     update = () => {
@@ -348,7 +354,9 @@ export default class ARScene extends Component<Props> {
     };
 
     selectObject = e => {
-        console.log("Rekt");
+        objectSelected = true;
+        console.log("Set objectSelected: ", objectSelected);
+        this.forceUpdate();
     }
 }
 
