@@ -48,7 +48,8 @@ class ARViewManager : RCTViewManager {
         let touchLocation = sender.location(in: arView)
         
         if inPlacementMode == true {
-            arView.addObject(location: touchLocation)
+            let name = "vase"
+            arView.addObject(location: touchLocation, name: name)
             inPlacementMode = false
         } else {
             arView.selectObject(location: touchLocation)

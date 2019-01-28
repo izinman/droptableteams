@@ -116,7 +116,7 @@ export default class ARScene extends Component<Props> {
                                             width: 55,
                                             alignSelf: 'center'
                                         }}
-                                        onPress={this.handleControl.bind(this, "delete")}/>
+                                        onPress={this.handleControl.bind(this, "deleteObject")}/>
                                 </View>
                                 <View
                                     style={{flex: 1, flexDirection: "row", justifyContent: 'space-evenly', width: 200}}>
@@ -327,7 +327,7 @@ export default class ARScene extends Component<Props> {
         console.log('Clicked', e);
         buttonPressed = e;
         this.adjustObject();
-        if (e == "confirmPlacement") {
+        if (e == "confirmPlacement" || e == "deleteObject") {
             objectSelected = false;
             this.forceUpdate();
         }

@@ -11,39 +11,49 @@ import SceneKit
 
 class ARView : ARSCNView, ARSCNViewDelegate {
     
-    var shipNode: SCNNode {
-        let scnFileName = "art.scnassets/ship.scn"
-        let objectScene = SCNScene(named: scnFileName)!
-        let objectNode = objectScene.rootNode.childNode(withName: "ship", recursively: true)!
-        let material = SCNMaterial()
-        objectNode.geometry?.materials = [material]
-        return objectNode
-    }
-    
     var planes = [UUID : VirtualPlane]()
     var objects = [SCNNode]()
     
     var selectedNode: SCNNode?
     var onObjectSelect: RCTDirectEventBlock?
     
-    func addObject(location: CGPoint) {
+    let ObjScaleMap: [String: SCNVector3] = [
+        "chair": SCNVector3(x: 0.02, y: 0.02, z: 0.02),
+        "vase": SCNVector3(x: 0.0015, y: 0.0015, z: 0.0015),
+        "table_2": SCNVector3(x: 0.01, y: 0.01, z: 0.01),
+        "coffee_table": SCNVector3(x: 0.25, y: 0.25, z: 0.25)
+    ]
+    
+    func createNode(name: String, hitResult: ARHitTestResult) -> SCNNode {
+        // Create a node object from the .scn file
+        let scnFileName = "art.scnassets/" + name + ".scn"
+        let tmpScene = SCNScene(named: scnFileName)!
+        let node = tmpScene.rootNode.childNode(withName: "_material_1", recursively: true)!
+        
+        // Initialize rotation value to ensure the object will be properly oriented
+        let rotation = simd_float4x4(SCNMatrix4MakeRotation(self.session.currentFrame!.camera.eulerAngles.y, 0, 1, 0))
+        let hitTransform = simd_mul(hitResult.worldTransform, rotation)
+        
+        // Scale, rotate, and place the node so it sits on the plane
+        node.transform = SCNMatrix4(hitTransform)
+        node.scale = ObjScaleMap[name]!
+        node.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
+        
+        return node
+    }
+    
+    func addObject(location: CGPoint, name: String) {
         // Perform a hit test to obtain the plane on which we will place the object
         let planeHits = self.hitTest(location, types: .existingPlaneUsingExtent)
         
         // Verify that the plane is valid
         if planeHits.count > 0, let hitResult = planeHits.first, let identifier = hitResult.anchor?.identifier, planes[identifier] != nil {
             // Create an object to place
-            let ship = shipNode.clone()
-            
-            // Adjust the orientation and placement so it sits on the plane
-            let rotation = simd_float4x4(SCNMatrix4MakeRotation(self.session.currentFrame!.camera.eulerAngles.y, 0, 1, 0))
-            let hitTransform = simd_mul(hitResult.worldTransform, rotation)
-            ship.transform = SCNMatrix4(hitTransform)
-            ship.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
+            let node = createNode(name: name, hitResult: hitResult)
             
             // Add the object to the scene
-            self.scene.rootNode.addChildNode(ship)
-            objects.append(ship)
+            self.scene.rootNode.addChildNode(node)
+            objects.append(node)
         }
     }
     
@@ -52,39 +62,58 @@ class ARView : ARSCNView, ARSCNViewDelegate {
         let nodeHits = self.hitTest(location, options: nil)
         
         // Check that the node is not null and select it
-        if let node = nodeHits.first?.node.parent as? SCNNode, objects.contains(node) {
-            
+        if let node = nodeHits.first?.node as? SCNNode, objects.contains(node) {
+            // If we had previously selected an object, unhighlight it before selecting a new one
             if (selectedNode != nil) {
                 selectedNode?.opacity = 1.0
             }
             
+            // Select the node and mark it visually by reducing the opacity
             selectedNode = node
             selectedNode?.opacity = 0.7
+            // Tell React to display adjustment button menu
             onObjectSelect!([:])
         }
     }
     
+    // Necessary for React Native to recognize object selection event emitter
     @objc func setOnObjectSelect(_ val: @escaping RCTDirectEventBlock) {
         onObjectSelect = val
     }
     
     func adjustObject(buttonPressed: String) {
+        
         switch (buttonPressed) {
+            
         case "rotateRight":
             selectedNode?.runAction(SCNAction.rotateBy(x: 0, y: -0.1, z: 0, duration: 0))
+            
         case "rotateLeft":
             selectedNode?.runAction(SCNAction.rotateBy(x: 0, y: 0.1, z: 0, duration: 0))
+            
         case "moveLeft":
             selectedNode?.runAction(SCNAction.moveBy(x: -0.01, y: 0, z: 0, duration: 0))
+            
         case "moveRight":
             selectedNode?.runAction(SCNAction.moveBy(x: 0.01, y: 0, z: 0, duration: 0))
+            
         case "moveForward":
             selectedNode?.runAction(SCNAction.moveBy(x: 0, y: 0, z: 0.01, duration: 0))
+            
         case "moveBackward":
             selectedNode?.runAction(SCNAction.moveBy(x: 0, y: 0, z: -0.01, duration: 0))
+            
         case "confirmPlacement":
             selectedNode?.opacity = 1.0
             selectedNode = nil
+            
+        case "deleteObject":
+            if selectedNode != nil, let index = objects.index(of: selectedNode!) {
+                objects.remove(at: index)
+                selectedNode?.removeFromParentNode()
+                selectedNode = nil
+            }
+            
         default:
             return
         }
