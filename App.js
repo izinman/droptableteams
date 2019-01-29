@@ -4,7 +4,7 @@ import StyleView from './StyleView.js'
 import { Button}  from 'react-native-elements';
 import {Platform, StyleSheet, Text, View, UIManager, findNodeHandle, Dimensions, requireNativeComponent} from 'react-native';
 import ARScene from './ARView.js';
-
+import AnimateView from './AnimateView.js'
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -20,11 +20,16 @@ handleClick = () => {
   render() {
       if(this.state.home == 0){
         return (
+          
           <View style={{ flex: 1, flexDirection: 'row', alignContent: 'flex-start', width: '100%', justifyContent: 'center', alignSelf: 'center' }}>
             <View style = {{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, zIndex: 0, backgroundColor: "#000000", opacity: 0.55, height: '100%'}}></View>
              <Image source={require('./home.jpg')} style ={styles.image} blurRadius = {0}/>
+             
           <View styles={styles.root} >
+          <AnimateView>
             <Text style ={styles.welcome4}>FreeRealEstate </Text>
+            </AnimateView>
+            <AnimateView>
             <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', alignContent: 'center',height: 20}}>
             <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
             <Image source={require('./artem.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
@@ -32,6 +37,8 @@ handleClick = () => {
             <Image source={require('./isaac.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
             <Image source={require('./jake.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
             </View>
+            </AnimateView>
+            
             <View style={styles.button_bg}>
             <Button 
               title="start"
@@ -47,6 +54,7 @@ handleClick = () => {
               onPress={this.handleClick}
             /> 
             </View>
+            
             </View>
             </View>
             
@@ -117,6 +125,8 @@ const styles = StyleSheet.create({
   },
   button_bg: {
     alignSelf: 'center',
+    position: 'absolute',
+    bottom: '10%',
     paddingBottom: '20%'
   },
 });
