@@ -15,6 +15,7 @@ extension ARView {
         let plane = VirtualPlane(anchor: planeAnchor)
         
         planes[planeAnchor.identifier] = plane
+        
         node.addChildNode(plane)
     }
     

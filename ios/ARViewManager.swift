@@ -15,6 +15,7 @@ class ARViewManager : RCTViewManager {
     
     var arView = ARView()
     var inPlacementMode = false
+    var objectToPlace: String?
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
@@ -35,6 +36,7 @@ class ARViewManager : RCTViewManager {
         
         // Run the ARView
         arView.session.run(config)
+        objectToPlace = "coffee_table"
         
         return arView
     }
@@ -47,8 +49,7 @@ class ARViewManager : RCTViewManager {
         // Get the location tapped by the user
         let touchLocation = sender.location(in: arView)
         
-        if inPlacementMode == true {
-            let name = "vase"
+        if inPlacementMode == true, let name = objectToPlace {
             arView.addObject(location: touchLocation, name: name)
             inPlacementMode = false
         } else {
@@ -58,6 +59,10 @@ class ARViewManager : RCTViewManager {
     
     @objc func adjustObject(_ node: ARSCNView!, buttonPressed: String) {
         arView.adjustObject(buttonPressed: buttonPressed)
+    }
+    
+    @objc func setObjectToPlace(_node: ARSCNView!, objectName: String) {
+        objectToPlace = objectName
     }
     
     override static func requiresMainQueueSetup() -> Bool {

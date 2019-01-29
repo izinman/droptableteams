@@ -37,6 +37,18 @@ class ARView : ARSCNView, ARSCNViewDelegate {
         let rotation = simd_float4x4(SCNMatrix4MakeRotation(self.session.currentFrame!.camera.eulerAngles.y, 0, 1, 0))
         let hitTransform = simd_mul(hitResult.worldTransform, rotation)
         
+        // Get the bounding box values to set the pivot to be at the center of the node
+        var minVec = SCNVector3Zero
+        var maxVec = SCNVector3Zero
+        (minVec, maxVec) =  node.boundingBox
+        
+        // Set the nodes pivot appropriately
+        node.pivot = SCNMatrix4MakeTranslation(
+            minVec.x + (maxVec.x - minVec.x)/2,
+            minVec.y,
+            minVec.z + (maxVec.z - minVec.z)/2
+        )
+        
         // Scale, rotate, and place the node so it sits on the plane
         node.transform = SCNMatrix4(hitTransform)
         node.scale = ObjScaleMap[name]!
@@ -51,6 +63,7 @@ class ARView : ARSCNView, ARSCNViewDelegate {
         
         // Verify that the plane is valid
         if planeHits.count > 0, let hitResult = planeHits.first, let identifier = hitResult.anchor?.identifier, planes[identifier] != nil {
+            
             // Create an object to place
             let node = createNode(name: name, hitResult: hitResult)
             
@@ -105,20 +118,20 @@ class ARView : ARSCNView, ARSCNViewDelegate {
             selectedNode?.runAction(SCNAction.rotateBy(x: 0, y: 0.1, z: 0, duration: 0))
             
         case "moveLeft":
-            let adjustedCorrdinates = getAdjustedCordinates(x: -0.01, z: 0)
-            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCorrdinates.0, y: 0, z: adjustedCorrdinates.1, duration: 0))
+            let adjustedCoordinates = getAdjustedCordinates(x: -0.01, z: 0)
+            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
             
         case "moveRight":
-            let adjustedCorrdinates = getAdjustedCordinates(x: 0.01, z: 0)
-            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCorrdinates.0, y: 0, z: adjustedCorrdinates.1, duration: 0))
+            let adjustedCoordinates = getAdjustedCordinates(x: 0.01, z: 0)
+            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
             
         case "moveForward":
-            let adjustedCorrdinates = getAdjustedCordinates(x: 0, z: -0.01)
-            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCorrdinates.0, y: 0, z: adjustedCorrdinates.1, duration: 0))
+            let adjustedCoordinates = getAdjustedCordinates(x: 0, z: -0.01)
+            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
             
         case "moveBackward":
-            let adjustedCorrdinates = getAdjustedCordinates(x: 0, z: 0.01)
-            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCorrdinates.0, y: 0, z: adjustedCorrdinates.1, duration: 0))
+            let adjustedCoordinates = getAdjustedCordinates(x: 0, z: 0.01)
+            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
             
         case "confirmPlacement":
             selectedNode?.opacity = 1.0
