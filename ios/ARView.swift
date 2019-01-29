@@ -86,7 +86,7 @@ class ARView : ARSCNView, ARSCNViewDelegate {
             
             // Select the node and mark it visually by reducing the opacity
             selectedNode = node
-            selectedNode?.opacity = 0.7
+            selectedNode?.opacity = 0.85
             // Tell React to display adjustment button menu
             onObjectSelect!([:])
         }
