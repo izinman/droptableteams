@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, UIManager, findNodeHandle, requireNativeComponent} from 'react-native';
 import { Button }  from 'react-native-elements';
-import Furniture from './Furniture';
 import StyleView from './StyleView';
-
+import AnimateView from './AnimateView.js'
 type Props = {};
 var buttonPressed = "";
-var objectSelected = false;
 
 export default class ARScene extends Component<Props> {
 
     constructor(props) {
         super(props);
-        this.state = {AR: 1};
+        this.state = {AR: 1,
+                      objectSelected: false};
     }
 
     componentDidMount() {
@@ -22,83 +21,29 @@ export default class ARScene extends Component<Props> {
     render() {
         if (this.state.AR == 1) {
             return (
-                <View>
+                <View style = {{width: '100%', height: '100%'}}>
                     <View style={{width: '100%'}}>
                         <ARView style={{height: '100%', width: '100%', backgroundColor: '#000000'}}
-                                ref={ref => (this.ref = ref)}
-                                onObjectSelect={this.selectObject}
+                            ref={ref => (this.ref = ref)}
+                            onObjectSelect={this.selectObject}
                         />
                     </View>
                     <View style={{
                         width: '100%',
+                        height: '100%',
                         flex: 1,
                         flexDirection: 'column',
                         justifyContent: 'space-evenly',
                         zIndex: 2,
-                        position: 'absolute',
-                        bottom: '5%'
                     }}>
-                        {(objectSelected == true) &&
-                        <View style={{width: '100%', flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
-                            <View style={{
-                                flex: 1,
-                                flexDirection: 'column',
-                                justifyContent: 'space-evenly',
-                                width: '50%'
-                            }}>
-                                <View
-                                    style={{flex: 1, flexDirection: "row", justifyContent: 'space-evenly', width: 200}}>
-
-                                    <Button
-                                        title={"Rotate"}
-                                        ViewComponent={require('react-native-linear-gradient').default}
-                                        titleStyle={{fontWeight: 'bold', fontSize: 12}}
-                                        linearGradientProps={{
-                                            colors: ['#2962FF', '#2962FF'],
-                                            start: {x: 0, y: 0},
-                                            end: {x: 0.5, y: 0},
-                                        }}
-                                        buttonStyle={{
-                                            borderWidth: 0,
-                                            borderColor: 'transparent',
-                                            borderRadius: 20,
-                                            height: 35
-                                        }}
-                                        containerStyle={{
-                                            marginVertical: 10,
-                                            height: 40,
-                                            width: 60,
-                                            alignSelf: 'center'
-                                        }}
-                                        onPress={this.handleControl.bind(this, "rotate")}
-                                    />
-                                    <Button
-                                        title={"Move"}
-                                        ViewComponent={require('react-native-linear-gradient').default}
-                                        titleStyle={{fontWeight: 'bold', fontSize: 12}}
-                                        linearGradientProps={{
-                                            colors: ['#2962FF', '#2962FF'],
-                                            start: {x: 0, y: 0},
-                                            end: {x: 0.5, y: 0},
-                                        }}
-                                        buttonStyle={{
-                                            borderWidth: 0,
-                                            borderColor: 'transparent',
-                                            borderRadius: 20,
-                                            height: 35
-                                        }}
-                                        containerStyle={{
-                                            marginVertical: 10,
-                                            height: 40,
-                                            width: 60,
-                                            alignSelf: 'center'
-                                        }}
-                                        onPress={this.handleControl.bind(this, "move")}
-                                    />
+                        {this.state.objectSelected &&
+                        <View style={{height: '100%'}}>
+                            <AnimateView>
+                                <View style={{position: 'absolute', bottom: 1000, left: 50}}>
                                     <Button
                                         title={"Delete"}
                                         ViewComponent={require('react-native-linear-gradient').default}
-                                        titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                        titleStyle={{fontWeight: 'bold', fontSize: 18, fontFamily: 'Product Sans'}}
                                         linearGradientProps={{
                                             colors: ["#D50000", "#D50000"],
                                             start: {x: 0, y: 0},
@@ -108,67 +53,23 @@ export default class ARScene extends Component<Props> {
                                             borderWidth: 0,
                                             borderColor: 'transparent',
                                             borderRadius: 20,
-                                            height: 35
+                                            height: 65
                                         }}
                                         containerStyle={{
                                             marginVertical: 10,
                                             height: 40,
-                                            width: 55,
+                                            width: 80,
                                             alignSelf: 'center'
                                         }}
                                         onPress={this.handleControl.bind(this, "deleteObject")}/>
                                 </View>
-                                <View
-                                    style={{flex: 1, flexDirection: "row", justifyContent: 'space-evenly', width: 200}}>
-
-                                    <Button
-                                        title={"<"}
-                                        ViewComponent={require('react-native-linear-gradient').default}
-                                        titleStyle={{fontWeight: 'bold', fontSize: 12}}
-                                        linearGradientProps={{
-                                            colors: ['#2962FF', '#2962FF'],
-                                            start: {x: 0, y: 0},
-                                            end: {x: 0.5, y: 0},
-                                        }}
-                                        buttonStyle={{
-                                            borderWidth: 0,
-                                            borderColor: 'transparent',
-                                            borderRadius: 20,
-                                            height: 35
-                                        }}
-                                        containerStyle={{
-                                            marginVertical: 10,
-                                            height: 40,
-                                            width: 35,
-                                            alignSelf: 'center'
-                                        }}
-                                        onPress={this.handleControl.bind(this, "rotateLeft")}/>
-                                    <Button
-                                        title={">"}
-                                        ViewComponent={require('react-native-linear-gradient').default}
-                                        titleStyle={{fontWeight: 'bold', fontSize: 12}}
-                                        linearGradientProps={{
-                                            colors: ['#2962FF', '#2962FF'],
-                                            start: {x: 0, y: 0},
-                                            end: {x: 0.5, y: 0},
-                                        }}
-                                        buttonStyle={{
-                                            borderWidth: 0,
-                                            borderColor: 'transparent',
-                                            borderRadius: 20,
-                                            height: 35
-                                        }}
-                                        containerStyle={{
-                                            marginVertical: 10,
-                                            height: 40,
-                                            width: 35,
-                                            alignSelf: 'center'
-                                        }}
-                                        onPress={this.handleControl.bind(this, "rotateRight")}/>
+                            </AnimateView>
+                            <AnimateView>
+                                <View style={{position: 'absolute', bottom: 1000, right: 50}}>
                                     <Button
                                         title={"Done"}
                                         ViewComponent={require('react-native-linear-gradient').default}
-                                        titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                        titleStyle={{fontWeight: 'bold', fontSize: 18, fontFamily: 'Product Sans'}}
                                         linearGradientProps={{
                                             colors: ["#00C853", "#00C853"],
                                             start: {x: 0, y: 0},
@@ -178,136 +79,287 @@ export default class ARScene extends Component<Props> {
                                             borderWidth: 0,
                                             borderColor: 'transparent',
                                             borderRadius: 20,
-                                            height: 35
+                                            height: 65
                                         }}
                                         containerStyle={{
                                             marginVertical: 10,
                                             height: 40,
-                                            width: 55,
+                                            width: 80,
                                             alignSelf: 'center'
                                         }}
                                         onPress={this.handleControl.bind(this, "confirmPlacement")}/>
+                                </View>
+                            </AnimateView>
+                            <View style={{
+                                width: '100%',
+                                flex: 1,
+                                flexDirection: 'row',
+                                justifyContent: 'space-evenly',
+                                position: 'absolute',
+                                bottom: 250
+                            }}>
+                                <View style={{
+                                    flex: 1,
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-evenly',
+                                    width: '50%'
+                                }}>
+                                    <AnimateView>
+                                        <View style={{
+                                            flex: 1,
+                                            flexDirection: "row",
+                                            justifyContent: 'space-evenly',
+                                            width: 400
+                                        }}>
+                                            <Button
+                                                title={"<"}
+                                                ViewComponent={require('react-native-linear-gradient').default}
+                                                titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                                linearGradientProps={{
+                                                    colors: ['#2962FF', '#2962FF'],
+                                                    start: {x: 0, y: 0},
+                                                    end: {x: 0.5, y: 0},
+                                                }}
+                                                buttonStyle={{
+                                                    borderWidth: 0,
+                                                    borderColor: 'transparent',
+                                                    borderRadius: 60,
+                                                    height: 55
+                                                }}
+                                                containerStyle={{
+                                                    marginVertical: 10,
+                                                    height: 40,
+                                                    width: 55,
+                                                    alignSelf: 'center'
+                                                }}
+                                                onPress={this.handleControl.bind(this, "rotateLeft")}/>
+                                            <Button
+                                                title={"Rotate"}
+                                                ViewComponent={require('react-native-linear-gradient').default}
+                                                titleStyle={{
+                                                    fontWeight: 'bold',
+                                                    fontSize: 18,
+                                                    fontFamily: 'Product Sans'
+                                                }}
+                                                linearGradientProps={{
+                                                    colors: ['#2962FF', '#2962FF'],
+                                                    start: {x: 0, y: 0},
+                                                    end: {x: 0.5, y: 0},
+                                                }}
+                                                buttonStyle={{
+                                                    borderWidth: 0,
+                                                    borderColor: 'transparent',
+                                                    borderRadius: 20,
+                                                    height: 65
+                                                }}
+                                                containerStyle={{
+                                                    marginVertical: 10,
+                                                    height: 40,
+                                                    width: 80,
+                                                    alignSelf: 'center'
+                                                }}
+                                                onPress={this.handleControl.bind(this, "rotate")}
+                                            />
+                                            <Button
+                                                title={">"}
+                                                ViewComponent={require('react-native-linear-gradient').default}
+                                                titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                                linearGradientProps={{
+                                                    colors: ['#2962FF', '#2962FF'],
+                                                    start: {x: 0, y: 0},
+                                                    end: {x: 0.5, y: 0},
+                                                }}
+                                                buttonStyle={{
+                                                    borderWidth: 0,
+                                                    borderColor: 'transparent',
+                                                    borderRadius: 60,
+                                                    height: 55
+                                                }}
+                                                containerStyle={{
+                                                    marginVertical: 10,
+                                                    height: 40,
+                                                    width: 55,
+                                                    alignSelf: 'center'
+                                                }}
+                                                onPress={this.handleControl.bind(this, "rotateRight")}/>
+                                        </View>
+                                    </AnimateView>
                                 </View>
                             </View>
                             <View style={{
                                 flex: 1,
                                 flexDirection: "column",
                                 justifyContent: 'space-evenly',
-                                width: '15%'
+                                position: 'absolute',
+                                bottom: 150,
+                                right: 0
                             }}>
-                                <Button
-                                    title={"^"}
-                                    ViewComponent={require('react-native-linear-gradient').default}
-                                    titleStyle={{fontWeight: 'bold', fontSize: 12}}
-                                    linearGradientProps={{
-                                        colors: ["#616161", "#616161"],
-                                        start: {x: 0, y: 0},
-                                        end: {x: .5, y: 0},
-                                    }}
-                                    buttonStyle={{
-                                        borderWidth: 0,
-                                        borderColor: 'transparent',
-                                        borderRadius: 20,
-                                        height: 35
-                                    }}
-                                    containerStyle={{marginVertical: -5, height: 40, width: 35, alignSelf: 'center'}}
-                                    onPress={this.handleControl.bind(this, "moveForward")}/>
-                                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
-                                    <Button
-                                        title={"<"}
-                                        ViewComponent={require('react-native-linear-gradient').default}
-                                        titleStyle={{fontWeight: 'bold', fontSize: 12}}
-                                        linearGradientProps={{
-                                            colors: ["#616161", "#616161"],
-                                            start: {x: 0, y: 0},
-                                            end: {x: .5, y: 0},
-                                        }}
-                                        buttonStyle={{
-                                            borderWidth: 0,
-                                            borderColor: 'transparent',
-                                            borderRadius: 20,
-                                            height: 35
-                                        }}
-                                        containerStyle={{marginVertical: 1, height: 40, width: 35, alignSelf: 'center'}}
-                                        onPress={this.handleControl.bind(this, "moveLeft")}/>
-                                    <Button
-                                        title={">"}
-                                        ViewComponent={require('react-native-linear-gradient').default}
-                                        titleStyle={{fontWeight: 'bold', fontSize: 12}}
-                                        linearGradientProps={{
-                                            colors: ["#616161", "#616161"],
-                                            start: {x: 0, y: 0},
-                                            end: {x: .5, y: 0},
-                                        }}
-                                        buttonStyle={{
-                                            borderWidth: 0,
-                                            borderColor: 'transparent',
-                                            borderRadius: 20,
-                                            height: 35
-                                        }}
-                                        containerStyle={{marginVertical: 1, height: 40, width: 35, alignSelf: 'center'}}
-                                        onPress={this.handleControl.bind(this, "moveRight")}/>
-                                </View>
-                                <View style={{transform: [{rotate: '180deg'}]}}>
-                                    <Button
-
-                                        title={"^"}
-                                        ViewComponent={require('react-native-linear-gradient').default}
-                                        titleStyle={{fontWeight: 'bold', fontSize: 12}}
-                                        linearGradientProps={{
-                                            colors: ["#616161", "#616161"],
-                                            start: {x: 0, y: 0},
-                                            end: {x: .5, y: 0},
-                                        }}
-                                        buttonStyle={{
-                                            borderWidth: 0,
-                                            borderColor: 'transparent',
-                                            borderRadius: 20,
-                                            height: 35
-                                        }}
-                                        containerStyle={{
-                                            marginBottom: -5,
-                                            marginTop: 10,
-                                            height: 40,
-                                            width: 35,
-                                            alignSelf: 'center'
-                                        }}
-                                        onPress={this.handleControl.bind(this, "moveBackward")}/>
-
-                                </View>
+                                <AnimateView>
+                                    <View style={{
+                                        flex: 1,
+                                        flexDirection: "column",
+                                        justifyContent: 'space-evenly',
+                                        width: 400,
+                                        height: 250
+                                    }}>
+                                        <Button
+                                            title={"^"}
+                                            ViewComponent={require('react-native-linear-gradient').default}
+                                            titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                            linearGradientProps={{
+                                                colors: ["#616161", "#616161"],
+                                                start: {x: 0, y: 0},
+                                                end: {x: .5, y: 0},
+                                            }}
+                                            buttonStyle={{
+                                                borderWidth: 0,
+                                                borderColor: 'transparent',
+                                                borderRadius: 60,
+                                                height: 55
+                                            }}
+                                            containerStyle={{
+                                                marginVertical: -5,
+                                                height: 40,
+                                                width: 55,
+                                                alignSelf: 'center'
+                                            }}
+                                            onPress={this.handleControl.bind(this, "moveForward")}/>
+                                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                                            <Button
+                                                title={"<"}
+                                                ViewComponent={require('react-native-linear-gradient').default}
+                                                titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                                linearGradientProps={{
+                                                    colors: ["#616161", "#616161"],
+                                                    start: {x: 0, y: 0},
+                                                    end: {x: .5, y: 0},
+                                                }}
+                                                buttonStyle={{
+                                                    borderWidth: 0,
+                                                    borderColor: 'transparent',
+                                                    borderRadius: 60,
+                                                    height: 55
+                                                }}
+                                                containerStyle={{
+                                                    marginVertical: 1,
+                                                    height: 40,
+                                                    width: 55,
+                                                    alignSelf: 'center'
+                                                }}
+                                                onPress={this.handleControl.bind(this, "moveLeft")}/>
+                                            <Button
+                                                title={"Move"}
+                                                ViewComponent={require('react-native-linear-gradient').default}
+                                                titleStyle={{
+                                                    fontWeight: 'bold',
+                                                    fontSize: 18,
+                                                    fontFamily: 'Product Sans'
+                                                }}
+                                                linearGradientProps={{
+                                                    colors: ['#2962FF', '#2962FF'],
+                                                    start: {x: 0, y: 0},
+                                                    end: {x: 0.5, y: 0},
+                                                }}
+                                                buttonStyle={{
+                                                    borderWidth: 0,
+                                                    borderColor: 'transparent',
+                                                    borderRadius: 20,
+                                                    height: 65
+                                                }}
+                                                containerStyle={{
+                                                    marginVertical: 10,
+                                                    height: 60,
+                                                    width: 80,
+                                                    alignSelf: 'center'
+                                                }}
+                                                onPress={this.handleControl.bind(this, "move")}
+                                            />
+                                            <Button
+                                                title={">"}
+                                                ViewComponent={require('react-native-linear-gradient').default}
+                                                titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                                linearGradientProps={{
+                                                    colors: ["#616161", "#616161"],
+                                                    start: {x: 0, y: 0},
+                                                    end: {x: .5, y: 0},
+                                                }}
+                                                buttonStyle={{
+                                                    borderWidth: 0,
+                                                    borderColor: 'transparent',
+                                                    borderRadius: 60,
+                                                    height: 55
+                                                }}
+                                                containerStyle={{
+                                                    marginVertical: 1,
+                                                    height: 40,
+                                                    width: 55,
+                                                    alignSelf: 'center'
+                                                }}
+                                                onPress={this.handleControl.bind(this, "moveRight")}/>
+                                        </View>
+                                        <View style={{transform: [{rotate: '180deg'}]}}>
+                                            <Button
+                                                title={"^"}
+                                                ViewComponent={require('react-native-linear-gradient').default}
+                                                titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                                linearGradientProps={{
+                                                    colors: ["#616161", "#616161"],
+                                                    start: {x: 0, y: 0},
+                                                    end: {x: .5, y: 0},
+                                                }}
+                                                buttonStyle={{
+                                                    borderWidth: 0,
+                                                    borderColor: 'transparent',
+                                                    borderRadius: 60,
+                                                    height: 55
+                                                }}
+                                                containerStyle={{
+                                                    marginBottom: -5,
+                                                    marginTop: 10,
+                                                    height: 40,
+                                                    width: 55,
+                                                    alignSelf: 'center'
+                                                }}
+                                                onPress={this.handleControl.bind(this, "moveBackward")}/>
+                                        </View>
+                                    </View>
+                                </AnimateView>
                             </View>
                         </View>
                         }
-                        <View style={{width: '100%', flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                        <View style={{width: '100%', flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', position: 'absolute', bottom: 50}}>
                             <Button
                                 title={"Place"}
                                 ViewComponent={require('react-native-linear-gradient').default}
-                                titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans'}}
                                 linearGradientProps={{
                                     colors: ['#2962FF', '#2962FF'],
                                     start: {x: 0, y: 0},
                                     end: {x: 0.5, y: 0},
                                 }}
                                 buttonStyle={{borderWidth: 0, borderColor: 'transparent', borderRadius: 20, height: 45}}
-                                containerStyle={{marginVertical: 10, height: 40, width: 115, alignSelf: 'center'}}
+                                containerStyle={{marginVertical: 10, height: 40, width: '40%', alignSelf: 'center'}}
                                 onPress={this.update}
                             />
                             <Button
                                 title={"New"}
                                 ViewComponent={require('react-native-linear-gradient').default}
-                                titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans'}}
                                 linearGradientProps={{
                                     colors: ["#00C853", "#00C853"],
                                     start: {x: 0, y: 0},
                                     end: {x: .5, y: 0},
                                 }}
                                 buttonStyle={{borderWidth: 0, borderColor: 'transparent', borderRadius: 20, height: 45}}
-                                containerStyle={{marginVertical: 10, height: 40, width: 115, alignSelf: 'center'}}
+                                containerStyle={{marginVertical: 10, height: 40, width: '40%', alignSelf: 'center'}}
                                 onPress={this.choose}
                             />
+                            
                         </View>
                     </View>
+                              
                 </View>
+                              
             );
         } else {
             if (this.props.styled == 0) {
@@ -328,12 +380,15 @@ export default class ARScene extends Component<Props> {
         buttonPressed = e;
         this.adjustObject();
         if (e == "confirmPlacement" || e == "deleteObject") {
-            objectSelected = false;
+            this.setState({objectSelected: false})
             this.forceUpdate();
         }
     }
-
+    test = () => {
+      this.setState({objectSelected: !this.state.objectSelected})
+    };
     update = () => {
+        console.log(this.state.objectSelected);
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this.ref),
             UIManager[ARView].Commands.enterPlacementMode,
@@ -354,8 +409,7 @@ export default class ARScene extends Component<Props> {
     };
 
     selectObject = e => {
-        objectSelected = true;
-        console.log("Set objectSelected: ", objectSelected);
+        this.setState({objectSelected: true})
         this.forceUpdate();
     }
 }
@@ -374,5 +428,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
     height: 650,
     alignSelf: 'stretch',
-  }
+  },
 });

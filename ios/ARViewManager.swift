@@ -32,7 +32,9 @@ class ARViewManager : RCTViewManager {
         
         // Add a tap gesture for object placement and selection
         let tapGesture = UITapGestureRecognizer(target: self, action:  #selector(handleTap(_:)))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         arView.addGestureRecognizer(tapGesture)
+        arView.addGestureRecognizer(pinchGesture)
         
         // Run the ARView
         arView.session.run(config)
@@ -43,6 +45,13 @@ class ARViewManager : RCTViewManager {
     
     @objc func enterPlacementMode(_ node: ARSCNView!,  count: NSNumber) {
         inPlacementMode = true
+    }
+    
+    @objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
+        if sender.state == .began || sender.state == .changed {
+            arView.scaleObject(scale: sender.scale)
+            sender.scale = 1.0
+        }
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {

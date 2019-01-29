@@ -149,6 +149,15 @@ class ARView : ARSCNView, ARSCNViewDelegate {
         }
     }
     
+    func scaleObject(scale: CGFloat) {
+        if let node = selectedNode {
+            let pinchScaleX: CGFloat = scale * CGFloat((node.scale.x))
+            let pinchScaleY: CGFloat = scale * CGFloat((node.scale.y))
+            let pinchScaleZ: CGFloat = scale * CGFloat((node.scale.z))
+            node.scale = SCNVector3Make(Float(pinchScaleX), Float(pinchScaleY), Float(pinchScaleZ))
+        }
+    }
+    
     func displayDebugInfo() {
         self.showsStatistics = true
         self.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
