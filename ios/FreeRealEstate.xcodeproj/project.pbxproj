@@ -52,9 +52,15 @@
 		AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
 		AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
 		AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
+		AC89AC1922014A9B00B37C1E /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC1822014A9B00B37C1E /* FocusSquare.swift */; };
+		AC89AC1A22014A9B00B37C1E /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC1822014A9B00B37C1E /* FocusSquare.swift */; };
 		AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC94C39E219C2DEB00D54C64 /* ARViewManager.m */; };
 		AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */; };
 		ACB0C61521FEC6CA003AC046 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ACB0C61421FEC6CA003AC046 /* art.scnassets */; };
+		ACD6AE6B22011ABD00AD31E4 /* ARView+ObjectGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD6AE6A22011ABD00AD31E4 /* ARView+ObjectGestures.swift */; };
+		ACD6AE6C22011ABD00AD31E4 /* ARView+ObjectGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD6AE6A22011ABD00AD31E4 /* ARView+ObjectGestures.swift */; };
+		ACD6AE6E22011C7E00AD31E4 /* ARView+AdjustButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD6AE6D22011C7E00AD31E4 /* ARView+AdjustButtons.swift */; };
+		ACD6AE6F22011C7E00AD31E4 /* ARView+AdjustButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD6AE6D22011C7E00AD31E4 /* ARView+AdjustButtons.swift */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B04742B3778F495AA908B4BE /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D794D4431CD2431AA5CEC782 /* AntDesign.ttf */; };
 		B725B59FF99F41D48DD1D736 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A078D5E8625849CB992DA1CD /* MaterialIcons.ttf */; };
@@ -444,10 +450,13 @@
 		AC3DB419219668C700AF31E7 /* FreeRealEstate-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		AC3DB41A219668C700AF31E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC6C883B21FBEAC300B07A9F /* ARView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; tabWidth = 4; };
+		AC89AC1822014A9B00B37C1E /* FocusSquare.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; tabWidth = 4; };
 		AC94C39E219C2DEB00D54C64 /* ARViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARViewManager.m; sourceTree = "<group>"; };
 		AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARViewManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		ACB0C61421FEC6CA003AC046 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-Bridging-Header.h"; sourceTree = "<group>"; };
+		ACD6AE6A22011ABD00AD31E4 /* ARView+ObjectGestures.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARView+ObjectGestures.swift"; sourceTree = "<group>"; tabWidth = 4; };
+		ACD6AE6D22011C7E00AD31E4 /* ARView+AdjustButtons.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARView+AdjustButtons.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		BDC48B429CBD489AB40433AA /* libRCTBEEPickerManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTBEEPickerManager.a; sourceTree = "<group>"; };
 		C1A8A6DCFF1C4516BD4D5DA8 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -606,6 +615,9 @@
 				AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */,
 				AC6C883B21FBEAC300B07A9F /* ARView.swift */,
 				AC3330BF21FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift */,
+				ACD6AE6A22011ABD00AD31E4 /* ARView+ObjectGestures.swift */,
+				AC89AC1822014A9B00B37C1E /* FocusSquare.swift */,
+				ACD6AE6D22011C7E00AD31E4 /* ARView+AdjustButtons.swift */,
 				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
 				ACB0C61421FEC6CA003AC046 /* art.scnassets */,
 				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
@@ -1395,13 +1407,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3330AF21FBEF0200505BF8 /* VirtualPlane.swift in Sources */,
+				ACD6AE6C22011ABD00AD31E4 /* ARView+ObjectGestures.swift in Sources */,
 				AC3330B121FBEF0C00505BF8 /* ARViewManager.swift in Sources */,
 				AC3330B021FBEF0800505BF8 /* ARViewManager.m in Sources */,
 				00E356F31AD99517003FC87E /* FreeRealEstateTests.m in Sources */,
 				AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */,
 				0AD3378F21AF8BDF00F1C634 /* ARViewManagerTests.swift in Sources */,
+				ACD6AE6F22011C7E00AD31E4 /* ARView+AdjustButtons.swift in Sources */,
 				AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */,
 				AC3330C121FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift in Sources */,
+				AC89AC1A22014A9B00B37C1E /* FocusSquare.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1410,8 +1425,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
+				ACD6AE6B22011ABD00AD31E4 /* ARView+ObjectGestures.swift in Sources */,
 				AC3330C021FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift in Sources */,
 				AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */,
+				AC89AC1922014A9B00B37C1E /* FocusSquare.swift in Sources */,
+				ACD6AE6E22011C7E00AD31E4 /* ARView+AdjustButtons.swift in Sources */,
 				AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */,
 				EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */,
 				AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */,

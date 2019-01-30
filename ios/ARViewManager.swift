@@ -21,49 +21,56 @@ class ARViewManager : RCTViewManager {
     override func view() -> UIView {
         // Set the bounds of the view to be the screen
         arView.bounds = UIScreen.main.bounds
-        
+        arView.screenCenter = arView.center
         arView.delegate = arView
-        
-        // Initialize the AWRTConfig and the scene
-        let config = ARWorldTrackingConfiguration()
-        config.planeDetection = .horizontal
-        config.isLightEstimationEnabled = true
         arView.scene = SCNScene()
+        arView.autoenablesDefaultLighting = true
         
         // Add a tap gesture for object placement and selection
         let tapGesture = UITapGestureRecognizer(target: self, action:  #selector(handleTap(_:)))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotate(_:)))
         arView.addGestureRecognizer(tapGesture)
         arView.addGestureRecognizer(pinchGesture)
+        arView.addGestureRecognizer(dragGesture)
+        arView.addGestureRecognizer(rotateGesture)
+        
+        // Initialize the AWRTConfig
+        let config = ARWorldTrackingConfiguration()
+        config.planeDetection = .horizontal
+        config.isLightEstimationEnabled = true
         
         // Run the ARView
         arView.session.run(config)
-        objectToPlace = "coffee_table"
+        objectToPlace = "chair"
         
         return arView
     }
     
     @objc func enterPlacementMode(_ node: ARSCNView!,  count: NSNumber) {
-        inPlacementMode = true
+        arView.addObject(name: objectToPlace!)
     }
     
-    @objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
-        if sender.state == .began || sender.state == .changed {
-            arView.scaleObject(scale: sender.scale)
-            sender.scale = 1.0
+    @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        if gesture.state == .began || gesture.state == .changed {
+            arView.scaleObject(scale: gesture.scale)
+            gesture.scale = 1.0
         }
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         // Get the location tapped by the user
-        let touchLocation = sender.location(in: arView)
-        
-        if inPlacementMode == true, let name = objectToPlace {
-            arView.addObject(location: touchLocation, name: name)
-            inPlacementMode = false
-        } else {
-            arView.selectObject(location: touchLocation)
-        }
+        let touchLocation = gesture.location(in: arView)
+        arView.selectObject(location: touchLocation)
+    }
+    
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+        arView.dragObject(gesture: gesture)
+    }
+    
+    @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
+        arView.rotateObject(gesture: gesture)
     }
     
     @objc func adjustObject(_ node: ARSCNView!, buttonPressed: String) {
