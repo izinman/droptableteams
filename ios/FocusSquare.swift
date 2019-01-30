@@ -37,11 +37,14 @@ class FocusSquare: SCNNode {
         guard readyToPlace else { return }
         
         SCNTransaction.begin()
-        SCNTransaction.animationDuration = 1.0
+        SCNTransaction.animationDuration = 0.6
         for node in childNodes {
             node.geometry?.materials.first?.diffuse.contents = UIColor.yellow
         }
         fill?.opacity = 0.0
+        scale.x *= 1.25
+        scale.y *= 1.25
+        scale.z *= 1.25
         SCNTransaction.completionBlock = { self.readyToPlace = false }
         SCNTransaction.commit()
     }
@@ -50,10 +53,13 @@ class FocusSquare: SCNNode {
         guard !readyToPlace else { return }
         
         SCNTransaction.begin()
-        SCNTransaction.animationDuration = 1.0
+        SCNTransaction.animationDuration = 0.6
         for node in childNodes {
             node.geometry?.materials.first?.diffuse.contents = UIColor.green
         }
+        scale.x *= 0.8
+        scale.y *= 0.8
+        scale.z *= 0.8
         fill?.opacity = 0.6
         SCNTransaction.completionBlock = { self.readyToPlace = true }
         SCNTransaction.commit()
