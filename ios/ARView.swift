@@ -16,7 +16,6 @@ class ARView : ARSCNView, ARSCNViewDelegate {
     var planeDetected = false
     
     var focusSquare: FocusSquare?
-    var screenCenter: CGPoint!
     
     var prevX: Float = 0.0
     var prevZ: Float = 0.0
@@ -105,9 +104,8 @@ class ARView : ARSCNView, ARSCNViewDelegate {
             // Select the node and mark it visually by reducing the opacity
             selectedNode = node
             
-            let fadeOutAction = SCNAction.fadeOpacity(to: 0.7, duration: 0.75)
-            let fadeInAction = SCNAction.fadeOpacity(to: 1.0, duration: 0.75)
-            fadeOutAction.timingMode = .easeInEaseOut
+            let fadeOutAction = SCNAction.fadeOpacity(to: 0.6, duration: 1.0)
+            let fadeInAction = SCNAction.fadeOpacity(to: 1.0, duration: 1.0)
             fadeInAction.timingMode = .easeInEaseOut
             
             let pulseAction = SCNAction.repeatForever(SCNAction.sequence([fadeOutAction, fadeInAction]))

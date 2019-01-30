@@ -59,6 +59,7 @@ class FocusSquare: SCNNode {
         SCNTransaction.commit()
     }
     
+    
     private func createSegment(width: CGFloat, height: CGFloat) -> SCNNode {
         let segment = SCNPlane(width: width, height: height)
         segment.materials = [colorMaterial]

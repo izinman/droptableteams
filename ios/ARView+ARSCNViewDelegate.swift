@@ -49,14 +49,22 @@ extension ARView {
             let extendPlaneHits = self.hitTest(self.center, types: .existingPlaneUsingExtent)
 
             if extendPlaneHits.first == nil {
-                self.planeDetected = false
-                focusSquare.enterSearchingMode()
+                if self.planeDetected {
+                    self.planeDetected = false
+                    focusSquare.enterSearchingMode()
+                }
                 let rotateAction = SCNAction.rotateBy(x: 0, y: 0.08, z: 0, duration: 0.5)
                 focusSquare.runAction(rotateAction)
                 
-            } else if !focusSquare.readyToPlace {
-                self.planeDetected = true
-                focusSquare.enterPlacementMode()
+            } else {
+                if !self.planeDetected {
+                    self.planeDetected = true
+                    focusSquare.enterPlacementMode()
+                }
+                
+                if focusSquare.eulerAngles.y != self.cameraVector.y {
+                    focusSquare.eulerAngles = SCNVector3(x: focusSquare.eulerAngles.x, y: self.cameraVector.y, z: focusSquare.eulerAngles.z)
+                }
             }
             
         }

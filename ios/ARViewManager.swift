@@ -21,7 +21,6 @@ class ARViewManager : RCTViewManager {
     override func view() -> UIView {
         // Set the bounds of the view to be the screen
         arView.bounds = UIScreen.main.bounds
-        arView.screenCenter = arView.center
         arView.delegate = arView
         arView.scene = SCNScene()
         arView.autoenablesDefaultLighting = true
