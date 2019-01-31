@@ -62,6 +62,8 @@
 		AC89AC622202928F00B37C1E /* ARViewManager+ObjectPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC602202928F00B37C1E /* ARViewManager+ObjectPlacement.swift */; };
 		AC89AC64220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC63220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift */; };
 		AC89AC65220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC63220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift */; };
+		AC89AC672202B3C200B37C1E /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC662202B3C200B37C1E /* BoundingBox.swift */; };
+		AC89AC682202B3C200B37C1E /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC662202B3C200B37C1E /* BoundingBox.swift */; };
 		AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC94C39E219C2DEB00D54C64 /* ARViewManager.m */; };
 		AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */; };
 		ACB0C61521FEC6CA003AC046 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ACB0C61421FEC6CA003AC046 /* art.scnassets */; };
@@ -459,6 +461,7 @@
 		AC89AC21220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ARSessionDelegate.swift"; sourceTree = "<group>"; };
 		AC89AC602202928F00B37C1E /* ARViewManager+ObjectPlacement.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ObjectPlacement.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC63220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ObjectAdjustment.swift"; sourceTree = "<group>"; tabWidth = 4; };
+		AC89AC662202B3C200B37C1E /* BoundingBox.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; tabWidth = 4; };
 		AC94C39E219C2DEB00D54C64 /* ARViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARViewManager.m; sourceTree = "<group>"; };
 		AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARViewManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		ACB0C61421FEC6CA003AC046 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -625,10 +628,11 @@
 				AC89AC1E2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift */,
 				AC89AC21220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift */,
 				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
+				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
 				AC6C883B21FBEAC300B07A9F /* ARView.swift */,
 				AC89AC1822014A9B00B37C1E /* FocusSquare.swift */,
+				AC89AC662202B3C200B37C1E /* BoundingBox.swift */,
 				ACB0C61421FEC6CA003AC046 /* art.scnassets */,
-				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -1423,6 +1427,7 @@
 				00E356F31AD99517003FC87E /* FreeRealEstateTests.m in Sources */,
 				AC89AC65220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift in Sources */,
 				AC89AC202202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift in Sources */,
+				AC89AC682202B3C200B37C1E /* BoundingBox.swift in Sources */,
 				AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */,
 				0AD3378F21AF8BDF00F1C634 /* ARViewManagerTests.swift in Sources */,
 				AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */,
@@ -1437,6 +1442,7 @@
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
 				AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */,
 				AC89AC1922014A9B00B37C1E /* FocusSquare.swift in Sources */,
+				AC89AC672202B3C200B37C1E /* BoundingBox.swift in Sources */,
 				AC89AC612202928F00B37C1E /* ARViewManager+ObjectPlacement.swift in Sources */,
 				AC89AC1C2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */,
 				AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */,

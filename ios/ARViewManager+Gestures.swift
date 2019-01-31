@@ -57,18 +57,48 @@ extension ARViewManager {
         }
     }
     
-    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
-        let location = gesture.location(in: arView)
+    func withinBoundingBox(node: SCNNode, x: Float, z: Float) -> Bool {
+        let (localMinVec, localMaxVec) = node.boundingBox
+        var trueMinVec = node.convertPosition(localMinVec, to: nil)
+        var trueMaxVec = node.convertPosition(localMaxVec, to: nil)
         
-        if gesture.state == .began, let node = arView.selectedNode {
+        guard let planeY = arView.focusSquare?.position.y else { return false }
+        trueMinVec.y = planeY
+        trueMaxVec.y = planeY
+        
+        let zThreshold = 0.15 * (trueMaxVec.x - trueMinVec.x)
+        let xThreshold = 0.15 * (trueMaxVec.z - trueMinVec.z)
+        
+        if x < (trueMinVec.x - xThreshold) || (x > trueMaxVec.x + xThreshold) {
+            return false
+        }
+        
+        if z < (trueMinVec.z - zThreshold) || (z > trueMaxVec.z + zThreshold) {
+            return false
+        }
+        
+        return true
+    }
+    
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+        
+        let location = gesture.location(in: arView)
+        guard let node = arView.selectedNode, let result = arView.hitTest(location, types: .existingPlane).first else { return }
+        
+        let newCoordX = result.worldTransform.columns.3.x
+        let newCoordZ = result.worldTransform.columns.3.z
+        
+        if gesture.state == .began {
+            if !withinBoundingBox(node: node, x: newCoordX, z: newCoordZ) {
+                gesture.state = .ended
+                return
+            }
+            
             arView.prevX = node.worldPosition.x
             arView.prevZ = node.worldPosition.z
         }
         
-        if gesture.state == .changed, let node = arView.selectedNode, let result = arView.hitTest(location, types: .existingPlane).first {
-            
-            let newCoordX = result.worldTransform.columns.3.x
-            let newCoordZ = result.worldTransform.columns.3.z
+        if gesture.state == .changed {
             
             let moveAction = SCNAction.moveBy(x: CGFloat(newCoordX - arView.prevX), y: 0, z: CGFloat(newCoordZ - arView.prevZ), duration: 0.1)
             node.runAction(moveAction)

@@ -13,7 +13,7 @@ class ARView : ARSCNView, ARSCNViewDelegate {
     
     var objects = [SCNNode]()
     var selectedNode: SCNNode?
-    var planeDetected = false
+    var inPlacementMode = false
     var objectToPlace: String?
     
     var focusSquare: FocusSquare?

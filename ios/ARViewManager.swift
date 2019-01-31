@@ -14,8 +14,6 @@ import SceneKit
 class ARViewManager : RCTViewManager {
     
     var arView = ARView()
-    var inPlacementMode = false
-    var objectToPlace: String?
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
@@ -23,7 +21,10 @@ class ARViewManager : RCTViewManager {
         arView.bounds = UIScreen.main.bounds
         arView.delegate = self
         arView.scene = SCNScene()
-        arView.autoenablesDefaultLighting = true
+        arView.autoenablesDefaultLighting = false
+        arView.antialiasingMode = .multisampling4X
+        arView.inPlacementMode = false
+        arView.objectToPlace = "chair"
         
         // Add a tap gesture for object placement and selection
         let tapGesture = UITapGestureRecognizer(target: self, action:  #selector(handleTap(_:)))
@@ -42,9 +43,12 @@ class ARViewManager : RCTViewManager {
         
         // Run the ARView
         arView.session.run(config)
-        objectToPlace = "chair"
         
         return arView
+    }
+    
+    func addLight() {
+        
     }
     
     func displayDebugInfo() {

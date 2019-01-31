@@ -17,7 +17,7 @@ extension ARViewManager {
     }
     
     @objc func enterPlacementMode(_ node: ARSCNView!,  count: NSNumber) {
-        guard let focusSquare = arView.focusSquare, arView.planeDetected else { return }
+        guard arView.inPlacementMode else { return }
         // Perform a hit test to obtain the plane on which we will place the object
         let planeHits = arView.hitTest(arView.center, types: .existingPlane)
         
@@ -66,6 +66,7 @@ extension ARViewManager {
         node.transform = SCNMatrix4(hitTransform)
         node.scale = arView.ObjScaleMap[name]!
         node.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
+        node.geometry?.firstMaterial?.lightingModel = .physicallyBased
         
         return node
     }

@@ -13,8 +13,8 @@ import SceneKit
 class FocusSquare: SCNNode {
     
     // Initialization data for creating the focusSquare
-    let size: CGFloat = 0.1
-    let segmentWidth: CGFloat = 0.004
+    let size: CGFloat = 0.2
+    let segmentWidth: CGFloat = 0.005
     
     private let colorMaterial: SCNMaterial = {
         let material = SCNMaterial()
@@ -23,7 +23,7 @@ class FocusSquare: SCNNode {
     }()
     
     private let fill: SCNNode = {
-        let square = SCNPlane(width: 0.1, height: 0.1)
+        let square = SCNPlane(width: 0.2, height: 0.2)
         let material = SCNMaterial()
         material.diffuse.contents = UIColor.green
         square.materials = [material]
@@ -100,7 +100,7 @@ class FocusSquare: SCNNode {
             self.runAction(self.pulseAction, forKey: "pulse")
             self.isAnimating = false
         }
-        SCNTransaction.animationDuration = 0.4
+        SCNTransaction.animationDuration = 0.25
         SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         
         // Change the color of the segments, make the fill disappear and slightly increase the square's size
@@ -108,9 +108,9 @@ class FocusSquare: SCNNode {
             node.geometry?.materials.first?.diffuse.contents = UIColor.yellow
         }
         fill.opacity = 0.0
-        scale.x *= 1.25
-        scale.y *= 1.25
-        scale.z *= 1.25
+        scale.x *= 1.15
+        scale.y *= 1.15
+        scale.z *= 1.15
         
         SCNTransaction.commit()
     }
@@ -127,16 +127,16 @@ class FocusSquare: SCNNode {
             self.readyToPlace = true
             self.isAnimating = false
         }
-        SCNTransaction.animationDuration = 0.4
+        SCNTransaction.animationDuration = 0.25
         SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         
         // Change the color of the segments to green, rescale and fade the fill in
         for node in childNodes {
             node.geometry?.materials.first?.diffuse.contents = UIColor.green
         }
-        scale.x *= 0.8
-        scale.y *= 0.8
-        scale.z *= 0.8
+        scale.x /= 1.15
+        scale.y /= 1.15
+        scale.z /= 1.15
         fill.opacity = 0.6
         
         SCNTransaction.commit()
