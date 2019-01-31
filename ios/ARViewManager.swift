@@ -21,7 +21,7 @@ class ARViewManager : RCTViewManager {
     override func view() -> UIView {
         // Set the bounds of the view to be the screen
         arView.bounds = UIScreen.main.bounds
-        arView.delegate = arView
+        arView.delegate = self
         arView.scene = SCNScene()
         arView.autoenablesDefaultLighting = true
         
@@ -47,37 +47,10 @@ class ARViewManager : RCTViewManager {
         return arView
     }
     
-    @objc func enterPlacementMode(_ node: ARSCNView!,  count: NSNumber) {
-        arView.addObject(name: objectToPlace!)
-    }
-    
-    @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
-        if gesture.state == .began || gesture.state == .changed {
-            arView.scaleObject(scale: gesture.scale)
-            gesture.scale = 1.0
-        }
-    }
-    
-    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-        // Get the location tapped by the user
-        let touchLocation = gesture.location(in: arView)
-        arView.selectObject(location: touchLocation)
-    }
-    
-    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
-        arView.dragObject(gesture: gesture)
-    }
-    
-    @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
-        arView.rotateObject(gesture: gesture)
-    }
-    
-    @objc func adjustObject(_ node: ARSCNView!, buttonPressed: String) {
-        arView.adjustObject(buttonPressed: buttonPressed)
-    }
-    
-    @objc func setObjectToPlace(_node: ARSCNView!, objectName: String) {
-        objectToPlace = objectName
+    func displayDebugInfo() {
+        arView.showsStatistics = true
+        arView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        // , ARSCNDebugOptions.showWorldOrigin]
     }
     
     override static func requiresMainQueueSetup() -> Bool {
