@@ -11,6 +11,8 @@ import SceneKit
 
 class ARView : ARSCNView, ARSCNViewDelegate {
     
+    var arViewManager: ARViewManager!
+    
     var planes = [UUID : VirtualPlane]()
     var objects = [SCNNode]()
     
@@ -57,25 +59,9 @@ class ARView : ARSCNView, ARSCNViewDelegate {
         return node
     }
     
-    func addObject(location: CGPoint, name: String) {
-        // Perform a hit test to obtain the plane on which we will place the object
-        let planeHits = self.hitTest(location, types: .existingPlaneUsingExtent)
-        
-        // Verify that the plane is valid
-        if planeHits.count > 0, let hitResult = planeHits.first, let identifier = hitResult.anchor?.identifier, planes[identifier] != nil {
-            
-            // Create an object to place
-            let node = createNode(name: name, hitResult: hitResult)
-            
-            // Add the object to the scene
-            self.scene.rootNode.addChildNode(node)
-            objects.append(node)
-        }
-    }
-    
     func selectObject(location: CGPoint) {
         // Perform a hit test to obtain the node the user tapped on
-        let nodeHits = self.hitTest(location, options: nil)
+        let nodeHits = hitTest(location, options: nil)
         
         // Check that the node is not null and select it
         if let node = nodeHits.first?.node, objects.contains(node) {
@@ -110,6 +96,8 @@ class ARView : ARSCNView, ARSCNViewDelegate {
     func adjustObject(buttonPressed: String) {
         
         switch (buttonPressed) {
+        case "sendMap":
+            arViewManager.shareSession()
             
         case "rotateRight":
             selectedNode?.runAction(SCNAction.rotateBy(x: 0, y: -0.1, z: 0, duration: 0))

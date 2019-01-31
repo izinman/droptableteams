@@ -65,6 +65,8 @@
 		C9CC7CCD172149068F17D0FB /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA0BCBC1D444E568B854C36 /* Ionicons.ttf */; };
 		DE6292B2844B4E7F8F701FC7 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96724590D6A946F49241917B /* MaterialCommunityIcons.ttf */; };
 		EAED28D021A5EBB70011E882 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAED28A821A5EB600011E882 /* libBVLinearGradient.a */; };
+		ED25D2AD2200D295001205CF /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED25D2AC2200D295001205CF /* MultipeerSession.swift */; };
+		ED25D2AE2200D401001205CF /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED25D2AC2200D295001205CF /* MultipeerSession.swift */; };
 		EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDABA60321B35F3900833E0F /* VirtualPlane.swift */; };
 /* End PBXBuildFile section */
 
@@ -401,7 +403,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
@@ -456,6 +457,7 @@
 		D794D4431CD2431AA5CEC782 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		EAED28A221A5EB600011E882 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		EC624A723C2B4D089DD98C2C /* ProductSans.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = ProductSans.ttf; path = ../assets/fonts/ProductSans.ttf; sourceTree = "<group>"; };
+		ED25D2AC2200D295001205CF /* MultipeerSession.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; tabWidth = 4; };
 		EDABA60321B35F3900833E0F /* VirtualPlane.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = VirtualPlane.swift; sourceTree = "<group>"; tabWidth = 4; };
 /* End PBXFileReference section */
 
@@ -607,10 +609,10 @@
 				AC6C883B21FBEAC300B07A9F /* ARView.swift */,
 				AC3330BF21FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift */,
 				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
-				ACB0C61421FEC6CA003AC046 /* art.scnassets */,
+				ED25D2AC2200D295001205CF /* MultipeerSession.swift */,
 				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */,
+				ACB0C61421FEC6CA003AC046 /* art.scnassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 			);
 			name = FreeRealEstate;
@@ -890,12 +892,12 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = X6L44JDG2E;
+						DevelopmentTeam = 8KU7L54DPF;
 						LastSwiftMigration = 1010;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = X6L44JDG2E;
+						DevelopmentTeam = 8KU7L54DPF;
 						LastSwiftMigration = 1010;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1397,6 +1399,7 @@
 				AC3330AF21FBEF0200505BF8 /* VirtualPlane.swift in Sources */,
 				AC3330B121FBEF0C00505BF8 /* ARViewManager.swift in Sources */,
 				AC3330B021FBEF0800505BF8 /* ARViewManager.m in Sources */,
+				ED25D2AE2200D401001205CF /* MultipeerSession.swift in Sources */,
 				00E356F31AD99517003FC87E /* FreeRealEstateTests.m in Sources */,
 				AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */,
 				0AD3378F21AF8BDF00F1C634 /* ARViewManagerTests.swift in Sources */,
@@ -1415,6 +1418,7 @@
 				AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */,
 				EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */,
 				AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */,
+				ED25D2AD2200D295001205CF /* MultipeerSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1460,7 +1464,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = X6L44JDG2E;
+				DEVELOPMENT_TEAM = 8KU7L54DPF;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1501,7 +1505,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = X6L44JDG2E;
+				DEVELOPMENT_TEAM = 8KU7L54DPF;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
@@ -1538,7 +1542,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = X6L44JDG2E;
+				DEVELOPMENT_TEAM = 8KU7L54DPF;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
@@ -1553,7 +1557,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.ucsb.capstone;
+				PRODUCT_BUNDLE_IDENTIFIER = cmargerum.ObjectSelection;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1570,7 +1574,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = X6L44JDG2E;
+				DEVELOPMENT_TEAM = 8KU7L54DPF;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
@@ -1585,7 +1589,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.ucsb.capstone;
+				PRODUCT_BUNDLE_IDENTIFIER = cmargerum.ObjectSelection;
 				PRODUCT_NAME = FreeRealEstate;
 				SWIFT_OBJC_BRIDGING_HEADER = "FreeRealEstate-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;

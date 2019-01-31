@@ -305,6 +305,19 @@ export default class ARScene extends Component<Props> {
                                 containerStyle={{marginVertical: 10, height: 40, width: 115, alignSelf: 'center'}}
                                 onPress={this.choose}
                             />
+                            <Button
+                                title={"Send Map"}
+                                ViewComponent={require('react-native-linear-gradient').default}
+                                titleStyle={{fontWeight: 'bold', fontSize: 12}}
+                                linearGradientProps={{
+                                    colors: ["#00C853", "#00C853"],
+                                    start: {x: 0, y: 0},
+                                    end: {x: .5, y: 0},
+                                }}
+                                buttonStyle={{borderWidth: 0, borderColor: 'transparent', borderRadius: 20, height: 45}}
+                                containerStyle={{marginVertical: 10, height: 40, width: 115, alignSelf: 'center'}}
+                                onPress={this.handleControl.bind(this, "sendMap")}
+                            />
                         </View>
                     </View>
                 </View>
