@@ -26,6 +26,7 @@ class ARViewManager : RCTViewManager {
         arView.antialiasingMode = .multisampling4X
         arView.inPlacementMode = false
         arView.objectToPlace = "chair"
+        arView.selectionBoxes = [SCNNode: BoundingBox]()
         
         // Add a tap gesture for object placement and selection
         let tapGesture = UITapGestureRecognizer(target: self, action:  #selector(handleTap(_:)))

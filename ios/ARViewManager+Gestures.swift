@@ -32,9 +32,7 @@ extension ARViewManager {
         if let node = nodeHits.first?.node, arView.objects.contains(node) {
             // If we had previously selected an object, unhighlight it before selecting a new one
             if let prevSelectedNode = arView.selectedNode {
-                prevSelectedNode.removeAction(forKey: "pulse")
-                prevSelectedNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.75))
-                
+                arView.selectionBoxes[prevSelectedNode]?.disappear()
                 if node == prevSelectedNode {
                     arView.selectedNode = nil
                     return
@@ -43,15 +41,10 @@ extension ARViewManager {
             
             // Select the node and mark it visually by reducing the opacity
             arView.selectedNode = node
-            currentBoundingBox = BoundingBox(node: node)
-            
-            let fadeOutAction = SCNAction.fadeOpacity(to: 0.6, duration: 1.0)
-            let fadeInAction = SCNAction.fadeOpacity(to: 1.0, duration: 1.0)
-            fadeInAction.timingMode = .easeInEaseOut
-            
-            let pulseAction = SCNAction.repeatForever(SCNAction.sequence([fadeOutAction, fadeInAction]))
-            
-            node.runAction(pulseAction, forKey: "pulse")
+            if arView.selectionBoxes[node] == nil {
+                arView.selectionBoxes[node] = BoundingBox(node: node)
+            }
+            arView.selectionBoxes[node]?.appear()
             
             // Tell React to display adjustment button menu
             arView.onObjectSelect!([:])
@@ -75,6 +68,7 @@ extension ARViewManager {
         if gesture.state == .changed {
             
             let distance = getDistance(from: node, to: result)
+            
             let moveAction = SCNAction.moveBy(x: CGFloat(newCoordX - arView.prevX), y: 0, z: CGFloat(newCoordZ - arView.prevZ), duration: 0.1)
             node.runAction(moveAction)
             

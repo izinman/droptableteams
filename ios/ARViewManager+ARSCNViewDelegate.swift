@@ -53,10 +53,6 @@ extension ARViewManager: ARSCNViewDelegate {
             focusSquare.updateSquare(toLocation: newPosVec, foundPlane: didFindPlaneUsingExtent, cameraAngle: arView.cameraVector.y)
             
             arView.inPlacementMode = focusSquare.readyToPlace
-            
-            if self.currentBoundingBox != nil {
-                self.currentBoundingBox.updateCorners()
-            }
         }
     }
     

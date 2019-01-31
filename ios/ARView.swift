@@ -12,19 +12,20 @@ import SceneKit
 class ARView : ARSCNView, ARSCNViewDelegate {
     
     var objects = [SCNNode]()
-    var selectedNode: SCNNode?
-    var inPlacementMode = false
     var objectToPlace: String?
+    var inPlacementMode = false
     
-    var focusSquare: FocusSquare?
-    
-    var prevX: Float = 0.0
+    var selectedNode: SCNNode?
+    var selectionBoxes: [SCNNode: BoundingBox]!
+    var prevX: Float = 0.0  // Used for tracking the drag gesture's displacement
     var prevZ: Float = 0.0
-    
-    var onObjectSelect: RCTDirectEventBlock?
     var cameraVector: simd_float3 {
         return session.currentFrame!.camera.eulerAngles
     }
+    
+    var focusSquare: FocusSquare?
+    
+    var onObjectSelect: RCTDirectEventBlock?
     
     let ObjScaleMap: [String: SCNVector3] = [
         "chair": SCNVector3(x: 0.02, y: 0.02, z: 0.02),
