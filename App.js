@@ -27,7 +27,7 @@ handleClick = () => {
              
           <View styles={styles.root} >
           <AnimateView>
-            <Text style ={styles.welcome4}>FreeRealEstate </Text>
+            <Text style ={styles.welcome4}>designAR </Text>
             </AnimateView>
             <AnimateView>
             <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', alignContent: 'center',height: 20}}>

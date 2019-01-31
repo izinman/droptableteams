@@ -36,8 +36,7 @@ export default class AnimateView extends Component<Props> {
     ).start();
     
   }
-
-
+  
   render() {
     let { fadeAnim } = this.state;
     let { scaleAnim } = this.state;
@@ -53,6 +52,7 @@ export default class AnimateView extends Component<Props> {
               ],
           opacity: this.state.fadeAnim,      // Bind opacity to animated value
         }}
+        onPress = {this.animate}
       >
         {this.props.children}
       </Animated.View>

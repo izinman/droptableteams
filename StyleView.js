@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, ScrollView, View, Picker, Animated } from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown';
-import {Tile} from 'react-native-elements'
+import {Tile, Button} from 'react-native-elements'
 import ARScene from './ARView.js';
 
 type Props = {};
@@ -13,8 +13,8 @@ var bedroom = require('./bedroom.jpg');
 var  gameroom = require('./gameroom.jpg');
 var  dungeon = require('./dungeon.jpg');
 var office = require('./office.jpg');
-var couches = [require('./couches/3.jpeg'),require('./couches/1.jpeg'),require('./couches/2.jpeg'),require('./couches/4.jpeg')];
-var chairs = [require('./chairs/3.jpeg'),require('./chairs/1.jpeg'),require('./chairs/2.jpeg'),require('./chairs/4.jpeg'),require('./chairs/6.jpeg')];
+var couches = [require('./couches/1.jpeg'),require('./couches/2.jpeg'),require('./couches/3.jpeg'),require('./couches/4.jpeg'),require('./couches/5.jpeg'),require('./couches/6.jpeg'),require('./couches/7.jpeg'),require('./couches/8.jpeg'),require('./couches/9.jpeg'),require('./couches/10.jpeg')];
+var chairs = [require('./chairs/1.jpeg'),require('./chairs/2.jpeg'),require('./chairs/3.jpeg'),require('./chairs/4.jpeg'),require('./chairs/5.jpeg'),require('./chairs/6.jpeg'),require('./chairs/7.jpeg'),require('./chairs/8.jpeg'),require('./chairs/9.jpeg')];
 var tables= [require('./tables/1.jpeg'),require('./tables/2.jpeg'),require('./tables/3.jpeg'),require('./tables/4.jpeg')];
 var misc= [require('./misc/1.jpeg'),require('./misc/2.jpg'),require('./misc/3.jpeg'),require('./misc/4.jpg'),require('./misc/5.jpg'),require('./misc/6.jpeg'),require('./misc/7.jpeg')];
 var beds= [require('./bed/1.jpg'),require('./bed/2.jpeg'),require('./bed/3.jpg'),require('./bed/4.jpeg'),require('./bed/5.jpeg'),require('./bed/6.jpeg'),require('./bed/7.jpg')];
@@ -57,8 +57,8 @@ export default class StyleView extends Component<Props> {
   }
 
   _renderScrollViewContent(title) {
-    var couchesData = Array.from({length: 4});
-    var chairsData = Array.from({length: 5});
+    var couchesData = Array.from({length: 10});
+    var chairsData = Array.from({length: 9});
     var tablesData = Array.from({length: 4});
     var miscData = Array.from({length: 7});
     var bedData = Array.from({length: 6});
@@ -70,7 +70,9 @@ export default class StyleView extends Component<Props> {
 
     return (
       <View>
+        
       <View style={styles.scrollViewContent}>
+      
       <Text style = {{paddingLeft: 25, paddingTop: 25, fontFamily: 'Product Sans', fontSize: 45, color: '#232323'}}>{this.state.room}</Text>
       <Text style = {{width: '100%', padding: 45, fontSize: 35, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Couches</Text>
         {couchesData.map((_, i) =>
@@ -82,7 +84,8 @@ export default class StyleView extends Component<Props> {
                     titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={225}
+                    width={250}
+                    height={141}
                     onPress={this.handleClick}
               />
               </View>
@@ -99,7 +102,8 @@ export default class StyleView extends Component<Props> {
                     titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={225}
+                    width={250}
+                    height={250}
                     onPress={this.handleClick}
               />
               </View>
@@ -215,6 +219,7 @@ export default class StyleView extends Component<Props> {
           }
         </ScrollView>
         <Animated.View style={[styles.header, {height: headerHeight}]}>
+        
           <Animated.Image
             style={[
               styles.backgroundImage,
@@ -224,6 +229,25 @@ export default class StyleView extends Component<Props> {
           />
           <Animated.View style ={[styles.ddContainerAnimated, {opacity: imageOpacity}]}></Animated.View>
           <View style={styles.bar}>
+          <View style={{width: '100%', height: '100%', 
+                        position: 'absolute', bottom: 0, 
+                        backgroundColor: "#00000000", zIndex: 25,
+                        }}
+                        >
+              <Button
+                                title="^"
+                                ViewComponent={require('react-native-linear-gradient').default}
+                                titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans'}}
+                                linearGradientProps={{
+                                    colors: ["#304ffe", "#304ffe"],
+                                    start: {x: 0, y: 0},
+                                    end: {x: .5, y: 0},
+                                }}
+                                buttonStyle={{borderTopLeftRadius: 25,borderTopRightRadius: 25, borderColor: 'transparent', borderRadius: 0, height: '100%'}}
+                                containerStyle={{marginVertical: 0, height: '100%', width: '100%', alignSelf: 'center'}}
+                                onPress={this.props.onPress}
+                            />
+        </View>
             <View style ={styles.ddContainer}>
               <View style={styles.dropdown}>
                 <Dropdown
@@ -276,7 +300,7 @@ const styles = StyleSheet.create({
     },
     fill: {
       zIndex: -10,
-      backgroundColor: '#ffffff',
+      backgroundColor: '#ffffffd0',
       width: '100%',
       alignSelf:'center'
     },
@@ -300,7 +324,7 @@ const styles = StyleSheet.create({
 
     },
     row: {
-      backgroundColor: '#ffffff',
+      backgroundColor: '#00000000',
       flexBasis: "33%"
     },
     header: {

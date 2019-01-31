@@ -24,7 +24,7 @@ class ARView : ARSCNView, ARSCNViewDelegate {
         "chair": SCNVector3(x: 0.02, y: 0.02, z: 0.02),
         "vase": SCNVector3(x: 0.0015, y: 0.0015, z: 0.0015),
         "table_2": SCNVector3(x: 0.01, y: 0.01, z: 0.01),
-        "coffee_table": SCNVector3(x: 0.25, y: 0.25, z: 0.25)
+        "coffee_table": SCNVector3(x: 0.10, y: 0.10, z: 0.10)
     ]
     
     func createNode(name: String, hitResult: ARHitTestResult) -> SCNNode {

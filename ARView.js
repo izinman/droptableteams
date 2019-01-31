@@ -4,6 +4,7 @@ import { Button }  from 'react-native-elements';
 import StyleView from './StyleView';
 import MoveControls from './MoveControls.js'
 import AnimateView from './AnimateView.js'
+import FurnitureAnimator from './FurnitureAnimator';
 type Props = {};
 var buttonPressed = "";
 var objectSelected = false;
@@ -38,7 +39,7 @@ export default class ARScene extends Component<Props> {
                         justifyContent: 'space-evenly',
                         zIndex: 2,
                     }}>
-                        {this.state.objectSelected &&
+                        {objectSelected &&
                         <View style={{height: '100%'}}>
                           <AnimateView>
                             <View style = {{position: 'absolute',  bottom: 1000, left: 50}}>
@@ -85,7 +86,7 @@ export default class ARScene extends Component<Props> {
                                              height: 40, 
                                              width: 80, 
                                              alignSelf: 'center'}}
-                            onPress = {this.handleControl.bind(this, "done")}                /> 
+                            onPress = {this.handleControl.bind(this, "confirmPlacement")}                /> 
                             </View>
                           </AnimateView>
                         <View style={{width: '100%', flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', position: 'absolute', bottom: 250}}>
@@ -114,7 +115,7 @@ export default class ARScene extends Component<Props> {
                                                   height: 40, 
                                                   width: 55, 
                                                   alignSelf: 'center'}}
-                                  onPress = {this.handleControl.bind(this, "rotate-left")}                /> 
+                                  onPress = {this.handleControl.bind(this, "rotateLeft")}                /> 
                                 <Button
                                   title={"Rotate"}
                                   ViewComponent={require('react-native-linear-gradient').default}
@@ -155,7 +156,7 @@ export default class ARScene extends Component<Props> {
                                                   height: 40, 
                                                   width: 55,
                                                   alignSelf: 'center'}}
-                                  onPress = {this.handleControl.bind(this, "rotate-right")}                /> 
+                                  onPress = {this.handleControl.bind(this, "rotateRight")}                /> 
                               </View>
                             </AnimateView>
                           </View>
@@ -187,7 +188,7 @@ export default class ARScene extends Component<Props> {
                                                  height: 40, 
                                                  width: 55, 
                                                  alignSelf: 'center'}}
-                                onPress = {this.handleControl.bind(this, "up")}/> 
+                                onPress = {this.handleControl.bind(this, "moveForward")}/> 
                               <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
                                 <Button     
                                   title={"<"}
@@ -206,7 +207,7 @@ export default class ARScene extends Component<Props> {
                                                    height: 40, 
                                                    width: 55, 
                                                    alignSelf: 'center'}}
-                                  onPress = {this.handleControl.bind(this, "left")}/> 
+                                  onPress = {this.handleControl.bind(this, "moveLeft")}/> 
                                   <Button
                                     title={"Move"}
                                     ViewComponent={require('react-native-linear-gradient').default}
@@ -247,7 +248,7 @@ export default class ARScene extends Component<Props> {
                                                    height: 40, 
                                                    width: 55, 
                                                    alignSelf: 'center'}}
-                                  onPress = {this.handleControl.bind(this, "right")}                /> 
+                                  onPress = {this.handleControl.bind(this, "moveRight")}                /> 
                                 </View>
                                 <View style ={{transform: [{ rotate: '180deg'}]}}>
                                   <Button     
@@ -268,7 +269,7 @@ export default class ARScene extends Component<Props> {
                                                      height: 40, 
                                                      width: 55, 
                                                      alignSelf: 'center'}}
-                                    onPress = {this.handleControl.bind(this, "down")}                /> 
+                                    onPress = {this.handleControl.bind(this, "moveBackward")}                /> 
                                 </View>
                               </View>
                             </AnimateView>
@@ -287,7 +288,7 @@ export default class ARScene extends Component<Props> {
                                 }}
                                 buttonStyle={{borderWidth: 0, borderColor: 'transparent', borderRadius: 20, height: 45}}
                                 containerStyle={{marginVertical: 10, height: 40, width: '40%', alignSelf: 'center'}}
-                                onPress={this.test}
+                                onPress={this.update}
                             />
                             <Button
                                 title={"New"}
@@ -305,7 +306,9 @@ export default class ARScene extends Component<Props> {
                             
                         </View>
                     </View>
-                              
+                    <View style = {{position: 'absolute', height: '100%', zIndex: 25, bottom: '-97.5%'}}>
+                  <FurnitureAnimator/>
+                  </View>
                 </View>
                               
             );
