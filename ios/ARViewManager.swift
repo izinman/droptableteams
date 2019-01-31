@@ -14,6 +14,7 @@ import SceneKit
 class ARViewManager : RCTViewManager {
     
     var arView = ARView()
+    var currentBoundingBox: BoundingBox!
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {

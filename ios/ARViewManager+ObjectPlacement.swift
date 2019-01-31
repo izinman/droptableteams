@@ -66,6 +66,7 @@ extension ARViewManager {
         node.transform = SCNMatrix4(hitTransform)
         node.scale = arView.ObjScaleMap[name]!
         node.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
+        
         node.geometry?.firstMaterial?.lightingModel = .physicallyBased
         
         return node

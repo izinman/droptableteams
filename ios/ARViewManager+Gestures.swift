@@ -43,6 +43,7 @@ extension ARViewManager {
             
             // Select the node and mark it visually by reducing the opacity
             arView.selectedNode = node
+            currentBoundingBox = BoundingBox(node: node)
             
             let fadeOutAction = SCNAction.fadeOpacity(to: 0.6, duration: 1.0)
             let fadeInAction = SCNAction.fadeOpacity(to: 1.0, duration: 1.0)
@@ -57,29 +58,6 @@ extension ARViewManager {
         }
     }
     
-    func withinBoundingBox(node: SCNNode, x: Float, z: Float) -> Bool {
-        let (localMinVec, localMaxVec) = node.boundingBox
-        var trueMinVec = node.convertPosition(localMinVec, to: nil)
-        var trueMaxVec = node.convertPosition(localMaxVec, to: nil)
-        
-        guard let planeY = arView.focusSquare?.position.y else { return false }
-        trueMinVec.y = planeY
-        trueMaxVec.y = planeY
-        
-        let zThreshold = 0.15 * (trueMaxVec.x - trueMinVec.x)
-        let xThreshold = 0.15 * (trueMaxVec.z - trueMinVec.z)
-        
-        if x < (trueMinVec.x - xThreshold) || (x > trueMaxVec.x + xThreshold) {
-            return false
-        }
-        
-        if z < (trueMinVec.z - zThreshold) || (z > trueMaxVec.z + zThreshold) {
-            return false
-        }
-        
-        return true
-    }
-    
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
         
         let location = gesture.location(in: arView)
@@ -88,18 +66,15 @@ extension ARViewManager {
         let newCoordX = result.worldTransform.columns.3.x
         let newCoordZ = result.worldTransform.columns.3.z
         
+        
         if gesture.state == .began {
-            if !withinBoundingBox(node: node, x: newCoordX, z: newCoordZ) {
-                gesture.state = .ended
-                return
-            }
-            
-            arView.prevX = node.worldPosition.x
-            arView.prevZ = node.worldPosition.z
+            arView.prevX = newCoordX
+            arView.prevZ = newCoordZ
         }
         
         if gesture.state == .changed {
             
+            let distance = getDistance(from: node, to: result)
             let moveAction = SCNAction.moveBy(x: CGFloat(newCoordX - arView.prevX), y: 0, z: CGFloat(newCoordZ - arView.prevZ), duration: 0.1)
             node.runAction(moveAction)
             
@@ -124,5 +99,17 @@ extension ARViewManager {
             node.eulerAngles = originalRotation
             gesture.rotation = 0.3 * gesture.rotation
         }
+    }
+    
+    func getDistance(from: SCNNode, to: ARHitTestResult) -> Float {
+        let tmpNode = SCNNode()
+        let hitPosition = SCNVector3(to.worldTransform.columns.3.x, to.worldTransform.columns.3.y, to.worldTransform.columns.3.z)
+        tmpNode.position = hitPosition
+        let nodePosition = from.convertPosition(from.position, to: tmpNode)
+       
+        let dx = hitPosition.x - nodePosition.x
+        let dz = hitPosition.z - nodePosition.z
+        
+        return sqrtf(dx * dx + dz * dz)
     }
 }
