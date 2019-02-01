@@ -12,7 +12,7 @@ import SceneKit
 import MultipeerConnectivity
 
 @objc(ARViewManager)
-class ARViewManager : RCTViewManager, ARSessionDelegate {
+class ARViewManager : RCTViewManager, MultipeerSharingDelegate, ARSessionDelegate {
     
     var arView = ARView()
     var inPlacementMode = false
@@ -27,7 +27,7 @@ class ARViewManager : RCTViewManager, ARSessionDelegate {
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
-        arView.arViewManager = self
+        arView.multipeerSharingDelegate = self
         
         // Set the bounds of the view to be the screen
         arView.bounds = UIScreen.main.bounds
@@ -69,6 +69,14 @@ class ARViewManager : RCTViewManager, ARSessionDelegate {
         }
     }
     
+    // Combine into one function for sending data
+    func sendAdjustmentAction(_ action: SCNAction, forHash hash: Int) {
+        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: (action, hash), requiringSecureCoding: true)
+            else { fatalError("can't encode tuple") }
+        multipeerSession.sendToAllPeers(data)
+    }
+
+    
     @objc func enterPlacementMode(_ node: ARSCNView!,  count: NSNumber) {
         inPlacementMode = true
     }
@@ -98,8 +106,11 @@ class ARViewManager : RCTViewManager, ARSessionDelegate {
             // Add the object to the scene
             arView.scene.rootNode.addChildNode(node)
             arView.objects.append(node)
+            var hasher = Hasher()
+            hasher.combine(node)
+            let hashValue = hasher.finalize()
         
-            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: node, requiringSecureCoding: true)
+            guard let data = try? NSKeyedArchiver.archivedData(withRootObject: (node, hashValue), requiringSecureCoding: true)
                 else { fatalError("can't encode tuple") }
             multipeerSession.sendToAllPeers(data)
         }
@@ -125,10 +136,15 @@ class ARViewManager : RCTViewManager, ARSessionDelegate {
                 configuration.planeDetection = .horizontal
                 configuration.initialWorldMap = worldMap
                 arView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+                arView.planes.removeAll()
                 
                 mapProvider = peer
             }
-            else if let node = try NSKeyedUnarchiver.unarchivedObject(ofClass: SCNNode.self, from: data) {
+        } catch {
+            print("can't decode data recieved from \(peer)")
+        }
+        do {
+            if let node = try NSKeyedUnarchiver.unarchivedObject(ofClass: SCNNode.self, from: data) {
                 print("PEER: Node unwrapped")
                 arView.scene.rootNode.addChildNode(node)
                 arView.objects.append(node)

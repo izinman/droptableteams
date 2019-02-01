@@ -9,10 +9,14 @@ import Foundation
 import ARKit
 import SceneKit
 
+protocol MultipeerSharingDelegate {
+    func shareSession()
+    func sendAdjustmentAction(_ action: SCNAction, forHash hash: Int)
+}
+
 class ARView : ARSCNView, ARSCNViewDelegate {
-    
-    var arViewManager: ARViewManager!
-    
+    var multipeerSharingDelegate: MultipeerSharingDelegate!
+    var hasher = Hasher()
     var planes = [UUID : VirtualPlane]()
     var objects = [SCNNode]()
     
@@ -94,46 +98,51 @@ class ARView : ARSCNView, ARSCNViewDelegate {
     }
     
     func adjustObject(buttonPressed: String) {
-        
-        switch (buttonPressed) {
-        case "sendMap":
-            arViewManager.shareSession()
-            
-        case "rotateRight":
-            selectedNode?.runAction(SCNAction.rotateBy(x: 0, y: -0.1, z: 0, duration: 0))
-            
-        case "rotateLeft":
-            selectedNode?.runAction(SCNAction.rotateBy(x: 0, y: 0.1, z: 0, duration: 0))
-            
-        case "moveLeft":
-            let adjustedCoordinates = getAdjustedCordinates(x: -0.01, z: 0)
-            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
-            
-        case "moveRight":
-            let adjustedCoordinates = getAdjustedCordinates(x: 0.01, z: 0)
-            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
-            
-        case "moveForward":
-            let adjustedCoordinates = getAdjustedCordinates(x: 0, z: -0.01)
-            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
-            
-        case "moveBackward":
-            let adjustedCoordinates = getAdjustedCordinates(x: 0, z: 0.01)
-            selectedNode?.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
-            
-        case "confirmPlacement":
-            selectedNode?.opacity = 1.0
-            selectedNode = nil
-            
-        case "deleteObject":
-            if let node = selectedNode, let index = objects.index(of: node) {
-                objects.remove(at: index)
-                node.removeFromParentNode()
+        if let selectedNode = selectedNode {
+            switch (buttonPressed) {
+            case "sendMap":
+                multipeerSharingDelegate.shareSession()
+                
+            case "rotateRight":
+                let moveAction = SCNAction.rotateBy(x: 0, y: -0.1, z: 0, duration: 0)
+                selectedNode.runAction(moveAction)
+                hasher.combine(selectedNode)
+                let hashValue = hasher.finalize()
+                multipeerSharingDelegate.sendAdjustmentAction(moveAction, forHash: hashValue)
+                
+            case "rotateLeft":
+                selectedNode.runAction(SCNAction.rotateBy(x: 0, y: 0.1, z: 0, duration: 0))
+                
+            case "moveLeft":
+                let adjustedCoordinates = getAdjustedCordinates(x: -0.01, z: 0)
+                selectedNode.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
+                
+            case "moveRight":
+                let adjustedCoordinates = getAdjustedCordinates(x: 0.01, z: 0)
+                selectedNode.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
+                
+            case "moveForward":
+                let adjustedCoordinates = getAdjustedCordinates(x: 0, z: -0.01)
+                selectedNode.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
+                
+            case "moveBackward":
+                let adjustedCoordinates = getAdjustedCordinates(x: 0, z: 0.01)
+                selectedNode.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
+                
+            case "confirmPlacement":
+                selectedNode.opacity = 1.0
+                self.selectedNode = nil
+                
+            case "deleteObject":
+                if let index = objects.index(of: selectedNode) {
+                    objects.remove(at: index)
+                    selectedNode.removeFromParentNode()
+                }
+                self.selectedNode = nil
+                
+            default:
+                return
             }
-            selectedNode = nil
-            
-        default:
-            return
         }
     }
     

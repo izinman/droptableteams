@@ -17,7 +17,6 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
     private var serviceBrowser: MCNearbyServiceBrowser!
     var receivedDataHandler: ((Data, MCPeerID) -> Void)!
     
-    
     override init() {
         super.init()
 
@@ -75,9 +74,8 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
     //
     // MCNearbyServiceAdvertiserDelegate Functions
     //
-    
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        invitationHandler(true, self.session)
+        invitationHandler(true, session)
         print("ACCEPTED PEER\n")
     }
     

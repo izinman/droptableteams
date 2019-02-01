@@ -606,9 +606,9 @@
 			children = (
 				AC3DB41A219668C700AF31E7 /* AppDelegate.swift */,
 				AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */,
+				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
 				AC6C883B21FBEAC300B07A9F /* ARView.swift */,
 				AC3330BF21FBF57B00505BF8 /* ARView+ARSCNViewDelegate.swift */,
-				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
 				ED25D2AC2200D295001205CF /* MultipeerSession.swift */,
 				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
 				ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */,
