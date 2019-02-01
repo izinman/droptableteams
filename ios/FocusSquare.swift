@@ -1,8 +1,8 @@
 //
-//  FocusSquare.swift
+//  FocusSquare1.swift
 //  FreeRealEstate
 //
-//  Created by Artem Jivotovski on 1/29/19.
+//  Created by Artem Jivotovski on 1/31/19.
 //  Copyright © 2019 Facebook. All rights reserved.
 //
 
@@ -12,225 +12,205 @@ import SceneKit
 
 class FocusSquare: SCNNode {
     
-    // Initialization data for creating the focusSquare
-    let size: CGFloat = 0.2
-    let segmentWidth: CGFloat = 0.005
-    var origScale: SCNVector3!
-    
-    private let colorMaterial: SCNMaterial = {
-        let material = SCNMaterial()
-        material.diffuse.contents = UIColor.yellow
-        return material
-    }()
-    
-    private let fill: SCNNode = {
-        let square = SCNPlane(width: 0.2, height: 0.2)
-        let material = SCNMaterial()
-        material.diffuse.contents = UIColor.green
-        square.materials = [material]
-        
-        let tmp = SCNNode(geometry: square)
-        tmp.opacity = 0.0
-        return tmp
-    }()
-    
-    // Used to track the square's state to run appropriate animations
+    var inAnimation = false
     var isVisible = false
-    var readyToPlace = false
-    var isAnimating = false
     
-    // Animations to run during searching mode
-    private let spinAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2 * .pi, z: 0, duration: 1.5))
-    private let pulseAction: SCNAction = {
+    var inPlaceMode = false
+    var inSearchMode = false
+    var canPlace = false
+    
+    var segments = [SCNNode]()
+    var fill: SCNNode?
+    
+    let spinAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2 * .pi, z: 0, duration: 1.5))
+    let pulseAction: SCNAction = {
         let pulseOutAction = SCNAction.fadeOpacity(to: 0.3, duration: 0.4)
         let pulseInAction = SCNAction.fadeOpacity(to: 1.0, duration: 0.4)
+        
         pulseOutAction.timingMode = .easeInEaseOut
         pulseInAction.timingMode = .easeInEaseOut
         
         return SCNAction.repeatForever(SCNAction.sequence([pulseOutAction, pulseInAction]))
     }()
     
-    /* Public init functions
-    */
     override init() {
         super.init()
-        setup()
+        
+        let segmentMaterial = SCNMaterial()
+        let fillMaterial = SCNMaterial()
+        
+        segmentMaterial.diffuse.contents = UIColor.yellow
+        fillMaterial.diffuse.contents = UIColor.green
+        
+        addHorizontalSegment(thickness: 0.005, length: 0.2, material: segmentMaterial, dx: 0.1)
+        addHorizontalSegment(thickness: 0.005, length: 0.2, material: segmentMaterial, dx: -0.1)
+        addVerticalSegment(thickness: 0.005, length: 0.2, material: segmentMaterial, dy: 0.1)
+        addVerticalSegment(thickness: 0.005, length: 0.2, material: segmentMaterial, dy: -0.1)
+        addFill(size: 0.2, material: fillMaterial)
+        
+        transform = SCNMatrix4MakeRotation(-Float.pi / 2.0, 1.0, 0.0, 0.0)
+        appear()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
+        fatalError("init(coder:) has not been implemented")
     }
     
-    /* Transition functions
-        Update the square's location and angle based on camera movement,
-        and enter search mode or placement mode depending on whether ARKit has
-        detected an existingPlaneUsingExtent we can place on.
-    */
+    func addHorizontalSegment(thickness: CGFloat, length: CGFloat, material: SCNMaterial, dx: Float) {
+        let segmentPlane = SCNPlane(width: thickness, height: length)
+        segmentPlane.materials = [material]
+        
+        let segmentNode = SCNNode(geometry: segmentPlane)
+        segmentNode.position.x += dx
+        segments.append(segmentNode)
+        addChildNode(segmentNode)
+    }
+    
+    func addVerticalSegment(thickness: CGFloat, length: CGFloat, material: SCNMaterial, dy: Float) {
+        let segmentPlane = SCNPlane(width: length, height: thickness)
+        segmentPlane.materials = [material]
+        
+        let segmentNode = SCNNode(geometry: segmentPlane)
+        segmentNode.position.y += dy
+        segments.append(segmentNode)
+        addChildNode(segmentNode)
+    }
+    
+    func addFill(size: CGFloat, material: SCNMaterial) {
+        let fillPlane = SCNPlane(width: size, height: size)
+        fillPlane.materials = [material]
+        
+        let fillNode = SCNNode(geometry: fillPlane)
+        fillNode.opacity = 0.0
+        fill = fillNode
+        addChildNode(fillNode)
+    }
     
     func appear() {
         guard !isVisible else { return }
-        isAnimating = true
+        
+        inAnimation = true
+        isVisible = true
         
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.25
         SCNTransaction.animationTimingFunction = CAMediaTimingFunction(controlPoints: 0.0, 0.1, 0.5, 1.0)
         SCNTransaction.completionBlock = {
-            self.isVisible = true
-            self.isAnimating = false
-            self.readyToPlace = true
-            
-            self.enterSearchingMode()
+            self.inAnimation = false
+            self.enterSearchMode()
         }
         
-        scale = origScale
-        eulerAngles = SCNVector3(0, Float.pi, 0)
-        for node in childNodes {
-            guard node != fill else { continue }
-            node.opacity = 1.0
-            node.geometry?.materials.first?.diffuse.contents = UIColor.yellow
+        for segment in segments {
+            segment.opacity = 1.0
         }
+        
+        scale = SCNVector3(1.0, 1.0, 1.0)
         
         SCNTransaction.commit()
     }
     
     func disappear() {
         guard isVisible else { return }
-        isAnimating = true
+        
+        inAnimation = true
+        isVisible = false
+        inPlaceMode = false
+        inSearchMode = false
+        canPlace = false
         
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.25
         SCNTransaction.animationTimingFunction = CAMediaTimingFunction(controlPoints: 0.0, 0.1, 0.5, 1.0)
         SCNTransaction.completionBlock = {
-            self.isVisible = false
-            self.isAnimating = false
-            self.readyToPlace = false
+            self.inAnimation = false
         }
         
-        scale.x = 0.3 * origScale.x
-        scale.y = 0.3 * origScale.y
-        scale.z = 0.3 * origScale.z
-        for node in childNodes {
-            node.opacity = 0.0
+        scale = SCNVector3(0.2, 0.2, 0.2)
+        opacity = 0.0
+        
+        for segment in segments {
+            segment.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
         }
         
         SCNTransaction.commit()
     }
     
-    func updateSquare(toLocation: SCNVector3, foundPlane: Bool, cameraAngle: Float) {
+    func update(location: SCNVector3, foundPlane: Bool, cameraAngle: Float) {
         // Update the position of the node
-        let moveAction = SCNAction.move(to: toLocation, duration: 0.1)
+        let moveAction = SCNAction.move(to: location, duration: 0.1)
         moveAction.timingMode = .easeInEaseOut
         runAction(moveAction)
         
-        // If we do not have a suitable plane to place on, indiate this to the user by entering search mode
         if !foundPlane {
-            enterSearchingMode()
+            enterSearchMode()
         } else {
             // Otherwise, enter place mode and adjust the square to face the camera
-            enterPlacementMode()
+            enterPlaceMode()
             adjustAngle(angle: cameraAngle)
         }
+    }
+
+    func enterPlaceMode() {
+        guard isVisible, !inAnimation, !inPlaceMode else { return }
+        
+        inAnimation = true
+        inPlaceMode = true
+        inSearchMode = false
+        
+        // Square will stop spinning and pulsing once it has returned to placement mode
+        SCNTransaction.begin()
+        SCNTransaction.completionBlock = {
+            self.removeAction(forKey: "pulse")
+            self.removeAction(forKey: "spin")
+            self.inAnimation = false
+            self.canPlace = true
+        }
+        SCNTransaction.animationDuration = 0.25
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        
+        // Change the color of the segments to green, rescale and fade the fill in
+        for segment in segments {
+            segment.geometry?.materials.first?.diffuse.contents = UIColor.green
+        }
+        scale = SCNVector3(1.0, 1.0, 1.0)
+        fill?.opacity = 0.4
+        
+        SCNTransaction.commit()
+    }
+    
+    func enterSearchMode() {
+        // Check to make sure we're in the placement state before transitioning and set it appropriately
+        guard isVisible, !inAnimation, !inSearchMode else { return }
+        
+        inAnimation = true
+        inSearchMode = true
+        inPlaceMode = false
+        canPlace = false
+        
+        // Square will start spinning and pulsing after entering search mode
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.25
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        SCNTransaction.completionBlock = {
+            self.runAction(self.spinAction, forKey: "spin")
+            self.runAction(self.pulseAction, forKey: "pulse")
+            self.inAnimation = false
+        }
+        
+        // Make the fill disappear, change the color of the segments, and slightly increase the square's size
+        fill?.opacity = 0.0
+        for segment in segments {
+            segment.geometry?.materials.first?.diffuse.contents = UIColor.yellow
+        }
+        scale = SCNVector3(1.1, 1.1, 1.1)
+        
+        SCNTransaction.commit()
     }
     
     func adjustAngle(angle: Float) {
         guard eulerAngles.y != angle else { return }
         eulerAngles = SCNVector3(x: eulerAngles.x, y: angle, z: eulerAngles.z)
     }
-    
-    func enterSearchingMode() {
-        // Check to make sure we're in the placement state before transitioning and set it appropriately
-        guard isVisible, readyToPlace, !isAnimating else { return }
-        readyToPlace = false
-        isAnimating = true
-        
-        // Square will start spinning and pulsing after entering search mode
-        SCNTransaction.begin()
-        SCNTransaction.completionBlock = {
-            self.runAction(self.spinAction, forKey: "spin")
-            self.runAction(self.pulseAction, forKey: "pulse")
-            self.isAnimating = false
-        }
-        SCNTransaction.animationDuration = 0.25
-        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-        
-        // Change the color of the segments, make the fill disappear and slightly increase the square's size
-        for node in childNodes {
-            node.geometry?.materials.first?.diffuse.contents = UIColor.yellow
-        }
-        fill.opacity = 0.0
-        scale.x *= 1.15
-        scale.y *= 1.15
-        scale.z *= 1.15
-        
-        SCNTransaction.commit()
-    }
-    
-    func enterPlacementMode() {
-        guard isVisible, !readyToPlace, !isAnimating else { return }
-        isAnimating = true
-        
-        // Square will stop spinning and pulsing once it has returned to placement mode
-        SCNTransaction.begin()
-        SCNTransaction.completionBlock = {
-            self.removeAction(forKey: "spin")
-            self.removeAction(forKey: "pulse")
-            self.readyToPlace = true
-            self.isAnimating = false
-        }
-        SCNTransaction.animationDuration = 0.25
-        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-        
-        // Change the color of the segments to green, rescale and fade the fill in
-        for node in childNodes {
-            node.geometry?.materials.first?.diffuse.contents = UIColor.green
-        }
-        scale.x /= 1.15
-        scale.y /= 1.15
-        scale.z /= 1.15
-        fill.opacity = 0.4
-        
-        SCNTransaction.commit()
-    }
-    
-    
-    /* Private Initializer Functions
-        Create the segments comprising the square's outline, add a transparent fill,
-        and orient the node to sit on the plane.
-    */
-    
-    private func createSegment(width: CGFloat, height: CGFloat) -> SCNNode {
-        let segment = SCNPlane(width: width, height: height)
-        segment.materials = [colorMaterial]
-        
-        return SCNNode(geometry: segment)
-    }
-    
-    private func addHorizontalSegment(dx: Float) {
-        let segmentNode = createSegment(width: segmentWidth, height: size)
-        segmentNode.position.x += dx
-        
-        addChildNode(segmentNode)
-    }
-    
-    private func addVerticalSegment(dy: Float) {
-        let segmentNode = createSegment(width: size, height: segmentWidth)
-        segmentNode.position.y += dy
-        
-        addChildNode(segmentNode)
-    }
-    
-    private func setup() {
-        let dist = Float(size) / 2.0
-        addHorizontalSegment(dx: dist)
-        addHorizontalSegment(dx: -dist)
-        addVerticalSegment(dy: dist)
-        addVerticalSegment(dy: -dist)
-        addChildNode(fill)
-        
-        // Rotate the node so the square is flat against the floor
-        transform = SCNMatrix4MakeRotation(-Float.pi / 2.0, 1.0, 0.0, 0.0)
-        origScale = scale
-        isVisible = true
-    }
+
 }
+

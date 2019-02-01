@@ -17,7 +17,7 @@ extension ARViewManager {
     }
     
     @objc func enterPlacementMode(_ node: ARSCNView!,  count: NSNumber) {
-        guard let focusSquare = arView.focusSquare, focusSquare.readyToPlace else { return }
+        guard let focusSquare = arView.focusSquare, focusSquare.canPlace else { return }
         // Perform a hit test to obtain the plane on which we will place the object
         let planeHits = arView.hitTest(arView.center, types: .existingPlane)
         

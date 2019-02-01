@@ -50,7 +50,7 @@ extension ARViewManager: ARSCNViewDelegate {
             let didFindPlaneUsingExtent = (arView.hitTest(arView.center, types: .existingPlaneUsingExtent).first != nil)
             
             // Update the location, orientation, and state of the square
-            focusSquare.updateSquare(toLocation: newPosVec, foundPlane: didFindPlaneUsingExtent, cameraAngle: arView.cameraVector.y)
+            focusSquare.update(location: newPosVec, foundPlane: didFindPlaneUsingExtent, cameraAngle: arView.cameraVector.y)
         }
     }
     
