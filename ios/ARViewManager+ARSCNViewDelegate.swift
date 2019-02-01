@@ -51,8 +51,6 @@ extension ARViewManager: ARSCNViewDelegate {
             
             // Update the location, orientation, and state of the square
             focusSquare.updateSquare(toLocation: newPosVec, foundPlane: didFindPlaneUsingExtent, cameraAngle: arView.cameraVector.y)
-            
-            arView.inPlacementMode = focusSquare.readyToPlace
         }
     }
     

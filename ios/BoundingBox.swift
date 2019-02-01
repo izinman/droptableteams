@@ -123,7 +123,7 @@ class BoundingBox: SCNNode {
     
     func scale(to: SCNVector3, opacityChange: CGFloat) {
         SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.1
+        SCNTransaction.animationDuration = 0.2
         SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         
         scale = to

@@ -15,6 +15,7 @@ class FocusSquare: SCNNode {
     // Initialization data for creating the focusSquare
     let size: CGFloat = 0.2
     let segmentWidth: CGFloat = 0.005
+    var origScale: SCNVector3!
     
     private let colorMaterial: SCNMaterial = {
         let material = SCNMaterial()
@@ -34,6 +35,7 @@ class FocusSquare: SCNNode {
     }()
     
     // Used to track the square's state to run appropriate animations
+    var isVisible = false
     var readyToPlace = false
     var isAnimating = false
     
@@ -66,9 +68,58 @@ class FocusSquare: SCNNode {
         detected an existingPlaneUsingExtent we can place on.
     */
     
+    func appear() {
+        guard !isVisible else { return }
+        isAnimating = true
+        
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.25
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(controlPoints: 0.0, 0.1, 0.5, 1.0)
+        SCNTransaction.completionBlock = {
+            self.isVisible = true
+            self.isAnimating = false
+            self.readyToPlace = true
+            
+            self.enterSearchingMode()
+        }
+        
+        scale = origScale
+        eulerAngles = SCNVector3(0, Float.pi, 0)
+        for node in childNodes {
+            guard node != fill else { continue }
+            node.opacity = 1.0
+            node.geometry?.materials.first?.diffuse.contents = UIColor.yellow
+        }
+        
+        SCNTransaction.commit()
+    }
+    
+    func disappear() {
+        guard isVisible else { return }
+        isAnimating = true
+        
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.25
+        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(controlPoints: 0.0, 0.1, 0.5, 1.0)
+        SCNTransaction.completionBlock = {
+            self.isVisible = false
+            self.isAnimating = false
+            self.readyToPlace = false
+        }
+        
+        scale.x = 0.3 * origScale.x
+        scale.y = 0.3 * origScale.y
+        scale.z = 0.3 * origScale.z
+        for node in childNodes {
+            node.opacity = 0.0
+        }
+        
+        SCNTransaction.commit()
+    }
+    
     func updateSquare(toLocation: SCNVector3, foundPlane: Bool, cameraAngle: Float) {
         // Update the position of the node
-        let moveAction = SCNAction.move(to: toLocation, duration: 0.05)
+        let moveAction = SCNAction.move(to: toLocation, duration: 0.1)
         moveAction.timingMode = .easeInEaseOut
         runAction(moveAction)
         
@@ -89,7 +140,7 @@ class FocusSquare: SCNNode {
     
     func enterSearchingMode() {
         // Check to make sure we're in the placement state before transitioning and set it appropriately
-        guard readyToPlace, !isAnimating else { return }
+        guard isVisible, readyToPlace, !isAnimating else { return }
         readyToPlace = false
         isAnimating = true
         
@@ -116,7 +167,7 @@ class FocusSquare: SCNNode {
     }
     
     func enterPlacementMode() {
-        guard !readyToPlace, !isAnimating else { return }
+        guard isVisible, !readyToPlace, !isAnimating else { return }
         isAnimating = true
         
         // Square will stop spinning and pulsing once it has returned to placement mode
@@ -137,7 +188,7 @@ class FocusSquare: SCNNode {
         scale.x /= 1.15
         scale.y /= 1.15
         scale.z /= 1.15
-        fill.opacity = 0.6
+        fill.opacity = 0.4
         
         SCNTransaction.commit()
     }
@@ -179,5 +230,7 @@ class FocusSquare: SCNNode {
         
         // Rotate the node so the square is flat against the floor
         transform = SCNMatrix4MakeRotation(-Float.pi / 2.0, 1.0, 0.0, 0.0)
+        origScale = scale
+        isVisible = true
     }
 }

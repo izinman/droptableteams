@@ -24,7 +24,6 @@ class ARViewManager : RCTViewManager {
         arView.scene = SCNScene()
         arView.autoenablesDefaultLighting = false
         arView.antialiasingMode = .multisampling4X
-        arView.inPlacementMode = false
         arView.objectToPlace = "chair"
         arView.selectionBoxes = [SCNNode: BoundingBox]()
         

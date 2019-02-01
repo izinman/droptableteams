@@ -13,8 +13,9 @@ import SceneKit
 extension ARViewManager {
     
     @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        guard let node = arView.selectedNode else { return }
         // If an object has been selected, scale it by the amount the user pinches or expands
-        if gesture.state == .began || gesture.state == .changed, let node = arView.selectedNode {
+        if gesture.state == .began || gesture.state == .changed {
             let scaleAction = SCNAction.scale(by: gesture.scale, duration: 0.1)
             node.runAction(scaleAction)
             gesture.scale = 1.0 // Necessary to prevent exponential scaling
@@ -35,6 +36,7 @@ extension ARViewManager {
                 arView.selectionBoxes[prevSelectedNode]?.disappear()
                 if node == prevSelectedNode {
                     arView.selectedNode = nil
+                    arView.focusSquare?.appear()
                     return
                 }
             }
@@ -44,6 +46,7 @@ extension ARViewManager {
             if arView.selectionBoxes[node] == nil {
                 arView.selectionBoxes[node] = BoundingBox(node: node)
             }
+            arView.focusSquare?.disappear()
             arView.selectionBoxes[node]?.appear()
             
             // Tell React to display adjustment button menu
@@ -52,9 +55,10 @@ extension ARViewManager {
     }
     
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+        guard let node = arView.selectedNode else { return }
         
         let location = gesture.location(in: arView)
-        guard let node = arView.selectedNode, let result = arView.hitTest(location, types: .existingPlane).first else { return }
+        guard let result = arView.hitTest(location, types: .existingPlane).first else { return }
         
         let newCoordX = result.worldTransform.columns.3.x
         let newCoordZ = result.worldTransform.columns.3.z

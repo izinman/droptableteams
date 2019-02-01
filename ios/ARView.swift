@@ -13,7 +13,6 @@ class ARView : ARSCNView, ARSCNViewDelegate {
     
     var objects = [SCNNode]()
     var objectToPlace: String?
-    var inPlacementMode = false
     
     var selectedNode: SCNNode?
     var selectionBoxes: [SCNNode: BoundingBox]!
