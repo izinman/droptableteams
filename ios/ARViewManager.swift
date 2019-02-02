@@ -2,8 +2,6 @@
 //  ARViewManager.swift
 //  FreeRealEstate
 //
-//  Created by Artem Jivotovski on 11/14/18.
-//  Copyright © 2018 Facebook. All rights reserved.
 //
 
 import UIKit
@@ -14,11 +12,10 @@ import SceneKit
 class ARViewManager : RCTViewManager {
     
     var arView = ARView()
-    var currentBoundingBox: BoundingBox!
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
-        // Set the bounds of the view to be the screen
+        // Initialize defaults and member variables for ARView
         arView.bounds = UIScreen.main.bounds
         arView.delegate = self
         arView.scene = SCNScene()
@@ -29,12 +26,14 @@ class ARViewManager : RCTViewManager {
         
         // Add a tap gesture for object placement and selection
         let tapGesture = UITapGestureRecognizer(target: self, action:  #selector(handleTap(_:)))
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
-        let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotate(_:)))
         arView.addGestureRecognizer(tapGesture)
-        arView.addGestureRecognizer(pinchGesture)
+        
+        // Add a drag gesture for object movement
+        let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         arView.addGestureRecognizer(dragGesture)
+        
+        // Add a rotate gesture for object rotation
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotate(_:)))
         arView.addGestureRecognizer(rotateGesture)
         
         // Initialize the AWRTConfig
@@ -48,16 +47,13 @@ class ARViewManager : RCTViewManager {
         return arView
     }
     
-    func addLight() {
-        
-    }
-    
     func displayDebugInfo() {
         arView.showsStatistics = true
         arView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         // , ARSCNDebugOptions.showWorldOrigin]
     }
     
+    // Necessary for React Native
     override static func requiresMainQueueSetup() -> Bool {
         return true
     }
