@@ -31,9 +31,14 @@ extension ARViewManager {
         
         // Check that the node is not null and select it
         if let node = nodeHits.first?.node, arView.objects.contains(node) {
-            // If we had previously selected an object, unhighlight it before selecting a new one
+            
+            // If an object was already selected, make its selection box disappear and delay the appearance of a new one
+            var delayAppear = 0.0
             if let prevSelectedNode = arView.selectedNode {
                 arView.selectionBoxes[prevSelectedNode]?.disappear()
+                delayAppear = 0.2
+                
+                // The user has tapped an object to deselect it, thus there is now no selected node and the focusSquare should appear
                 if node == prevSelectedNode {
                     arView.selectedNode = nil
                     arView.focusSquare?.appear()
@@ -41,13 +46,19 @@ extension ARViewManager {
                 }
             }
             
-            // Select the node and mark it visually by reducing the opacity
+            // Select the node and get a reference to its selection box
             arView.selectedNode = node
-            if arView.selectionBoxes[node] == nil {
-                arView.selectionBoxes[node] = BoundingBox(node: node)
+            var selectionBox = arView.selectionBoxes[node]
+            
+            // If the node had not yet been selected, initialize a new selection box and store the reference
+            if selectionBox == nil {
+                selectionBox = BoundingBox(node: node)
+                arView.selectionBoxes[node] = selectionBox
             }
+            
+            // Make the focusSquare disappear and render the selection box
             arView.focusSquare?.disappear()
-            arView.selectionBoxes[node]?.appear()
+            selectionBox?.runAction(SCNAction.wait(duration: delayAppear), completionHandler: { selectionBox?.appear() })
             
             // Tell React to display adjustment button menu
             arView.onObjectSelect!([:])

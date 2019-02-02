@@ -92,21 +92,26 @@ class FocusSquare: SCNNode {
         inAnimation = true
         isVisible = true
         
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.25
-        SCNTransaction.animationTimingFunction = CAMediaTimingFunction(controlPoints: 0.0, 0.1, 0.5, 1.0)
-        SCNTransaction.completionBlock = {
-            self.inAnimation = false
-            self.enterSearchMode()
+        let appear = {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.2
+            SCNTransaction.animationTimingFunction = CAMediaTimingFunction(controlPoints: 0.9, 0.2, 0.7, 1.0)
+            SCNTransaction.completionBlock = {
+                self.inAnimation = false
+                self.enterSearchMode()
+            }
+            
+            for segment in self.segments {
+                segment.opacity = 1.0
+            }
+            self.scale = SCNVector3(1.0, 1.0, 1.0)
+            
+            SCNTransaction.commit()
         }
         
-        for segment in segments {
-            segment.opacity = 1.0
-        }
+        // Allow the selection box's disappear animation to finish before rendering the focus square
+        runAction(SCNAction.wait(duration: 0.175), completionHandler: appear)
         
-        scale = SCNVector3(1.0, 1.0, 1.0)
-        
-        SCNTransaction.commit()
     }
     
     func disappear() {
@@ -119,14 +124,16 @@ class FocusSquare: SCNNode {
         canPlace = false
         
         SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.25
+        SCNTransaction.animationDuration = 0.15
         SCNTransaction.animationTimingFunction = CAMediaTimingFunction(controlPoints: 0.0, 0.1, 0.5, 1.0)
         SCNTransaction.completionBlock = {
             self.inAnimation = false
         }
         
         scale = SCNVector3(0.2, 0.2, 0.2)
-        opacity = 0.0
+        for node in childNodes {
+            node.opacity = 0.0
+        }
         
         for segment in segments {
             segment.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
