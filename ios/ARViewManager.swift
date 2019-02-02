@@ -61,7 +61,8 @@ class ARViewManager : RCTViewManager {
         arView.adjustObject(buttonPressed: buttonPressed)
     }
     
-    @objc func setObjectToPlace(_node: ARSCNView!, objectName: String) {
+    @objc func setObjectToPlace(_ node: ARSCNView!, objectName: String) {
+        print(objectName)
         objectToPlace = objectName
     }
     

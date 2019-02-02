@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, ScrollView, View, Picker, Animated } from 'react-native'
+import { StyleSheet, Text, ScrollView, View, Picker, Animated, UIManager, findNodeHandle, requireNativeComponent, Dimensions } from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown';
 import {Tile, Button} from 'react-native-elements'
-import ARScene from './ARView.js';
+import LinearGradient from 'react-native-linear-gradient';
 
 type Props = {};
+var objectSelected
+var {height, width} = Dimensions.get('window');
+var headerFont = height * .032
+var subheaderFont = height * .027
 var all = require('./all.jpeg');
 var familyroom = require('./familyroom.jpg');
 var kitchen = require('./kitchen.jpg');
@@ -19,8 +23,8 @@ var tables= [require('./tables/1.jpeg'),require('./tables/2.jpeg'),require('./ta
 var misc= [require('./misc/1.jpeg'),require('./misc/2.jpg'),require('./misc/3.jpeg'),require('./misc/4.jpg'),require('./misc/5.jpg'),require('./misc/6.jpeg'),require('./misc/7.jpeg')];
 var beds= [require('./bed/1.jpg'),require('./bed/2.jpeg'),require('./bed/3.jpg'),require('./bed/4.jpeg'),require('./bed/5.jpeg'),require('./bed/6.jpeg'),require('./bed/7.jpg')];
 
-const HEADER_MAX_HEIGHT = 600;
-const HEADER_MIN_HEIGHT = 160;
+const HEADER_MAX_HEIGHT = height*.43;
+const HEADER_MIN_HEIGHT = height*.16;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 const ACCENT_COLOR = '#FFC107'
 
@@ -37,10 +41,11 @@ export default class StyleView extends Component<Props> {
     this.handleClick = this.handleClick.bind(this);
     this.handleDropDown = this.handleDropDown.bind(this);
   }
-  handleClick = () => {
-    console.log("working");
-    this.setState({start: 1});
-  }
+
+  componentDidMount() {
+    this.nodeHandle = findNodeHandle(this.ref);
+}
+  
 
   handleDropDown(text) {
     var newImg = '';
@@ -69,93 +74,97 @@ export default class StyleView extends Component<Props> {
     var data = Array.from({length: 10});
 
     return (
+    
       <View>
         
       <View style={styles.scrollViewContent}>
       
-      <Text style = {{paddingLeft: 25, paddingTop: 25, fontFamily: 'Product Sans', fontSize: 45, color: '#232323'}}>{this.state.room}</Text>
-      <Text style = {{width: '100%', padding: 45, fontSize: 35, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Couches</Text>
+      <Text style = {{textAlign: 'left', width: '100%',  paddingTop: height * .04, paddingLeft: width * .02, paddingBottom: height * .02, fontFamily: 'Product Sans', fontSize: headerFont, color: '#232323'}}>{this.state.room}</Text>
+      <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Couches</Text>
         {couchesData.map((_, i) =>
           <View key={i} style={styles.row}>
-             <View style={{padding: 20, alignSelf:'flex-start'}}>
+             <View style={{padding: height * .01 , alignSelf:'center'}}>
                 <Tile
                     imageSrc={couches[i]}
                     title = ""
                     titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={250}
-                    height={141}
-                    onPress={this.handleClick}
+                    width={width * .30}
+                    height={width * .22}
+                    onPress={this.handleClick.bind(this,'couch' + i)}
               />
               </View>
           </View>
           
         )}
-        <Text style = {{width: '100%', padding: 45, fontSize: 35,  fontFamily: 'Product Sans'}}>Chairs</Text>
+        <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Chairs</Text>
         {chairsData.map((_, i) =>
           <View key={i} style={styles.row}>
-             <View style={{padding: 20, alignSelf:'flex-start'}}>
+             <View style={{padding: height * .01, alignSelf:'center'}}>
                 <Tile
                     imageSrc={chairs[i]}
                     title = ""
                     titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={250}
-                    height={250}
-                    onPress={this.handleClick}
+                    width={width * .30}
+                    height={width * .30}
+                    onPress={this.handleClick.bind(this,'chair' + i)}
               />
               </View>
           </View>
           
         )}
-        <Text style = {{width: '100%', padding: 45, fontSize: 35, fontFamily: 'Product Sans'}}>Tables</Text>
+        <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Tables</Text>
         {tablesData.map((_, i) =>
           <View key={i} style={styles.row}>
-             <View style={{padding: 20, alignSelf:'flex-start'}}>
+             <View style={{padding: height * .01, alignSelf:'center'}}>
                 <Tile
                     imageSrc={tables[i]}
                     title = ""
                     titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={225}
-                    onPress={this.handleClick}
+                    width={width * .30}
+                    height={width * .22}
+                    onPress={this.handleClick.bind(this,'table' + i)}
               />
               </View>
           </View>
           
         )}
-        <Text style = {{width: '100%', padding: 45, fontSize: 35,  fontFamily: 'Product Sans'}}>Beds</Text>
+        <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Beds</Text>
         {bedData.map((_, i) =>
           <View key={i} style={styles.row}>
-             <View style={{padding: 20, alignSelf:'center'}}>
+             <View style={{padding: height * .01, alignSelf:'center'}}>
                 <Tile
                     imageSrc={ beds[i]}
                     title = ""
                     titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={205}
+                    width={width * .30}
+                    height={width * .22}
                     onPress={this.handleClick}
               />
               </View>
           </View>
           
         )}
-        <Text style = {{width: '100%', padding: 45, fontSize: 35,  fontFamily: 'Product Sans'}}>Misc.</Text>
+        <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Misc</Text>
         {miscData.map((_, i) =>
           <View key={i} style={styles.row}>
-             <View style={{padding: 20, alignSelf:'center'}}>
+             <View style={{padding: height * .01, alignSelf:'center'}}>
                 <Tile
                     imageSrc={ misc[i]}
                     title = ""
                     titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
                     featured
                     activeOpacity={.75}
-                    width={205}
-                    onPress={this.handleClick}
+                    width={width * .30}
+                    height={width * .22}
+                    onPress={this.handleClick.bind(this, "misc" + i)}
               />
               </View>
           </View>
@@ -205,10 +214,8 @@ export default class StyleView extends Component<Props> {
     },{
       value: 'Dungeon',
     }];
-    if(this.state.start == 0){
     return (
       <View style={styles.fill}>
-        
         <ScrollView
           style={styles.fill}
           scrollEventThrottle={16}
@@ -229,33 +236,16 @@ export default class StyleView extends Component<Props> {
           />
           <Animated.View style ={[styles.ddContainerAnimated, {opacity: imageOpacity}]}></Animated.View>
           <View style={styles.bar}>
-          <View style={{width: '100%', height: '100%', 
-                        position: 'absolute', bottom: 0, 
-                        backgroundColor: "#00000000", zIndex: 25,
-                        }}
-                        >
-              <Button
-                                title="^"
-                                ViewComponent={require('react-native-linear-gradient').default}
-                                titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans'}}
-                                linearGradientProps={{
-                                    colors: ["#304ffe", "#304ffe"],
-                                    start: {x: 0, y: 0},
-                                    end: {x: .5, y: 0},
-                                }}
-                                buttonStyle={{borderTopLeftRadius: 25,borderTopRightRadius: 25, borderColor: 'transparent', borderRadius: 0, height: '100%'}}
-                                containerStyle={{marginVertical: 0, height: '100%', width: '100%', alignSelf: 'center'}}
-                                onPress={this.props.onPress}
-                            />
-        </View>
+          
             <View style ={styles.ddContainer}>
               <View style={styles.dropdown}>
+            
                 <Dropdown
                   baseColor='#304ffe'
                   label='Room'
                   textColor='#304ffe'
                   itemColor="#232323"
-                  fontSize={35}
+                  fontSize={headerFont}
                   pickerStyle={{backgroundColor:"#ffffff" }}
                   labelFontSize={25}
                   selectedItemColor="#232323"
@@ -267,46 +257,94 @@ export default class StyleView extends Component<Props> {
               </View>
           </View>
         </Animated.View>
+        <View style={{width: width - 40, height: 1, alignSelf: 'center',
+                        position: 'absolute', top: -height * .035, 
+                        backgroundColor: "#00000000", borderColor: "#ffffff", borderWidth: 1,zIndex: 25, 
+                        }}
+                        >
+              <Button
+                                title="^"
+                                ViewComponent={require('react-native-linear-gradient').default}
+                                titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans'}}
+                                linearGradientProps={{
+                                    colors: ["#00000000", "#00000000"],
+                                    start: {x: 0, y: 0},
+                                    end: {x: .5, y: 0},
+                                }}
+                                buttonStyle={{borderTopLeftRadius: height/20,borderTopRightRadius: height/20, borderColor: 'transparent', borderRadius: 0, height: height/20}}
+                                containerStyle={{marginVertical: 0, height: 30, width: '100%', alignSelf: 'center'}}
+                                onPress={this.props.onPress}
+                            />
         </View>
+        <View style={{width: width - 40, height: 1, alignSelf: 'center',
+                        position: 'absolute', top: height * .055, 
+                        backgroundColor: "#00000000", borderColor: "#00000000", borderWidth: 1,zIndex: 25, transform: [{ rotate: '180deg'}]
+                        }}
+                        >
+              <Button
+                                title="^"
+                                ViewComponent={require('react-native-linear-gradient').default}
+                                titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans', color: '#232323f0', rotation: 90}}
+                                linearGradientProps={{
+                                    colors: ["#00000000", "#00000000"],
+                                    start: {x: 0, y: 0},
+                                    end: {x: .5, y: 0},
+                                }}
+                                buttonStyle={{borderTopLeftRadius: height/20,borderTopRightRadius: height/20, borderColor: 'transparent', borderRadius: 0, height: height/20}}
+                                containerStyle={{marginVertical: 0, height: 30, width: '100%', alignSelf: 'center'}}
+                                onPress={this.props.onPress}
+                            />
+        </View>
+        </View>      
       );
-    }
-    else{
-      return(
-        <ARScene></ARScene>
-      );
-    }
   }
+  handleClick(e){
+    console.log(e)
+    this.props.onPress(e)
+  }
+  
+  selectObject = () => {
+    UIManager.dispatchViewManagerCommand(
+        findNodeHandle(this.ref),
+        UIManager[Style].Commands.setObjectToPlace,
+        [objectSelected]
+    );
+  };
 }
+
+const Style = requireNativeComponent("StyleView")
 
 const styles = StyleSheet.create({
     ddContainer:{
       position: 'absolute',
-      top:0,
       width: "100%",
+      top: height * .05,
       height: HEADER_MIN_HEIGHT,
     },
     ddContainerAnimated:{
       position: 'absolute',
-      top:0,
+      top: 0,
       width: "100%",
       height: HEADER_MIN_HEIGHT,
       backgroundColor: '#ffffffd0'
     },
     dropdown:{
-      paddingTop: 25,
-      margin: HEADER_MIN_HEIGHT/8,
+     
+      marginHorizontal: HEADER_MIN_HEIGHT/9,
       width: '90%',
 
     },
     fill: {
       zIndex: -10,
       backgroundColor: '#ffffffd0',
+      height: height ,
       width: '100%',
+      bottom: 0,
       alignSelf:'center'
     },
     backgroundImage: {
       position: 'absolute',
-      top: 0,
+      top:  0,
       left: 0,
       right: 0,
       width: null,
@@ -325,22 +363,20 @@ const styles = StyleSheet.create({
     },
     row: {
       backgroundColor: '#00000000',
-      flexBasis: "33%"
+      flexBasis: width/3
     },
     header: {
       position: 'absolute',
       top: 0,
       left: 0,
       right: 0,
-      shadowColor: 'black',
-      shadowOpacity: 1.0,
-      backgroundColor: '#ffffff',
+      backgroundColor: '#ffffffd0',
       overflow: 'hidden',
     },
     bar: {
       width: '100%',
       marginTop: 0,
-      height: 32,
+      height: 0,
       alignItems: 'flex-start',
       justifyContent: 'flex-start',
     },
@@ -354,15 +390,15 @@ const styles = StyleSheet.create({
       width: '100%',
       flex: 1,
       justifyContent:'flex-start',
-      alignItems: 'flex-start',
-      alignSelf: 'flex-start',
+      alignItems: 'stretch',
+      alignSelf: 'center',
       flexDirection: 'row',
       flexWrap: 'wrap',
       
     },
   container: {
-    backgroundColor: "#FFD54F",
-    height: '100%',
+    backgroundColor: "#ffffffd0",
+    height: '50%',
     width: '100%',
     
   },

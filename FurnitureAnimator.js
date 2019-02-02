@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import { Animated, Text, View } from 'react-native';
+import { Animated, Text, View, Dimensions} from 'react-native';
 import StyleView from './StyleView';
 
 type Props = {};
 var opened = 0;
 var arrow="^"
+var {height, width} = Dimensions.get('window');
 export default class FurnitureAnimator extends Component<Props> {
     constructor(props) {
         super(props);
@@ -24,12 +25,13 @@ export default class FurnitureAnimator extends Component<Props> {
     
     
   }
-  drawerOpened = () => {
+  drawerOpened = (e) => {
+    if(e !='couch5' && e!='chair3'){
     if(opened == 0){
         Animated.timing(
             this.state.scaleAnim,            // The animated value to drive
             {
-              toValue: .5,                   // Animate to opacity: 1 (opaque)
+              toValue: 0,                   // Animate to opacity: 1 (opaque)
               duration: 300,              // Make it take a while
             }
         ).start();
@@ -45,8 +47,13 @@ export default class FurnitureAnimator extends Component<Props> {
         ).start();
         opened = 0
     }
+  }
+  else{
+    this.props.onPress(e)
+    console.log(e);
+  }
     
-    console.log("Pressed jake");
+    
 }
   
   render() {
@@ -60,7 +67,7 @@ export default class FurnitureAnimator extends Component<Props> {
             transform: [{
                 translateY: this.state.scaleAnim.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [-2150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+                    outputRange: [-height , 0]  // 0 : 150, 0.5 : 75, 1 : 0
                   })},
               ],
               

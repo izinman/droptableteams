@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, UIManager, findNodeHandle, requireNativeComponent} from 'react-native';
+import {Platform, StyleSheet, Text, View, UIManager, findNodeHandle, requireNativeComponent, Dimensions} from 'react-native';
 import { Button }  from 'react-native-elements';
 import StyleView from './StyleView';
 import MoveControls from './MoveControls.js'
@@ -8,6 +8,8 @@ import FurnitureAnimator from './FurnitureAnimator';
 type Props = {};
 var buttonPressed = "";
 var objectSelected = false;
+var {height, width} = Dimensions.get('window');
+
 
 export default class ARScene extends Component<Props> {
 
@@ -306,8 +308,8 @@ export default class ARScene extends Component<Props> {
                             
                         </View>
                     </View>
-                    <View style = {{position: 'absolute', height: '100%', zIndex: 25, bottom: '-97.5%'}}>
-                  <FurnitureAnimator/>
+                    <View style = {{position: 'absolute', backgroundColor: "#00000000", height: '100%', zIndex: 25, bottom: -height}}>
+                  <FurnitureAnimator onPress={this.selectFurniture}/>
                   </View>
                 </View>
                               
@@ -358,9 +360,28 @@ export default class ARScene extends Component<Props> {
         );
     };
 
+    selectFurniture = e => {
+      var obj
+      if(e == 'couch5'){
+        obj = 'couch_2'
+      }
+      else if(e == 'chair3'){
+        obj = 'chair'
+      }
+      else if(e == 'couch6'){
+        obj = 'couch_2'
+      }
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(this.ref),
+        UIManager[ARView].Commands.setObjectToPlace,
+        [obj]
+    );
+    }
+
+
     selectObject = e => {
         objectSelected = true;
-        console.log("Set objectSelected: ", objectSelected);
+        console.log(e);
         this.forceUpdate();
     }
 }

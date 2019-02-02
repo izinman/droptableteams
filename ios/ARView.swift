@@ -21,17 +21,26 @@ class ARView : ARSCNView, ARSCNViewDelegate {
     }
     
     let ObjScaleMap: [String: SCNVector3] = [
-        "chair": SCNVector3(x: 0.02, y: 0.02, z: 0.02),
+        "chair": SCNVector3(x: 0.01, y: 0.01, z: 0.01),
         "vase": SCNVector3(x: 0.0015, y: 0.0015, z: 0.0015),
         "table_2": SCNVector3(x: 0.01, y: 0.01, z: 0.01),
-        "coffee_table": SCNVector3(x: 0.10, y: 0.10, z: 0.10)
+        "coffee_table": SCNVector3(x: 0.10, y: 0.10, z: 0.10),
+        "couch_2": SCNVector3(x: 0.05, y: 0.05, z: 0.05)
     ]
     
     func createNode(name: String, hitResult: ARHitTestResult) -> SCNNode {
         // Create a node object from the .scn file
         let scnFileName = "art.scnassets/" + name + ".scn"
         let tmpScene = SCNScene(named: scnFileName)!
-        let node = tmpScene.rootNode.childNode(withName: "_material_1", recursively: true)!
+        var child_node = ""
+        if (name == "couch_2"){
+            child_node = "Obj3d66_512505_1_864_wire_000000000"
+        }
+        else{
+            child_node = "_material_1"
+        }
+
+        let node = tmpScene.rootNode.childNode(withName: child_node, recursively: true)!
         
         // Initialize rotation value to ensure the object will be properly oriented
         let rotation = simd_float4x4(SCNMatrix4MakeRotation(self.session.currentFrame!.camera.eulerAngles.y, 0, 1, 0))
