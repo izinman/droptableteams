@@ -14,14 +14,18 @@ var familyroom = require('./familyroom.jpg');
 var kitchen = require('./kitchen.jpg');
 var diningroom = require('./diningroom.jpg' );
 var bedroom = require('./bedroom.jpg');
-var  gameroom = require('./gameroom.jpg');
-var  dungeon = require('./dungeon.jpg');
+var gameroom = require('./gameroom.jpg');
+var dungeon = require('./dungeon.jpg');
 var office = require('./office.jpg');
 var couches = [require('./couches/1.jpeg'),require('./couches/2.jpeg'),require('./couches/3.jpeg'),require('./couches/4.jpeg'),require('./couches/5.jpeg'),require('./couches/6.jpeg'),require('./couches/7.jpeg'),require('./couches/8.jpeg'),require('./couches/9.jpeg'),require('./couches/10.jpeg')];
 var chairs = [require('./chairs/1.jpeg'),require('./chairs/2.jpeg'),require('./chairs/3.jpeg'),require('./chairs/4.jpeg'),require('./chairs/5.jpeg'),require('./chairs/6.jpeg'),require('./chairs/7.jpeg'),require('./chairs/8.jpeg'),require('./chairs/9.jpeg')];
-var tables= [require('./tables/1.jpeg'),require('./tables/2.jpeg'),require('./tables/3.jpeg'),require('./tables/4.jpeg')];
+var tables= [require('./tables/1.jpg'),require('./tables/2.jpg'),require('./tables/3.jpg'),require('./tables/4.jpg'),require('./tables/5.jpg'),require('./tables/6.jpg'),require('./tables/7.jpg'),require('./tables/8.jpg'),require('./tables/9.jpg')];
 var misc= [require('./misc/1.jpeg'),require('./misc/2.jpg'),require('./misc/3.jpeg'),require('./misc/4.jpg'),require('./misc/5.jpg'),require('./misc/6.jpeg'),require('./misc/7.jpeg')];
-var beds= [require('./bed/1.jpg'),require('./bed/2.jpeg'),require('./bed/3.jpg'),require('./bed/4.jpeg'),require('./bed/5.jpeg'),require('./bed/6.jpeg'),require('./bed/7.jpg')];
+var beds= [require('./bed/1.jpg'),require('./bed/2.jpg'),require('./bed/3.jpg'),require('./bed/4.jpg'),require('./bed/5.jpg'),require('./bed/6.jpg'),require('./bed/7.jpg'),require('./bed/8.jpg'),require('./bed/9.jpg'),require('./bed/10.jpg')];
+
+var cabinets= [require('./cabinets/1.jpg'),require('./cabinets/2.jpg'),require('./cabinets/3.jpg'),require('./cabinets/4.jpg'),require('./cabinets/5.jpg'),require('./cabinets/6.jpg'),require('./cabinets/7.jpg'),require('./cabinets/8.jpg'),require('./cabinets/9.jpg')]
+var appliances= [require('./appliances/1.jpeg'),require('./appliances/2.jpeg'),require('./appliances/3.jpeg'),require('./appliances/4.jpeg'),require('./appliances/5.jpeg'),require('./appliances/6.jpeg'),require('./appliances/7.jpeg'),require('./appliances/8.jpeg'),require('./appliances/9.jpeg'),require('./appliances/10.jpeg'),require('./appliances/11.jpeg'),require('./appliances/12.jpeg'),require('./appliances/13.jpeg')]
+
 
 const HEADER_MAX_HEIGHT = height*.43;
 const HEADER_MIN_HEIGHT = height*.16;
@@ -64,9 +68,12 @@ export default class StyleView extends Component<Props> {
   _renderScrollViewContent(title) {
     var couchesData = Array.from({length: 10});
     var chairsData = Array.from({length: 9});
-    var tablesData = Array.from({length: 4});
+    var tablesData = Array.from({length: 9});
     var miscData = Array.from({length: 7});
-    var bedData = Array.from({length: 6});
+    var bedData = Array.from({length: 10});
+
+    var cabinetData = Array.from({length: 9});
+    var applianceData = Array.from({length: 13});
 
 
 
@@ -91,7 +98,7 @@ export default class StyleView extends Component<Props> {
                     featured
                     activeOpacity={.75}
                     width={width * .30}
-                    height={width * .22}
+                    height={width * .16875}
                     onPress={this.handleClick.bind(this,'couch' + i)}
               />
               </View>
@@ -127,7 +134,7 @@ export default class StyleView extends Component<Props> {
                     featured
                     activeOpacity={.75}
                     width={width * .30}
-                    height={width * .22}
+                    height={width * .30}
                     onPress={this.handleClick.bind(this,'table' + i)}
               />
               </View>
@@ -145,14 +152,48 @@ export default class StyleView extends Component<Props> {
                     featured
                     activeOpacity={.75}
                     width={width * .30}
-                    height={width * .22}
+                    height={width * .30}
                     onPress={this.handleClick}
               />
               </View>
           </View>
           
         )}
-        <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Misc</Text>
+        <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Cabinets</Text>
+        {cabinetData.map((_, i) =>
+          <View key={i} style={styles.row}>
+             <View style={{padding: height * .01, alignSelf:'center'}}>
+                <Tile
+                    imageSrc={ cabinets[i]}
+                    title = ""
+                    titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
+                    featured
+                    activeOpacity={.75}
+                    width={width * .30}
+                    height={width * .30}
+                    onPress={this.handleClick}
+              />
+              </View>
+          </View>
+        )}
+        <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Appliances</Text>
+        {applianceData.map((_, i) =>
+          <View key={i} style={styles.row}>
+             <View style={{padding: height * .01, alignSelf:'center'}}>
+                <Tile
+                    imageSrc={appliances[i]}
+                    title = ""
+                    titleStyle={{ fontSize: 14, fontWeight: 'bold'}}
+                    featured
+                    activeOpacity={.75}
+                    width={width * .30}
+                    height={width * .30}
+                    onPress={this.handleClick}
+              />
+              </View>
+          </View>
+        )}
+        {/* <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Misc</Text>
         {miscData.map((_, i) =>
           <View key={i} style={styles.row}>
              <View style={{padding: height * .01, alignSelf:'center'}}>
@@ -169,7 +210,7 @@ export default class StyleView extends Component<Props> {
               </View>
           </View>
           
-        )}
+        )} */}
       </View>
       </View>
     );
