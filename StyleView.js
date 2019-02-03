@@ -17,14 +17,14 @@ var bedroom = require('./bedroom.jpg');
 var gameroom = require('./gameroom.jpg');
 var dungeon = require('./dungeon.jpg');
 var office = require('./office.jpg');
-var couches = [require('./couches/1.jpeg'),require('./couches/2.jpeg'),require('./couches/3.jpeg'),require('./couches/4.jpeg'),require('./couches/5.jpeg'),require('./couches/6.jpeg'),require('./couches/7.jpeg'),require('./couches/8.jpeg'),require('./couches/9.jpeg'),require('./couches/10.jpeg'),require('./couches/11.jpeg')];
-var chairs = [require('./chairs/1.jpeg'),require('./chairs/2.jpeg'),require('./chairs/3.jpeg'),require('./chairs/4.jpeg'),require('./chairs/5.jpeg'),require('./chairs/6.jpeg'),require('./chairs/7.jpeg'),require('./chairs/8.jpeg'),require('./chairs/9.jpeg')];
+var couches = [require('./couches/1.jpg'),require('./couches/2.jpg'),require('./couches/3.jpg'),require('./couches/4.jpg'),require('./couches/5.jpg'),require('./couches/6.jpg'),require('./couches/7.jpg'),require('./couches/8.jpg'),require('./couches/9.jpg'),require('./couches/10.jpg'),require('./couches/11.jpg')];
+var chairs = [require('./chairs/1.jpg'),require('./chairs/2.jpg'),require('./chairs/3.jpg'),require('./chairs/4.jpg'),require('./chairs/5.jpg'),require('./chairs/6.jpg'),require('./chairs/7.jpg'),require('./chairs/8.jpg'),require('./chairs/9.jpg')];
 var tables= [require('./tables/1.jpg'),require('./tables/2.jpg'),require('./tables/3.jpg'),require('./tables/4.jpg'),require('./tables/5.jpg'),require('./tables/6.jpg'),require('./tables/7.jpg'),require('./tables/8.jpg'),require('./tables/9.jpg')];
 var misc= [require('./misc/1.jpeg'),require('./misc/2.jpg'),require('./misc/3.jpeg'),require('./misc/4.jpg'),require('./misc/5.jpg'),require('./misc/6.jpeg'),require('./misc/7.jpeg')];
 var beds= [require('./bed/1.jpg'),require('./bed/2.jpg'),require('./bed/3.jpg'),require('./bed/4.jpg'),require('./bed/5.jpg'),require('./bed/6.jpg'),require('./bed/7.jpg'),require('./bed/8.jpg'),require('./bed/9.jpg'),require('./bed/10.jpg')];
 
 var cabinets= [require('./cabinets/1.jpg'),require('./cabinets/2.jpg'),require('./cabinets/3.jpg'),require('./cabinets/4.jpg'),require('./cabinets/5.jpg'),require('./cabinets/6.jpg'),require('./cabinets/7.jpg'),require('./cabinets/8.jpg'),require('./cabinets/9.jpg'),require('./cabinets/10.jpg'),require('./cabinets/11.jpg'),require('./cabinets/12.jpg')]
-var appliances= [require('./appliances/1.jpeg'),require('./appliances/2.jpeg'),require('./appliances/3.jpeg'),require('./appliances/4.jpeg'),require('./appliances/5.jpeg'),require('./appliances/6.jpeg'),require('./appliances/7.jpeg'),require('./appliances/8.jpeg'),require('./appliances/9.jpeg'),require('./appliances/10.jpeg'),require('./appliances/11.jpeg'),require('./appliances/12.jpeg'),require('./appliances/13.jpeg')]
+var appliances= [require('./appliances/1.jpg'),require('./appliances/2.jpg'),require('./appliances/3.jpg'),require('./appliances/4.jpg'),require('./appliances/5.jpg'),require('./appliances/6.jpg'),require('./appliances/7.jpg'),require('./appliances/8.jpg'),require('./appliances/9.jpg'),require('./appliances/10.jpg'),require('./appliances/11.jpg'),require('./appliances/12.jpg'),require('./appliances/13.jpg')]
 
 
 const HEADER_MAX_HEIGHT = height*.43;
