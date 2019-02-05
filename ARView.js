@@ -65,6 +65,21 @@ export default class ARScene extends Component<Props> {
                             />
                         </Animated.View>
                     </View>
+                    <View style = {{position: 'absolute', top: 0, left: 0}}>
+                            <Button
+                            title={'Send Map'}
+                                ViewComponent={require('react-native-linear-gradient').default}
+                                titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans'}}
+                                linearGradientProps={{
+                                    colors: ['#000000', '#000000'],
+                                    start: {x: 0, y: 0},
+                                    end: {x: 0.5, y: 0},
+                                }}
+                                buttonStyle={{borderWidth: 0, borderColor: 'transparent', 
+                                borderRadius: height, height: height* .075}}
+                                containerStyle={{ height: height, width: height*.075, alignSelf: 'center'}}
+                                onPress={this.handleControl.bind(this, "sendMap")}                            />
+                    </View>
                     <View style = {{position: 'absolute', backgroundColor: "#00000000", height: '100%', zIndex: 25, bottom: -height}}>
                   <FurnitureAnimator onPress={this.selectFurniture}/>
                   </View>
