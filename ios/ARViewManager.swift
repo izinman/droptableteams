@@ -2,8 +2,6 @@
 //  ARViewManager.swift
 //  FreeRealEstate
 //
-//  Created by Artem Jivotovski on 11/14/18.
-//  Copyright © 2018 Facebook. All rights reserved.
 //
 
 import UIKit
@@ -14,58 +12,49 @@ import SceneKit
 class ARViewManager : RCTViewManager {
     
     var arView = ARView()
-    var inPlacementMode = false
-    var objectToPlace: String?
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
-        // Set the bounds of the view to be the screen
+        // Initialize defaults and member variables for ARView
         arView.bounds = UIScreen.main.bounds
-        
-        arView.delegate = arView
-        
-        // Initialize the AWRTConfig and the scene
-        let config = ARWorldTrackingConfiguration()
-        config.planeDetection = .horizontal
-        config.isLightEstimationEnabled = true
+        arView.delegate = self
         arView.scene = SCNScene()
+        arView.autoenablesDefaultLighting = false
+        arView.antialiasingMode = .multisampling4X
+        arView.objectToPlace = "chair"
+        arView.showAdjustButtons = false
+        arView.selectionBoxes = [SCNNode: BoundingBox]()
         
         // Add a tap gesture for object placement and selection
         let tapGesture = UITapGestureRecognizer(target: self, action:  #selector(handleTap(_:)))
         arView.addGestureRecognizer(tapGesture)
         
+        // Add a drag gesture for object movement
+        let dragGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        arView.addGestureRecognizer(dragGesture)
+        
+        // Add a rotate gesture for object rotation
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotate(_:)))
+        arView.addGestureRecognizer(rotateGesture)
+        
+        // Initialize the AWRTConfig
+        let config = ARWorldTrackingConfiguration()
+        config.planeDetection = .horizontal
+        config.isLightEstimationEnabled = true
+        
         // Run the ARView
         arView.session.run(config)
-        objectToPlace = "coffee_table"
         
         return arView
     }
     
-    @objc func enterPlacementMode(_ node: ARSCNView!,  count: NSNumber) {
-        inPlacementMode = true
+    func displayDebugInfo() {
+        arView.showsStatistics = true
+        arView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        // , ARSCNDebugOptions.showWorldOrigin]
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        // Get the location tapped by the user
-        let touchLocation = sender.location(in: arView)
-        
-        if inPlacementMode == true, let name = objectToPlace {
-            arView.addObject(location: touchLocation, name: name)
-            inPlacementMode = false
-        } else {
-            arView.selectObject(location: touchLocation)
-        }
-    }
-    
-    @objc func adjustObject(_ node: ARSCNView!, buttonPressed: String) {
-        arView.adjustObject(buttonPressed: buttonPressed)
-    }
-    
-    @objc func setObjectToPlace(_ node: ARSCNView!, objectName: String) {
-        print(objectName)
-        objectToPlace = objectName
-    }
-    
+    // Necessary for React Native
     override static func requiresMainQueueSetup() -> Bool {
         return true
     }

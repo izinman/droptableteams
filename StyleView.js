@@ -3,6 +3,7 @@ import { StyleSheet, Text, ScrollView, View, Picker, Animated, UIManager, findNo
 import { Dropdown } from 'react-native-material-dropdown';
 import {Tile, Button} from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient';
+import AnimateView from './AnimateView.js'
 
 type Props = {};
 var objectSelected
@@ -36,8 +37,13 @@ export default class StyleView extends Component<Props> {
                   selected: 'contemporary',
                   img: all,
                   room: "All",
-                  couchesOn: '#232323',
-                  scrollY: new Animated.Value(0),};
+                  scrollY: new Animated.Value(0),
+                  couchesOn: true,
+                  bedsOn: true,
+                  chairsOn: true,
+                  tablesOn: true,
+                  miscOn: true,
+                  appliancesOn: true};
     this.handleClick = this.handleClick.bind(this);
     this.handleDropDown = this.handleDropDown.bind(this);
   }
@@ -57,6 +63,32 @@ export default class StyleView extends Component<Props> {
     text == 'Office' ? newImg = office :
     text == 'Dungeon' ? newImg = dungeon :
     newImg = all;
+    switch(text){
+      case "Family Room":
+        this.setState({couchesOn: true, bedsOn: false, miscOn: true, tablesOn: true, chairsOn: true, appliancesOn: false})
+        break;
+      case "Kitchen":
+        this.setState({couchesOn: false, bedsOn: false, miscOn: true, tablesOn: true, chairsOn: true, appliancesOn: true})
+        break;
+      case "Dining Room":
+        this.setState({couchesOn: false, bedsOn: false, miscOn: true, tablesOn: true, chairsOn: true, appliancesOn: false})
+        break;
+      case "Bedroom":
+      this.setState({couchesOn: false, bedsOn: true, miscOn: true, tablesOn: false, chairsOn: true, appliancesOn: false})
+        break;
+      case "Game Room":
+      this.setState({couchesOn: true, bedsOn: false, miscOn: true, tablesOn: true, chairsOn: true, appliancesOn: true})
+        break;
+      case "Office":
+      this.setState({couchesOn: false, bedsOn: false, miscOn: true, tablesOn: true, chairsOn: true, appliancesOn: false})
+        break;
+      case "Dungeon":
+      this.setState({couchesOn: true, bedsOn: true, miscOn: true, tablesOn: true, chairsOn: true, appliancesOn: true})
+        break;
+      default:
+      this.setState({couchesOn: true, bedsOn: false, miscOn: true, tablesOn: true, chairsOn: true, appliancesOn: false})
+      
+    }
     this.setState({img: newImg, room: text})
     console.log(text);
   }
@@ -75,14 +107,18 @@ export default class StyleView extends Component<Props> {
 
     return (
     
-      <View>
+      <AnimateView>
         
       <View style={styles.scrollViewContent}>
       
       <Text style = {{textAlign: 'left', width: '100%',  paddingTop: height * .04, paddingLeft: width * .02, paddingBottom: height * .02, fontFamily: 'Product Sans', fontSize: headerFont, color: '#232323'}}>{this.state.room}</Text>
+      {this.state.couchesOn&&
       <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Couches</Text>
+      }
         {couchesData.map((_, i) =>
           <View key={i} style={styles.row}>
+                  {this.state.couchesOn&&
+
              <View style={{padding: height * .01 , alignSelf:'center'}}>
                 <Tile
                     imageSrc={couches[i]}
@@ -95,12 +131,17 @@ export default class StyleView extends Component<Props> {
                     onPress={this.handleClick.bind(this,'couch' + i)}
               />
               </View>
+                  }
           </View>
-          
+        
         )}
+        {this.state.chairsOn&&
         <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Chairs</Text>
+        }
         {chairsData.map((_, i) =>
+        
           <View key={i} style={styles.row}>
+          {this.state.chairsOn&&
              <View style={{padding: height * .01, alignSelf:'center'}}>
                 <Tile
                     imageSrc={chairs[i]}
@@ -113,12 +154,17 @@ export default class StyleView extends Component<Props> {
                     onPress={this.handleClick.bind(this,'chair' + i)}
               />
               </View>
+          }
           </View>
-          
+        
         )}
+        {this.state.tablesOn&&
         <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Tables</Text>
+        }
         {tablesData.map((_, i) =>
+        
           <View key={i} style={styles.row}>
+          {this.state.tablesOn&&
              <View style={{padding: height * .01, alignSelf:'center'}}>
                 <Tile
                     imageSrc={tables[i]}
@@ -131,12 +177,17 @@ export default class StyleView extends Component<Props> {
                     onPress={this.handleClick.bind(this,'table' + i)}
               />
               </View>
+          }
           </View>
-          
+        
         )}
+        {this.state.bedsOn&&
         <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Beds</Text>
+        }
         {bedData.map((_, i) =>
+        
           <View key={i} style={styles.row}>
+          {this.state.bedsOn&&
              <View style={{padding: height * .01, alignSelf:'center'}}>
                 <Tile
                     imageSrc={ beds[i]}
@@ -149,12 +200,17 @@ export default class StyleView extends Component<Props> {
                     onPress={this.handleClick}
               />
               </View>
+          }
           </View>
-          
+        
         )}
+        {this.state.miscOn&&
         <Text style = {{width: '100%', paddingHorizontal: width * .05, paddingBottom: height * .02, paddingTop: height * .02, fontSize: subheaderFont, fontFamily: 'Product Sans', color: this.state.couchesOn}}>Misc</Text>
+        }
         {miscData.map((_, i) =>
+        
           <View key={i} style={styles.row}>
+          {this.state.miscOn&&
              <View style={{padding: height * .01, alignSelf:'center'}}>
                 <Tile
                     imageSrc={ misc[i]}
@@ -167,11 +223,12 @@ export default class StyleView extends Component<Props> {
                     onPress={this.handleClick.bind(this, "misc" + i)}
               />
               </View>
+          }
           </View>
-          
+        
         )}
       </View>
-      </View>
+      </AnimateView>
     );
   }
 
@@ -363,7 +420,7 @@ const styles = StyleSheet.create({
     },
     row: {
       backgroundColor: '#00000000',
-      flexBasis: width/3
+      flexBasis: width/3,
     },
     header: {
       position: 'absolute',
