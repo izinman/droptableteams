@@ -34,6 +34,8 @@ extension ARViewManager {
             let appearAction = SCNAction.fadeOpacity(to: 1.0, duration: 0.2)
             appearAction.timingMode = .easeInEaseOut
             node.runAction(appearAction)
+            
+            sendNodeUpdate(forNode: node, withAction: nil)
         }
     }
     

@@ -7,11 +7,19 @@
 import UIKit
 import ARKit
 import SceneKit
+import MultipeerConnectivity
 
 @objc(ARViewManager)
 class ARViewManager : RCTViewManager {
     
     var arView = ARView()
+    var mapProvider: MCPeerID?
+    var multipeerSession: MultipeerSession = MultipeerSession()
+    
+    // REPLACE WITH REACT BUTTONS
+    var sendMapButtonEnabled: Bool = false
+    var sessionInfoLabel: String = ""
+    // REPLACE
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
@@ -36,6 +44,9 @@ class ARViewManager : RCTViewManager {
         // Add a rotate gesture for object rotation
         let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotate(_:)))
         arView.addGestureRecognizer(rotateGesture)
+        
+        // Configure dataHandler
+        multipeerSession.receivedDataHandler = receivedData
         
         // Initialize the AWRTConfig
         let config = ARWorldTrackingConfiguration()

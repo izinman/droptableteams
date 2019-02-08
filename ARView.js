@@ -141,6 +141,13 @@ export default class ARScene extends Component<Props> {
         );
     };
 
+    sendMap = () => {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this.ref),
+            UIManager[ARView].Commands.sendMap,[]
+        );
+    };
+
     selectFurniture = e => {
         console.log("selectFurniture")
       var obj
