@@ -26,7 +26,6 @@ export default class FurnitureAnimator extends Component<Props> {
     
   }
   drawerOpened = (e) => {
-    if(e !='couch5' && e!='chair3'){
     if(opened == 0){
         Animated.timing(
             this.state.scaleAnim,            // The animated value to drive
@@ -47,13 +46,8 @@ export default class FurnitureAnimator extends Component<Props> {
         ).start();
         opened = 0
     }
-  }
-  else{
     this.props.onPress(e)
     console.log(e);
-  }
-    
-    
 }
   
   render() {

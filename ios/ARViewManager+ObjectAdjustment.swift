@@ -33,9 +33,6 @@ extension ARViewManager {
     @objc func adjustObject(_ node: ARSCNView!, buttonPressed: String) {
         //COLE's shit. There's no buttons rn, so just use this function
         print("Coles shit works")
-        return
-        /*
-         
         guard arView.showAdjustButtons == true, let node = arView.selectedNode else { return }
         
         switch (buttonPressed) {
@@ -79,7 +76,6 @@ extension ARViewManager {
         default:
             return
         }
- */
     }
  
 }

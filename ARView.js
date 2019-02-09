@@ -3,13 +3,14 @@ import {Platform, StyleSheet, Text, View, UIManager, findNodeHandle, Animated, r
 import { Button }  from 'react-native-elements';
 import StyleView from './StyleView';
 import MoveControls from './MoveControls.js'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 import AnimateView from './AnimateView.js'
 import FurnitureAnimator from './FurnitureAnimator';
 type Props = {};
 var buttonPressed = "";
 var objectSelected = false;
 var {height, width} = Dimensions.get('window');
+var placing = true
 
 
 export default class ARScene extends Component<Props> {
@@ -18,7 +19,8 @@ export default class ARScene extends Component<Props> {
         super(props);
         this.state = {AR: 1,
                       objectSelected: false,
-                      checkScale: new Animated.Value(1)};
+                      checkScale: new Animated.Value(1),
+                      confirmScale: new Animated.Value(0)};
     }
 
     componentDidMount() {
@@ -39,47 +41,84 @@ export default class ARScene extends Component<Props> {
                         width: '100%',
                         height: '100%',
                     }}>
-                        <Animated.View style={{position: 'absolute', bottom: height*.12, left: 0, width: width, opacity: this.state.checkScale
+                        <Animated.View style={{position: 'absolute', bottom: height*.18, left: 0, width: width, transform: [{scale: this.state.checkScale}]
                             
                               }}>
                             <Button
                                 title={""}
                                 icon={
                                   <Icon
-                                    name="check-circle-o"
-                                    size={height * .075}
+                                    name="plus-circle"
+                                    size={height * .065}
                                     color="white"
                                   />
                                 }
                                 ViewComponent={require('react-native-linear-gradient').default}
                                 titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans'}}
                                 linearGradientProps={{
-                                    colors: ['#000000', '#000000'],
+                                    colors: ['#00000000', '#00000000'],
                                     start: {x: 0, y: 0},
                                     end: {x: 0.5, y: 0},
                                 }}
-                                buttonStyle={{borderWidth: 0, borderColor: 'transparent', 
+                                buttonStyle={{borderWidth: 0, borderColor: 'transparent', backgroundColor: '#00000000',
                                 borderRadius: height, height: height* .075}}
                                 containerStyle={{ height: height, width: height*.075, alignSelf: 'center'}}
                                 onPress={this.update}
                             />
                         </Animated.View>
-                    </View>
-                    <View style = {{position: 'absolute', top: 0, left: 0}}>
+                        <Animated.View style={{position: 'absolute', bottom: height*.18, left: width/10, width: width/2, transform: [{scale: this.state.confirmScale}]
+                            
+                              }}>
                             <Button
-                            title={'Send Map'}
+                                title={""}
+                                icon={
+                                  <Icon
+                                    name="check-circle"
+                                    size={height * .065}
+                                    color="white"
+                                  />
+                                }
                                 ViewComponent={require('react-native-linear-gradient').default}
                                 titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans'}}
                                 linearGradientProps={{
-                                    colors: ['#000000', '#000000'],
+                                    colors: ['#00000000', '#00000000'],
                                     start: {x: 0, y: 0},
                                     end: {x: 0.5, y: 0},
                                 }}
                                 buttonStyle={{borderWidth: 0, borderColor: 'transparent', 
                                 borderRadius: height, height: height* .075}}
                                 containerStyle={{ height: height, width: height*.075, alignSelf: 'center'}}
-                                onPress={this.handleControl.bind(this, "sendMap")}                            />
+                                onPress={this.handleControl.bind(this, 'confirmPlacement')}
+                            />
+                        </Animated.View>
+                        <Animated.View style={{position: 'absolute', bottom: height*.18, right: width/10, width: width/2, transform: [{scale: this.state.confirmScale}]
+                            
+                              }}>
+                            <Button
+                                title={""}
+                                icon={
+                                  <Icon
+                                    name="trash-2"
+                                    size={height * .065}
+                                    color="white"
+                                  />
+                                }
+                                linearGradientProps={{
+                                    colors: ['#00000000', '#00000000'],
+                                    start: {x: 0, y: 0},
+                                    end: {x: 0.5, y: 0},
+                                }}
+                                ViewComponent={require('react-native-linear-gradient').default}
+                                titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans'}}
+                                
+                                buttonStyle={{borderWidth: 0, borderColor: 'transparent', backgroundColor: '#00000000',
+                                borderRadius: height, height: height* .075}}
+                                containerStyle={{ height: height, width: height*.075, alignSelf: 'center'}}
+                                onPress={this.handleControl.bind(this, 'deleteObject')}
+                            />
+                        </Animated.View>
                     </View>
+                    
                     <View style = {{position: 'absolute', backgroundColor: "#00000000", height: '100%', zIndex: 25, bottom: -height}}>
                   <FurnitureAnimator onPress={this.selectFurniture}/>
                   </View>
@@ -101,6 +140,20 @@ export default class ARScene extends Component<Props> {
     }
 
     handleControl(e) {
+        Animated.timing(
+            this.state.confirmScale,            // The animated value to drive
+            {
+              toValue: 0,                   // Animate to opacity: 1 (opaque)
+              duration: 300,              // Make it take a while
+            }
+          ).start();
+          Animated.timing(
+          this.state.checkScale,            // The animated value to drive
+            {
+              toValue: 1,                   // Animate to opacity: 1 (opaque)
+              duration: 300,              // Make it take a while
+            }
+          ).start();
         console.log('handleControl')
         console.log('Clicked', e);
         buttonPressed = e;
@@ -109,7 +162,7 @@ export default class ARScene extends Component<Props> {
             objectSelected = false;
             this.forceUpdate();
         }
-    }
+    };
     test = () => {
       this.setState({objectSelected: !this.state.objectSelected})      
     };
@@ -119,14 +172,8 @@ export default class ARScene extends Component<Props> {
             findNodeHandle(this.ref),
             UIManager[ARView].Commands.placeObject,[]
         );
-        Animated.timing(
-          this.state.checkScale,            // The animated value to drive
-          {
-            toValue: 1,                   // Animate to opacity: 1 (opaque)
-            duration: 300,              // Make it take a while
-          }
-      ).start();
-    };
+            };
+    
 
     choose = () => {
         this.setState({AR: 0});
@@ -142,29 +189,60 @@ export default class ARScene extends Component<Props> {
     };
 
     selectFurniture = e => {
-        console.log("selectFurniture")
+        console.log(e)
       var obj
-      if(e == 'couch5'){
-        obj = 'couch_2'
+      if(e == 'couch9'){
+        obj = 'couch_1'
+      }
+      else if(e == 'couch5'){
+          obj = 'couch_2'
       }
       else if(e == 'chair3'){
-        obj = 'chair'
+        obj = 'chair_1'
       }
-      else if(e == 'couch6'){
-        obj = 'couch_2'
+      else if(e == 'chair1'){
+        obj = 'chair_2'
+      }
+      else if(e == 'table6'){
+        obj = 'table_1'
+      }
+      else if(e == 'cabinet3'){
+        obj = 'wardrobe'
+      }
+      else if(e == 'cabinet9'){
+        obj = 'coffee_table'
+      }
+      else{
+          obj = 'couch_1'
       }
       UIManager.dispatchViewManagerCommand(
         findNodeHandle(this.ref),
         UIManager[ARView].Commands.setObjectToPlace,
         [obj]
     );
-    }
+      }
+    
 
 
     selectObject = e => {
-        objectSelected = true;
         console.log(e);
-        this.forceUpdate();
+        objectSelected = true;
+        Animated.timing(
+            this.state.checkScale,            // The animated value to drive
+            {
+              toValue: 0,                   // Animate to opacity: 1 (opaque)
+              duration: 300,              // Make it take a while
+            }
+          ).start();
+          placing = false;
+          Animated.timing(
+            this.state.confirmScale,            // The animated value to drive
+            {
+              toValue: 1,                   // Animate to opacity: 1 (opaque)
+              duration: 300,              // Make it take a while
+            }
+          ).start();
+        
     }
 }
 
