@@ -39,7 +39,7 @@ handleClick = () => {
             
             <View style={styles.button_bg}>
             <Button 
-              title="start"
+              title="START"
               ViewComponent={require('react-native-linear-gradient').default}
               titleStyle={{fontWeight: '600', fontSize: 30, fontFamily: 'Product Sans'}}
               linearGradientProps={{
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     textAlign: 'center',
     position: 'absolute',
-    top: height*.2
+    top: height*.285
   },
   image: {
     position: "absolute",
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     position: 'absolute',
     bottom: '10%',
-    paddingBottom: '15%'
+    paddingBottom: '10%'
   },
 });
 
