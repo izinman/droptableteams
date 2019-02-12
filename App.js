@@ -22,23 +22,20 @@ handleClick = () => {
       if(this.state.home == 0){
         return (
           
-          <View style={{ flex: 1, flexDirection: 'row', alignContent: 'flex-start', width: '100%', justifyContent: 'center', alignSelf: 'center' }}>
+          <View style={{width: '100%', justifyContent: 'center', alignSelf: 'center' }}>
             <View style = {{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, zIndex: 0, backgroundColor: "#000000", opacity: 0.55, height: '100%'}}></View>
              <Image source={require('./home.jpg')} style ={styles.image} blurRadius = {0}/>
              
           <View styles={styles.root} >
-          <AnimateView>
             <Text style ={styles.welcome4}>designAR </Text>
-            </AnimateView>
-            <AnimateView>
-            <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', alignContent: 'center',height: height}}>
+            
+            <View style={{justifyContent:'center', alignContent: 'center',height: height}}>
+            {/* <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
             <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./artem.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./micheal.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./isaac.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./jake.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/> */}
             </View>
-            </AnimateView>
             
             <View style={styles.button_bg}>
             <Button 
@@ -80,13 +77,13 @@ const styles = StyleSheet.create({
   welcome4: {
     color: "#FFFFFF", 
     fontWeight: "600", 
-    fontSize: 55, 
+    fontSize: 80, 
     width: '100%',
     fontFamily: 'Product Sans',
     fontStyle: 'italic',
     textAlign: 'center',
     position: 'absolute',
-    top: height*.05
+    top: height*.2
   },
   image: {
     position: "absolute",
@@ -100,7 +97,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     position: 'absolute',
     bottom: '10%',
-    paddingBottom: '20%'
+    paddingBottom: '15%'
   },
 });
 
