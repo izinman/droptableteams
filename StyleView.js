@@ -18,7 +18,7 @@ var bedroom = require('./bedroom.jpg');
 var  gameroom = require('./gameroom.jpg');
 var  dungeon = require('./dungeon.jpg');
 var office = require('./office.jpg');
-var couches = [require('./couches/1.jpg'),require('./couches/2.jpg'),require('./couches/3.jpg'),require('./couches/4.jpg'),require('./couches/5.jpg'),require('./couches/6.jpg'),require('./couches/7.jpg'),require('./couches/8.jpg'),require('./couches/9.jpg'),require('./couches/10.jpg'),require('./couches/11.jpg')];
+var couches = [require('./couches/1.jpg'),require('./couches/2.jpg'),require('./couches/3.jpg'),require('./couches/4.jpg'),require('./couches/5.jpg'),require('./couches/6.jpg'),require('./couches/7.jpg'),require('./couches/8.jpg'),require('./couches/9.jpg'),require('./couches/10.jpg'),require('./couches/11.jpg'),require('./couches/12.jpg')];
 var chairs = [require('./chairs/1.jpg'),require('./chairs/2.jpg'),require('./chairs/3.jpg'),require('./chairs/4.jpg'),require('./chairs/5.jpg'),require('./chairs/6.jpg'),require('./chairs/7.jpg'),require('./chairs/8.jpg'),require('./chairs/9.jpg')];
 var tables= [require('./tables/1.jpg'),require('./tables/2.jpg'),require('./tables/3.jpg'),require('./tables/4.jpg'),require('./tables/5.jpg'),require('./tables/6.jpg'),require('./tables/7.jpg'),require('./tables/8.jpg'),require('./tables/9.jpg')];
 var misc= [require('./misc/1.jpeg'),require('./misc/2.jpg'),require('./misc/3.jpeg'),require('./misc/4.jpg'),require('./misc/5.jpg'),require('./misc/6.jpeg'),require('./misc/7.jpeg')];
@@ -97,7 +97,7 @@ export default class StyleView extends Component<Props> {
   }
 
   _renderScrollViewContent(title) {
-    var couchesData = Array.from({length: 11});
+    var couchesData = Array.from({length: 12});
     var chairsData = Array.from({length: 9});
     var tablesData = Array.from({length: 9});
     var miscData = Array.from({length: 7});
