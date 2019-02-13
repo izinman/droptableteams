@@ -64,7 +64,7 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
     //
     public func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
         // Invite peer
-        print("FOUND PEER\n")
+        print("PEER: FOUND\n")
         browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
     }
     // Not used
@@ -76,7 +76,7 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
     //
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         invitationHandler(true, session)
-        print("ACCEPTED PEER\n")
+        print("PEER: ACCEPTED\n")
     }
     
 }

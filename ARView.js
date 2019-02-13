@@ -104,7 +104,7 @@ export default class ARScene extends Component<Props> {
         console.log('handleControl')
         console.log('Clicked', e);
         buttonPressed = e;
-        this.adjustObject();
+        this.sendMap();
         if (e == "confirmPlacement" || e == "deleteObject") {
             objectSelected = false;
             this.forceUpdate();

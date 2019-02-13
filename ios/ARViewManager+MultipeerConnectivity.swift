@@ -27,8 +27,8 @@ extension ARViewManager {
         var hasher = Hasher()
         hasher.combine(node)
         let hashValue = hasher.finalize()
+        //let nodeUpdate = MultipeerUpdate(node: node, nodeHash: hashValue, action: action).data
         let nodeUpdate = MultipeerUpdate(node: node, nodeHash: hashValue, action: action)
-        
         guard let data = try? NSKeyedArchiver.archivedData(withRootObject: nodeUpdate, requiringSecureCoding: true)
         else { fatalError("can't encode node update") }
         
@@ -36,39 +36,44 @@ extension ARViewManager {
     }
 
     func receivedData(_ data: Data, from peer: MCPeerID) {
-        let update = MultipeerUpdate(data: data)
-        
-        if let nodeHash = update?.nodeHash, arView.objectHashTable[nodeHash] == nil, let newNode = update?.node {
-            // Add new node, objectHashTable does not contain hash
-            arView.scene.rootNode.addChildNode(newNode)
-            let appearAction = SCNAction.fadeOpacity(to: 1.0, duration: 0.2)
-            appearAction.timingMode = .easeInEaseOut
-            newNode.runAction(appearAction)
-            
-            arView.objects.append(newNode)
-            arView.objectHashTable[nodeHash] = newNode
-        } else if let nodeHash = update?.nodeHash, let action = update?.action {
-            // Update node with new info
-            let updateNode = arView.objectHashTable[nodeHash]
-            updateNode?.runAction(action)
-        } else if let nodeHash = update?.nodeHash, let deadNode = arView.objectHashTable[nodeHash], let index = arView.objects.index(of: deadNode) {
-            // Delete node
-            // Might be able to combine with above else if, if nodes can be removed with actions
-            // and we can determine that it is a removing action
-            arView.objects.remove(at: index)
-            arView.objectHashTable.removeValue(forKey: nodeHash)
-            deadNode.removeFromParentNode()
+        //let update = MultipeerUpdate(data: data)
+        print("PEER: INSIDE RECEIVED DATA")
+        do {
+            if let update = try NSKeyedUnarchiver.unarchivedObject(ofClass: MultipeerUpdate.self, from: data) {
+                if var node = update?.node, let nodeHash = update?.nodeHash, let action = update?.action  {
+                    print("PEER: DATA RECEIVED")
+                    if let unwrappedNode = arView.objectHashTable[nodeHash] {
+                        node = unwrappedNode
+                    } else {
+                        arView.scene.rootNode.addChildNode(node)
+                        arView.objects.append(node)
+                        arView.objectHashTable[nodeHash] = node
+                    }
+                    node.runAction(action)
+                } else if let nodeHash = update?.nodeHash, let removedNode = arView.objectHashTable[nodeHash], let index = arView.objects.index(of: removedNode) {
+                    // Action is nil
+                    arView.objects.remove(at: index)
+                    arView.objectHashTable.removeValue(forKey: nodeHash)
+                    removedNode.removeFromParentNode()
+                }
+            }
+        } catch {
+            // print("can't decode data recieved from \(peer)")
         }
         
         // Putting this after update code bc 170 taught me that try catch is costly, and the above will fail if it's not
         // a map (hopefully)
         do {
             if mapProvider == nil, let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
+                
                 let configuration = ARWorldTrackingConfiguration()
                 configuration.planeDetection = .horizontal
                 configuration.initialWorldMap = worldMap
                 arView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
                 mapProvider = peer
+                
+                print("PEER: MAP RECEIVED")
+                
                 return
             }
         } catch {

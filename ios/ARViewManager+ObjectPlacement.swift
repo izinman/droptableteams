@@ -24,18 +24,18 @@ extension ARViewManager {
         // Verify that the plane is valid
         if planeHits.count > 0, let hitResult = planeHits.first {
             // Create an object to place
-            guard let node = createNode(objName: arView.objectToPlace, hitResult: hitResult) else { return }
-            node.opacity = 0.0
+            guard let newNode = createNode(objName: arView.objectToPlace, hitResult: hitResult) else { return }
+            newNode.opacity = 0.0
             
             // Add the object to the scene
-            arView.scene.rootNode.addChildNode(node)
-            arView.objects.append(node)
+            arView.scene.rootNode.addChildNode(newNode)
+            arView.objects.append(newNode)
             
             let appearAction = SCNAction.fadeOpacity(to: 1.0, duration: 0.2)
             appearAction.timingMode = .easeInEaseOut
-            node.runAction(appearAction)
+            newNode.runAction(appearAction)
             
-            sendNodeUpdate(forNode: node, withAction: nil)
+            sendNodeUpdate(forNode: newNode, withAction: appearAction)
         }
     }
     
