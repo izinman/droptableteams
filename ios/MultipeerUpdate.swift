@@ -8,56 +8,69 @@
 
 import SceneKit
 
-struct MultipeerUpdate: Codable {
+class MultipeerUpdate: NSObject, NSSecureCoding {
     
-    var node: SCNNode?
-    var nodeHash: Int
+    static var supportsSecureCoding: Bool = true
+    
+    var nodeHash: Int64
     var action: SCNAction?
+    var node: SCNNode?
     
-    init(node: SCNNode?, nodeHash: Int, action: SCNAction?) {
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(nodeHash, forKey: "nodeHash")
+        
+        if action != nil {
+            do {
+                let actionEncoded = try NSKeyedArchiver.archivedData(withRootObject: action!, requiringSecureCoding: false)
+                aCoder.encode(actionEncoded, forKey: "action")
+                print("PEER: encoded action")
+            } catch {}
+        }
+        
+        if node != nil {
+            do {
+                let nodeEncoded = try NSKeyedArchiver.archivedData(withRootObject: node!, requiringSecureCoding: false)
+                aCoder.encode(nodeEncoded, forKey: "node")
+                print("PEER: encoded node")
+            } catch {}
+        }
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        let nodeHash = aDecoder.decodeInt64(forKey: "nodeHash")
+        
+        let actionDecoded: SCNAction?
+        if let actionData = aDecoder.decodeObject(forKey: "action") as? Data {
+            do {
+                actionDecoded = try NSKeyedUnarchiver.unarchivedObject(ofClass: SCNAction.self, from: actionData)
+            } catch {
+                actionDecoded = nil
+            }
+        } else {
+            actionDecoded = nil
+        }
+        
+        let nodeDecoded: SCNNode?
+        if let nodeData = aDecoder.decodeObject(forKey: "node") as? Data {
+            do {
+                nodeDecoded = try NSKeyedUnarchiver.unarchivedObject(ofClass: SCNNode.self, from: nodeData)
+            } catch {
+                nodeDecoded = nil
+            }
+        } else {
+            nodeDecoded = nil
+        }
+        
+        self.init(
+            node: nodeDecoded,
+            nodeHash: nodeHash,
+            action: actionDecoded
+        )
+    }
+    
+    init(node: SCNNode?, nodeHash: Int64, action: SCNAction?) {
         self.node = node
         self.nodeHash = nodeHash
         self.action = action
     }
-    enum CodingKeys: String, CodingKey {
-        case node
-        case nodeHash
-        case action
-    }
 }
-
-extension MultipeerUpdate {
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        node = try values.decode(SCNNode.self, forKey: .node)
-        nodeHash = try values.decode(Int.self, forKey: .nodeHash)
-        action = try values.decode(SCNAction.self, forKey: .action)
-    }
-}
-
-extension MultipeerUpdate {
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(node, forKey: .node)
-        try container.encode(nodeHash, forKey: .nodeHash)
-        try container.encode(action, forKey: .action)
-    }
-}
-
-
-
-//protocol DataConvertible {
-//    init?(data: Data)
-//    var data: Data { get }
-//}
-//
-//extension DataConvertible {
-//    init?(data: Data) {
-//        guard data.count == MemoryLayout<Self>.stride else { return nil }
-//        self = data.withUnsafeBytes { $0.pointee }
-//    }
-//    var data: Data {
-//        var value = self
-//        return Data(buffer: UnsafeBufferPointer(start: &value, count: 1))
-//    }
-//}

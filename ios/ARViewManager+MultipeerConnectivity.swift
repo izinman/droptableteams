@@ -26,10 +26,11 @@ extension ARViewManager {
     func sendNodeUpdate(forNode node: SCNNode, withAction action: SCNAction?) {
         var hasher = Hasher()
         hasher.combine(node)
-        let hashValue = hasher.finalize()
-        //let nodeUpdate = MultipeerUpdate(node: node, nodeHash: hashValue, action: action).data
-        let nodeUpdate = MultipeerUpdate(node: node, nodeHash: hashValue, action: action)
-        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: nodeUpdate, requiringSecureCoding: true)
+        let hashValue = Int64(hasher.finalize())
+        print("PEER: sender hash: \(hashValue)")
+        let sendNode = arView.objects.contains(node) ? nil : node
+        let nodeUpdate = MultipeerUpdate(node: sendNode, nodeHash: hashValue, action: action)
+        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: nodeUpdate, requiringSecureCoding: false)
         else { fatalError("can't encode node update") }
         
         multipeerSession.sendToAllPeers(data)
@@ -40,17 +41,24 @@ extension ARViewManager {
         print("PEER: INSIDE RECEIVED DATA")
         do {
             if let update = try NSKeyedUnarchiver.unarchivedObject(ofClass: MultipeerUpdate.self, from: data) {
-                if var node = update?.node, let nodeHash = update?.nodeHash, let action = update?.action  {
-                    print("PEER: DATA RECEIVED")
-                    if let unwrappedNode = arView.objectHashTable[nodeHash] {
-                        node = unwrappedNode
-                    } else {
+                print("PEER: INSIDE IF!!!")
+                let nodeHash = update.nodeHash
+                if let action = update.action  {
+                    print("PEER: DATA RECEIVED!!! NUT")
+                    let actionNode: SCNNode
+                    if let node = update.node {
                         arView.scene.rootNode.addChildNode(node)
                         arView.objects.append(node)
-                        arView.objectHashTable[nodeHash] = node
+                        arView.objectHashTable[update.nodeHash] = node
+                        actionNode = node
+                    } else {
+                        guard let unwrappedNode = arView.objectHashTable[nodeHash] else {
+                            fatalError("Node not in hash table")
+                        }
+                         actionNode = unwrappedNode
                     }
-                    node.runAction(action)
-                } else if let nodeHash = update?.nodeHash, let removedNode = arView.objectHashTable[nodeHash], let index = arView.objects.index(of: removedNode) {
+                    actionNode.runAction(action)
+                } else if let removedNode = arView.objectHashTable[nodeHash], let index = arView.objects.index(of: removedNode) {
                     // Action is nil
                     arView.objects.remove(at: index)
                     arView.objectHashTable.removeValue(forKey: nodeHash)
@@ -58,7 +66,9 @@ extension ARViewManager {
                 }
             }
         } catch {
-            // print("can't decode data recieved from \(peer)")
+            if mapProvider != nil {
+                print("PEER: DATA NOT RECEIVED")
+            }
         }
         
         // Putting this after update code bc 170 taught me that try catch is costly, and the above will fail if it's not

@@ -12,7 +12,7 @@ import SceneKit
 class ARView : ARSCNView, ARSCNViewDelegate {
     
     var objects = [SCNNode]()
-    var objectHashTable = [Int:SCNNode]()
+    var objectHashTable = [Int64:SCNNode]()
     var objectToPlace: String?
     
     var selectedNode: SCNNode?

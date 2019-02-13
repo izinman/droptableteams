@@ -29,13 +29,15 @@ extension ARViewManager {
             
             // Add the object to the scene
             arView.scene.rootNode.addChildNode(newNode)
-            arView.objects.append(newNode)
+            
             
             let appearAction = SCNAction.fadeOpacity(to: 1.0, duration: 0.2)
             appearAction.timingMode = .easeInEaseOut
             newNode.runAction(appearAction)
             
             sendNodeUpdate(forNode: newNode, withAction: appearAction)
+            // Done after sendNodeUpdate so that nil isn't sent
+            arView.objects.append(newNode)
         }
     }
     
