@@ -27,16 +27,15 @@ extension ARViewManager {
             guard let newNode = createNode(objName: arView.objectToPlace, hitResult: hitResult) else { return }
             newNode.opacity = 0.0
             
-            // Add the object to the scene
-            arView.scene.rootNode.addChildNode(newNode)
-            
-            
             let appearAction = SCNAction.fadeOpacity(to: 1.0, duration: 0.2)
             appearAction.timingMode = .easeInEaseOut
-            newNode.runAction(appearAction)
             
             sendNodeUpdate(forNode: newNode, withAction: appearAction)
-            // Done after sendNodeUpdate so that nil isn't sent
+            
+            // Done after sendNodeUpdate so that nil isn't sent and gives the receiver a head start on placing
+            // Add the object to the scene
+            arView.scene.rootNode.addChildNode(newNode)
+            newNode.runAction(appearAction)
             arView.objects.append(newNode)
         }
     }

@@ -44,7 +44,7 @@ extension ARViewManager {
                 print("PEER: INSIDE IF!!!")
                 let nodeHash = update.nodeHash
                 if let action = update.action  {
-                    print("PEER: DATA RECEIVED!!! NUT")
+                    print("PEER: DATA RECEIVED!!!")
                     let actionNode: SCNNode
                     if let node = update.node {
                         arView.scene.rootNode.addChildNode(node)
