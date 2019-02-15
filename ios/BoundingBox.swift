@@ -127,9 +127,11 @@ class BoundingBox: SCNNode {
         SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         SCNTransaction.completionBlock = {
             self.scaleDown()
-            self.isVisible = false
         }
         
+        for node in childNodes {
+            node.geometry?.firstMaterial?.diffuse.contents = UIColor.green
+        }
         scale = SCNVector3(1.05, 1.05, 1.05)
         
         SCNTransaction.commit()
@@ -139,6 +141,12 @@ class BoundingBox: SCNNode {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.15
         SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+        SCNTransaction.completionBlock = {
+            for node in self.childNodes {
+                node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
+            }
+            self.isVisible = false
+        }
         
         opacity = 0.0
         scale = SCNVector3(0.5, 0.5, 0.5)

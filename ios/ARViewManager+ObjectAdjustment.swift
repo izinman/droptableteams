@@ -13,25 +13,15 @@ import SceneKit
 extension ARViewManager {
     
     @objc func enableAdjustMode() {
-        arView.showAdjustButtons = true
+        arViewModel.showAdjustButtons = true
     }
     
     @objc func disableAdjustMode() {
-        arView.showAdjustButtons = false
-    }
-    
-    func getAdjustedCordinates(x: Float, z: Float) -> (CGFloat, CGFloat) {
-        // z2 = cosβz_1 − sinβx_1
-        // x2 = sinβz_1 + cosβx_1
-        let beta: Float = arView.cameraVector.y;
-        let adjustedZ = CGFloat(cos(beta) * z - sin(beta) * x)
-        let adjustedX = CGFloat(sin(beta) * z + cos(beta) * x)
-        
-        return (adjustedX, adjustedZ)
+        arViewModel.showAdjustButtons = false
     }
     
     @objc func adjustObject(_node: ARSCNView!, buttonPressed: String) {
-        guard arView.showAdjustButtons == true, let node = arView.selectedNode else { return }
+        guard arViewModel.showAdjustButtons == true, let node = arViewModel.selectedNode else { return }
         
         switch (buttonPressed) {
             
@@ -58,18 +48,27 @@ extension ARViewManager {
             node.runAction(SCNAction.moveBy(x: adjustedCoordinates.0, y: 0, z: adjustedCoordinates.1, duration: 0))
             
         case "confirmPlacement":
-            node.opacity = 1.0
-            arView.selectedNode = nil
+            arViewModel.selectedNode = nil
             
         case "deleteObject":
-            if let index = arView.objects.index(of: node) {
-                arView.objects.remove(at: index)
+            if let index = arViewModel.objects.index(of: node) {
+                arViewModel.objects.remove(at: index)
                 node.removeFromParentNode()
             }
-            arView.selectedNode = nil
+            arViewModel.selectedNode = nil
             
         default:
             return
         }
+    }
+    
+    func getAdjustedCordinates(x: Float, z: Float) -> (CGFloat, CGFloat) {
+        // z2 = cosβz_1 − sinβx_1
+        // x2 = sinβz_1 + cosβx_1
+        let beta: Float = arView.cameraVector.y;
+        let adjustedZ = CGFloat(cos(beta) * z - sin(beta) * x)
+        let adjustedX = CGFloat(sin(beta) * z + cos(beta) * x)
+        
+        return (adjustedX, adjustedZ)
     }
 }

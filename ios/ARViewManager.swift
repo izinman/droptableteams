@@ -7,11 +7,20 @@
 import UIKit
 import ARKit
 import SceneKit
+import MultipeerConnectivity
 
 @objc(ARViewManager)
 class ARViewManager : RCTViewManager {
     
     var arView = ARView()
+    var arViewModel = ARViewModel()
+    
+    var mapProvider: MCPeerID?
+    var multipeerSession: MultipeerSession = MultipeerSession()
+    
+    // REPLACE WITH REACT BUTTONS
+    var sendMapButtonEnabled: Bool = false
+    var sessionInfoLabel: String = ""
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
@@ -19,11 +28,13 @@ class ARViewManager : RCTViewManager {
         arView.bounds = UIScreen.main.bounds
         arView.delegate = self
         arView.scene = SCNScene()
-        arView.autoenablesDefaultLighting = false
+        arView.autoenablesDefaultLighting = true
         arView.antialiasingMode = .multisampling4X
-        arView.objectToPlace = "chair"
-        arView.showAdjustButtons = false
-        arView.selectionBoxes = [SCNNode: BoundingBox]()
+        
+        arViewModel.arView = arView
+        arViewModel.objectToPlace = "chair"
+        arViewModel.showAdjustButtons = false
+        arViewModel.selectionBoxes = [SCNNode: BoundingBox]()
         
         // Add a tap gesture for object placement and selection
         let tapGesture = UITapGestureRecognizer(target: self, action:  #selector(handleTap(_:)))
@@ -42,8 +53,12 @@ class ARViewManager : RCTViewManager {
         config.planeDetection = .horizontal
         config.isLightEstimationEnabled = true
         
+        // Configure dataHandler
+        multipeerSession.receivedDataHandler = receivedData
+        
         // Run the ARView
         arView.session.run(config)
+        setupDirectionalLighting(queue: DispatchQueue.main)
         
         return arView
     }

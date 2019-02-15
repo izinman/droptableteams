@@ -48,6 +48,8 @@
 		AC3330B121FBEF0C00505BF8 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */; };
 		AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
 		AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
+		AC46625522153947006E18D7 /* ARViewManager+SceneLighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46625422153947006E18D7 /* ARViewManager+SceneLighting.swift */; };
+		AC46625622153947006E18D7 /* ARViewManager+SceneLighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46625422153947006E18D7 /* ARViewManager+SceneLighting.swift */; };
 		AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
 		AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
 		AC89AC1C2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */; };
@@ -67,6 +69,14 @@
 		AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC94C39E219C2DEB00D54C64 /* ARViewManager.m */; };
 		AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */; };
 		ACB0C61521FEC6CA003AC046 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ACB0C61421FEC6CA003AC046 /* art.scnassets */; };
+		ACECA0BD221649EE000A0899 /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACECA090221649EE000A0899 /* MultipeerSession.swift */; };
+		ACECA0BE221649EE000A0899 /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACECA090221649EE000A0899 /* MultipeerSession.swift */; };
+		ACECA0C0221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACECA0BF221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift */; };
+		ACECA0C1221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACECA0BF221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift */; };
+		ACECA0C322164A0C000A0899 /* MultipeerUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACECA0C222164A0C000A0899 /* MultipeerUpdate.swift */; };
+		ACECA0C422164A0C000A0899 /* MultipeerUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACECA0C222164A0C000A0899 /* MultipeerUpdate.swift */; };
+		ACFDF71D220A6E61007C79E1 /* ARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFDF71C220A6E61007C79E1 /* ARViewModel.swift */; };
+		ACFDF71E220A6E61007C79E1 /* ARViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFDF71C220A6E61007C79E1 /* ARViewModel.swift */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B04742B3778F495AA908B4BE /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D794D4431CD2431AA5CEC782 /* AntDesign.ttf */; };
 		B725B59FF99F41D48DD1D736 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A078D5E8625849CB992DA1CD /* MaterialIcons.ttf */; };
@@ -454,6 +464,7 @@
 		A63D366FDE5F4A88988949EE /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		AC3DB419219668C700AF31E7 /* FreeRealEstate-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		AC3DB41A219668C700AF31E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AC46625422153947006E18D7 /* ARViewManager+SceneLighting.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+SceneLighting.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC6C883B21FBEAC300B07A9F /* ARView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+Gestures.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC1E2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ARSCNViewDelegate.swift"; sourceTree = "<group>"; tabWidth = 4; };
@@ -466,6 +477,10 @@
 		AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARViewManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		ACB0C61421FEC6CA003AC046 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-Bridging-Header.h"; sourceTree = "<group>"; };
+		ACECA090221649EE000A0899 /* MultipeerSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; };
+		ACECA0BF221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+MultipeerConnectivity.swift"; sourceTree = "<group>"; tabWidth = 4; };
+		ACECA0C222164A0C000A0899 /* MultipeerUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerUpdate.swift; sourceTree = "<group>"; };
+		ACFDF71C220A6E61007C79E1 /* ARViewModel.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARViewModel.swift; sourceTree = "<group>"; tabWidth = 4; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		BDC48B429CBD489AB40433AA /* libRCTBEEPickerManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTBEEPickerManager.a; sourceTree = "<group>"; };
 		C1A8A6DCFF1C4516BD4D5DA8 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -620,21 +635,11 @@
 		13B07FAE1A68108700A75B9A /* FreeRealEstate */ = {
 			isa = PBXGroup;
 			children = (
-				AC3DB41A219668C700AF31E7 /* AppDelegate.swift */,
-				AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */,
-				AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */,
-				AC89AC602202928F00B37C1E /* ARViewManager+ObjectPlacement.swift */,
-				AC89AC63220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift */,
-				AC89AC1E2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift */,
-				AC89AC21220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift */,
-				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
-				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
-				AC6C883B21FBEAC300B07A9F /* ARView.swift */,
-				AC89AC6C22040D7200B37C1E /* FocusSquare.swift */,
-				AC89AC662202B3C200B37C1E /* BoundingBox.swift */,
+				ACECA0C522164A14000A0899 /* Multipeer */,
+				ACFDF74B220AB766007C79E1 /* UI Elements */,
+				ACFDF74D220AB7EA007C79E1 /* ARView Logic */,
+				ACFDF74E220AB823007C79E1 /* React Native Bridge */,
 				ACB0C61421FEC6CA003AC046 /* art.scnassets */,
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
-				ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 			);
 			name = FreeRealEstate;
@@ -770,6 +775,53 @@
 				2D02E4901E0B4A5D006451C7 /* FreeRealEstate-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		ACECA0C522164A14000A0899 /* Multipeer */ = {
+			isa = PBXGroup;
+			children = (
+				ACECA0BF221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift */,
+				ACECA0C222164A0C000A0899 /* MultipeerUpdate.swift */,
+				ACECA090221649EE000A0899 /* MultipeerSession.swift */,
+			);
+			name = Multipeer;
+			sourceTree = "<group>";
+		};
+		ACFDF74B220AB766007C79E1 /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				AC6C883B21FBEAC300B07A9F /* ARView.swift */,
+				AC89AC6C22040D7200B37C1E /* FocusSquare.swift */,
+				AC89AC662202B3C200B37C1E /* BoundingBox.swift */,
+				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
+			);
+			name = "UI Elements";
+			sourceTree = "<group>";
+		};
+		ACFDF74D220AB7EA007C79E1 /* ARView Logic */ = {
+			isa = PBXGroup;
+			children = (
+				ACFDF71C220A6E61007C79E1 /* ARViewModel.swift */,
+				AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */,
+				AC46625422153947006E18D7 /* ARViewManager+SceneLighting.swift */,
+				AC89AC602202928F00B37C1E /* ARViewManager+ObjectPlacement.swift */,
+				AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */,
+				AC89AC63220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift */,
+				AC89AC1E2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift */,
+				AC89AC21220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift */,
+			);
+			name = "ARView Logic";
+			sourceTree = "<group>";
+		};
+		ACFDF74E220AB823007C79E1 /* React Native Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */,
+				AC3DB41A219668C700AF31E7 /* AppDelegate.swift */,
+				AC94C39E219C2DEB00D54C64 /* ARViewManager.m */,
+				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+			);
+			name = "React Native Bridge";
 			sourceTree = "<group>";
 		};
 		ADBDB9201DFEBF0600ED6528 /* Products */ = {
@@ -1418,17 +1470,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACFDF71E220A6E61007C79E1 /* ARViewModel.swift in Sources */,
 				AC3330AF21FBEF0200505BF8 /* VirtualPlane.swift in Sources */,
 				AC89AC1D2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */,
 				AC89AC622202928F00B37C1E /* ARViewManager+ObjectPlacement.swift in Sources */,
 				AC89AC23220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift in Sources */,
 				AC89AC6E22040D7200B37C1E /* FocusSquare.swift in Sources */,
+				ACECA0C1221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift in Sources */,
 				AC3330B121FBEF0C00505BF8 /* ARViewManager.swift in Sources */,
 				AC3330B021FBEF0800505BF8 /* ARViewManager.m in Sources */,
+				ACECA0BE221649EE000A0899 /* MultipeerSession.swift in Sources */,
+				ACECA0C422164A0C000A0899 /* MultipeerUpdate.swift in Sources */,
 				00E356F31AD99517003FC87E /* FreeRealEstateTests.m in Sources */,
 				AC89AC65220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift in Sources */,
 				AC89AC202202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift in Sources */,
 				AC89AC682202B3C200B37C1E /* BoundingBox.swift in Sources */,
+				AC46625622153947006E18D7 /* ARViewManager+SceneLighting.swift in Sources */,
 				AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */,
 				0AD3378F21AF8BDF00F1C634 /* ARViewManagerTests.swift in Sources */,
 				AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */,
@@ -1441,8 +1498,10 @@
 			files = (
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
 				AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */,
+				ACECA0C322164A0C000A0899 /* MultipeerUpdate.swift in Sources */,
 				AC89AC672202B3C200B37C1E /* BoundingBox.swift in Sources */,
 				AC89AC612202928F00B37C1E /* ARViewManager+ObjectPlacement.swift in Sources */,
+				AC46625522153947006E18D7 /* ARViewManager+SceneLighting.swift in Sources */,
 				AC89AC1C2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */,
 				AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */,
 				EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */,
@@ -1450,7 +1509,10 @@
 				AC89AC64220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift in Sources */,
 				AC89AC6D22040D7200B37C1E /* FocusSquare.swift in Sources */,
 				AC89AC22220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift in Sources */,
+				ACECA0BD221649EE000A0899 /* MultipeerSession.swift in Sources */,
 				AC89AC1F2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift in Sources */,
+				ACECA0C0221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift in Sources */,
+				ACFDF71D220A6E61007C79E1 /* ARViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
