@@ -37,7 +37,6 @@ extension ARViewManager {
     }
 
     func receivedData(_ data: Data, from peer: MCPeerID) {
-        //let update = MultipeerUpdate(data: data)
         print("PEER: INSIDE RECEIVED DATA")
         do {
             if let update = try NSKeyedUnarchiver.unarchivedObject(ofClass: MultipeerUpdate.self, from: data) {

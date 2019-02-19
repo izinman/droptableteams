@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, ScrollView, View, Picker, Animated } from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown';
 import {Tile} from 'react-native-elements'
-import ARScene from './ARView.js';
 import { Button }  from 'react-native-elements';
 
 type Props = {};
@@ -113,42 +112,5 @@ export default class MoveControls extends Component<Props> {
           </View>
           </Animated.View>
         );
-    }
-    handleControl(e) {
-        console.log('Clicked', e);
-        buttonPressed = e;
-        this.adjustObject();
-        if (e == "confirmPlacement") {
-            objectSelected = false;
-            this.forceUpdate();
-        }
-    }
-    test = () => {
-      this.setState({objectSelected: !this.state.objectSelected})      
-    };
-    update = () => {
-        UIManager.dispatchViewManagerCommand(
-            findNodeHandle(this.ref),
-            UIManager[ARView].Commands.enterPlacementMode,
-            [42]
-        );
-    };
-
-    choose = () => {
-        this.setState({AR: 0});
-    };
-
-    adjustObject = () => {
-        UIManager.dispatchViewManagerCommand(
-            findNodeHandle(this.ref),
-            UIManager[ARView].Commands.adjustObject,
-            [buttonPressed]
-        );
-    };
-
-    selectObject = e => {
-        objectSelected = true;
-        console.log("Set objectSelected: ", objectSelected);
-        this.forceUpdate();
     }
 }

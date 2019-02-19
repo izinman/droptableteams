@@ -34,9 +34,15 @@ extension ARViewManager {
             
             // Done after sendNodeUpdate so that nil isn't sent and gives the receiver a head start on placing
             // Add the object to the scene
+            var hasher = Hasher()
+            hasher.combine(newNode)
+            let hashValue = Int64(hasher.finalize())
+            
+            arView.objectHashTable[hashValue] = newNode
+            arView.objects.append(newNode)
+            
             arView.scene.rootNode.addChildNode(newNode)
             newNode.runAction(appearAction)
-            arView.objects.append(newNode)
         }
     }
     

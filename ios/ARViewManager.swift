@@ -14,7 +14,7 @@ class ARViewManager : RCTViewManager {
     
     var arView = ARView()
     var mapProvider: MCPeerID?
-    var multipeerSession: MultipeerSession = MultipeerSession()
+    lazy var multipeerSession: MultipeerSession = MultipeerSession()
     
     // REPLACE WITH REACT BUTTONS
     var sendMapButtonEnabled: Bool = false
