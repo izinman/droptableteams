@@ -11,7 +11,7 @@ import MultipeerConnectivity
 class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     static let serviceType = "free-realestate"
     
-    private let myPeerID = MCPeerID(displayName: UIDevice.current.name)
+    let myPeerID = MCPeerID(displayName: UIDevice.current.name)
     private var session: MCSession!
     private var serviceAdvertiser: MCNearbyServiceAdvertiser!
     private var serviceBrowser: MCNearbyServiceBrowser!
@@ -19,7 +19,7 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
     
     override init() {
         super.init()
-
+        
         session = MCSession(peer: myPeerID, securityIdentity: nil, encryptionPreference: .required)
         session.delegate = self
         
@@ -44,7 +44,7 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
     var connectedPeers: [MCPeerID] {
         return session.connectedPeers
     }
-
+    
     
     //
     // MCSessionDelegate Functions
@@ -57,7 +57,7 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {}
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
-
+    
     
     //
     // MCNearbyServiceBrowserDelegate Functions
@@ -75,8 +75,10 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
     // MCNearbyServiceAdvertiserDelegate Functions
     //
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        invitationHandler(true, session)
-        print("PEER: ACCEPTED\n")
+        if peerID != myPeerID {
+            invitationHandler(true, session)
+            print("PEER: ACCEPTED\n")
+        }
     }
     
 }

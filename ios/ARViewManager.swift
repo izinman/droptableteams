@@ -20,7 +20,6 @@ class ARViewManager : RCTViewManager {
     
     // REPLACE WITH REACT BUTTONS
     var sendMapButtonEnabled: Bool = false
-    var sessionInfoLabel: String = ""
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
@@ -58,7 +57,21 @@ class ARViewManager : RCTViewManager {
         
         // Run the ARView
         arView.session.run(config)
+        arView.session.delegate = self
         setupDirectionalLighting(queue: DispatchQueue.main)
+        
+        // Multipeer UILabel and UIView
+        arView.mappingStatusLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        arView.mappingStatusLabel.center = CGPoint(x: 160, y: 285)
+        arView.mappingStatusLabel.textAlignment = .center
+        arView.mappingStatusLabel.text = "I'm a test label"
+        arView.addSubview(arView.mappingStatusLabel)
+        
+        arView.sessionInfoLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 400, height: 21))
+        arView.sessionInfoLabel.center = CGPoint(x: 660, y: 285)
+        arView.sessionInfoLabel.textAlignment = .center
+        arView.sessionInfoLabel.text = "I'm a test label"
+        arView.addSubview(arView.sessionInfoLabel)
         
         return arView
     }

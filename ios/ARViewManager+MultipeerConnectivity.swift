@@ -9,7 +9,7 @@ import ARKit
 import SceneKit
 import MultipeerConnectivity
 
-extension ARViewManager {
+extension ARViewManager: ARSessionDelegate {
 
     @objc func sendMap(_ node: ARSCNView!) {
         print("PEER: Map attempting to be shared")
@@ -19,14 +19,18 @@ extension ARViewManager {
             guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
                 else { fatalError("can't encode map") }
             self.multipeerSession.sendToAllPeers(data)
-            print("PEER: Map sent\n")
+            self.mapProvider = self.multipeerSession.myPeerID
         }
+        print("PEER: Map sent\n")
     }
     
     func sendNodeUpdate(forNode node: SCNNode, withAction action: SCNAction?) {
         var hasher = Hasher()
         hasher.combine(node)
-        let hashValue = Int64(hasher.finalize())
+        var hashValue = Int64(hasher.finalize())
+        if let peerHash = arViewModel.selfHashToPeerHash[hashValue] {
+            hashValue = peerHash
+        }
         print("PEER: sender hash: \(hashValue)")
         let sendNode = arViewModel.objects.contains(node) ? nil : node
         let nodeUpdate = MultipeerUpdate(node: sendNode, nodeHash: hashValue, action: action)
@@ -42,27 +46,58 @@ extension ARViewManager {
         do {
             if let update = try NSKeyedUnarchiver.unarchivedObject(ofClass: MultipeerUpdate.self, from: data) {
                 print("PEER: INSIDE IF!!!")
-                let nodeHash = update.nodeHash
+                let peerNodeHash = update.nodeHash
+                print("PERR: peerNodeHash \(peerNodeHash)")
                 if let action = update.action  {
                     print("PEER: DATA RECEIVED!!!")
                     let actionNode: SCNNode
                     if let node = update.node {
                         arView.scene.rootNode.addChildNode(node)
                         arViewModel.objects.append(node)
-                        arViewModel.objectHashTable[update.nodeHash] = node
+                        
+                        var hasher = Hasher()
+                        hasher.combine(node)
+                        let selfNodeHash = Int64(hasher.finalize())
+                        
+                        arViewModel.objectHashTable[peerNodeHash] = node
+                        arViewModel.selfHashToPeerHash[selfNodeHash] = peerNodeHash
+                        
                         actionNode = node
                     } else {
-                        guard let unwrappedNode = arViewModel.objectHashTable[nodeHash] else {
-                            fatalError("Node not in hash table")
+                        // Handle Rotate or Pan
+                        if let unwrappedNode = arViewModel.objectHashTable[peerNodeHash]  {
+                            // self created node
+                            actionNode = unwrappedNode
+                        } else {
+                            // peer created node
+                            guard let selfNodeHash = arViewModel.selfHashToPeerHash[peerNodeHash], let unwrappedNode = arViewModel.objectHashTable[selfNodeHash] else {
+                                fatalError("PEER: Node not in hash table")
+                            }
+                            actionNode = unwrappedNode
                         }
-                         actionNode = unwrappedNode
                     }
                     actionNode.runAction(action)
-                } else if let removedNode = arViewModel.objectHashTable[nodeHash], let index = arViewModel.objects.index(of: removedNode) {
-                    // Action is nil
-                    arViewModel.objects.remove(at: index)
-                    arViewModel.objectHashTable.removeValue(forKey: nodeHash)
-                    removedNode.removeFromParentNode()
+                } else {
+                    // Action is nil, remove the node
+                    if
+                        let removedNode = arViewModel.objectHashTable[peerNodeHash],
+                        let index = arViewModel.objects.index(of: removedNode) {
+                        // self created node
+                        
+                        arViewModel.objects.remove(at: index)
+                        arViewModel.objectHashTable.removeValue(forKey: peerNodeHash)
+                        removedNode.removeFromParentNode()
+                    } else if
+                        let selfNodeHash = arViewModel.selfHashToPeerHash[peerNodeHash],
+                        let removedNode = arViewModel.objectHashTable[selfNodeHash],
+                        let index = arViewModel.objects.index(of: removedNode) {
+                        // peer craeted node
+                        
+                        arViewModel.objects.remove(at: index)
+                        arViewModel.objectHashTable.removeValue(forKey: peerNodeHash)
+                        arViewModel.selfHashToPeerHash.removeValue(forKey: peerNodeHash)
+                        removedNode.removeFromParentNode()
+                    }
                 }
             }
         } catch {
@@ -90,73 +125,19 @@ extension ARViewManager {
             print("can't decode data recieved from \(peer)")
         }
     }
-    
-    
-    // Everything below this does nothing because the UI isn't ready -> useless
-    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        updateSessionInfoLabel(for: session.currentFrame!, trackingState: camera.trackingState)
-    }
-    
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        
-        switch frame.worldMappingStatus {
-        case .notAvailable, .limited:
-            sendMapButtonEnabled = false
-            print("PEERS: ", multipeerSession.connectedPeers.isEmpty)
-        case .extending:
-            sendMapButtonEnabled = !multipeerSession.connectedPeers.isEmpty
-            print("PEERS: ", multipeerSession.connectedPeers.isEmpty)
-        case .mapped:
-            sendMapButtonEnabled = !multipeerSession.connectedPeers.isEmpty
-            print("PEERS: ", multipeerSession.connectedPeers.isEmpty)
-        }
-        //
-        // mappingStatusLabel.text = frame.worldMappingStatus.description
-        updateSessionInfoLabel(for: frame, trackingState: frame.camera.trackingState)
-    }
-    
-    private func updateSessionInfoLabel(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
-        // Update the UI to provide feedback on the state of the AR experience.
-        let message: String
-        
-        switch trackingState {
-        case .normal where frame.anchors.isEmpty && multipeerSession.connectedPeers.isEmpty:
-            // No planes detected; provide instructions for this app's AR interactions.
-            message = "Move around to map the environment, or wait to join a shared session."
-            
-        case .normal where !multipeerSession.connectedPeers.isEmpty && mapProvider == nil:
-            let peerNames = multipeerSession.connectedPeers.map({ $0.displayName }).joined(separator: ", ")
-            message = "Connected with \(peerNames)."
-            
-        case .notAvailable:
-            message = "Tracking unavailable."
-            
-        case .limited(.excessiveMotion):
-            message = "Tracking limited - Move the device more slowly."
-            
-        case .limited(.insufficientFeatures):
-            message = "Tracking limited - Point the device at an area with visible surface detail, or improve lighting conditions."
-            
-        case .limited(.initializing) where mapProvider != nil,
-             .limited(.relocalizing) where mapProvider != nil:
-            message = "Received map from \(mapProvider!.displayName)."
-            
-        case .limited(.relocalizing):
-            message = "Resuming session — move to where you were when the session was interrupted."
-            
-        case .limited(.initializing):
-            message = "Initializing AR session."
-            
-        default:
-            // No feedback needed when tracking is normal and planes are visible.
-            // (Nor when in unreachable limited-tracking states.)
-            message = ""
-            
-        }
-        
-        sessionInfoLabel = message
-        //sessionInfoView.isHidden = message.isEmpty
-    }
-    // Stop all this does nothing because UI ins't ready
+}
 
+extension ARFrame.WorldMappingStatus {
+    public var description: String {
+        switch self {
+        case .notAvailable:
+            return "Not Available"
+        case .limited:
+            return "Limited"
+        case .extending:
+            return "Extending"
+        case .mapped:
+            return "Mapped"
+        }
+    }
 }

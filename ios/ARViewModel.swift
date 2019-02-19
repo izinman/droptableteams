@@ -15,6 +15,7 @@ class ARViewModel {
     
     var objects = [SCNNode]()
     var objectHashTable = [Int64:SCNNode]()
+    var selfHashToPeerHash = [Int64:Int64]()
     var objectToPlace: String?
     
     var sceneLight: SCNNode?

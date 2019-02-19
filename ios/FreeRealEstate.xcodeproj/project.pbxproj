@@ -468,7 +468,7 @@
 		AC6C883B21FBEAC300B07A9F /* ARView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+Gestures.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC1E2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ARSCNViewDelegate.swift"; sourceTree = "<group>"; tabWidth = 4; };
-		AC89AC21220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ARSessionDelegate.swift"; sourceTree = "<group>"; };
+		AC89AC21220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ARSessionDelegate.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC602202928F00B37C1E /* ARViewManager+ObjectPlacement.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ObjectPlacement.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC63220292FF00B37C1E /* ARViewManager+ObjectAdjustment.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ObjectAdjustment.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC662202B3C200B37C1E /* BoundingBox.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -477,7 +477,7 @@
 		AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARViewManager.swift; sourceTree = "<group>"; tabWidth = 4; };
 		ACB0C61421FEC6CA003AC046 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		ACBAC57F2195152C00795235 /* FreeRealEstate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreeRealEstate-Bridging-Header.h"; sourceTree = "<group>"; };
-		ACECA090221649EE000A0899 /* MultipeerSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; };
+		ACECA090221649EE000A0899 /* MultipeerSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; tabWidth = 4; };
 		ACECA0BF221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+MultipeerConnectivity.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		ACECA0C222164A0C000A0899 /* MultipeerUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerUpdate.swift; sourceTree = "<group>"; };
 		ACFDF71C220A6E61007C79E1 /* ARViewModel.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARViewModel.swift; sourceTree = "<group>"; tabWidth = 4; };
