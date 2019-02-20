@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, UIManager, findNodeHandle, Animated, requireNativeComponent, Dimensions} from 'react-native';
 import { Button }  from 'react-native-elements';
 import StyleView from './StyleView';
-import MoveControls from './MoveControls.js'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 import AnimateView from './AnimateView.js'
 import FurnitureAnimator from './FurnitureAnimator';
 type Props = {};
@@ -46,7 +45,7 @@ export default class ARScene extends Component<Props> {
                                 title={""}
                                 icon={
                                   <Icon
-                                    name="check-circle-o"
+                                    name="check-circle"
                                     size={height * .075}
                                     color="white"
                                   />
@@ -65,7 +64,7 @@ export default class ARScene extends Component<Props> {
                             />
                         </Animated.View>
                     </View>
-                    <View style = {{position: 'absolute', top: 0, left: 0}}>
+                    {/* <View style = {{position: 'absolute', top: 0, left: 0}}>
                             <Button
                             title={'Send Map'}
                                 ViewComponent={require('react-native-linear-gradient').default}
@@ -79,7 +78,7 @@ export default class ARScene extends Component<Props> {
                                 borderRadius: height, height: height* .075}}
                                 containerStyle={{ height: height, width: height*.075, alignSelf: 'center'}}
                                 onPress={this.handleControl.bind(this, "sendMap")}                            />
-                    </View>
+                    </View> */}
                     <View style = {{position: 'absolute', backgroundColor: "#00000000", height: '100%', zIndex: 25, bottom: -height}}>
                   <FurnitureAnimator onPress={this.selectFurniture}/>
                   </View>

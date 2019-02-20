@@ -31,11 +31,11 @@ handleClick = () => {
             </AnimateView>
             <AnimateView>
             <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', alignContent: 'center',height: 20}}>
-            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./artem.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./micheal.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./isaac.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./jake.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./cole-min.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./artem-min.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./micheal-min.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./isaac-min.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./jake-min.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
             </View>
             </AnimateView>
             

@@ -13,7 +13,12 @@ import SceneKit
 extension ARViewManager {
     
     @objc func setObjectToPlace(_ node: ARSCNView!, objectName: String) {
-        arViewModel.objectToPlace = objectName
+        //arViewModel.objectToPlace = objectName
+        if (!firstPlaced) {
+            arViewModel.objectToPlace = "chair_2"
+        } else {
+            arViewModel.objectToPlace = "chair_1"
+        }
     }
     
     @objc func placeObject(_ node: ARSCNView!) {
@@ -37,6 +42,9 @@ extension ARViewManager {
             arView.scene.rootNode.addChildNode(newNode)
             newNode.runAction(appearAction)
             arViewModel.objects.append(newNode)
+            if (!firstPlaced) {
+                firstPlaced = true
+            }
         }
     }
     
@@ -44,11 +52,15 @@ extension ARViewManager {
         
         // Create a node object from the .scn file
         guard let name = objName else { return nil }
+//        if (firstPlaced) {
+//            name = "chair_2"
+//        }
         let scnFileName = "art.scnassets/" + name + ".scn"
         guard let tmpScene = SCNScene(named: scnFileName) else { return nil }
         
         // Default material is _material_1 except for couch_2 which will break without this
-        let objectMaterial = (name != "couch_2") ? "_material_1" : "Obj3d66_512505_1_864_wire_000000000"
+        //let objectMaterial = (name != "couch_2") ? "_material_1" : "Obj3d66_512505_1_864_wire_000000000"
+        let objectMaterial = (firstPlaced) ? "_material_1" : "pillow_fabric"
         let node = tmpScene.rootNode.childNode(withName: objectMaterial, recursively: true)!
         
         // Initialize rotation value to ensure the object will be properly oriented

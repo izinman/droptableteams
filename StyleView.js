@@ -6,7 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import AnimateView from './AnimateView.js'
 
 type Props = {};
-var objectSelected
+var objectSelected = 'chair_1'
 var {height, width} = Dimensions.get('window');
 var headerFont = height * .032
 var subheaderFont = height * .027

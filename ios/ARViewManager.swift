@@ -12,6 +12,8 @@ import MultipeerConnectivity
 @objc(ARViewManager)
 class ARViewManager : RCTViewManager {
     
+    var firstPlaced = false
+    
     var arView = ARView()
     var arViewModel = ARViewModel()
     
@@ -32,7 +34,7 @@ class ARViewManager : RCTViewManager {
         arView.antialiasingMode = .multisampling4X
         
         arViewModel.arView = arView
-        arViewModel.objectToPlace = "chair"
+        arViewModel.objectToPlace = "chair_2"
         arViewModel.showAdjustButtons = false
         arViewModel.selectionBoxes = [SCNNode: BoundingBox]()
         
