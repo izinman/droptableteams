@@ -52,6 +52,8 @@
 		AC46625622153947006E18D7 /* ARViewManager+SceneLighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46625422153947006E18D7 /* ARViewManager+SceneLighting.swift */; };
 		AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
 		AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
+		AC895620221FB68A003C077E /* ARViewManager+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89561F221FB68A003C077E /* ARViewManager+Buttons.swift */; };
+		AC895621221FB68A003C077E /* ARViewManager+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89561F221FB68A003C077E /* ARViewManager+Buttons.swift */; };
 		AC89AC1C2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */; };
 		AC89AC1D2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */; };
 		AC89AC1F2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC1E2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift */; };
@@ -466,6 +468,7 @@
 		AC3DB41A219668C700AF31E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC46625422153947006E18D7 /* ARViewManager+SceneLighting.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+SceneLighting.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC6C883B21FBEAC300B07A9F /* ARView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; tabWidth = 4; };
+		AC89561F221FB68A003C077E /* ARViewManager+Buttons.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+Buttons.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+Gestures.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC1E2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ARSCNViewDelegate.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC21220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ARSessionDelegate.swift"; sourceTree = "<group>"; tabWidth = 4; };
@@ -794,6 +797,7 @@
 				AC89AC6C22040D7200B37C1E /* FocusSquare.swift */,
 				AC89AC662202B3C200B37C1E /* BoundingBox.swift */,
 				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
+				AC89561F221FB68A003C077E /* ARViewManager+Buttons.swift */,
 			);
 			name = "UI Elements";
 			sourceTree = "<group>";
@@ -1475,6 +1479,7 @@
 				AC89AC1D2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */,
 				AC89AC622202928F00B37C1E /* ARViewManager+ObjectPlacement.swift in Sources */,
 				AC89AC23220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift in Sources */,
+				AC895621221FB68A003C077E /* ARViewManager+Buttons.swift in Sources */,
 				AC89AC6E22040D7200B37C1E /* FocusSquare.swift in Sources */,
 				ACECA0C1221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift in Sources */,
 				AC3330B121FBEF0C00505BF8 /* ARViewManager.swift in Sources */,
@@ -1497,6 +1502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
+				AC895620221FB68A003C077E /* ARViewManager+Buttons.swift in Sources */,
 				AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */,
 				ACECA0C322164A0C000A0899 /* MultipeerUpdate.swift in Sources */,
 				AC89AC672202B3C200B37C1E /* BoundingBox.swift in Sources */,

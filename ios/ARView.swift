@@ -15,6 +15,9 @@ class ARView : ARSCNView, ARSCNViewDelegate {
     var focusSquare: FocusSquare?
     var onObjectSelect: RCTDirectEventBlock?
     var sessionInfoLabel: UILabel!
+    var placeButton: UIButton!
+    var confirmButton: UIButton!
+    var removeButton: UIButton!
     
     // Necessary for React Native to recognize object selection event emitter
     @objc func setOnObjectSelect(_ val: @escaping RCTDirectEventBlock) {

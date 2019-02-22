@@ -30,6 +30,7 @@ extension ARViewManager {
                 if node == prevSelectedNode {
                     arViewModel.selectedNode = nil
                     arView.focusSquare?.appear()
+                    hideAdjustmentButtons()
                     return
                 }
             }
@@ -50,6 +51,7 @@ extension ARViewManager {
             
             // Tell React to display adjustment button menu
             arView.onObjectSelect!([:])
+            showAdjustmentButtons()
         }
     }
     

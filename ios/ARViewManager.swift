@@ -59,6 +59,9 @@ class ARViewManager : RCTViewManager {
         arView.session.run(config)
         arView.session.delegate = self
         setupDirectionalLighting(queue: DispatchQueue.main)
+        addPlaceButton()
+        addConfirmButton()
+        addRemoveButton()
         
         // Multipeer UILabel and UIView
         arView.sessionInfoLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 400, height: 21))
