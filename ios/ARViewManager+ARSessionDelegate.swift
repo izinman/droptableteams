@@ -19,17 +19,6 @@ extension ARViewManager {
     }
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        
-        switch frame.worldMappingStatus {
-        case .notAvailable, .limited:
-            sendMapButtonEnabled = false
-        case .extending:
-            sendMapButtonEnabled = !multipeerSession.connectedPeers.isEmpty
-        case .mapped:
-            sendMapButtonEnabled = !multipeerSession.connectedPeers.isEmpty
-        }
-        //
-        arView.mappingStatusLabel.text = frame.worldMappingStatus.description
         updateSessionInfoLabel(for: frame, trackingState: frame.camera.trackingState)
     }
     
@@ -45,25 +34,10 @@ extension ARViewManager {
         case .normal where !multipeerSession.connectedPeers.isEmpty && mapProvider == multipeerSession.myPeerID:
             let peerNames = multipeerSession.connectedPeers.map({ $0.displayName }).joined(separator: ", ")
             message = "Connected with \(peerNames)."
-            
-        case .notAvailable:
-            message = "Tracking unavailable."
-            
-        case .limited(.excessiveMotion):
-            message = "Tracking limited - Move the device more slowly."
-            
-        case .limited(.insufficientFeatures):
-            message = "Tracking limited - Point the device at an area with visible surface detail, or improve lighting conditions."
-            
+    
         case .limited(.initializing) where mapProvider != nil,
              .limited(.relocalizing) where mapProvider != nil:
             message = "Received map from \(mapProvider!.displayName)."
-            
-        case .limited(.relocalizing):
-            message = "Resuming session — move to where you were when the session was interrupted."
-            
-        case .limited(.initializing):
-            message = "Initializing AR session."
             
         default:
             // No feedback needed when tracking is normal and planes are visible.

@@ -16,13 +16,16 @@ class ARViewManager : RCTViewManager {
     var arViewModel = ARViewModel()
     
     var mapProvider: MCPeerID?
-    var multipeerSession: MultipeerSession = MultipeerSession()
+    lazy var multipeerSession: MultipeerSession = MultipeerSession()
     
     // REPLACE WITH REACT BUTTONS
     var sendMapButtonEnabled: Bool = false
     
     // Returns an ARSCNView for React to present
     override func view() -> UIView {
+        // Configure dataHandler
+        multipeerSession.receivedDataHandler = receivedData
+        
         // Initialize defaults and member variables for ARView
         arView.bounds = UIScreen.main.bounds
         arView.delegate = self
@@ -52,25 +55,16 @@ class ARViewManager : RCTViewManager {
         config.planeDetection = .horizontal
         config.isLightEstimationEnabled = true
         
-        // Configure dataHandler
-        multipeerSession.receivedDataHandler = receivedData
-        
         // Run the ARView
         arView.session.run(config)
         arView.session.delegate = self
         setupDirectionalLighting(queue: DispatchQueue.main)
         
         // Multipeer UILabel and UIView
-        arView.mappingStatusLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-        arView.mappingStatusLabel.center = CGPoint(x: 160, y: 285)
-        arView.mappingStatusLabel.textAlignment = .center
-        arView.mappingStatusLabel.text = "I'm a test label"
-        arView.addSubview(arView.mappingStatusLabel)
-        
         arView.sessionInfoLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 400, height: 21))
         arView.sessionInfoLabel.center = CGPoint(x: 660, y: 285)
         arView.sessionInfoLabel.textAlignment = .center
-        arView.sessionInfoLabel.text = "I'm a test label"
+        arView.sessionInfoLabel.text = ""
         arView.addSubview(arView.sessionInfoLabel)
         
         return arView
