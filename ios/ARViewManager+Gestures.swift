@@ -23,16 +23,10 @@ extension ARViewManager {
             // If an object was already selected, make its selection box disappear and delay the appearance of a new one
             var delayAppear = 0.0
             if let prevSelectedNode = arViewModel.selectedNode {
+                if node == prevSelectedNode { return }
+                
                 arViewModel.selectionBoxes[prevSelectedNode]?.disappear()
                 delayAppear = 0.2
-                
-                // The user has tapped an object to deselect it, thus there is now no selected node and the focusSquare should appear
-                if node == prevSelectedNode {
-                    arViewModel.selectedNode = nil
-                    arView.focusSquare?.appear()
-                    hideAdjustmentButtons()
-                    return
-                }
             }
             
             // Select the node and get a reference to its selection box

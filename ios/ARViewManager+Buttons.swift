@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import ARKit
+import SceneKit
 
 extension ARViewManager {
     func addPlaceButton() {
@@ -32,7 +34,7 @@ extension ARViewManager {
         button.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         button.clipsToBounds = true
         button.setImage(UIImage(named:"art.scnassets/confirm-button.png"), for: .normal)
-        button.addTarget(self, action: #selector(placeObject), for: .touchUpInside)
+        button.addTarget(self, action: #selector(confirmAdjustment), for: .touchUpInside)
         button.alpha = 0.0
         button.isEnabled = false
         arView.addSubview(button)
@@ -46,7 +48,7 @@ extension ARViewManager {
         button.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         button.clipsToBounds = true
         button.setImage(UIImage(named:"art.scnassets/remove-button.png"), for: .normal)
-        button.addTarget(self, action: #selector(placeObject), for: .touchUpInside)
+        button.addTarget(self, action: #selector(removeObject), for: .touchUpInside)
         button.alpha = 0.0
         button.isEnabled = false
         arView.addSubview(button)
