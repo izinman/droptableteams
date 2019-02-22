@@ -7,6 +7,7 @@ import ARScene from './ARView.js';
 import AnimateView from './AnimateView.js'
 
 type Props = {};
+var {height, width} = Dimensions.get('window');
 export default class App extends Component<Props> {
   constructor(props) {
     super(props);
@@ -21,31 +22,28 @@ handleClick = () => {
       if(this.state.home == 0){
         return (
           
-          <View style={{ flex: 1, flexDirection: 'row', alignContent: 'flex-start', width: '100%', justifyContent: 'center', alignSelf: 'center' }}>
+          <View style={{width: '100%', justifyContent: 'center', alignSelf: 'center' }}>
             <View style = {{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, zIndex: 0, backgroundColor: "#000000", opacity: 0.55, height: '100%'}}></View>
              <Image source={require('./home.jpg')} style ={styles.image} blurRadius = {0}/>
              
           <View styles={styles.root} >
-          <AnimateView>
             <Text style ={styles.welcome4}>designAR </Text>
-            </AnimateView>
-            <AnimateView>
-            <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', alignContent: 'center',height: 20}}>
+            
+            <View style={{justifyContent:'center', alignContent: 'center',height: height}}>
+            {/* <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
             <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./artem.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./micheal.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./isaac.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./jake.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
+            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/> */}
             </View>
-            </AnimateView>
             
             <View style={styles.button_bg}>
             <Button 
-              title="start"
+              title="START"
               ViewComponent={require('react-native-linear-gradient').default}
               titleStyle={{fontWeight: '600', fontSize: 30, fontFamily: 'Product Sans'}}
               linearGradientProps={{
-                colors: ['#304FFE', '#304FFE'],
+                colors: ['#304FFE00', '#304FFE00'],
                   start: {x:0, y:0},
                   end: {x:0.5, y:0},
               }}
@@ -76,44 +74,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: "25%"
   },
-  welcome1: {
-
-    color: "#FFFFFF", 
-    fontWeight: '300',
-    fontFamily: 'Product Sans',
-    fontSize: 34, 
-    alignSelf: 'center',
-    textAlign: 'center',
-    paddingBottom: 55,
-    paddingTop: '20%',
-  },
-  welcome2: {
-    color: "#FFFFFF", 
-    fontWeight: "bold", 
-    fontSize: 32, 
-    width: '100%',
-    textAlign: 'center',
-    fontStyle: 'italic',
-    paddingBottom: '15%'
-  },
-  welcome3: {
-    color: "#FFFFFF", 
-    fontWeight: "300", 
-    fontSize: 25, 
-    width: '100%',
-    textAlign: 'center',
-    paddingBottom: "5%"
-  },
   welcome4: {
     color: "#FFFFFF", 
     fontWeight: "600", 
-    fontSize: 55, 
+    fontSize: 80, 
     width: '100%',
     fontFamily: 'Product Sans',
     fontStyle: 'italic',
     textAlign: 'center',
-    paddingTop: 250,
-    paddingBottom: 25
+    position: 'absolute',
+    top: height*.285
   },
   image: {
     position: "absolute",
@@ -127,7 +97,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     position: 'absolute',
     bottom: '10%',
-    paddingBottom: '20%'
+    paddingBottom: '10%'
   },
 });
 

@@ -34,7 +34,7 @@ class ARViewManager : RCTViewManager {
         arView.antialiasingMode = .multisampling4X
         
         arViewModel.arView = arView
-        arViewModel.objectToPlace = "chair"
+        arViewModel.objectToPlace = "chair_1"
         arViewModel.showAdjustButtons = false
         arViewModel.selectionBoxes = [SCNNode: BoundingBox]()
         
