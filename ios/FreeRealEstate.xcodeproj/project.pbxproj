@@ -34,6 +34,8 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* FreeRealEstateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FreeRealEstateTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		2EC5F86B2220F5E300FE5160 /* ARViewManager+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */; };
+		2ECFD9672220EEB400EAD81D /* ARViewManager+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */; };
 		57C26DFFCF7348459BD41C54 /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC48B429CBD489AB40433AA /* libRCTBEEPickerManager.a */; };
 		58C6881D41EF4226827D56FA /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C29908D6E9F54553A20DFD9D /* EvilIcons.ttf */; };
 		757DBC290C474362A3523E7D /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F8CC78A9BC645B19D086337 /* Feather.ttf */; };
@@ -43,6 +45,7 @@
 		8AA86A91C0EB496B89302B4F /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD8018113EC34049A1CA8C5C /* FontAwesome5_Regular.ttf */; };
 		A5867B855DC0493CA0599D7F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94ABB681823D444494F53174 /* SimpleLineIcons.ttf */; };
 		A85F93EA30BC4A41A7DF16BA /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F72C067DF414DDC9171BC1F /* Foundation.ttf */; };
+		AC3330AF21FBEF0200505BF8 /* VirtualPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDABA60321B35F3900833E0F /* VirtualPlane.swift */; };
 		AC3330B021FBEF0800505BF8 /* ARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC94C39E219C2DEB00D54C64 /* ARViewManager.m */; };
 		AC3330B121FBEF0C00505BF8 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */; };
 		AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3DB41A219668C700AF31E7 /* AppDelegate.swift */; };
@@ -51,8 +54,6 @@
 		AC46625622153947006E18D7 /* ARViewManager+SceneLighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46625422153947006E18D7 /* ARViewManager+SceneLighting.swift */; };
 		AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
 		AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C883B21FBEAC300B07A9F /* ARView.swift */; };
-		AC895620221FB68A003C077E /* ARViewManager+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89561F221FB68A003C077E /* ARViewManager+Buttons.swift */; };
-		AC895621221FB68A003C077E /* ARViewManager+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89561F221FB68A003C077E /* ARViewManager+Buttons.swift */; };
 		AC89AC1C2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */; };
 		AC89AC1D2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */; };
 		AC89AC1F2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC89AC1E2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift */; };
@@ -86,6 +87,7 @@
 		C9CC7CCD172149068F17D0FB /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA0BCBC1D444E568B854C36 /* Ionicons.ttf */; };
 		DE6292B2844B4E7F8F701FC7 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96724590D6A946F49241917B /* MaterialCommunityIcons.ttf */; };
 		EAED28D021A5EBB70011E882 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAED28A821A5EB600011E882 /* libBVLinearGradient.a */; };
+		EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDABA60321B35F3900833E0F /* VirtualPlane.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -443,6 +445,7 @@
 		2D02E4901E0B4A5D006451C7 /* FreeRealEstate-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FreeRealEstate-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA0BCBC1D444E568B854C36 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewManager+Buttons.swift"; sourceTree = "<group>"; };
 		36759B739B814A3BA393BEEC /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		390D2A6D9D5E45DF860F1875 /* RCTBEEPickerManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTBEEPickerManager.xcodeproj; path = "../node_modules/react-native-picker/ios/RCTBEEPickerManager.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -464,7 +467,6 @@
 		AC3DB41A219668C700AF31E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC46625422153947006E18D7 /* ARViewManager+SceneLighting.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+SceneLighting.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC6C883B21FBEAC300B07A9F /* ARView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; tabWidth = 4; };
-		AC89561F221FB68A003C077E /* ARViewManager+Buttons.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+Buttons.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+Gestures.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC1E2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ARSCNViewDelegate.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		AC89AC21220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+ARSessionDelegate.swift"; sourceTree = "<group>"; tabWidth = 4; };
@@ -487,6 +489,7 @@
 		D794D4431CD2431AA5CEC782 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		EAED28A221A5EB600011E882 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		EC624A723C2B4D089DD98C2C /* ProductSans.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = ProductSans.ttf; path = ../assets/fonts/ProductSans.ttf; sourceTree = "<group>"; };
+		EDABA60321B35F3900833E0F /* VirtualPlane.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = VirtualPlane.swift; sourceTree = "<group>"; tabWidth = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -790,7 +793,7 @@
 				AC6C883B21FBEAC300B07A9F /* ARView.swift */,
 				AC89AC6C22040D7200B37C1E /* FocusSquare.swift */,
 				AC89AC662202B3C200B37C1E /* BoundingBox.swift */,
-				AC89561F221FB68A003C077E /* ARViewManager+Buttons.swift */,
+				EDABA60321B35F3900833E0F /* VirtualPlane.swift */,
 			);
 			name = "UI Elements";
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 			children = (
 				ACFDF71C220A6E61007C79E1 /* ARViewModel.swift */,
 				AC94C3A0219C2E0400D54C64 /* ARViewManager.swift */,
+				2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */,
 				AC46625422153947006E18D7 /* ARViewManager+SceneLighting.swift */,
 				AC89AC602202928F00B37C1E /* ARViewManager+ObjectPlacement.swift */,
 				AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */,
@@ -1467,10 +1471,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACFDF71E220A6E61007C79E1 /* ARViewModel.swift in Sources */,
+				AC3330AF21FBEF0200505BF8 /* VirtualPlane.swift in Sources */,
 				AC89AC1D2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */,
 				AC89AC622202928F00B37C1E /* ARViewManager+ObjectPlacement.swift in Sources */,
 				AC89AC23220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift in Sources */,
-				AC895621221FB68A003C077E /* ARViewManager+Buttons.swift in Sources */,
 				AC89AC6E22040D7200B37C1E /* FocusSquare.swift in Sources */,
 				ACECA0C1221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift in Sources */,
 				AC3330B121FBEF0C00505BF8 /* ARViewManager.swift in Sources */,
@@ -1482,6 +1486,7 @@
 				AC89AC682202B3C200B37C1E /* BoundingBox.swift in Sources */,
 				AC46625622153947006E18D7 /* ARViewManager+SceneLighting.swift in Sources */,
 				AC3330B221FBEF1100505BF8 /* AppDelegate.swift in Sources */,
+				2EC5F86B2220F5E300FE5160 /* ARViewManager+Buttons.swift in Sources */,
 				0AD3378F21AF8BDF00F1C634 /* ARViewManagerTests.swift in Sources */,
 				AC6C883D21FBEAC300B07A9F /* ARView.swift in Sources */,
 			);
@@ -1492,7 +1497,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
-				AC895620221FB68A003C077E /* ARViewManager+Buttons.swift in Sources */,
 				AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */,
 				ACECA0C322164A0C000A0899 /* MultipeerUpdate.swift in Sources */,
 				AC89AC672202B3C200B37C1E /* BoundingBox.swift in Sources */,
@@ -1500,9 +1504,11 @@
 				AC46625522153947006E18D7 /* ARViewManager+SceneLighting.swift in Sources */,
 				AC89AC1C2202897000B37C1E /* ARViewManager+Gestures.swift in Sources */,
 				AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */,
+				EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */,
 				AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */,
 				AC89AC6D22040D7200B37C1E /* FocusSquare.swift in Sources */,
 				AC89AC22220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift in Sources */,
+				2ECFD9672220EEB400EAD81D /* ARViewManager+Buttons.swift in Sources */,
 				ACECA0BD221649EE000A0899 /* MultipeerSession.swift in Sources */,
 				AC89AC1F2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift in Sources */,
 				ACECA0C0221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift in Sources */,

@@ -101,15 +101,29 @@ export default class ARScene extends Component<Props> {
     }
 
     handleControl(e) {
+        Animated.timing(
+            this.state.confirmScale,            // The animated value to drive
+            {
+              toValue: 0,                   // Animate to opacity: 1 (opaque)
+              duration: 300,              // Make it take a while
+            }
+          ).start();
+          Animated.timing(
+          this.state.checkScale,            // The animated value to drive
+            {
+              toValue: 1,                   // Animate to opacity: 1 (opaque)
+              duration: 300,              // Make it take a while
+            }
+          ).start();
         console.log('handleControl')
         console.log('Clicked', e);
         buttonPressed = e;
-        this.sendMap();
+        this.adjustObject();
         if (e == "confirmPlacement" || e == "deleteObject") {
             objectSelected = false;
             this.forceUpdate();
         }
-    }
+    };
     test = () => {
       this.setState({objectSelected: !this.state.objectSelected})      
     };
@@ -149,17 +163,36 @@ export default class ARScene extends Component<Props> {
     };
 
     selectFurniture = e => {
-        console.log("selectFurniture")
+        console.log("HELLO"+e)
       var obj
-      if(e == 'couch5'){
-        obj = 'couch_2'
+      if(e == 'couch9'){
+        obj = 'couch_1'
+      }
+      else if(e == 'couch5'){
+          obj = 'couch_2'
+      }
+      else if(e == 'couch11'){
+          obj = 'couch_3'
       }
       else if(e == 'chair3'){
-        obj = 'chair'
+        obj = 'chair_1'
       }
-      else if(e == 'couch6'){
-        obj = 'couch_2'
+      else if(e == 'chair1'){
+        obj = 'chair_2'
       }
+      else if(e == 'table6'){
+        obj = 'table_1'
+      }
+      else if(e == 'cabinet3'){
+        obj = 'wardrobe'
+      }
+      else if(e == 'cabinet9'){
+        obj = 'coffee_table'
+      }
+      else{
+          obj = 'couch_1'
+      }
+      console.log("STRINGSEARH "+obj)
       UIManager.dispatchViewManagerCommand(
         findNodeHandle(this.ref),
         UIManager[ARView].Commands.setObjectToPlace,
@@ -169,12 +202,26 @@ export default class ARScene extends Component<Props> {
 
 
     selectObject = e => {
-        objectSelected = true;
         console.log(e);
-        this.forceUpdate();
+        objectSelected = true;
+        Animated.timing(
+            this.state.checkScale,            // The animated value to drive
+            {
+              toValue: 0,                   // Animate to opacity: 1 (opaque)
+              duration: 300,              // Make it take a while
+            }
+          ).start();
+          placing = false;
+          Animated.timing(
+            this.state.confirmScale,            // The animated value to drive
+            {
+              toValue: 1,                   // Animate to opacity: 1 (opaque)
+              duration: 300,              // Make it take a while
+            }
+          ).start();
+        
     }
 }
-
 
 const ARView = requireNativeComponent("ARView")
 const styles = StyleSheet.create({

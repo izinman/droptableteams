@@ -111,7 +111,7 @@ extension ARViewManager {
         let hitPosition = SCNVector3(to.worldTransform.columns.3.x, to.worldTransform.columns.3.y, to.worldTransform.columns.3.z)
         tmpNode.position = hitPosition
         let nodePosition = from.convertPosition(from.position, to: tmpNode)
-       
+        
         let dx = hitPosition.x - nodePosition.x
         let dz = hitPosition.z - nodePosition.z
         

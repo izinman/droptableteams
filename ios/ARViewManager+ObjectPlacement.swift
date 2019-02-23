@@ -14,6 +14,7 @@ extension ARViewManager {
     
     @objc func setObjectToPlace(_ node: ARSCNView!, objectName: String) {
         arViewModel.objectToPlace = objectName
+        print("\n\n SETOBJECTTOPLACE SWIFT IS BEING CALLED\n\n")
     }
     
     @objc func placeObject(_ node: ARSCNView!) {
@@ -51,11 +52,27 @@ extension ARViewManager {
         // Create a node object from the .scn file
         guard let name = objName else { return nil }
         let scnFileName = "art.scnassets/" + name + ".scn"
+        print("name" + name)
         guard let tmpScene = SCNScene(named: scnFileName) else { return nil }
         
-        // Default material is _material_1 except for couch_2 which will break without this
-        let objectMaterial = (name != "couch_2") ? "_material_1" : "Obj3d66_512505_1_864_wire_000000000"
-        let node = tmpScene.rootNode.childNode(withName: objectMaterial, recursively: true)!
+        var child_node = ""
+        if(name == "chair_2"){
+            child_node = "pillow_fabric"
+        }
+        else if(name == "couch_1"){
+            child_node = "Box002"
+        }
+        else if (name == "couch_2"){
+            child_node = "Obj3d66_512505_1_864_wire_000000000"
+        }
+        else if(name == "couch_3"){
+            child_node = "andango_arm_wire_088144225"
+        }
+        else {
+            child_node = "_material_1"
+        }
+        
+        let node = tmpScene.rootNode.childNode(withName: child_node, recursively: true)!
         
         // Initialize rotation value to ensure the object will be properly oriented
         let rotation = simd_float4x4(SCNMatrix4MakeRotation(arView.session.currentFrame!.camera.eulerAngles.y, 0, 1, 0))
@@ -83,7 +100,7 @@ extension ARViewManager {
         
         return node
     }
-    
+
     @objc func confirmAdjustment() {
         if let node = arViewModel.selectedNode {
             arViewModel.selectionBoxes[node]?.disappear()
