@@ -56,16 +56,15 @@ extension ARViewManager {
         guard let tmpScene = SCNScene(named: scnFileName) else { return nil }
         
         var child_node = ""
-        if(name == "chair_2"){
+        if (name == "chair_2") {
             child_node = "pillow_fabric"
-        }
-        else if(name == "couch_1"){
+        } else if (name == "couch_1") {
             child_node = "Box002"
         }
-        else if (name == "couch_2"){
+        else if (name == "couch_2") {
             child_node = "Obj3d66_512505_1_864_wire_000000000"
         }
-        else if(name == "couch_3"){
+        else if (name == "couch_3") {
             child_node = "andango_arm_wire_088144225"
         }
         else {

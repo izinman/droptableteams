@@ -43,8 +43,6 @@ extension ARViewManager {
             arView.focusSquare?.disappear()
             selectionBox?.runAction(SCNAction.wait(duration: delayAppear), completionHandler: { selectionBox?.appear() })
             
-            // Tell React to display adjustment button menu
-            arView.onObjectSelect!([:])
             showAdjustmentButtons()
         }
     }

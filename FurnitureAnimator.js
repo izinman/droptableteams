@@ -49,7 +49,51 @@ export default class FurnitureAnimator extends Component<Props> {
     this.props.onPress(e)
     console.log(e);
   }
-    
+  closeDrawer = () => {
+    if(opened == 0){
+      Animated.timing(
+          this.state.scaleAnim,            // The animated value to drive
+          {
+            toValue: 0,                   // Animate to opacity: 1 (opaque)
+            duration: 300,              // Make it take a while
+          }
+      ).start();
+      opened = 1
+  }
+  else{
+      Animated.timing(
+          this.state.scaleAnim,            // The animated value to drive
+          {
+            toValue: 1,                   // Animate to opacity: 1 (opaque)
+            duration: 300,              // Make it take a while
+          }
+      ).start();
+      opened = 0
+  }
+}
+
+openDrawer = () => {
+  if(opened == 0){
+    Animated.timing(
+        this.state.scaleAnim,            // The animated value to drive
+        {
+          toValue: 0,                   // Animate to opacity: 1 (opaque)
+          duration: 300,              // Make it take a while
+        }
+    ).start();
+    opened = 1
+}
+else{
+    Animated.timing(
+        this.state.scaleAnim,            // The animated value to drive
+        {
+          toValue: 1,                   // Animate to opacity: 1 (opaque)
+          duration: 300,              // Make it take a while
+        }
+    ).start();
+    opened = 0
+}
+}
   
   render() {
     let { fadeAnim } = this.state;
@@ -68,7 +112,7 @@ export default class FurnitureAnimator extends Component<Props> {
               
         }}
       >
-      <StyleView onPress={this.drawerOpened}/>
+      <StyleView onPress={this.drawerOpened} onClose={this.closeDrawer} onOpen={this.openDrawer}/>
             </Animated.View>
     );
   }

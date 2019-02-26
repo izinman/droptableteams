@@ -3,6 +3,7 @@ import { StyleSheet, Text, ScrollView, View, Picker, Animated, UIManager, findNo
 import { Dropdown } from 'react-native-material-dropdown';
 import {Tile, Button} from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/Feather';
 import AnimateView from './AnimateView.js'
 
 type Props = {};
@@ -359,43 +360,47 @@ export default class StyleView extends Component<Props> {
               </View>
           </View>
         </Animated.View>
-        <View style={{width: width - 40, height: 1, alignSelf: 'center',
-                        position: 'absolute', top: -height * .065, 
-                        backgroundColor: "#00000000", borderColor: "#ffffff", borderWidth: 3 ,zIndex: 25, 
-                        }}
-                        >
-              <Button
-                                title="^"
-                                ViewComponent={require('react-native-linear-gradient').default}
-                                titleStyle={{fontWeight: 'bold', fontSize: 40, fontFamily: 'Product Sans'}}
-                                linearGradientProps={{
-                                    colors: ["#00000000", "#00000000"],
-                                    start: {x: 0, y: 0},
-                                    end: {x: .5, y: 0},
-                                }}
-                                buttonStyle={{borderTopLeftRadius: height/20,borderTopRightRadius: height/20, borderColor: 'transparent', borderRadius: 0, height: height/20}}
-                                containerStyle={{marginVertical: 0, height: 30, width: '100%', alignSelf: 'center'}}
-                                onPress={this.props.onPress}
-                            />
-        </View>
-        <View style={{width: width - 40, height: 1, alignSelf: 'center',
-                        position: 'absolute', top: height * .055, 
-                        backgroundColor: "#00000000", borderColor: "#00000000", borderWidth: 1,zIndex: 25, transform: [{ rotate: '180deg'}]
-                        }}
-                        >
-              <Button
-                                title="^"
-                                ViewComponent={require('react-native-linear-gradient').default}
-                                titleStyle={{fontWeight: 'bold', fontSize: 40, fontFamily: 'Product Sans', color: '#232323f0', rotation: 90}}
-                                linearGradientProps={{
-                                    colors: ["#00000000", "#00000000"],
-                                    start: {x: 0, y: 0},
-                                    end: {x: .5, y: 0},
-                                }}
-                                buttonStyle={{borderTopLeftRadius: height/20,borderTopRightRadius: height/20, borderColor: 'transparent', borderRadius: 0, height: height/20}}
-                                containerStyle={{marginVertical: 0, height: 30, width: '100%', alignSelf: 'center'}}
-                                onPress={this.props.onPress}
-                            />
+        <Animated.View style = {{position: 'absolute', top: -height * .05, width: width, height: height * .05, backgroundColor: '#ffffff'}}>
+          <Button 
+                title=""
+                ViewComponent={require('react-native-linear-gradient').default}
+                linearGradientProps={{
+                  colors: ['#ffffff', '#424242'],
+                    start: {x:0, y:.7},
+                    end: {x:0, y:1},
+                }}
+                icon={
+                  <Icon
+                    name="chevrons-up"
+                    size={height * .03}
+                    color="#008fbe"
+                  />
+                }
+                buttonStyle={{height: height * .05, width: width}}
+                containerStyle={{marginVertical: 0, height: height * .04}}
+                onPress={this.props.onOpen}
+          /> 
+        </Animated.View>
+        <View style = {{position: 'absolute', top: 0, width: width, height: height * .05, backgroundColor: '#ffffff'}}>
+          <Button 
+                title=""
+                ViewComponent={require('react-native-linear-gradient').default}
+                linearGradientProps={{
+                  colors: ['#424242', '#ffffff'],
+                    start: {x:0, y:0},
+                    end: {x:0, y:.3},
+                }}
+                icon={
+                  <Icon
+                    name="chevrons-down"
+                    size={height * .03}
+                    color="#008fbe"
+                  />
+                }
+                buttonStyle={{height: height * .05, width: width}}
+                containerStyle={{marginVertical: 0, height: height * .04}}
+                onPress={this.props.onClose}
+          /> 
         </View>
         </View>      
       );
@@ -404,7 +409,12 @@ export default class StyleView extends Component<Props> {
     console.log(e)
     this.props.onPress(e)
   }
-  
+  handleClose(){
+    this.props.onClose()
+  }
+  handleOpen(){
+    this.props.onOpen()
+  }  
   selectObject = () => {
     UIManager.dispatchViewManagerCommand(
         findNodeHandle(this.ref),

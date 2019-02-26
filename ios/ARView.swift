@@ -13,7 +13,6 @@ class ARView : ARSCNView, ARSCNViewDelegate {
     
     var cameraVector: simd_float3 { return session.currentFrame!.camera.eulerAngles }
     var focusSquare: FocusSquare?
-    var onObjectSelect: RCTDirectEventBlock?
     var sessionInfoLabel: UILabel!
     var placeButton: UIButton!
     var confirmButton: UIButton!
@@ -33,8 +32,4 @@ class ARView : ARSCNView, ARSCNViewDelegate {
         
     ]
     
-    // Necessary for React Native to recognize object selection event emitter
-    @objc func setOnObjectSelect(_ val: @escaping RCTDirectEventBlock) {
-        onObjectSelect = val
-    }
 }

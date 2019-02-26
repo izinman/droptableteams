@@ -26,6 +26,4 @@ RCT_EXTERN_METHOD(adjustObject: (nonnull NSNumber *)node
 
 RCT_EXTERN_METHOD(sendMap: (nonnull NSNumber *)node)
 
-RCT_EXPORT_VIEW_PROPERTY(onObjectSelect, RCTDirectEventBlock)
-
 @end
