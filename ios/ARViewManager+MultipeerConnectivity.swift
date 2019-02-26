@@ -84,20 +84,51 @@ extension ARViewManager: ARSessionDelegate {
                         let index = arViewModel.objects.index(of: removedNode) {
                         // self created node
                         
-                        arViewModel.objects.remove(at: index)
-                        arViewModel.objectHashTable.removeValue(forKey: peerNodeHash)
-                        removedNode.removeFromParentNode()
+                        let fadeAction = SCNAction.fadeOpacity(to: 0.0, duration: 0.15)
+                        fadeAction.timingMode = SCNActionTimingMode.easeInEaseOut
+                        arViewModel.selectionBoxes[removedNode]?.disappear()
+                        removedNode.runAction(fadeAction, completionHandler: {
+                            self.arViewModel.objects.remove(at: index)
+                            self.arViewModel.selectionBoxes.removeValue(forKey: removedNode)
+                            self.arViewModel.objectHashTable.removeValue(forKey: peerNodeHash)
+                            removedNode.removeFromParentNode()
+                        })
+                        
+                        if arViewModel.selectedNode == removedNode {
+                            arViewModel.selectedNode = nil
+                            arView.focusSquare?.appear()
+                            hideAdjustmentButtons()
+                        }
                     } else if
                         let selfNodeHash = arViewModel.selfHashToPeerHash[peerNodeHash],
                         let removedNode = arViewModel.objectHashTable[selfNodeHash],
                         let index = arViewModel.objects.index(of: removedNode) {
                         // peer craeted node
                         
+                        let fadeAction = SCNAction.fadeOpacity(to: 0.0, duration: 0.15)
+                        fadeAction.timingMode = SCNActionTimingMode.easeInEaseOut
+                        arViewModel.selectionBoxes[removedNode]?.disappear()
+                        removedNode.runAction(fadeAction, completionHandler: {
+                            self.arViewModel.objects.remove(at: index)
+                            self.arViewModel.selectionBoxes.removeValue(forKey: removedNode)
+                            self.arViewModel.objectHashTable.removeValue(forKey: selfNodeHash)
+                            self.arViewModel.selfHashToPeerHash.removeValue(forKey: peerNodeHash)
+                            removedNode.removeFromParentNode()
+                        })
+                        
+                        if arViewModel.selectedNode == removedNode {
+                            arViewModel.selectedNode = nil
+                            arView.focusSquare?.appear()
+                            hideAdjustmentButtons()
+                        }
+                        
+                        
                         arViewModel.objects.remove(at: index)
                         arViewModel.objectHashTable.removeValue(forKey: peerNodeHash)
                         arViewModel.selfHashToPeerHash.removeValue(forKey: peerNodeHash)
                         removedNode.removeFromParentNode()
                     }
+                
                 }
             }
         } catch {

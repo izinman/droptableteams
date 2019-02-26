@@ -115,14 +115,16 @@ extension ARViewManager {
             fadeAction.timingMode = SCNActionTimingMode.easeInEaseOut
             arViewModel.selectionBoxes[node]?.disappear()
             node.runAction(fadeAction, completionHandler: {
-                self.arViewModel.selectedNode = nil
                 self.arViewModel.objects.remove(at: index)
                 self.arViewModel.selectionBoxes.removeValue(forKey: node)
                 node.removeFromParentNode()
             })
             
+            arViewModel.selectedNode = nil
             arView.focusSquare?.appear()
             hideAdjustmentButtons()
+            
+            sendNodeUpdate(forNode: node, withAction: nil)
         }
     }
 }
