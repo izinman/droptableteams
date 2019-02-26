@@ -94,7 +94,8 @@ extension ARViewManager: ARSessionDelegate {
                             removedNode.removeFromParentNode()
                         })
                         
-                        if arViewModel.selectedNode == removedNode {
+                        if let selectedNode = arViewModel.selectedNode, selectedNode == removedNode {
+                            print("PEER: Inside selected Node")
                             arViewModel.selectedNode = nil
                             arView.focusSquare?.appear()
                             hideAdjustmentButtons()
@@ -116,7 +117,8 @@ extension ARViewManager: ARSessionDelegate {
                             removedNode.removeFromParentNode()
                         })
                         
-                        if arViewModel.selectedNode == removedNode {
+                        if let selectedNode = arViewModel.selectedNode, selectedNode == removedNode {
+                            print("PEER: Inside selected Node")
                             arViewModel.selectedNode = nil
                             arView.focusSquare?.appear()
                             hideAdjustmentButtons()
