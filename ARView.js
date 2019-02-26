@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, UIManager, findNodeHandle, Animated, requireNativeComponent, Dimensions} from 'react-native';
 import { Button }  from 'react-native-elements';
 import StyleView from './StyleView';
-import MoveControls from './MoveControls.js'
-import Icon from 'react-native-vector-icons/FontAwesome';
 import AnimateView from './AnimateView.js'
 import FurnitureAnimator from './FurnitureAnimator';
 type Props = {};
@@ -32,21 +30,6 @@ export default class ARScene extends Component<Props> {
                         <ARView style={{height: height * .95, width: width, backgroundColor: '#000000'}}
                             ref={ref => (this.ref = ref)}
                         />
-                    </View>
-                    <View style = {{position: 'absolute', top: 0, left: 0}}>
-                            <Button
-                            title={'Send Map'}
-                                ViewComponent={require('react-native-linear-gradient').default}
-                                titleStyle={{fontWeight: 'bold', fontSize: 20, fontFamily: 'Product Sans'}}
-                                linearGradientProps={{
-                                    colors: ['#000000', '#000000'],
-                                    start: {x: 0, y: 0},
-                                    end: {x: 0.5, y: 0},
-                                }}
-                                buttonStyle={{borderWidth: 0, borderColor: 'transparent', 
-                                borderRadius: height, height: height* .075}}
-                                containerStyle={{ height: height, width: height*.075, alignSelf: 'center'}}
-                                onPress={this.handleControl.bind(this, "sendMap")}                            />
                     </View>
                     <View style = {{position: 'absolute', backgroundColor: "#00000000", height: '100%', zIndex: 25, bottom: -height}}>
                   <FurnitureAnimator onPress={this.selectFurniture}/>
@@ -93,13 +76,6 @@ export default class ARScene extends Component<Props> {
 
     choose = () => {
         this.setState({AR: 0});
-    };
-
-    sendMap = () => {
-        UIManager.dispatchViewManagerCommand(
-            findNodeHandle(this.ref),
-            UIManager[ARView].Commands.sendMap,[]
-        );
     };
 
     selectFurniture = e => {
