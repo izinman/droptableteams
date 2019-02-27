@@ -35,7 +35,6 @@
 		2DCD954D1E0B4F2C00145EB5 /* FreeRealEstateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FreeRealEstateTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2E6F75C62226098600748DFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E6F75C52226098600748DFA /* Images.xcassets */; };
-		2E6F75F6222609C300748DFA /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 2E6F75F5222609C300748DFA /* AppIcon.appiconset */; };
 		2EC5F86B2220F5E300FE5160 /* ARViewManager+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */; };
 		2ECFD9672220EEB400EAD81D /* ARViewManager+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */; };
 		57C26DFFCF7348459BD41C54 /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC48B429CBD489AB40433AA /* libRCTBEEPickerManager.a */; };
@@ -447,9 +446,8 @@
 		2D02E4901E0B4A5D006451C7 /* FreeRealEstate-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FreeRealEstate-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E6F75C52226098600748DFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FreeRealEstate/Images.xcassets; sourceTree = "<group>"; };
-		2E6F75F5222609C300748DFA /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppIcon.appiconset; path = "../../Downloads/New Icon png/ios/AppIcon.appiconset"; sourceTree = "<group>"; };
 		2EA0BCBC1D444E568B854C36 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewManager+Buttons.swift"; sourceTree = "<group>"; };
+		2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+Buttons.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		36759B739B814A3BA393BEEC /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		390D2A6D9D5E45DF860F1875 /* RCTBEEPickerManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTBEEPickerManager.xcodeproj; path = "../node_modules/react-native-picker/ios/RCTBEEPickerManager.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -646,7 +644,6 @@
 				ACB0C61421FEC6CA003AC046 /* art.scnassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				2E6F75C52226098600748DFA /* Images.xcassets */,
-				2E6F75F5222609C300748DFA /* AppIcon.appiconset */,
 			);
 			name = FreeRealEstate;
 			sourceTree = "<group>";
@@ -1413,7 +1410,6 @@
 				8AA86A91C0EB496B89302B4F /* FontAwesome5_Regular.ttf in Resources */,
 				C5BE41E97C88484B97FAEB92 /* FontAwesome5_Solid.ttf in Resources */,
 				A85F93EA30BC4A41A7DF16BA /* Foundation.ttf in Resources */,
-				2E6F75F6222609C300748DFA /* AppIcon.appiconset in Resources */,
 				2E6F75C62226098600748DFA /* Images.xcassets in Resources */,
 				C9CC7CCD172149068F17D0FB /* Ionicons.ttf in Resources */,
 				DE6292B2844B4E7F8F701FC7 /* MaterialCommunityIcons.ttf in Resources */,
