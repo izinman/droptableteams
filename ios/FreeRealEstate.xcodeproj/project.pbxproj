@@ -783,9 +783,10 @@
 		ACECA0C522164A14000A0899 /* Multipeer */ = {
 			isa = PBXGroup;
 			children = (
-				ACECA0BF221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift */,
 				ACECA0C222164A0C000A0899 /* MultipeerUpdate.swift */,
 				ACECA090221649EE000A0899 /* MultipeerSession.swift */,
+				ACECA0BF221649F8000A0899 /* ARViewManager+MultipeerConnectivity.swift */,
+				AC89AC21220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift */,
 			);
 			name = Multipeer;
 			sourceTree = "<group>";
@@ -811,7 +812,6 @@
 				AC89AC602202928F00B37C1E /* ARViewManager+ObjectPlacement.swift */,
 				AC89AC1B2202897000B37C1E /* ARViewManager+Gestures.swift */,
 				AC89AC1E2202898900B37C1E /* ARViewManager+ARSCNViewDelegate.swift */,
-				AC89AC21220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift */,
 			);
 			name = "ARView Logic";
 			sourceTree = "<group>";
