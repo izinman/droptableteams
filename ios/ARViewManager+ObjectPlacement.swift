@@ -23,7 +23,7 @@ extension ARViewManager {
         let planeHits = arView.hitTest(arView.center, types: .existingPlane)
         
         // Verify that the plane is valid
-        if planeHits.count > 0, let hitResult = planeHits.last {
+        if planeHits.count > 0, let hitResult = planeHits.first {
             // Create an object to place
             guard let newNode = createNode(objName: arViewModel.objectToPlace, hitResult: hitResult) else { return }
             newNode.opacity = 0.0

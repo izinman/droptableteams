@@ -11,7 +11,7 @@ import ARKit
 import SceneKit
 
 class BoundingBox: SCNNode {
-    let thickness: CGFloat = 0.5
+    //let thickness: CGFloat = 0.5
     var isVisible = false
     var fullScale: SCNVector3!
     var halfScale: SCNVector3!
@@ -46,10 +46,11 @@ class BoundingBox: SCNNode {
         super.init()
         
         let (minVec, maxVec) = node.boundingBox
-        let x = CGFloat(maxVec.x - minVec.x)
-        let y = CGFloat(maxVec.z - minVec.z)
-        let xOffset = Float(x/2.0)
-        let yOffset = Float(y/2.0)
+        let x = CGFloat(maxVec.z - minVec.z)
+        let y = CGFloat(maxVec.x - minVec.x)
+        let xOffset = Float(y/2.0)
+        let yOffset = Float(x/2.0)
+        let thickness = CGFloat(0.0145 * min(x, y))
         
         let material = SCNMaterial()
         material.diffuse.contents = UIColor.yellow
@@ -71,6 +72,7 @@ class BoundingBox: SCNNode {
         
         transform = SCNMatrix4MakeRotation(-Float.pi / 2.0, 1.0, 0.0, 0.0)
         
+        scale = SCNVector3(1.03 * scale.x, 1.03 * scale.y, 1.03 * scale.z)
         fullScale = scale
         halfScale = SCNVector3(scale.x * 0.5, scale.y * 0.5, scale.z * 0.5)
         scale = halfScale

@@ -69,6 +69,7 @@ class ARViewManager : RCTViewManager {
         arView.sessionInfoLabel.textAlignment = .center
         arView.sessionInfoLabel.text = ""
         arView.addSubview(arView.sessionInfoLabel)
+        //arView.debugOptions = [.showBoundingBoxes]
         
         return arView
     }

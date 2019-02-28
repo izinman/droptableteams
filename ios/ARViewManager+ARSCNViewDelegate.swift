@@ -43,7 +43,7 @@ extension ARViewManager: ARSCNViewDelegate {
         DispatchQueue.main.async {
             let arView = self.arView
             // Run a hit test to find the new location for the focusSquare
-            guard let newPos = arView.hitTest(arView.center, types: .existingPlane).last?.worldTransform.columns.3 else { return }
+            guard let newPos = arView.hitTest(arView.center, types: .existingPlane).first?.worldTransform.columns.3 else { return }
             let newPosVec = SCNVector3(x: newPos.x, y: newPos.y, z: newPos.z)
             
             // Determine if the resulting position is a valid plane for placement
