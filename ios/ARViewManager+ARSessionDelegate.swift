@@ -40,7 +40,9 @@ extension ARViewManager {
         } else {
             message = ""
         }
+        // @Artem animate the peerview
         arView.connectedPeersLabel.text = message
         arView.connectedPeersLabel.isHidden = message.isEmpty
+        arView.connectedPeersView.isHidden = message.isEmpty
     }
 }
