@@ -39,7 +39,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         let view = RCTRootView(bundleURL: bundleURL, moduleName: moduleName, initialProperties: initialProperties, launchOptions: launchOptions)
 
         view?.backgroundColor = UIColor.white
-       */
+      */
         // Create the controller to display the view
         let controller = UIViewController()
         controller.view = view

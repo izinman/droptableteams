@@ -41,13 +41,12 @@ export default class StyleView extends Component<Props> {
       Animated.sequence([
         Animated.timing(this.state.animatedStartValue, {
           toValue: 1,
-          duration: 250,
+          duration: 450,
           
         }),
         Animated.timing(this.state.animatedStartValue, {
           toValue: 0,
-          duration: 250,
-          delay: 600
+          duration: 450,
         })
       ]),
       {
@@ -84,7 +83,7 @@ export default class StyleView extends Component<Props> {
           <View style = {styles.horizontalWide}>
             {couchesData.map((_, i) =>
               <View key={i} style={styles.row}>
-                <View style={{paddingLeft: height * .02, paddingBottom: height * .02}}>
+                <View style={{paddingLeft: height * .02, paddingBottom: height * .02, shadowColor: '#00000087', shadowRadius: 5, shadowOpacity: 1,shadowOffset: {width: 0, height: 3}}}>
                  <Tile
                     imageSrc={couches[i]}
                     title = ""
@@ -107,10 +106,10 @@ export default class StyleView extends Component<Props> {
             </View>    
           </View>
           <ScrollView horizontal= {true} style={{width: width}}>
-          <View style = {styles.horizontalSquare}>
+          <View style = {styles.horizontalChairs}>
             {chairsData.map((_, i) =>
               <View key={i} style={styles.row}>
-                <View style={{paddingLeft: height * .02, paddingBottom: height * .02}}>
+                <View style={{paddingLeft: height * .02, paddingBottom: height * .02, shadowColor: '#00000087', shadowRadius: 5, shadowOpacity: 1,shadowOffset: {width: 0, height: 3}}}>
                  <Tile
                     imageSrc={chairs[i]}
                     title = ""
@@ -133,10 +132,10 @@ export default class StyleView extends Component<Props> {
           </View>    
         </View>
         <ScrollView horizontal= {true} style={{width: width}}>
-          <View style = {styles.horizontalSquare}>
+          <View style = {styles.horizontalTables}>
             {tablesData.map((_, i) =>
               <View key={i} style={styles.row}>
-                <View style={{paddingLeft: height * .02, paddingBottom: height * .02}}>
+                <View style={{paddingLeft: height * .02, paddingBottom: height * .02, shadowColor: '#00000087', shadowRadius: 5, shadowOpacity: 1,shadowOffset: {width: 0, height: 3}}}>
                  <Tile
                     imageSrc={tables[i]}
                     title = ""
@@ -159,10 +158,10 @@ export default class StyleView extends Component<Props> {
         </View>    
       </View>
       <ScrollView horizontal= {true} style={{width: width}}>
-          <View style = {styles.horizontalSquare}>
+          <View style = {styles.horizontalBeds}>
             {bedData.map((_, i) =>
               <View key={i} style={styles.row}>
-                <View style={{paddingLeft: height * .02, paddingBottom: height * .02}}>
+                <View style={{paddingLeft: height * .02, paddingBottom: height * .02, shadowColor: '#00000087', shadowRadius: 5, shadowOpacity: 1,shadowOffset: {width: 0, height: 3}}}>
                  <Tile
                     imageSrc={beds[i]}
                     title = ""
@@ -185,10 +184,10 @@ export default class StyleView extends Component<Props> {
       </View>    
       </View>
       <ScrollView horizontal= {true} style={{width: width}}>
-          <View style = {styles.horizontalSquare}>
+          <View style = {styles.horizontalCabinets}>
             {cabinetData.map((_, i) =>
               <View key={i} style={styles.row}>
-                <View style={{paddingLeft: height * .02, paddingBottom: height * .02}}>
+                <View style={{paddingLeft: height * .02, paddingBottom: height * .02, shadowColor: '#00000087', shadowRadius: 5, shadowOpacity: 1,shadowOffset: {width: 0, height: 3}}}>
                  <Tile
                     imageSrc={cabinets[i]}
                     title = ""
@@ -211,10 +210,10 @@ export default class StyleView extends Component<Props> {
       </View>    
       </View>
       <ScrollView horizontal= {true} style={{width: width}}>
-          <View style = {styles.horizontalSquare}>
+          <View style = {styles.horizontalAppliances}>
             {applianceData.map((_, i) =>
               <View key={i} style={styles.row}>
-                <View style={{paddingLeft: height * .02, paddingBottom: height * .02}}>
+                <View style={{paddingLeft: height * .02, paddingBottom: height * .02, shadowColor: '#00000087', shadowRadius: 5, shadowOpacity: 1,shadowOffset: {width: 0, height: 3}}}>
                  <Tile
                     imageSrc={appliances[i]}
                     title = ""
@@ -272,11 +271,11 @@ export default class StyleView extends Component<Props> {
             source={this.state.img}
           />
         </Animated.View>
-        <Animated.View style = {{position: 'absolute', backgroundColor:'#ffffff87',borderTopRightRadius: 15, borderTopLeftRadius: 15,top: -height * .05, width: width, height: height * .05}}>
+        <Animated.View style = {{position: 'absolute', backgroundColor:'#008fbec8',borderTopRightRadius: 15, borderTopLeftRadius: 15,top: -height * .05, width: width, height: height * .05}}>
             <Animated.View style = {{alignSelf: 'center',  transform: [{
                 translateY: this.state.animatedStartValue.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [-height*.01 , 0]})
+                  outputRange: [-height*.007 , 0]})
               }]
             }}>
               <Button 
@@ -342,12 +341,44 @@ const styles = StyleSheet.create({
       width: width * 2,
       height: height *.3
     },
-    horizontalSquare: {
+    horizontalChairs: {
       flex: 1,
       flexDirection: 'column',
       flexWrap: 'wrap',
       alignSelf: 'center',
-      width: width * 2,
+      width: width * 1.25,
+      height: height *.4
+    },
+    horizontalTables: {
+      flex: 1,
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+      alignSelf: 'center',
+      width: width * 1.25,
+      height: height *.4
+    },
+    horizontalBeds: {
+      flex: 1,
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+      alignSelf: 'center',
+      width: width * 1.25,
+      height: height *.4
+    },
+    horizontalCabinets: {
+      flex: 1,
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+      alignSelf: 'center',
+      width: width * 1.5,
+      height: height *.4
+    },
+    horizontalAppliances: {
+      flex: 1,
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+      alignSelf: 'center',
+      width: width * 1.75,
       height: height *.4
     },
     fill: {
