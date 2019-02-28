@@ -11,15 +11,14 @@ import ARKit
 import SceneKit
 
 class BoundingBox: SCNNode {
-    //let thickness: CGFloat = 0.5
     var isVisible = false
     var fullScale: SCNVector3!
     var halfScale: SCNVector3!
     
     
     private let pulseAction: SCNAction = {
-        let pulseOutAction = SCNAction.fadeOpacity(to: 0.2, duration: 0.75)
-        let pulseInAction = SCNAction.fadeOpacity(to: 1.0, duration: 0.75)
+        let pulseOutAction = SCNAction.fadeOpacity(to: 0.2, duration: 1.0)
+        let pulseInAction = SCNAction.fadeOpacity(to: 1.0, duration: 1.0)
     
         pulseOutAction.timingMode = .easeInEaseOut
         pulseInAction.timingMode = .easeInEaseOut
@@ -46,11 +45,12 @@ class BoundingBox: SCNNode {
         super.init()
         
         let (minVec, maxVec) = node.boundingBox
-        let x = CGFloat(maxVec.z - minVec.z)
+        var x = CGFloat(maxVec.z - minVec.z)
         let y = CGFloat(maxVec.x - minVec.x)
         let xOffset = Float(y/2.0)
         let yOffset = Float(x/2.0)
         let thickness = CGFloat(0.0145 * min(x, y))
+        x -= 2.0 * thickness
         
         let material = SCNMaterial()
         material.diffuse.contents = UIColor.yellow
@@ -60,10 +60,10 @@ class BoundingBox: SCNNode {
         let posYSegment = makeSegment(w: y, h: thickness, material: material)
         let negYSegment = makeSegment(w: y, h: thickness, material: material)
         
-        posXSegment.position.x += xOffset
-        negXSegment.position.x -= xOffset
-        posYSegment.position.y += yOffset
-        negYSegment.position.y -= yOffset
+        posXSegment.position.x += (xOffset - Float(thickness/2.0))
+        negXSegment.position.x -= (xOffset - Float(thickness/2.0))
+        posYSegment.position.y += (yOffset - Float(thickness/2.0))
+        negYSegment.position.y -= (yOffset - Float(thickness/2.0))
         
         addChildNode(posXSegment)
         addChildNode(negXSegment)
