@@ -15,26 +15,37 @@ export default class ARScene extends Component<Props> {
     constructor(props) {
         super(props);
         this.state = {AR: 1,
-                      checkScale: new Animated.Value(1)};
+                      introAnim: new Animated.Value(0)};
     }
 
     componentDidMount() {
         this.nodeHandle = findNodeHandle(this.ref);
+        Animated.timing(
+            this.state.introAnim,            // The animated value to drive
+            {
+              toValue: 1,                   // Animate to opacity: 1 (opaque)
+              duration: 1000,              // Make it take a while
+            }
+        ).start();
     }
 
     render() {
         if (this.state.AR == 1) {
             return (
-                <View style = {{width: width, height: height * .9}}>
+                <Animated.View style = {{width: width, height: height,transform: [{
+                        translateX: this.state.introAnim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [height , 0]})
+                  }] }}>
                     <View style={{width: width}}>
-                        <ARView style={{height: height * .95, width: width, backgroundColor: '#000000'}}
+                        <ARView style={{height: height, width: width, backgroundColor: '#000000'}}
                             ref={ref => (this.ref = ref)}
                         />
                     </View>
                     <View style = {{position: 'absolute', backgroundColor: "#00000000", height: '100%', zIndex: 25, bottom: -height}}>
                   <FurnitureAnimator onPress={this.selectFurniture}/>
                   </View>
-                </View>
+                </Animated.View>
                               
             );
         } else {
