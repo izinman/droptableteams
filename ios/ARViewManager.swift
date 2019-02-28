@@ -64,11 +64,11 @@ class ARViewManager : RCTViewManager {
         addRemoveButton()
         
         // Multipeer UILabel and UIView
-        arView.sessionInfoLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 400, height: 21))
-        arView.sessionInfoLabel.center = CGPoint(x: 660, y: 285)
-        arView.sessionInfoLabel.textAlignment = .center
-        arView.sessionInfoLabel.text = ""
-        arView.addSubview(arView.sessionInfoLabel)
+        arView.connectedPeersLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 400, height: 21))
+        arView.connectedPeersLabel.center = CGPoint(x: 650, y: 285)
+        arView.connectedPeersLabel.textAlignment = .center
+        arView.connectedPeersLabel.text = ""
+        arView.addSubview(arView.connectedPeersLabel)
         
         return arView
     }
