@@ -35,7 +35,7 @@ class ARViewManager : RCTViewManager {
         
         arViewModel.arView = arView
         arViewModel.objectToPlace = "chair_1"
-        arViewModel.showAdjustButtons = false
+        arViewModel.peerLabelHidden = true
         arViewModel.selectionBoxes = [SCNNode: BoundingBox]()
         
         // Add a tap gesture for object placement and selection
@@ -62,20 +62,7 @@ class ARViewManager : RCTViewManager {
         addPlaceButton()
         addConfirmButton()
         addRemoveButton()
-        
-        // Multipeer UILabel and UIView
-        arView.connectedPeersView = UIView(frame: CGRect(x: arViewModel.center_x_bound - 95, y: arViewModel.center_y_bound * 0.05, width: 250, height: 35))
-        arView.connectedPeersView.backgroundColor = UIColor.gray.withAlphaComponent(0.45)
-        arView.connectedPeersView.layer.cornerRadius = 8
-        arView.connectedPeersView.clipsToBounds = true
-        arView.addSubview(arView.connectedPeersView)
-        
-        // Add a function for this @Artem
-        arView.connectedPeersLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 250, height: 35))
-        arView.connectedPeersLabel.textColor = UIColor.white
-        arView.connectedPeersLabel.textAlignment = .center
-        arView.connectedPeersLabel.text = "Connected with Artem"
-        arView.connectedPeersView.addSubview(arView.connectedPeersLabel)
+        addPeersLabel()
         
         return arView
     }

@@ -13,12 +13,12 @@ import SceneKit
 class ARViewModel {
     var arView: ARView?
     
-    
     let viewBounds: CGRect = UIScreen.main.bounds
     var center_x_bound: Double { return floor(Double((viewBounds.maxX + viewBounds.minX)/2)) - 30 }
     var center_y_bound: Double { return floor(Double((viewBounds.maxY + viewBounds.minY) * 0.85)) }
     var confirm_x_bound: Double { return center_x_bound - 60.0 }
     var remove_x_bound: Double { return center_x_bound + 60.0 }
+    var peerLabelHidden: Bool?
     
     var objects = [SCNNode]()
     var objectHashTable = [Int64:SCNNode]()
@@ -35,8 +35,6 @@ class ARViewModel {
     var selectionBoxes: [SCNNode: BoundingBox]!
     var prevX: Float = 0.0  // Used for tracking the drag gesture's displacement
     var prevZ: Float = 0.0
-    
-    var showAdjustButtons: Bool?
     
     let ObjScaleMap: [String: SCNVector3] = [
         "chair": SCNVector3(x: 0.015, y: 0.015, z: 0.015),

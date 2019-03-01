@@ -11,6 +11,56 @@ import MultipeerConnectivity
 
 extension ARViewManager: ARSessionDelegate {
 
+    func addPeersLabel() {
+        // Multipeer UILabel and UIView
+        arView.connectedPeersView = UIView(frame: CGRect(x: arViewModel.center_x_bound - 95, y: arViewModel.center_y_bound * 0.05, width: 250, height: 35))
+        arView.connectedPeersView.backgroundColor = UIColor.gray.withAlphaComponent(0.45)
+        arView.connectedPeersView.layer.cornerRadius = 8
+        arView.connectedPeersView.clipsToBounds = true
+        arView.connectedPeersView.transform = CGAffineTransform(scaleX: 0.01, y: 1)
+        arView.connectedPeersView.alpha = 0.0
+        arView.addSubview(arView.connectedPeersView)
+        
+        arView.connectedPeersLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 250, height: 35))
+        arView.connectedPeersLabel.textColor = UIColor.white
+        arView.connectedPeersLabel.textAlignment = .center
+        arView.connectedPeersLabel.text = "Connected with Artem"
+        arView.connectedPeersLabel.alpha = 0.0
+        arView.connectedPeersView.addSubview(arView.connectedPeersLabel)
+    }
+    
+    func showPeersLabel() {
+        guard let hidden = arViewModel.peerLabelHidden else { return }
+        if (hidden) {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
+                    self.arView.connectedPeersView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                    self.arView.connectedPeersView.alpha = 1.0
+                }, completion: { _ in
+                    UIView.animate(withDuration: 0.15, animations: {
+                        self.arView.connectedPeersLabel.alpha = 1.0
+                    }, completion: { _ in self.arViewModel.peerLabelHidden = false})
+                })
+            }
+        }
+    }
+    
+    func hidePeersLabel() {
+        guard let hidden = arViewModel.peerLabelHidden else { return }
+        if (!hidden) {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.15, delay: 0.0, animations: {
+                    self.arView.connectedPeersLabel.alpha = 0.0
+                })
+                
+                UIView.animate(withDuration: 0.2, delay: 0.10, options: .curveEaseIn, animations: {
+                    self.arView.connectedPeersView.transform = CGAffineTransform(scaleX: 0.01, y: 1)
+                    self.arView.connectedPeersView.alpha = 0.0
+                }, completion: { _ in self.arViewModel.peerLabelHidden = true})
+            }
+        }
+    }
+    
     @objc func sendMap(_ node: ARSCNView!) {
         print("PEER: Map attempting to be shared")
         arView.session.getCurrentWorldMap { worldMap, error in
