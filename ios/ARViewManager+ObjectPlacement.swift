@@ -105,7 +105,7 @@ extension ARViewManager {
         // Create a node object from the .scn file
         guard let name = objName else { return nil }
         let scnFileName = "art.scnassets/" + name + ".scn"
-        print("name" + name)
+
         guard let tmpScene = SCNScene(named: scnFileName) else { return nil }
         
         var child_node = ""

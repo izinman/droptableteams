@@ -49,14 +49,14 @@ class ARViewModel {
     let ObjScaleMap: [String: SCNVector3] = [
         "chair": SCNVector3(x: 0.015, y: 0.015, z: 0.015),
         "vase": SCNVector3(x: 0.0015, y: 0.0015, z: 0.0015),
-        "table_1": SCNVector3(x: 0.01, y: 0.01, z: 0.01),
-        "coffee_table": SCNVector3(x: 0.25, y: 0.25, z: 0.25),
-        "couch_1": SCNVector3(x: 0.02, y: 0.02, z: 0.02),
-        "couch_2": SCNVector3(x: 0.001, y: 0.001, z: 0.001),
-        "couch_3": SCNVector3(x: 0.01, y: 0.01, z: 0.01),
-        "chair_1": SCNVector3(x: 0.015, y: 0.015, z: 0.015),
-        "chair_2": SCNVector3(x: 0.007, y: 0.007, z: 0.007),
-        "wardrobe": SCNVector3(x: 0.007, y: 0.007, z: 0.007)
+        "table_1": SCNVector3(x: 0.005, y: 0.005, z: 0.005),
+        "coffee_table": SCNVector3(x: 0.16, y: 0.16, z: 0.16),
+        "couch_1": SCNVector3(x: 0.021, y: 0.021, z: 0.021),
+        "couch_2": SCNVector3(x: 0.0009, y: 0.0009, z: 0.0009),
+        "couch_3": SCNVector3(x: 0.00085, y: 0.00085, z: 0.00085),
+        "chair_1": SCNVector3(x: 0.017, y: 0.017, z: 0.017),
+        "chair_2": SCNVector3(x: 0.0036, y: 0.0036, z: 0.0036),
+        "wardrobe": SCNVector3(x: 0.0007, y: 0.0007, z: 0.0007)
     ]
     
     let byteToNameMap: [UInt8 : String] = [
