@@ -11,66 +11,47 @@ import SceneKit
 class MultipeerUpdate: NSObject, NSSecureCoding {
     
     static var supportsSecureCoding: Bool = true
-    
+    // name: UInt8?, x: Float?, y: Float?, z: Float?, rotation: CGFloat?
     var nodeHash: Int64
-    var action: SCNAction?
-    var node: SCNNode?
+    var name: UInt8?
+    var x: Float?
+    var y: Float?
+    var z: Float?
+    var rotation: Float?
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(nodeHash, forKey: "nodeHash")
-        
-        if action != nil {
-            do {
-                let actionEncoded = try NSKeyedArchiver.archivedData(withRootObject: action!, requiringSecureCoding: false)
-                aCoder.encode(actionEncoded, forKey: "action")
-                print("PEER: encoded action")
-            } catch {}
-        }
-        
-        if node != nil {
-            do {
-                let nodeEncoded = try NSKeyedArchiver.archivedData(withRootObject: node!, requiringSecureCoding: false)
-                aCoder.encode(nodeEncoded, forKey: "node")
-                print("PEER: encoded node")
-            } catch {}
-        }
+        aCoder.encode(nodeHash, forKey: "h")
+        aCoder.encode(name, forKey: "n")
+        aCoder.encode(x, forKey: "x")
+        aCoder.encode(y, forKey: "y")
+        aCoder.encode(z, forKey: "z")
+        aCoder.encode(rotation, forKey: "r")
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let nodeHash = aDecoder.decodeInt64(forKey: "nodeHash")
-        
-        let actionDecoded: SCNAction?
-        if let actionData = aDecoder.decodeObject(forKey: "action") as? Data {
-            do {
-                actionDecoded = try NSKeyedUnarchiver.unarchivedObject(ofClass: SCNAction.self, from: actionData)
-            } catch {
-                actionDecoded = nil
-            }
-        } else {
-            actionDecoded = nil
-        }
-        
-        let nodeDecoded: SCNNode?
-        if let nodeData = aDecoder.decodeObject(forKey: "node") as? Data {
-            do {
-                nodeDecoded = try NSKeyedUnarchiver.unarchivedObject(ofClass: SCNNode.self, from: nodeData)
-            } catch {
-                nodeDecoded = nil
-            }
-        } else {
-            nodeDecoded = nil
-        }
+        let nodeHash = aDecoder.decodeInt64(forKey: "h")
+        let name = aDecoder.decodeObject(forKey: "n") as? UInt8
+        let x = aDecoder.decodeObject(forKey: "x") as? Float
+        let y = aDecoder.decodeObject(forKey: "y") as? Float
+        let z = aDecoder.decodeObject(forKey: "z") as? Float
+        let rotation = aDecoder.decodeObject(forKey: "r") as? Float
         
         self.init(
-            node: nodeDecoded,
+            name: name,
             nodeHash: nodeHash,
-            action: actionDecoded
+            x: x,
+            y: y,
+            z: z,
+            rotation: rotation
         )
     }
     
-    init(node: SCNNode?, nodeHash: Int64, action: SCNAction?) {
-        self.node = node
+    init(name: UInt8?, nodeHash: Int64, x: Float?, y: Float?, z: Float?, rotation: Float?) {
+        self.name = name
         self.nodeHash = nodeHash
-        self.action = action
+        self.x = x
+        self.y = y
+        self.z = z
+        self.rotation = rotation
     }
 }

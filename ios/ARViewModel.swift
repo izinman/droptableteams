@@ -10,6 +10,16 @@ import Foundation
 import ARKit
 import SceneKit
 
+let CHAIR_1: UInt8 = 0
+let CHAIR_2: UInt8 = 1
+let COUCH_1: UInt8 = 2
+let COUCH_2: UInt8 = 3
+let COUCH_3: UInt8 = 4
+let COFFEE_TABLE: UInt8 = 5
+let TABLE_1: UInt8 = 6
+let WARDROBE: UInt8 = 7
+let VASE: UInt8 = 8
+
 class ARViewModel {
     var arView: ARView?
     
@@ -48,4 +58,28 @@ class ARViewModel {
         "chair_2": SCNVector3(x: 0.007, y: 0.007, z: 0.007),
         "wardrobe": SCNVector3(x: 0.007, y: 0.007, z: 0.007)
     ]
+    
+    let byteToNameMap: [UInt8 : String] = [
+        CHAIR_1: "chair_1",
+        CHAIR_2: "chair_2",
+        COUCH_1: "couch_1",
+        COUCH_2: "couch_2",
+        COUCH_3: "couch_3",
+        COFFEE_TABLE: "coffee_table",
+        TABLE_1: "table_1",
+        WARDROBE: "wardrobe",
+        VASE: "vase",
+    ]
+    
+    let nameToByteMap: [String : UInt8] = [
+        "chair_1": CHAIR_1,
+        "chair_2": CHAIR_2,
+        "couch_1": COUCH_1,
+        "couch_2": COUCH_2,
+        "couch_3": COUCH_3,
+        "coffee_table": COFFEE_TABLE,
+        "table_1": TABLE_1,
+        "wardrobe": WARDROBE,
+        "vase": VASE,
+        ]
 }

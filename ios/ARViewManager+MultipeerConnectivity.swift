@@ -74,7 +74,8 @@ extension ARViewManager: ARSessionDelegate {
         print("PEER: Map sent\n")
     }
     
-    func sendNodeUpdate(forNode node: SCNNode, withAction action: SCNAction?) {
+    
+    func sendUpdate(node: SCNNode, name: UInt8?, x: Float?, y: Float?, z: Float?, rotation: Float?) {
         var hasher = Hasher()
         hasher.combine(node)
         var hashValue = Int64(hasher.finalize())
@@ -82,14 +83,12 @@ extension ARViewManager: ARSessionDelegate {
             hashValue = peerHash
         }
         print("PEER: sender hash: \(hashValue)")
-        let sendNode = arViewModel.objects.contains(node) ? nil : node
-        let nodeUpdate = MultipeerUpdate(node: sendNode, nodeHash: hashValue, action: action)
+        let nodeUpdate = MultipeerUpdate(name: name, nodeHash: hashValue, x: x, y: y, z: z, rotation: rotation)
         guard let data = try? NSKeyedArchiver.archivedData(withRootObject: nodeUpdate, requiringSecureCoding: false)
-        else { fatalError("can't encode node update") }
-        
+            else { fatalError("can't encode node update") }
         multipeerSession.sendToAllPeers(data)
     }
-
+    
     func receivedData(_ data: Data, from peer: MCPeerID) {
         //let update = MultipeerUpdate(data: data)
         print("PEER: INSIDE RECEIVED DATA")
@@ -97,36 +96,55 @@ extension ARViewManager: ARSessionDelegate {
             if let update = try NSKeyedUnarchiver.unarchivedObject(ofClass: MultipeerUpdate.self, from: data) {
                 print("PEER: INSIDE IF!!!")
                 let peerNodeHash = update.nodeHash
-                print("PERR: peerNodeHash \(peerNodeHash)")
-                if let action = update.action  {
-                    print("PEER: DATA RECEIVED!!!")
-                    let actionNode: SCNNode
-                    if let node = update.node {
-                        arView.scene.rootNode.addChildNode(node)
-                        arViewModel.objects.append(node)
-                        
-                        var hasher = Hasher()
-                        hasher.combine(node)
-                        let selfNodeHash = Int64(hasher.finalize())
-                        
-                        arViewModel.objectHashTable[peerNodeHash] = node
-                        arViewModel.selfHashToPeerHash[selfNodeHash] = peerNodeHash
-                        
-                        actionNode = node
-                    } else {
-                        // Handle Rotate or Pan
-                        if let unwrappedNode = arViewModel.objectHashTable[peerNodeHash]  {
-                            // self created node
-                            actionNode = unwrappedNode
-                        } else {
-                            // peer created node
-                            guard let selfNodeHash = arViewModel.selfHashToPeerHash[peerNodeHash], let unwrappedNode = arViewModel.objectHashTable[selfNodeHash] else {
-                                fatalError("PEER: Node not in hash table")
-                            }
-                            actionNode = unwrappedNode
+                let name = update.name
+                let x = update.x
+                let y = update.y
+                let z = update.z
+                let rotation = update.rotation
+                
+                if let objNameByte = name {         // name is not nil, receiving new node placement
+                    let objName = arViewModel.byteToNameMap[objNameByte]!
+                    guard let newNode = createNode(objName: objName, x: x!, y: y!, z: z!, rotation: rotation!) else { return }
+                    
+                    arView.scene.rootNode.addChildNode(newNode)
+                    arViewModel.objects.append(newNode)
+                    
+                    var hasher = Hasher()
+                    hasher.combine(newNode)
+                    let selfNodeHash = Int64(hasher.finalize())
+                    
+                    arViewModel.objectHashTable[peerNodeHash] = newNode
+                    arViewModel.selfHashToPeerHash[selfNodeHash] = peerNodeHash
+                    
+                    let appearAction = SCNAction.fadeOpacity(to: 1.0, duration: 0.2)
+                    appearAction.timingMode = .easeInEaseOut
+                    newNode.runAction(appearAction)
+                } else if let dX = x, let dZ = z {    // Name is nil but coordinates aren't, must be move action
+                    
+                    var unwrappedNode = arViewModel.objectHashTable[peerNodeHash]
+                    if unwrappedNode == nil {
+                        // peer created node
+                        if let selfNodeHash = arViewModel.selfHashToPeerHash[peerNodeHash] {
+                            unwrappedNode = arViewModel.objectHashTable[selfNodeHash]
+                            if unwrappedNode == nil { fatalError("Error: Node not in hash table") }
                         }
                     }
-                    actionNode.runAction(action)
+                    
+                    let moveAction = SCNAction.moveBy(x: CGFloat(dX), y: 0, z: CGFloat(dZ), duration: 0.1)
+                    unwrappedNode?.runAction(moveAction)
+                } else if let dRotate = rotation {      // Coordinates are nil but rotation isnt, must be rotate action
+                    
+                    var unwrappedNode = arViewModel.objectHashTable[peerNodeHash]
+                    if unwrappedNode == nil {
+                        // peer created node
+                        if let selfNodeHash = arViewModel.selfHashToPeerHash[peerNodeHash] {
+                            unwrappedNode = arViewModel.objectHashTable[selfNodeHash]
+                            if unwrappedNode == nil { fatalError("Error: Node not in hash table") }
+                        }
+                    }
+                    
+                    let rotateAction = SCNAction.rotateBy(x: 0, y: CGFloat(dRotate), z: 0, duration: 0.1)
+                    unwrappedNode?.runAction(rotateAction)
                 } else {
                     // Action is nil, remove the node
                     if
@@ -173,35 +191,20 @@ extension ARViewManager: ARSessionDelegate {
                             arView.focusSquare?.appear()
                             hideAdjustmentButtons()
                         }
-                        
-                        
-                        arViewModel.objects.remove(at: index)
-                        arViewModel.objectHashTable.removeValue(forKey: peerNodeHash)
-                        arViewModel.selfHashToPeerHash.removeValue(forKey: peerNodeHash)
-                        removedNode.removeFromParentNode()
                     }
-                
                 }
             }
         } catch {
-            if mapProvider != nil {
-                print("PEER: DATA NOT RECEIVED")
-            }
+            print("not a node update")
         }
-        
-        // Putting this after update code bc 170 taught me that try catch is costly, and the above will fail if it's not
-        // a map (hopefully)
         do {
             if mapProvider == nil, let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
-                
                 let configuration = ARWorldTrackingConfiguration()
                 configuration.planeDetection = .horizontal
                 configuration.initialWorldMap = worldMap
                 arView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
                 mapProvider = peer
-                
                 print("PEER: MAP RECEIVED")
-                
                 return
             }
         } catch {

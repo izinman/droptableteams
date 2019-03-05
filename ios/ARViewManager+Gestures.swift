@@ -73,7 +73,8 @@ extension ARViewManager {
             // Move the node by the distance between this touch and the previous touch
             let moveAction = SCNAction.moveBy(x: CGFloat(newCoordX - arViewModel.prevX), y: 0, z: CGFloat(newCoordZ - arViewModel.prevZ), duration: 0.1)
             node.runAction(moveAction)
-            sendNodeUpdate(forNode: node, withAction: moveAction)
+            sendUpdate(node: node, name: nil, x: newCoordX - arViewModel.prevX, y: nil, z: newCoordZ - arViewModel.prevZ, rotation: nil)
+            //sendNodeUpdate(forNode: node, withAction: moveAction)
             
             // Update the coordinates before processing more touches
             arViewModel.prevX = newCoordX
@@ -98,7 +99,8 @@ extension ARViewManager {
         if gesture.state == .changed {
             let rotateAction = SCNAction.rotateBy(x: 0, y: -gesture.rotation, z: 0, duration: 0.1)
             node.runAction(rotateAction)
-            sendNodeUpdate(forNode: node, withAction: rotateAction)
+            sendUpdate(node: node, name: nil, x: nil, y: nil, z: nil, rotation: Float(-gesture.rotation))
+            //sendNodeUpdate(forNode: node, withAction: rotateAction)
             //node.eulerAngles.y -= Float(gesture.rotation)
             gesture.rotation = 0//.3 * gesture.rotation
         }

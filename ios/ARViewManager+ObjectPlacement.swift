@@ -26,12 +26,17 @@ extension ARViewManager {
         if planeHits.count > 0, let hitResult = planeHits.first {
             // Create an object to place
             guard let newNode = createNode(objName: arViewModel.objectToPlace, hitResult: hitResult) else { return }
-            newNode.opacity = 0.0
             
             let appearAction = SCNAction.fadeOpacity(to: 1.0, duration: 0.2)
             appearAction.timingMode = .easeInEaseOut
             
-            sendNodeUpdate(forNode: newNode, withAction: appearAction)
+            let nameByte = arViewModel.nameToByteMap[arViewModel.objectToPlace!]
+            let newX = hitResult.worldTransform.columns.3.x // change to depend on newNode position?
+            let newY = hitResult.worldTransform.columns.3.y
+            let newZ = hitResult.worldTransform.columns.3.z
+            let newRotate = newNode.eulerAngles.y
+            sendUpdate(node: newNode, name: nameByte, x: newX, y: newY, z: newZ, rotation: newRotate)
+            //sendNodeUpdate(forNode: newNode, withAction: appearAction)
             
             // Done after sendNodeUpdate so that nil isn't sent and gives the receiver a head start on placing
             // Add the object to the scene
@@ -45,6 +50,54 @@ extension ARViewManager {
             arView.scene.rootNode.addChildNode(newNode)
             newNode.runAction(appearAction)
         }
+    }
+    
+    func createNode(objName: String?, x: Float, y: Float, z: Float, rotation: Float) -> SCNNode? {
+        guard let name = objName else { return nil }
+        let scnFileName = "art.scnassets/" + name + ".scn"
+        print("name" + name)
+        guard let tmpScene = SCNScene(named: scnFileName) else { return nil }
+        
+        var child_node = ""
+        if (name == "chair_2") {
+            child_node = "pillow_fabric"
+        } else if (name == "couch_1") {
+            child_node = "Box002"
+        }
+        else if (name == "couch_2") {
+            child_node = "Obj3d66_512505_1_864_wire_000000000"
+        }
+        else if (name == "couch_3") {
+            child_node = "andango_arm_wire_088144225"
+        }
+        else {
+            child_node = "_material_1"
+        }
+        
+        let node = tmpScene.rootNode.childNode(withName: child_node, recursively: true)!
+        
+        var minVec = SCNVector3Zero
+        var maxVec = SCNVector3Zero
+        (minVec, maxVec) =  node.boundingBox
+        
+        // Set the nodes pivot appropriately
+        node.pivot = SCNMatrix4MakeTranslation(
+            minVec.x + (maxVec.x - minVec.x)/2,
+            minVec.y,
+            minVec.z + (maxVec.z - minVec.z)/2
+        )
+        
+        // Scale, rotate, and place the node so it sits on the plane
+        node.eulerAngles.y = rotation
+        node.position = SCNVector3(x: x, y: y, z: z)
+        
+        node.scale = arViewModel.ObjScaleMap[name]!
+        
+        node.geometry?.firstMaterial?.lightingModel = .physicallyBased
+        node.categoryBitMask = arViewModel.objectLightingMask
+        node.opacity = 0.0
+        
+        return node
     }
     
     func createNode(objName: String?, hitResult: ARHitTestResult) -> SCNNode? {
@@ -96,6 +149,7 @@ extension ARViewManager {
         
         node.geometry?.firstMaterial?.lightingModel = .physicallyBased
         node.categoryBitMask = arViewModel.objectLightingMask
+        node.opacity = 0.0
         
         return node
     }
@@ -124,7 +178,8 @@ extension ARViewManager {
             arView.focusSquare?.appear()
             hideAdjustmentButtons()
             
-            sendNodeUpdate(forNode: node, withAction: nil)
+            sendUpdate(node: node, name: nil, x: nil, y: nil, z: nil, rotation: nil)
+            //sendNodeUpdate(forNode: node, withAction: nil)
         }
     }
 }
