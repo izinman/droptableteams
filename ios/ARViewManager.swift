@@ -14,7 +14,7 @@ class ARViewManager : RCTViewManager {
     
     var arView = ARView()
     var arViewModel = ARViewModel()
-    
+    var planes = [UUID : VirtualPlane]()
     var mapProvider: MCPeerID?
     lazy var multipeerSession: MultipeerSession = MultipeerSession()
     
@@ -32,6 +32,7 @@ class ARViewManager : RCTViewManager {
         arView.scene = SCNScene()
         arView.autoenablesDefaultLighting = true
         arView.antialiasingMode = .multisampling4X
+        arView.debugOptions = [.showFeaturePoints]
         
         arViewModel.arView = arView
         arViewModel.objectToPlace = "chair_1"
@@ -54,7 +55,6 @@ class ARViewManager : RCTViewManager {
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = .horizontal
         config.isLightEstimationEnabled = true
-        
         // Run the ARView
         arView.session.run(config)
         arView.session.delegate = self

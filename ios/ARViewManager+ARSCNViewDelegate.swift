@@ -12,7 +12,14 @@ import SceneKit
 
 extension ARViewManager: ARSCNViewDelegate {
     
+    
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        if let planeAnchor = anchor as? ARPlaneAnchor {
+            let plane = VirtualPlane(anchor: planeAnchor)
+            node.addChildNode(plane)
+            planes[planeAnchor.identifier] = plane
+        }
+        
         guard arView.focusSquare == nil else { return }
         
         // Create a new focus square
@@ -23,12 +30,16 @@ extension ARViewManager: ARSCNViewDelegate {
         
         // Store the focus square
         arView.focusSquare = node
+        
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
             if let planeAnchor = anchor as? ARPlaneAnchor {
                 self.adjustObjectOntoPlane(node: node, anchor: planeAnchor)
+                if let plane = self.planes[planeAnchor.identifier] {
+                    plane.updateWithNewAnchor(planeAnchor)
+                }
             }
         }
     }
