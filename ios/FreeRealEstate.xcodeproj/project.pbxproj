@@ -37,6 +37,8 @@
 		2E6F75C62226098600748DFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E6F75C52226098600748DFA /* Images.xcassets */; };
 		2EC5F86B2220F5E300FE5160 /* ARViewManager+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */; };
 		2ECFD9672220EEB400EAD81D /* ARViewManager+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */; };
+		2EEBD0BC222E2EFC005D4547 /* DMZTouchesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEBD0B9222E2EFB005D4547 /* DMZTouchesWindow.m */; };
+		2EEBD0BD222E2EFC005D4547 /* DMZTouchesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEBD0BB222E2EFC005D4547 /* DMZTouchesWindow.swift */; };
 		57C26DFFCF7348459BD41C54 /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC48B429CBD489AB40433AA /* libRCTBEEPickerManager.a */; };
 		58C6881D41EF4226827D56FA /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C29908D6E9F54553A20DFD9D /* EvilIcons.ttf */; };
 		757DBC290C474362A3523E7D /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F8CC78A9BC645B19D086337 /* Feather.ttf */; };
@@ -448,6 +450,9 @@
 		2E6F75C52226098600748DFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FreeRealEstate/Images.xcassets; sourceTree = "<group>"; };
 		2EA0BCBC1D444E568B854C36 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		2ECFD9662220EEB400EAD81D /* ARViewManager+Buttons.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "ARViewManager+Buttons.swift"; sourceTree = "<group>"; tabWidth = 4; };
+		2EEBD0B9222E2EFB005D4547 /* DMZTouchesWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMZTouchesWindow.m; sourceTree = "<group>"; };
+		2EEBD0BA222E2EFB005D4547 /* DMZTouchesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMZTouchesWindow.h; sourceTree = "<group>"; };
+		2EEBD0BB222E2EFC005D4547 /* DMZTouchesWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMZTouchesWindow.swift; sourceTree = "<group>"; };
 		36759B739B814A3BA393BEEC /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		390D2A6D9D5E45DF860F1875 /* RCTBEEPickerManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTBEEPickerManager.xcodeproj; path = "../node_modules/react-native-picker/ios/RCTBEEPickerManager.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -679,6 +684,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2EEBD0BE222E2F28005D4547 /* TouchesWindow */ = {
+			isa = PBXGroup;
+			children = (
+				2EEBD0BA222E2EFB005D4547 /* DMZTouchesWindow.h */,
+				2EEBD0B9222E2EFB005D4547 /* DMZTouchesWindow.m */,
+				2EEBD0BB222E2EFC005D4547 /* DMZTouchesWindow.swift */,
+			);
+			name = TouchesWindow;
+			path = FreeRealEstateTests;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -759,6 +775,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* FreeRealEstateTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				2EEBD0BE222E2F28005D4547 /* TouchesWindow */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				AC3DB419219668C700AF31E7 /* FreeRealEstate-tvOS-Bridging-Header.h */,
 				7DBF66319DF94F238191352B /* Resources */,
@@ -1004,12 +1021,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EA47E6F021D82B3F0039FE2D /* Products */;
-					ProjectRef = 84036C8638074B74B7F49CAF /* BVLinearGradient.xcodeproj */;
-				},
-				{
 					ProductGroup = EAED28A321A5EB600011E882 /* Products */;
 					ProjectRef = EAED28A221A5EB600011E882 /* BVLinearGradient.xcodeproj */;
+				},
+				{
+					ProductGroup = EA47E6F021D82B3F0039FE2D /* Products */;
+					ProjectRef = 84036C8638074B74B7F49CAF /* BVLinearGradient.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1503,6 +1520,7 @@
 				AC3DB41B219668C700AF31E7 /* AppDelegate.swift in Sources */,
 				AC6C883C21FBEAC300B07A9F /* ARView.swift in Sources */,
 				ACECA0C322164A0C000A0899 /* MultipeerUpdate.swift in Sources */,
+				2EEBD0BC222E2EFC005D4547 /* DMZTouchesWindow.m in Sources */,
 				AC89AC672202B3C200B37C1E /* BoundingBox.swift in Sources */,
 				AC89AC612202928F00B37C1E /* ARViewManager+ObjectPlacement.swift in Sources */,
 				AC46625522153947006E18D7 /* ARViewManager+SceneLighting.swift in Sources */,
@@ -1510,6 +1528,7 @@
 				AC94C3A1219C2E0400D54C64 /* ARViewManager.swift in Sources */,
 				EDABA60421B35F3900833E0F /* VirtualPlane.swift in Sources */,
 				AC94C39F219C2DEB00D54C64 /* ARViewManager.m in Sources */,
+				2EEBD0BD222E2EFC005D4547 /* DMZTouchesWindow.swift in Sources */,
 				AC89AC6D22040D7200B37C1E /* FocusSquare.swift in Sources */,
 				AC89AC22220289A600B37C1E /* ARViewManager+ARSessionDelegate.swift in Sources */,
 				2ECFD9672220EEB400EAD81D /* ARViewManager+Buttons.swift in Sources */,
@@ -1642,6 +1661,10 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = X6L44JDG2E;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
@@ -1675,6 +1698,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = X6L44JDG2E;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",

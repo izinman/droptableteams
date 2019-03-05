@@ -7,13 +7,13 @@
 //
 
 import UIKit
-
 @UIApplicationMain
 
 class AppDelegate : UIResponder, UIApplicationDelegate {
   
     // Create the base window
-    var window : UIWindow? = UIWindow(frame: UIScreen.main.bounds)
+  var window = DMZTouchesWindow(frame: UIScreen.main.bounds)
+  
   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
         [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -45,8 +45,9 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         controller.view = view
       
         // Add the controller to the window
-        window?.rootViewController = controller
-        window?.makeKeyAndVisible()
+      window.dmz_touchesEnabled = true
+        window.rootViewController = controller
+        window.makeKeyAndVisible()
       
         return true
     }
