@@ -36,7 +36,6 @@ extension ARViewManager {
             let newZ = hitResult.worldTransform.columns.3.z
             let newRotate = newNode.eulerAngles.y
             sendUpdate(node: newNode, name: nameByte, x: newX, y: newY, z: newZ, rotation: newRotate)
-            //sendNodeUpdate(forNode: newNode, withAction: appearAction)
             
             // Done after sendNodeUpdate so that nil isn't sent and gives the receiver a head start on placing
             // Add the object to the scene
@@ -44,6 +43,7 @@ extension ARViewManager {
             hasher.combine(newNode)
             let hashValue = Int64(hasher.finalize())
             
+            arViewModel.objNameMap[newNode] = nameByte
             arViewModel.objectHashTable[hashValue] = newNode
             arViewModel.objects.append(newNode)
             

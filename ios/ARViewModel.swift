@@ -31,6 +31,7 @@ class ARViewModel {
     var peerLabelHidden: Bool?
     
     var objects = [SCNNode]()
+    var objNameMap = [SCNNode: UInt8]()
     var objectHashTable = [Int64:SCNNode]()
     var selfHashToPeerHash = [Int64:Int64]()
     var objectToPlace: String?
@@ -81,5 +82,5 @@ class ARViewModel {
         "table_1": TABLE_1,
         "wardrobe": WARDROBE,
         "vase": VASE,
-        ]
+    ]
 }

@@ -113,6 +113,7 @@ extension ARViewManager: ARSessionDelegate {
                     hasher.combine(newNode)
                     let selfNodeHash = Int64(hasher.finalize())
                     
+                    arViewModel.objNameMap[newNode] = objNameByte
                     arViewModel.objectHashTable[peerNodeHash] = newNode
                     arViewModel.selfHashToPeerHash[selfNodeHash] = peerNodeHash
                     

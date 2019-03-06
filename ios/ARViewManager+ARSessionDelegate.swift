@@ -26,6 +26,16 @@ extension ARViewManager {
                 print("PEER: Map sent")
                 self.multipeerSession.sendToAllPeers(data)
                 self.mapProvider = self.multipeerSession.myPeerID
+                
+                for node in self.arViewModel.objects {
+                    let nodeName = self.arViewModel.objNameMap[node]
+                    let x = node.worldPosition.x
+                    let y = node.worldPosition.y
+                    let z = node.worldPosition.z
+                    let rotation = node.eulerAngles.y
+                    
+                    self.sendUpdate(node: node, name: nodeName, x: x, y: y, z: z, rotation: rotation)
+                }
             }
         }
         updateConnectedPeersLabel(for: frame, trackingState: frame.camera.trackingState)

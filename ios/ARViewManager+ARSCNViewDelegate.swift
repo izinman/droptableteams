@@ -23,6 +23,7 @@ extension ARViewManager: ARSCNViewDelegate {
         
         // Store the focus square
         arView.focusSquare = node
+        showPlaceButton()
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {

@@ -24,7 +24,6 @@ extension ARViewManager {
         button.isEnabled = false
         arView.addSubview(button)
         arView.placeButton = button
-        showPlaceButton()
     }
     
     func addConfirmButton() {
