@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {Image} from 'react-native'
-import StyleView from './StyleView.js'
-import { Button}  from 'react-native-elements';
-import {Platform, StyleSheet, Text, View, UIManager, findNodeHandle, Dimensions, Animated, Easing} from 'react-native';
+import {Easing, StyleSheet, Text, View, UIManager, findNodeHandle, Dimensions, Animated} from 'react-native';
 import ARScene from './ARView.js';
-import AnimateView from './AnimateView.js'
+var icon = require('./icon.png');
 
 type Props = {};
 var {height, width} = Dimensions.get('window');
@@ -13,7 +11,11 @@ export default class App extends Component<Props> {
     super(props);
     this.state = {home: 0,
                   introAnim: new Animated.Value(0),
-                  introAnim1: new Animated.Value(0)}
+                  loadingAnimShift: new Animated.Value(1),
+                  loadingAnimScale: new Animated.Value(0),
+                  loadingIconScale: new Animated.Value(0),
+
+                }
 }
 handleClick = () => {
   this.setState({home: 1})
@@ -24,76 +26,83 @@ componentDidMount() {
       this.state.introAnim,           
       {
         toValue: 1,                  
-        duration: 400,             
+        duration: 350,   
+        delay: 5000          
       }
   ).start();
   Animated.timing(
-    this.state.introAnim1,           
+    this.state.loadingAnimShift,           
     {
-      toValue: 1,                   
-      duration: 300,    
-      delay: 400,
- 
+      toValue: 0,                  
+      duration: 4700,   
+      delay: 0,
+      easing: Easing.linear          
     }
+).start();
+Animated.timing(
+  this.state.loadingAnimScale,           
+  {
+    toValue: 1,                  
+    duration: 4700,   
+    delay: 0,
+    easing: Easing.linear                  
+  }
+).start();
+Animated.timing(
+  this.state.loadingIconScale,           
+  {
+    toValue: 1,                  
+    duration: 500,   
+    delay: 600,
+    easing: Easing.elastic(1)                
+  }
 ).start();
 }
 
 
   render() {
-      if(this.state.home == 0){
         return (
-          
-          <View style={{width: '100%', justifyContent: 'center', alignSelf: 'center' }}>
-            <View style = {{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, zIndex: 0, backgroundColor: "#000000", opacity: 0.55, height: '100%'}}></View>
-             <Image source={require('./home.jpg')} style ={styles.image} blurRadius = {0}/>
-             
-          <View styles={styles.root} >
-            <Animated.View style={{transform: [{
-                        translateY: this.state.introAnim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [height * .2 , 0]})}],
-                          opacity: this.state.introAnim
+          <Animated.View style={{
+            backgroundColor: '#008fbe',
+            transform: [{
+              translateX: this.state.introAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, -width]})
+            }]
+          }}>
+            <View style = {{flex: 1, flexDirection: 'row', width: width*2, height: height}}>
+                <View style = {{backgroundColor: '#ffffff', zIndex: 1,width: width, height: height, flex: 1, flexDirection: 'column', alignContent: 'center', justifyContent: 'center'}} >
+                  <Animated.View style = {{
+                    opacity: this.state.loadingIconScale.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0, 1]
+                    }),
+                    transform: [{
+                      scale: this.state.loadingIconScale.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [.75, 1]},
+                      ) 
+                    },
+                  ]
                   }}>
-              <Text style ={styles.welcome4}>designAR </Text>
-            </Animated.View >
-            <View style={{justifyContent:'center', alignContent: 'center',height: height}}>
-            {/* <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/>
-            <Image source={require('./cole.png')} style={{width: 100, height: 100, margin: 5, borderRadius: 0}}/> */}
+                    <View style = {{shadowColor: '#000000b0', shadowRadius: 5, shadowOpacity: 1, shadowOffset: {width: 0, height: 1}, position: 'relative', center: height/2 - height * .15, left: width/2 - width * .15 }}>
+                      <Image source = {icon} style = {{borderRadius: 50, width: width * .3, height: width * .3}}></Image>
+                    </View>
+                  </Animated.View>
+                  <View style = {{width: width * .3, height: 10,backgroundColor: '#0000001a',borderRadius: 5, position: 'absolute', top: height/2 + height * .2, left: width/2 - width * .15}}></View>
+                  <Animated.View style ={{width: 20, height: 20, position: 'absolute', top: height/2 + height * .2, left: width/2 - (width * .15)}}>
+                    <Animated.View style = {{width: width * .3, height: 10, 
+                                           backgroundColor: '#008fbe',borderRadius: 5, 
+                                            width: this.state.loadingAnimScale.interpolate({
+                                              inputRange: [0, 1],
+                                              outputRange: [0, width * .3]})}}>
+                    </Animated.View>
+                  </Animated.View>
+                </View>
+              <ARScene/>  
             </View>
-            
-            <View style={styles.button_bg}>
-            <Animated.View style={{
-                        opacity: this.state.introAnim1.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0 , 1]}),
-                  }}>
-            <Button 
-              title="START"
-              ViewComponent={require('react-native-linear-gradient').default}
-              titleStyle={{fontWeight: '600', fontSize: 30, fontFamily: 'Product Sans'}}
-              linearGradientProps={{
-                colors: ['#304FFE00', '#304FFE00'],
-                  start: {x:0, y:0},
-                  end: {x:0.5, y:0},
-              }}
-              buttonStyle={{borderWidth: 0, borderColor: 'white', borderWidth: 0 ,borderRadius: 35, height: 60}}
-              containerStyle={{marginVertical: 10, height: 50, width: 350}}
-              onPress={this.handleClick}
-            /> 
-            </Animated.View>
-            </View>
-            
-            </View>
-            </View>
-            
+          </Animated.View>  
         );
-      }
-      else{
-        return(<ARScene styled={0}/>);
-      }
     }
 }
 
