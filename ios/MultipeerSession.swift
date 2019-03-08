@@ -66,6 +66,9 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
         // Invite peer
         print("PEER: FOUND\n")
         browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
+        if peerID != myPeerID {
+            browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
+        }
     }
     // Not used
     public func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {}
