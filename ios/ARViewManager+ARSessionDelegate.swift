@@ -18,18 +18,21 @@ extension ARViewManager {
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         if frame.worldMappingStatus == .mapped, mapProvider == nil, !multipeerSession.connectedPeers.isEmpty {
+            mapProvider = self.multipeerSession.myPeerID
             arView.session.getCurrentWorldMap { worldMap, error in
-                guard let map = worldMap
-                    else { print("Error: \(error!.localizedDescription)"); print("PEER: Can't send map"); return }
+                guard let map = worldMap else {
+                        print("Error: \(error!.localizedDescription)"); print("PEER: Can't send map")
+                        self.mapProvider = nil
+                        return
+                }
                 guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
                     else { fatalError("PEER: can't encode map") }
                 print("PEER: Map sent")
                 self.multipeerSession.sendToAllPeers(data)
-                self.mapProvider = self.multipeerSession.myPeerID
                 var ctr = 0
                 
                 for node in self.arViewModel.objects {
-                    print("For loop: node: \(node), iter: \(ctr)")
+                    print("PEER: For loop: node: \(node), iter: \(ctr)")
                     let nodeName = self.arViewModel.objNameMap[node]
                     let x = node.worldPosition.x
                     let y = node.worldPosition.y
