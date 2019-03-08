@@ -52,8 +52,8 @@ Animated.timing(
   this.state.loadingIconScale,           
   {
     toValue: 1,                  
-    duration: 500,   
-    delay: 600,
+    duration: 1000,   
+    delay: 4000,
     easing: Easing.elastic(1)                
   }
 ).start();
@@ -132,8 +132,6 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     height: '100%',
     zIndex: -1,
-    
-    
   },
   button_bg: {
     alignSelf: 'center',
