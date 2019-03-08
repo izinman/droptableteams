@@ -44,14 +44,14 @@ extension ARViewManager: ARSCNViewDelegate {
         DispatchQueue.main.async {
             let arView = self.arView
             // Run a hit test to find the new location for the focusSquare
-            guard let newPos = arView.hitTest(arView.center, types: .existingPlane).first?.worldTransform.columns.3 else { return }
+            guard let newPos = arView.hitTest(arView.center, types: .estimatedHorizontalPlane).first?.worldTransform.columns.3 else { return }
             let newPosVec = SCNVector3(x: newPos.x, y: newPos.y, z: newPos.z)
             
             // Determine if the resulting position is a valid plane for placement
-            let didFindPlaneUsingExtent = (arView.hitTest(arView.center, types: .existingPlaneUsingGeometry).first != nil)
+            let didFindPlaneUsingGeometry = (arView.hitTest(arView.center, types: .existingPlaneUsingGeometry).first != nil)
             
             // Update the location, orientation, and state of the square
-            focusSquare.update(location: newPosVec, foundPlane: didFindPlaneUsingExtent, cameraAngle: arView.cameraVector.y)
+            focusSquare.update(location: newPosVec, foundPlane: didFindPlaneUsingGeometry, cameraAngle: arView.cameraVector.y)
         }
         
         if let lightEstimate = arView.session.currentFrame?.lightEstimate {

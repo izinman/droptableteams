@@ -36,7 +36,16 @@ extension ARViewManager {
             // If the node had not yet been selected, initialize a new selection box and store the reference
             if selectionBox == nil {
                 selectionBox = BoundingBox(node: node)
+                let name = arViewModel.objNameMap[node]
+                if name == CHAIR_2 {
+                    selectionBox?.position.z += 18.5
+                } else if name == COFFEE_TABLE {
+                    selectionBox?.position.x += 0.55
+                    selectionBox?.position.z -= 0.65
+                }
+                
                 arViewModel.selectionBoxes[node] = selectionBox
+                
             }
             
             // Make the focusSquare disappear and render the selection box

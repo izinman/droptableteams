@@ -26,8 +26,10 @@ extension ARViewManager {
                 print("PEER: Map sent")
                 self.multipeerSession.sendToAllPeers(data)
                 self.mapProvider = self.multipeerSession.myPeerID
+                var ctr = 0
                 
                 for node in self.arViewModel.objects {
+                    print("For loop: node: \(node), iter: \(ctr)")
                     let nodeName = self.arViewModel.objNameMap[node]
                     let x = node.worldPosition.x
                     let y = node.worldPosition.y
@@ -35,6 +37,7 @@ extension ARViewManager {
                     let rotation = node.eulerAngles.y
                     
                     self.sendUpdate(node: node, name: nodeName, x: x, y: y, z: z, rotation: rotation)
+                    ctr += 1
                 }
             }
         }
