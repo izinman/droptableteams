@@ -66,7 +66,7 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
         // Invite peer
         print("PEER: FOUND\n")
         browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
-        if peerID != myPeerID {
+        if peerID.displayName != myPeerID.displayName {
             browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
         }
     }
@@ -78,7 +78,7 @@ class MultipeerSession: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDeleg
     // MCNearbyServiceAdvertiserDelegate Functions
     //
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        if peerID != myPeerID {
+        if peerID.displayName != myPeerID.displayName {
             invitationHandler(true, session)
             print("PEER: ACCEPTED\n")
         }

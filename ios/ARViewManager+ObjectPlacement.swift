@@ -20,7 +20,7 @@ extension ARViewManager {
     @objc func placeObject(_ node: ARSCNView!) {
         guard let focusSquare = arView.focusSquare, focusSquare.canPlace else { return }
         // Perform a hit test to obtain the plane on which we will place the object
-        let planeHits = arView.hitTest(arView.center, types: .existingPlane)
+        let planeHits = arView.hitTest(arView.center, types: .existingPlaneUsingGeometry)
         
         // Verify that the plane is valid
         if planeHits.count > 0, let hitResult = planeHits.first {
