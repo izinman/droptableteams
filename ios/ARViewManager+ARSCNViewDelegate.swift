@@ -48,7 +48,7 @@ extension ARViewManager: ARSCNViewDelegate {
             let newPosVec = SCNVector3(x: newPos.x, y: newPos.y, z: newPos.z)
             
             // Determine if the resulting position is a valid plane for placement
-            let didFindPlaneUsingExtent = (arView.hitTest(arView.center, types: .existingPlaneUsingExtent).first != nil)
+            let didFindPlaneUsingExtent = (arView.hitTest(arView.center, types: .existingPlaneUsingGeometry).first != nil)
             
             // Update the location, orientation, and state of the square
             focusSquare.update(location: newPosVec, foundPlane: didFindPlaneUsingExtent, cameraAngle: arView.cameraVector.y)
