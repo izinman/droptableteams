@@ -17,6 +17,7 @@ extension ARViewManager {
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {}
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        guard arViewModel.canSendMap else { return }
         if frame.worldMappingStatus == .mapped, mapProvider == nil, !multipeerSession.connectedPeers.isEmpty {
             mapProvider = self.multipeerSession.myPeerID
             arView.session.getCurrentWorldMap { worldMap, error in

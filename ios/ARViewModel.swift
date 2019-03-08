@@ -29,6 +29,7 @@ class ARViewModel {
     var confirm_x_bound: Double { return center_x_bound - 60.0 }
     var remove_x_bound: Double { return center_x_bound + 60.0 }
     var peerLabelHidden: Bool?
+    var canSendMap: Bool = false
     
     var objects = [SCNNode]()
     var objNameMap = [SCNNode: UInt8]()

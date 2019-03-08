@@ -64,7 +64,13 @@ class ARViewManager : RCTViewManager {
         addRemoveButton()
         addPeersLabel()
         
+        _ = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(allowMapSend), userInfo: nil, repeats: false)
+        
         return arView
+    }
+    
+    @objc func allowMapSend() {
+        arViewModel.canSendMap = true
     }
     
     func displayDebugInfo() {
