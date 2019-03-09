@@ -52,8 +52,8 @@ Animated.timing(
   this.state.loadingIconScale,           
   {
     toValue: 1,                  
-    duration: 1000,   
-    delay: 4000,
+    duration: 900,   
+    delay: 3000,
     easing: Easing.elastic(1)                
   }
 ).start();

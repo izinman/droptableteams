@@ -14,9 +14,9 @@ var subheaderFont = height * .027
 var all = require('./familyroom.jpg');
 var couches = [require('./couches/1.jpg'),require('./couches/2.jpg'),require('./couches/3.jpg'),require('./couches/4.jpg'),require('./couches/5.jpg'),require('./couches/6.jpg'),require('./couches/7.jpg'),require('./couches/8.jpg'),require('./couches/9.jpg'),require('./couches/10.jpg'),require('./couches/11.jpg'),require('./couches/12.jpg')];
 var chairs = [require('./chairs/1.jpg'),require('./chairs/2.jpg'),require('./chairs/3.jpg'),require('./chairs/4.jpg'),require('./chairs/5.jpg'),require('./chairs/6.jpg'),require('./chairs/7.jpg'),require('./chairs/8.jpg'),require('./chairs/9.jpg')];
-var tables= [require('./tables/1.jpg'),require('./tables/2.jpg'),require('./tables/3.jpg'),require('./tables/4.jpg'),require('./tables/5.jpg'),require('./tables/6.jpg'),require('./tables/7.jpg'),require('./tables/8.jpg'),require('./tables/9.jpg')];
+var tables= [require('./tables/1.jpg'),require('./tables/2.jpg'),require('./tables/3.jpg'),require('./tables/4.jpg'),require('./tables/5.jpg'),require('./tables/6.jpg'),require('./tables/7.jpg'),require('./tables/8.jpg'),require('./tables/9.jpg'),require('./tables/10.jpg')];
 var beds= [require('./bed/1.jpg'),require('./bed/2.jpg'),require('./bed/3.jpg'),require('./bed/4.jpg'),require('./bed/5.jpg'),require('./bed/6.jpg'),require('./bed/7.jpg'),require('./bed/8.jpg'),require('./bed/9.jpg'),require('./bed/10.jpg')];
-var cabinets= [require('./cabinets/1.jpg'),require('./cabinets/2.jpg'),require('./cabinets/3.jpg'),require('./cabinets/4.jpg'),require('./cabinets/5.jpg'),require('./cabinets/6.jpg'),require('./cabinets/7.jpg'),require('./cabinets/8.jpg'),require('./cabinets/9.jpg'),require('./cabinets/10.jpg'),require('./cabinets/11.jpg'),require('./cabinets/12.jpg')]
+var cabinets= [require('./cabinets/1.jpg'),require('./cabinets/2.jpg'),require('./cabinets/3.jpg'),require('./cabinets/4.jpg'),require('./cabinets/5.jpg'),require('./cabinets/6.jpg'),require('./cabinets/7.jpg'),require('./cabinets/8.jpg'),require('./cabinets/9.jpg'),require('./cabinets/10.jpg'),require('./cabinets/11.jpg')]
 var appliances= [require('./appliances/1.jpg'),require('./appliances/2.jpg'),require('./appliances/3.jpg'),require('./appliances/4.jpg'),require('./appliances/5.jpg'),require('./appliances/6.jpg'),require('./appliances/7.jpg'),require('./appliances/8.jpg'),require('./appliances/9.jpg'),require('./appliances/10.jpg'),require('./appliances/11.jpg'),require('./appliances/12.jpg'),require('./appliances/13.jpg')]
 const HEADER_MAX_HEIGHT = height*.25;
 const HEADER_MIN_HEIGHT = height*.05;
@@ -65,7 +65,7 @@ export default class StyleView extends Component<Props> {
   _renderScrollViewContent(title) {
     var couchesData = Array.from({length: 12});
     var chairsData = Array.from({length: 9});
-    var tablesData = Array.from({length: 9});
+    var tablesData = Array.from({length: 10});
     var bedData = Array.from({length: 10});
     var cabinetData = Array.from({length: 12});
     var applianceData = Array.from({length: 13});
