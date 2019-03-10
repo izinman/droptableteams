@@ -112,7 +112,7 @@ export default class ARScene extends Component<Props> {
       else if(e == 'cabinet3'){
         obj = 'wardrobe'
       }
-      else if(e == 'cabinet9'){
+      else if(e == 'table9'){
         obj = 'coffee_table'
       }
       else{

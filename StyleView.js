@@ -67,7 +67,7 @@ export default class StyleView extends Component<Props> {
     var chairsData = Array.from({length: 9});
     var tablesData = Array.from({length: 10});
     var bedData = Array.from({length: 10});
-    var cabinetData = Array.from({length: 12});
+    var cabinetData = Array.from({length: 11});
     var applianceData = Array.from({length: 13});
     return (
       <AnimateView>
