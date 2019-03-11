@@ -51,7 +51,7 @@ class ARViewModel {
     let ObjScaleMap: [String: SCNVector3] = [
         "chair": SCNVector3(x: 0.015, y: 0.015, z: 0.015),
         "vase": SCNVector3(x: 0.0015, y: 0.0015, z: 0.0015),
-        "table_1": SCNVector3(x: 0.005, y: 0.005, z: 0.005),
+        "table_1": SCNVector3(x: 0.0075, y: 0.0075, z: 0.0065),
         "coffee_table": SCNVector3(x: 0.16, y: 0.16, z: 0.16),
         "couch_1": SCNVector3(x: 0.021, y: 0.021, z: 0.021),
         "couch_2": SCNVector3(x: 0.0009, y: 0.0009, z: 0.0009),
