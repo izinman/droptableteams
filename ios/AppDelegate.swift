@@ -24,21 +24,21 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         // Define the name of the initial module
         let moduleName = "FreeRealEstate"
       
-        //let jsCodeLocation = Bundle.main.url(forResource:"main", withExtension: "jsbundle")
+        let jsCodeLocation = Bundle.main.url(forResource:"main", withExtension: "jsbundle")
       
-        //let view = RCTRootView(bundleURL:jsCodeLocation as URL!, moduleName: moduleName, initialProperties: initialProperties, launchOptions:launchOptions)
-        //view?.backgroundColor = UIColor.white
+        let view = RCTRootView(bundleURL:jsCodeLocation as URL!, moduleName: moduleName, initialProperties: initialProperties, launchOptions:launchOptions)
+        view?.backgroundColor = UIColor.white
       
         // TO RE-ENABLE JAVASCRIPT OVER THE WIRE (AND HOT REFRESHES) UNCOMMENT THE FOLLOWING AND COMMENT THE ABOVE
       
         // Define the url that will be used to find the entry file
-      
-        let bundleURL = RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index", fallbackResource: nil)
-       
-        // Create the React Native view that will render the module with the properties
-        let view = RCTRootView(bundleURL: bundleURL, moduleName: moduleName, initialProperties: initialProperties, launchOptions: launchOptions)
-
-        view?.backgroundColor = UIColor.white
+//
+//        let bundleURL = RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index", fallbackResource: nil)
+//
+//        // Create the React Native view that will render the module with the properties
+//        let view = RCTRootView(bundleURL: bundleURL, moduleName: moduleName, initialProperties: initialProperties, launchOptions: launchOptions)
+//
+//        view?.backgroundColor = UIColor.white
  
         // Create the controller to display the view
         let controller = UIViewController()
