@@ -16,6 +16,10 @@ extension ARViewManager {
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {}
     
+    func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
+        return true
+    }
+    
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         guard arViewModel.canSendMap else { return }
         if frame.worldMappingStatus == .mapped, mapProvider == nil, !multipeerSession.connectedPeers.isEmpty {
