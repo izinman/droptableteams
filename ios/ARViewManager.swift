@@ -64,7 +64,8 @@ class ARViewManager : RCTViewManager {
         addRemoveButton()
         addPeersLabel()
         
-        if multipeerSession.myPeerID.displayName == "Michael's iPad" { arViewModel.canSendMap = true }
+        let displayName = multipeerSession.myPeerID.displayName
+        if displayName == "Michael’s iPad" { arViewModel.canSendMap = true }
         
         return arView
     }
