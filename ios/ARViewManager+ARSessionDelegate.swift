@@ -21,8 +21,7 @@ extension ARViewManager {
     }
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        guard arViewModel.canSendMap else { return }
-        if frame.worldMappingStatus == .mapped, mapProvider == nil, !multipeerSession.connectedPeers.isEmpty {
+        if frame.worldMappingStatus == .mapped, mapProvider == nil, !multipeerSession.connectedPeers.isEmpty, arViewModel.canSendMap {
             mapProvider = self.multipeerSession.myPeerID
             arView.session.getCurrentWorldMap { worldMap, error in
                 guard let map = worldMap else {
