@@ -127,8 +127,8 @@ extension ARViewManager {
         let node = tmpScene.rootNode.childNode(withName: child_node, recursively: true)!
         
         // Initialize rotation value to ensure the object will be properly oriented
-        let rotation = simd_float4x4(SCNMatrix4MakeRotation(arView.session.currentFrame!.camera.eulerAngles.y, 0, 1, 0))
-        let hitTransform = simd_mul(hitResult.worldTransform, rotation)
+//        let rotation = simd_float4x4(SCNMatrix4MakeRotation(arView.session.currentFrame!.camera.eulerAngles.y, 0, 1, 0))
+//        let hitTransform = simd_mul(hitResult.worldTransform, rotation)
         
         // Get the bounding box values to set the pivot to be at the center of the node
         var minVec = SCNVector3Zero
@@ -143,7 +143,7 @@ extension ARViewManager {
         )
         
         // Scale, rotate, and place the node so it sits on the plane
-        node.transform = SCNMatrix4(hitTransform)
+        node.transform = SCNMatrix4(hitResult.worldTransform)
         node.scale = arViewModel.ObjScaleMap[name]!
         node.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y, hitResult.worldTransform.columns.3.z)
         
