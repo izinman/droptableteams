@@ -55,7 +55,7 @@ class ARViewModel {
         "coffee_table": SCNVector3(x: 0.16, y: 0.16, z: 0.16),
         "couch_1": SCNVector3(x: 0.0225, y: 0.0225, z: 0.0225),
         "couch_2": SCNVector3(x: 0.00105, y: 0.00105, z: 0.00105),
-        "couch_3": SCNVector3(x: 0.00085, y: 0.00085, z: 0.00085),
+        "couch_3": SCNVector3(x: 0.00073, y: 0.00073, z: 0.00073),
         "chair_1": SCNVector3(x: 0.017, y: 0.017, z: 0.017),
         "chair_2": SCNVector3(x: 0.0036, y: 0.0036, z: 0.0036),
         "wardrobe": SCNVector3(x: 0.00073, y: 0.00073, z: 0.00073)
